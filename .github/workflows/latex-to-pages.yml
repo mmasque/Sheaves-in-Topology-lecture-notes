@@ -20,7 +20,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.FILE }}.pdf
-          path: ./github_artifacts
+          path: main.pdf
   deploy:
     needs: [build_latex]
     runs-on: ubuntu-latest
@@ -30,13 +30,11 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: github_artifacts
-      - name: move
-        run: mkdir -p github_deploy && mv github_artifacts/*/* github_deploy
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./github_deploy
+          publish_dir: ./github_artifacts
           publish_branch: build
           force_orphan: true
         
