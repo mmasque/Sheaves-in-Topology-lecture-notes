@@ -1,0 +1,90 @@
+\chapter{Motivation, sheaves and presheaves}
+
+\section{Introduction}
+\todo{Not sure if we want to add the examples etc.}
+
+
+\section{Sheaves and presheaves}
+
+\begin{defn}
+    Let $X$ be a topological space. Write $\open(X)$ for the partially ordered set of opens of $X$.  A \emph{presheaf} of sets on $X$ is a functor
+    \[
+        F: \open(X)\opp \to \catSet. 
+    \]  
+\end{defn}
+By changing the codomain we can obtain, for example, presheaves of abelian groups. In this course, we will focus almost entirely on presheaves of sets and of abelian groups.
+Let $U \subset V $ be open sets of $X$. The inclusion under $F$ gives a \emph{restriction} map $F(V) \to F(U)$. The naming comes from the following example: 
+
+\begin{exmp}\label{exmp:ct-maps-presheaf}
+    Let $X$ and $Z$ be topological spaces. The assignment $h_Z: \open(X)\opp \to \catSet$ by $U \mapsto \cont(U,Z)$ can be turned into a presheaf: given $U \subseteq V$ opens of $X$, define $$r_{UV}: \cont(V,Z) \to \cont(U,Z)$$ by $f \mapsto f|_U$.
+\end{exmp}
+We generalise the notation of function restriction. For $F(V) \to F(U)$, we denote the map pointwise by $s \mapsto s|_U$.
+
+\begin{defn}\label{defn:sheaf}
+    Let $X$ be a topological space and $\mathcal{F}$ a presheaf \[\mathcal{F}: \open(X)\opp \to \catSet. \] We call $\mathcal{F}$ a \emph{sheaf} if
+    for every open $U \subset X$ and every open cover $(U_i)_{i \in I}$ of $U$ with $\bigcup_i U_i = U$, the map 
+        \[
+            \mathcal{F}(U) \to \prod_{i\in I}\mathcal{F}(U_i)
+        \] given by $s \mapsto (s|_{U_i})_{i \in I}$:
+    \begin{enumerate}
+        \item injective, and
+        \item its image satisfies a \emph{gluing} condition: it is given by $\setpred{(s_i)_{i\in I}}{s_i |_{U_i \cap U_j} = s_j | _ {U_i \cap U_j} \forall i,j \in I}$.
+    \end{enumerate}
+\end{defn}
+
+\begin{rmk}\label{rmk:sheafs-as-equalizers}
+    One checks that requiring the conditions i) and ii) above are equivalent to requiring that
+\[\begin{tikzcd}
+	{\mathcal{F}(U)} & {\prod_i\mathcal{F}(U_i)} & {\prod_{i,j}\mathcal{F}(U_i \cap U_j)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\alpha", shift left, from=1-2, to=1-3]
+	\arrow["\beta"', shift right, from=1-2, to=1-3]
+\end{tikzcd}\]
+    is an equaliser diagram for all $U$ open in $X$ and for all $(U_i)_{i \in I}$ open covers of $U$ , where $\alpha: (s_i)_{i \in I} \mapsto s_i|_{U_i \cap U_j}$ and $\beta: (s_i)_{i \in I} \mapsto s_j|_{U_i \cap U_j}$.
+\end{rmk}
+
+\begin{lem} \label{lem:ct-maps-sheaf}
+    The presheaf $h_Z$ from \cref{exmp:ct-maps-presheaf} is a sheaf.
+\end{lem}
+\begin{proof}
+    If two functions agree on every open of a cover of $U$ they agree on $U$, this gives \cref{defn:sheaf} i). For ii), we use the pasting lemma.
+\end{proof}
+
+\begin{exmp}
+    Let $Z$ be a discrete topological space, let $X$ be a topological space. Given an open subset $U$ of $X$, a map $f: U \to Z$ is continuous if and only if it is locally constant. The sheaf $h_Z$ is called the \emph{constant sheaf} on the set $Z$, labelled $\constSheaf{Z}$ or $\constSheaf{Z}_X$.
+\end{exmp}
+
+\begin{exmp}
+    If $X$ is a manifold, then the assignment $U \mapsto C^\infty(U, \mathbb{R})$ is a sheaf of $\mathbb{R}$ vector spaces. One can show that the assignment $U \mapsto \Omega^k(U)$ (smooth differential $k$-forms) is a sheaf.
+\end{exmp}
+
+\begin{lem}[name=Sheaf of sections]\label{exmp:sheaf-of-sections}
+    Let $f: Y \to X$ be a continuous map of topological spaces. The assignment on opens of $X$ given by 
+    \[
+        h_{Y/X}: U \mapsto \setpred{s: U \to f^{-1}(U) }{ f \circ s = \id_U} =: \cont[X](U, Y)
+    \]
+    is a sheaf.
+\end{lem}
+\begin{proof}
+    One can prove the above lemma in a similar way we proved \cref{lem:ct-maps-sheaf}. 
+    Alternatively, consider the diagram 
+    \[\begin{tikzcd}
+	{\cont[X](U,Y)} & {\cont(U,Y)} \\
+	{\{U \to X\}} & {\cont(U,X)}
+	\arrow["{f \circ -}", from=1-2, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+\end{tikzcd}\]
+    and check that it is a pullback. We will come back to this in more detail in later lectures. 
+\end{proof}
+
+The example in the lemma above is why the elements of $\mathcal{F}(U)$ are often called sections. 
+
+\begin{exmp}
+    Let $Y \xrightarrow{f} X$ be the $2:1$ cover of the circle: $f: z \mapsto z^2$, with $X := S^1$ and $Y: S^1$. 
+    On small intervals $U \subset X$ we get $f^{-1}(U)  \cong U \times \{1,2\}$. We thus have two sections: $U \mapsto (U, 1)$ and $U \mapsto (U, 2)$. So $h_{Y/X}(U)$ has two elements
+    On $V$ a union of small intervals, we get $2^{|\pi_0(V)|}$ elements, where $|\pi_0(V)|$ is the number of path components of $V$. 
+    On $W = X$, we get no sections. If $s: X \to Y$ is a section, then the induced map $s_*: \pi_1(X) \to \pi_1(Y)$ is a section to the map $f_*: \pi_1(Y) \to \pi_1(X)$. But this induced map is multiplication by $2$, and it does not have a section. 
+\end{exmp}

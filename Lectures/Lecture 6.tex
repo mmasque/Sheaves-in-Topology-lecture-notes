@@ -1,0 +1,208 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Sheaves of abelian groups}
+
+\section{Sheaves of abelian groups}
+\remyquote{Why is he erasing an empty board, you might ask.}
+\noindent
+Almost everything we have done so far works for sheaves with algebraic structure, for example:
+\begin{itemize}
+    \item Sheaves of abelian groups ($\rightsquigarrow$ homological algebra)
+    \item Sheaves of commutative rings (algebraic geometry)
+    \item Sheaves of commutative monoids (useful in logarithmic geometry (?))
+\end{itemize}
+You can also do more general things:
+\begin{itemize}[resume]
+    \item Sheaves of topological rings
+    \item Sheaves of banach algebras
+    \item Sheaves of categories (a.k.a. stacks in categories)
+    \item Sheaves of groupoids (\emph{stacks})
+    \item Sheaves of homotopy types/spaces/anima/\(\infty\)-groupoids (\emph{$\infty$-stacks})
+\end{itemize}
+We should warn that the sheaf condition should be modified for higher-categorical sheaves.
+
+\begin{defn}
+    Let $\cat C$ be a category. A \emph{presheaf on $X\in\catTopologicalSpace$ with values in $\cat C$} is a functor $F\colon \open(X)\opp \to \cat C$. If $\cat C$ is complete (can weaken to $\cat C$ has products (why?)), then a sheaf on $X$ with values in $\cat C$ is a presheaf such that the sheaf condition holds in $\cat C$. 
+    
+    We denote the categories of such objects $\catPresheaf(X, \cat C)$ and $\catSheaf(X, \cat C)$ respectively. In the case $\cat C$ is $\catAbelianGroup$, we may use the notation $\catAbelianPresheaf(X) := \catPresheaf(X, \catAbelianGroup)$ and $\catAbelianSheaf(X) := \catSheaf(X, \catAbelianGroup)$.
+\end{defn}
+
+We will need a description of limits in $\catAbelianGroup$. 
+
+\begin{lem}[name={\cite[Section~\RN{5}.1]{MacLaneMoerdijkSheavesGeometryLogic}}]
+    The forgetful functor $\catAbelianGroup\to \catSet$ creates limits.
+\end{lem}
+
+\begin{exmp}
+The product of a family \((A_i)_{i\in I}\) of abelian groups is given by the set $\prod_{i\in I} A_i$ with coordinatewise addition.
+Equalisers in $\catAbelianGroup$ (and in fact in any additive category with all kernels) are given by
+\[\eq(f,g) = \setpred{a\in A}{f(a) = g(a)} = \ker(f-g)\text{.}\] 
+
+However, colimits are not the same as in $\catSet$.
+The coproduct of a family \((A_i)_{i\in I}\) of abelian groups is the direct sum
+\[\bigoplus_{i\in I} A_i = \setpred{(a_i)_{i\in I} \in \prod_{i\in I} A_i}{\#\setpred{i\in I}{a_i\neq 0}<\infty}\text{,}\]
+and coequalisers in $\catAbelianGroup$ are given by $\coeq(f,g) = \coker(f-g)$.
+\end{exmp}
+
+\begin{cor}
+A presheaf $F\colon \open(X)\opp \to \catAbelianGroup$ is a sheaf if and only if the composite
+\[ \open(X)\opp\xrightarrow{F} \catAbelianGroup \xrightarrow{U}\catSet \]
+is a sheaf, where $U\colon \catAbelianGroup\to\catSet$ is the forgetful functor.
+\end{cor}
+
+\begin{defn}\label{defn:filtered-category}
+    A small category $\cat I$ is \emph{filtered} if $\cat I\neq \varnothing$ and the following conditions hold:
+    \begin{enumerate}
+        \item\label{defn:filtered-category:upperbound} For all $i,j\in \cat I$ there exists a $k\in\cat I$ and arrows $i\to k \leftarrow j$
+        \item\label{defn:filtered-category-equaliser} For $u,v\colon i\to j$ in $\cat I$ there exists a $k\in \cat I$ and $w\colon j\to k$ such that $wu = wv$.
+    \end{enumerate}
+    Dually, there is a notion of \emph{cofiltered category}.
+\end{defn}
+
+\begin{exmp}
+    A poset $P$ always satisfies \cref{defn:filtered-category-equaliser}, so it is filtered if and only if it is nonempty and every pair of elements has an upper bound.
+    If $I$ is a set, then the poset $\mathcal P_{\textup{fin}}(I) := \setpred{J\subseteq I}{I\text{ finite}}$ of finite subsets of \(I\) ordered by inclusion is filtered, since $\mathcal P_{\textup{fin}}(I)$ contains the empty set and two finite subsets $J, J'\subseteq I$ have an upper bound $J\cup J'$. 
+\end{exmp}
+
+\begin{exc}
+    Show that a category $\cat I$ is filtered if and only if every finite diagram $D\colon \cat J \to \cat I$ in $\cat I$ has a cocone.
+\end{exc}
+
+\begin{defn}[Only the notation was introduced in the lecture]
+    A \emph{filtered colimit}, denoted $\filteredcolim$, is the colimit of a functor $F\colon \cat I\to \cat C$ where $\cat I$ is a filtered category. A \emph{cofiltered limit}, denoted $\cofilteredlim$, is the limit of a functor $F\colon \cat I\to \cat C$ where $\cat I$ is a cofiltered category.
+\end{defn}
+
+\begin{lem}[name={\cite[Section~\RN{9}.1]{MacLaneMoerdijkSheavesGeometryLogic}}]
+    The forgetful functor $U\colon \catAbelianGroup\to\catSet$ creates filtered colimits.
+\end{lem}
+
+\begin{exmp} The following are examples of filtered limits and colimits, in some cases the indexing category is omitted in the notation.
+\begin{itemize}
+    \item We saw that \[\bigoplus_{i\in I} A_i \cong \filteredcolim_{J\in \cat P_{\textup{fin}}(I)} \oplus_{j\in J} A_j\text{.}\]
+    \item The filtered colimit of the rings \(\frac{1}{n}\bb Z\) where the diagram is indexed by the divisibility poset is
+      \[\filteredcolim_{n}\frac{1}{n} \bb Z = \bb Q\text{.}\]
+    \item The filtered colimit of the field extensions of \(\bb Q\) is
+      \[\filteredcolim_{\bb Q\to K \textup{ finite}} K = \overline{\bb Q}\text{.}\]
+    \item The filtered limit of the rings \(\bb Z/p^n\bb Z\) for \(p\) a prime is the ring
+      \[\cofilteredlim_{n} \bb Z / p^n\bb Z = \bb Z_p\]
+      of the \(p\)-adic integers.
+    \item The stalk of a sheaf \(\mathcal F\) at a point \(x\) is a filtered colimit:
+      \[ \cat F_x = \filteredcolim_{U\ni x} \cat F(U)\text{.} \]
+      Indeed the indexing category $\setpred{U\in\open(X)\opp}{x\in U}$ is filtered: if $x\in U, V \subseteq X$ are open then $x\in U\cap V$.
+    \item Likewise, the pullback of a presheaf \(\mathcal F\) is given by
+      \[ f^{\circledast} \mathcal F(V) = \filteredcolim_{f(V) \subseteq U} \cat F(U)\text{,} \]
+      a filtered colimit.
+\end{itemize}
+    
+\end{exmp}
+
+\section{Abelian group objects}
+\remyquote{I'm only familiar with this for \(\infty\)-categories, not for \(1\)-categories.}
+\noindent
+\begin{defn}
+    Let $\cat C$ be a category with finite products. An \emph{abelian group object} in $\cat C$ is a quadruple $(A, m, i, 0)$ of an object $A\in \cat C$ and morphisms
+    \begin{align*}
+        m\colon A\times A\to A \\
+        i\colon A\to A \\
+        0\colon * \to A
+    \end{align*}
+    such that the following diagrams commute:
+    \begin{enumerate}
+        \item[] (Associativity) 
+            \[\begin{tikzcd}
+            A\times A\times A \arrow[r, "m\times \id"] \arrow[d, "\id\times m"] & A\times A \arrow[d, "m"] \\
+            A\times A \arrow[r, "m"]                                            & A                       
+            \end{tikzcd}\]
+        \item[] (Commutativity) 
+            \[\begin{tikzcd}
+            A\times A \arrow[rd, "m"] \arrow[rr, "\text{swap}"] &   & A\times A \arrow[ld, "m"'] \\ 
+            & A & 
+            \end{tikzcd}\]
+        \item[] (Identity)
+            \[\begin{tikzcd}
+            A\times * \arrow[r, "\id\times 0"] \arrow[d, "\text{pr}_1"] & A\times A \arrow[d, "m"] & *\times A \arrow[l, "0\times\id"'] \arrow[d, "\text{pr}_2"] \\
+            A \arrow[r, "\id"]                                          & A                        & A \arrow[l, "\id"']                                        
+            \end{tikzcd}\]
+        \item[] (Inverse)
+            \[\begin{tikzcd}
+            * \arrow[d, "0"] &                           & A \arrow[d, "\Delta"] \arrow[rr] \arrow[ll]                           &                          & * \arrow[d, "0"] \\
+            A                & A\times A \arrow[l, "m"'] & A\times A \arrow[r, "\id \times i"] \arrow[l, "i\times \id"'] & A\times A \arrow[r, "m"] & A               
+            \end{tikzcd}\]
+    \end{enumerate}
+    Write $\catAbelianGroup(\cat C)$ for the \emph{category of abelian group objects} in $\cat C$. The morphisms of this category are
+    \[\catAbelianGroup(\cat C)((A,m,i,0), (B, m,i, 0)) = \{f\in \cat C(A,B)\colon f\circ m = m\circ\left(f \times f\right)\}\] that is, those morphisms that commute with the group operation $m$. 
+\end{defn}
+
+\begin{rmk}
+    $\catAbelianGroup(\catSet) = \catAbelianGroup$.
+\end{rmk}
+
+\begin{lem} We have the following equivalences of categories:
+    \begin{enumerate}
+        \item[(i)] $\catAbelianGroup(\catPresheaf(X)) \cong \catAbelianPresheaf(X)$
+        \item[(ii)] $\catAbelianGroup(\catSheaf(X)) \cong \catAbelianSheaf(X)$
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}[sketch]
+    \begin{enumerate}
+        \item[(i)] A presheaf $F\colon \open(X)\opp \to \catAbelianGroup$ consists of $F(U)\in\catAbelianGroup$ for all $U\in \open(X)\opp$ with restriction maps $r_{UV}\colon F(V)\to F(U)$ in $\catAbelianGroup$. This means that the group operation $F(U)\times F(U)\to F(U)$ is natural, that is, if $U\subseteq V$ then
+        \[\begin{tikzcd}
+        F(V)\times F(V) \arrow[r, "m_V"] \arrow[d, "r_{UV}\times r_{UV}"'] & F(V) \arrow[d, "r_{UV}"] \\
+        F(U)\times F(U) \arrow[r, "m_U"']                                  & F(U)                    
+        \end{tikzcd}\] So $m\colon F\times F\to F$ is natural. Likewise, $0$ and \(i\) are natural transformations (follow your nose). Conversely, an abelian object in $\catPresheaf(X)$ is a presheaf of abelian groups (why?).
+        \item[(ii)] We claimed earlier that $F\colon \open(X)\opp\to \catAbelianGroup$ is a sheaf if and only if $U\circ F\colon \open(X)\opp \to \catSet$ is a sheaf (where $U\colon \catAbelianGroup\to \catSet$ is the forgetful functor). Thus for any sheaf $\cat F\in \catAbelianSheaf(X)$, $U\circ \cat F$ is a sheaf of sets which has abelian group object structure by (i). Conversely, $(\mathcal F, m,i, 0)\in \catAbelianGroup(\catSheaf)$ is the data of a sheaf of abelian groups, since it is a presheaf of abelian groups by (i) and thus a sheaf since it is a sheaf on sets.  \qedhere
+    \end{enumerate}\end{proof}
+
+\begin{rmk}
+    We can do everything we know for sheaves of abelian groups as well:
+    \begin{itemize}
+        \item We have an adjunction:
+            \[\begin{tikzcd}
+            \catAbelianPresheaf(X) \ar[r, "{\etalespace*}"{name=leftadj}, shift left=2] & \catAbelianGroup(\catTopologicalSpace_{/X}) \ar[l, "h_{-/X}"{name=rightadj}, shift left=2]
+            \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
+          \end{tikzcd}\]
+         which restricts to an equivalence:
+            \[\begin{tikzcd}
+            \catAbelianSheaf(X) \ar[r, "{\etalespace*}"{name=leftadj}, shift left=2] & \catAbelianGroup(\catLocalHomeomorphism_{/X}) \ar[l, "h_{-/X}"{name=rightadj}, shift left=2]
+            \ar[from=leftadj, to=rightadj, phantom, "\simeq"]
+          \end{tikzcd}\]
+          \item Monodromy: $\catAbelianGroup(\catLocallyConstantSheaf(X)) \cong \catName{Rep}_{\bb Z}(\Pi_1(X,x))$ (where $\catName{Rep}_{\bb Z}$ denotes the category of representations in $\catModule_{\bb Z}$). We may also denote $\catAbelianGroup(\catLocallyConstantSheaf(X))$ by $\catAbelianGroup^{\text{l.c.}}(X) \cong \catModule_{\bb Z[\Pi_1(X,x)]}$.
+          \item Pushforward and pullback: for $f\colon Y\to X$ we have adjunctions
+              \[\begin{tikzcd}
+            \catAbelianPresheaf(Y) \ar[r, "f_*"'{name=rightadj}, shift right=2] &
+            \catAbelianPresheaf(X) \ar[l, "f^\circledast"'{name=leftadj}, shift right=2]
+            \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
+          \end{tikzcd}\]
+          and 
+              \[\begin{tikzcd}
+                \catAbelianSheaf(Y) \ar[r, "f_*"'{name=rightadj}, shift right=2] &
+                \catAbelianSheaf(X) \ar[l, "f^*"'{name=leftadj}, shift right=2]
+                \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
+              \end{tikzcd}\]
+        \item All the functors $f_*, f^{\circledast}, f^*, (-)^\sharp, h_{(-)/X}$ commute with the forgetful functors (see \cite[\href{https://stacks.math.columbia.edu/tag/0085}{Lemma~0085}]{stacks-project} for a hands-on proof that $(-)^\sharp$ does).
+        \item A map $f\colon \cat F\to \cat G$ in $\catAbelianGroup(X)$ is an isomorphism if and only if the induced map $f_x\colon\mathcal F_x\to\mathcal G_x$ on stalks is an isomorphism for all $x\in X$. 
+    \end{itemize}
+\end{rmk}
+
+Finally, since the image presheaf is not a sheaf we define exactness in the $\catAbelianGroup(X)$ via the stalks.
+
+\begin{defn}
+    A sequence $\cat F\xrightarrow{f}\cat G\xrightarrow{g}\cat H$ in $\catAbelianGroup(X)$ is exact at $\cat G$ iff $\cat F_x\xrightarrow{f_x} \cat G_x \xrightarrow{g_x} \cat H_x$ is exact for all $x\in X$.
+\end{defn}
+
+(Remark Remy in lecture: Coincidentally, the reason of this definition, that the image presheaf is not a sheaf, is also the reason the global sections functor (evaluation in the global sections) is generally only left exact, thus a right derived functor. Right deriving the global sections functor on a sheaf  $\cat F\in \catAbelianGroup(X)$ allows us to compute the sheaf cohomology denoted $H^i(X;\cat F)$.)
+
+\begin{exmp}
+    Let $0\to A\to B\to C\to 0$ be a short exact sequence in $\catAbelianGroup$. Then the sequence of constant sheaves, 
+    \[0\to \underline{A}\to \underline{B}\to \underline{C}\to 0\] is exact. Indeed, $\left(\underline{Z}\right)_x\cong Z$ for any $x\in X$ and $Z\in \catSet$ (as the fibre of $Z\times X\xrightarrow{\text{pr}_2} X$ at $x\in X$). 
+\end{exmp}
+
+\begin{exmp}
+    Let $\iota\colon \{0\} \xhookrightarrow{} \bb R$, $A\in\catAbelianGroup$. Then $\iota_* A$ has etale space,
+    \todo{draw line with $\#A$ origins}
+\end{exmp}
+
+\end{document}

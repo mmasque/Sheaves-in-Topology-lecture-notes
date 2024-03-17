@@ -1,0 +1,696 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sheaves}
+
+%% Macros for if-then-else logic.
+\RequirePackage{iftex}
+\NewDocumentCommand\@ifmemoirloaded{m}{\@ifclassloaded{memoir}{#1}{}}
+\NewDocumentCommand\@ifarticleloaded{m}{\@ifclassloaded{article}{#1}{}}
+
+%% Use the Dutch format for dates, also in English (1 January 2000)
+\RequirePackage[calc]{datetime2}
+\DTMnewdatestyle{daymonthyear}{%
+  \RenewDocumentCommand\DTMdisplaydate{mmmm}{\number##3~\DTMmonthname{##2} \number##1}
+  \RenewDocumentCommand\DTMDisplaydate{mmmm}{\DTMdisplaydate{##1}{##2}{##3}{##4}}
+}
+\DTMsetdatestyle{daymonthyear}
+
+%% Do not use wide spaces between sentences.
+\frenchspacing
+%% Do not indent
+% \@ifclassloaded{memoir}{%
+%   \setlength{\parindent}{0pt}
+%   \nonzeroparskip
+% }{%
+%   \RequirePackage[parfill]{parskip}
+% }
+
+%% Use UTF-8 input if compiled with pdfTeX.
+\ifpdftex
+  \RequirePackage{textcomp}
+  \RequirePackage[utf8]{inputenc}
+\fi
+
+\RequirePackage[style=british]{csquotes}
+
+%% Reduce margins if article is loaded
+% \@ifarticleloaded{\RequirePackage[scale=.7]{geometry}}
+\RequirePackage[scale=0.65, vscale=0.75]{geometry}
+%% Graphics
+\RequirePackage{graphicx}
+%% Figures
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\@ifclassloaded{memoir}{%
+  \captiondelim{\,\(\cdot\)\,}
+  \captionnamefont{\sbseries}
+}{%
+  \DeclareCaptionLabelSeparator{dot}{\,\(\cdot\)\,}
+  \DeclareCaptionFont{sb}{\sbseries}
+  \captionsetup{labelfont=sb, labelsep=dot}
+}
+% Number subfigures with roman numerals
+\RenewDocumentCommand\thesubfigure{}{\roman{subfigure}}
+%% Maths
+\RequirePackage{amsmath,amsthm}
+\RequirePackage{mathtools}
+% \mathtoolsset{centercolon}
+\RequirePackage{bm} % bold maths
+
+\RequirePackage{cases} % numcases
+%% TikZ figures
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\usetikzlibrary{arrows,3d}
+\RequirePackage{tikz-3dplot}
+%% Commutative diagrams
+\RequirePackage{tikz-cd}
+% Arrow style
+\tikzcdset{
+  arrow style=tikz,
+  diagrams={>={Straight Barb[scale=0.8]}}
+  % diagrams={>={Classical TikZ Rightarrow}
+}
+\usetikzlibrary{decorations.pathmorphing}
+% Style for monos, epis, isos, weak equivalences, (acyclic) cofibrations, (acyclic) fibrations.
+\tikzcdset{
+  mono/.style={tail},
+  epi/.style={two heads},
+  iso/.style={"\cong"' sloped},
+  iso'/.style={"\cong" sloped},
+  pullback/.style={phantom, "\lrcorner", pos=0.025},
+  pushout/.style={phantom, "\ulcorner", pos=0.025},
+  weak equivalence/.style={"\sim"' sloped},
+  weak equivalence'/.style={"\sim" sloped},
+  cofibration/.style={hook},
+  fibration/.style={two heads},
+  acyclic cofibration/.style={weak equivalence, cofibration},
+  acyclic cofibration'/.style={weak equivalence', cofibration},
+  acyclic fibration/.style={weak equivalence, fibration},
+  acyclic fibration'/.style={weak equivalence', fibration},
+  inclusion/.style={hook},
+}
+%% Tables
+\RequirePackage{booktabs}
+
+%% Font selection
+\RequirePackage{fontspec}
+\RequirePackage[symbols]{kpfonts-otf}
+\usepackage[only,boxslash]{stmaryrd}
+\newfontfamily\KpLight{KpLight}[
+  Numbers=Lowercase,
+  SmallCapsFeatures={Letters=SmallCaps},
+  Ligatures={TeX,Common,Required},
+  Style=Swash,
+  StylisticSet=1,
+]
+\defaultfontfeatures+[KpRoman,KpSans]{
+  Numbers=Lowercase,
+  SmallCapsFeatures={Letters=SmallCaps},
+  Ligatures={TeX,Common,Required},
+  Style=Swash,
+  StylisticSet=1,
+}
+\defaultfontfeatures+[ETbb]{
+  Numbers=Lowercase,  % oldstyle numbers
+  Ligatures={TeX,Common},
+  Style=Swash,
+}
+\newfontfamily\LaptureCaption{LaptureCaption}[
+  Path = ./fonts/,
+  UprightFont = {Lapture-Caption-Regular.ttf},
+  BoldFont = {Lapture-Caption-Semibold.ttf},
+  ItalicFont = {Lapture-Caption-Italic.ttf},
+  BoldItalicFont = {Lapture-Caption-Semibold-Italic.ttf},
+]
+\newfontfamily\LaptureSubhead{LaptureSubhead}[
+  Path = ./fonts/,
+  UprightFont = {Lapture-Subhead-Regular.ttf},
+  BoldFont = {Lapture-Subhead-Semibold.ttf},
+  ItalicFont = {Lapture-Subhead-Italic.ttf},
+  BoldItalicFont = {Lapture-Subhead-Semibold-Italic.ttf},
+]
+\newfontfamily\ArtigoDisplay{ArtigoDisplay}[
+  Path = ./fonts/,
+  UprightFont = {Artigo-Display-Regular.ttf},
+  BoldFont = {Artigo-Display-Medium.ttf},
+]
+\defaultfontfeatures+[LaptureCaption,LaptureSubhead]{
+  Numbers=Lowercase,
+  Ligatures={TeX,Common,Required},
+}
+
+%% Kp
+% \setmainfont{KpRoman}
+% \setmonofont{KpMono}
+% \newcommand*{\ltseries}{\KpLight}
+% \newcommand*{\sbseries}{\KpLight\bfseries}
+% \DeclareTextFontCommand{\textlt}{\ltseries}
+% \DeclareTextFontCommand{\textsb}{\sbseries}
+
+%% Fbb (Bembo-like)
+\setmainfont{ETbb}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
+\newcommand*{\sbseries}{\bfseries}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+
+\setmathfont{KpMath-Regular}[Style=leqslant]
+\setmathfont{KpMath-Regular}[range={cal,bfcal},StylisticSet=1]
+%% Use mathcal from Boondox, mathbb from mathpazo.
+\let\mathbfcal\undefined
+\usepackage[cal=boondoxo,bb=pazo]{mathalpha}
+
+\setsansfont[Scale=MatchLowercase]{MerriweatherSansLight}
+
+\RequirePackage{microtype}
+
+%% Links
+\RequirePackage{hyperref}
+% \definecolor{link}{RGB}{0,128,192}
+\definecolor{link}{RGB}{0,0,0}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=link,
+  linkcolor=link,
+  citecolor=link,
+  filecolor=link,
+  anchorcolor=black,
+}
+\urlstyle{sf}
+\RequirePackage[capitalise,nameinlink,noabbrev]{cleveref}
+%% Refer to sections and subsections using the paragraph symbol followed by a non-breaking space.
+%% Typographic reference: <https://practicaltypography.com/paragraph-and-section-marks.html>
+% \crefformat{chapter}{#2\S#1#3}
+% \crefmultiformat{chapter}{#2\S\S#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefname{chapter}{Lecture}{Lectures}
+\crefname{chapter}{Lecture}{Lectures}
+\crefformat{section}{#2\S~#1#3}
+\Crefformat{section}{#2Section~#1#3}
+\crefmultiformat{section}{#2\S\S~#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefmultiformat{section}{#2Sections~#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefformat{subsection}{#2\S~#1#3}
+\Crefformat{subsection}{#2Section~#1#3}
+\crefmultiformat{subsection}{#2\S\S~#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefmultiformat{subsection}{#2Sections~#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+% Refer to equations by their number enclosed in brackets, not preceded by ‘Equation(s)’.
+\Crefname{equation}{}{}
+\crefname{equation}{}{}
+% Refer to items without the word ‘Item(s)’.
+\Crefname{enumi}{}{}
+\crefname{enumi}{}{}
+\Crefname{enumii}{}{}
+\crefname{enumii}{}{}
+\Crefname{enumiii}{}{}
+\crefname{enumiii}{}{}
+\Crefname{enumiv}{}{}
+\crefname{enumiv}{}{}
+\Crefname{enumv}{}{}
+\crefname{enumv}{}{}
+
+%% Itemize, enumerate, description
+\RequirePackage[inline]{enumitem}  
+\setlist[enumerate,1]{label=(\roman*)}
+\setlist[enumerate,2]{label=(\alph*)}
+%% Decrease size around itemize, enumerate, description (memoir)
+\@ifmemoirloaded{\tightlists}
+%%%% TODO: same thing for article?
+
+%% To do notes
+\RequirePackage{todonotes}
+\newcommand{\towrite}[1]{\todo[inline,color=blue!20]{\textsf{To do: #1}}}
+
+%% This package adds the list of references to the table of contents.
+%% Not necessary for memoir.
+\@ifarticleloaded{\RequirePackage[nottoc,numbib]{tocbibind}}
+
+%% References
+\usepackage[backend=biber,style=alphabetic,backref=true,backrefstyle=two,sorting=nyt]{biblatex}
+\addbibresource{bibliography.bib}
+\RenewDocumentCommand\RNfont{m}{\textsc{#1}}  % font of upper case roman numerals
+% \DeclareBibliographyStrings{nodate={{no date}{n.d.}}}
+% \DefineBibliographyStrings{english}{nodate={n.d.}}
+
+%% These two packages are used to switch between the languages on the titlepage
+\RequirePackage{ifthen} 
+\RequirePackage{iflang}
+
+%% Theorem environments
+\RequirePackage{thmtools}
+% \numberwithin{equation}{\@ifclassloaded{memoir}{chapter}{section}}
+% \numberwithin{table}{\@ifclassloaded{memoir}{chapter}{section}}
+% \numberwithin{figure}{\@ifclassloaded{memoir}{chapter}{section}}
+
+\def\thmskip{\@ifclassloaded{memoir}{.5\baselineskip}{0}}
+\declaretheoremstyle[
+  spaceabove=\thmskip,
+  spacebelow=\thmskip,
+  headfont=\sbseries,
+  bodyfont=\itshape,
+  notefont=\normalfont,
+  headpunct={\,\(\cdot\)},
+  postheadspace=0.16667em,
+  % headformat=margin,
+]{myplain}
+\declaretheoremstyle[
+  spaceabove=\thmskip,
+  spacebelow=\thmskip,
+  headfont=\sbseries,
+  bodyfont=\normalfont,
+  notefont=\normalfont,
+  headpunct={\,\(\cdot\)},
+  postheadspace=0.16667em,
+  % qed=\(\lozenge\),
+  % headformat=margin,
+]{mydefinition}
+\declaretheoremstyle[
+  spaceabove=\thmskip,
+  spacebelow=\thmskip,
+  headfont=\itshape,
+  bodyfont=\normalfont,
+  notefont=\normalfont,
+  headpunct={\,\(\cdot\)},
+  postheadspace=0.16667em,
+  % qed=\(\lozenge\),
+  % headformat=margin,
+]{myremark}
+\declaretheoremstyle[
+  spaceabove=\thmskip,
+  spacebelow=\thmskip,
+  headfont=\itshape,
+  bodyfont=\normalfont,
+  notefont=\itshape,
+  headpunct={.},
+  % postheadspace=0.16667em,
+  qed=\qedsymbol,
+  numbered=no,
+  % headformat=margin,
+]{myproof}
+
+\declaretheorem[
+  name=Theorem,
+  refname={Theorem,Theorems},
+  style=myplain,
+  numberwithin=\@ifclassloaded{memoir}{section}{subsection}
+]{thm}
+\declaretheorem[
+  name=Theorem,
+  refname={Theorem,Theorems},
+  style=myplain,
+  numbered=no
+]{thm*}
+\declaretheorem[
+  name=Corollary,
+  sharenumber=thm,
+  refname={Corollary,Corollaries},
+  style=myplain
+]{cor}
+\declaretheorem[
+  name=Lemma,
+  sharenumber=thm,
+  refname={Lemma,Lemmas},
+  style=myplain
+]{lem}
+\declaretheorem[
+  name=Proposition,
+  sharenumber=thm,
+  refname={Proposition,Propositions},
+  style=myplain
+]{prop}
+\declaretheorem[
+  name=Exercise,
+  sharenumber=thm,
+  refname={Exercise,Exercises},
+  style=mydefinition
+]{exc}
+\declaretheorem[
+  name=Definition,
+  sharenumber=thm,
+  refname={Definition,Definitions},
+  style=mydefinition
+]{defn}
+\declaretheorem[
+  name=Example,
+  sharenumber=thm,
+  refname={Example,Examples},
+  style=myremark
+]{exmp}
+\declaretheorem[
+  name=Examples,
+  sharenumber=thm,
+  refname={Examples,Examples},
+  style=myremark
+]{exmps}
+\declaretheorem[
+  name=Remark,
+  sharenumber=thm,
+  refname={Remark,Remarks},
+  style=myremark
+]{rmk}
+\declaretheorem[
+  name=Notation,
+  sharenumber=thm,
+  refname={Notation,Notations},
+  style=myremark
+]{notn}
+\declaretheorem[
+  name=Convention,
+  sharenumber=thm,
+  refname={Convention,Conventions},
+  style=myremark
+]{conv}
+%% Proof environment is already defined by amsthm; redefine it here.
+\RenewDocumentEnvironment{proof}{}{}{}
+\let\proof\@undefined
+\let\endproof\@undefined
+\declaretheorem[
+  name=Proof,
+  refname={Proof,Proofs},
+  style=myproof
+]{proof}
+
+%% Use this when enumerating in a theorem environment.
+\NewDocumentCommand\thmenum{}{\leavevmode}
+
+\AddToHook{begindocument/end}{%
+  %% Swap \phi and \varphi
+  \let\ovarphi\varphi
+  \let\ophi\phi
+  \let\phi\ovarphi
+  \let\varphi\ophi
+  %% Swap \epsilon and \varepsilon
+  \let\ovarepsilon\varepsilon
+  \let\oepsilon\epsilon
+  \let\epsilon\ovarepsilon
+  \let\varepsilon\oepsilon
+}
+
+%% Maths macros
+%% \NewMathOperator\name{symbol} defines the following commands:
+%% + \nameop for the operator ‘symbol’,
+%% + \name for \name,
+%% + \name* for the ordinary maths version of the operator ‘symbol’ (i.e., \mathord{\name}),
+%% If a star is used (\NewMathOperator*), the limits of the operator will be set above and below the symbol.
+\NewDocumentCommand\NewMathOperator{smm}{%
+  \IfBooleanTF{#1}{%
+    \def\DeclareMathOperatorStar{\DeclareMathOperator*}
+    \expandafter\DeclareMathOperatorStar\csname \string #2 op\endcsname{#3}
+  }{%
+    \expandafter\DeclareMathOperator\csname \string #2 op\endcsname{#3}
+  }
+  \NewDocumentCommand{#2}{s}{%
+    \IfBooleanTF{##1}{\mathord{\csname \string #2 op\endcsname}}{\csname \string #2 op\endcsname}
+  }
+}
+%% Change spacing of \colon:
+\RenewDocumentCommand\colon{}{\nobreak \mskip 5mu\mathpunct {}\nonscript \mkern -\thinmuskip {:}\mskip 5mu\relax}
+%% Use slanted ≤ and ≥
+\RenewDocumentCommand\leq{}{\leqslant}
+\RenewDocumentCommand\geq{}{\geqslant}
+% \RenewDocumentCommand\emptyset{}{\varnothing}
+%% Common paired delimiters
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+%% Shorthand for blackboard bold
+\NewDocumentCommand\bb{m}{\mathbb{#1}}
+\NewDocumentCommand\vbb{m}{\varmathbb{#1}}
+%% Common operators
+\NewMathOperator\id{id}
+% \NewDocumentCommand\id{}{1}
+\NewMathOperator\dom{dom}
+\NewMathOperator\cod{cod}
+\NewMathOperator\ran{ran}
+\NewMathOperator\im{im}
+\NewMathOperator\coim{coim}
+\NewMathOperator\const{const}
+\NewMathOperator\incl{incl}
+\NewMathOperator\eq{eq}
+\NewMathOperator\coeq{coeq}
+\NewMathOperator\pr{pr}
+\NewMathOperator\prl{pr_1}
+\NewMathOperator\prr{pr_2}
+\NewMathOperator\inj{inj}
+\NewMathOperator\inl{inl}
+\NewMathOperator\inr{inr}
+\NewMathOperator\ob{ob}
+\NewMathOperator\mor{mor}
+\NewMathOperator\coker{coker}
+\NewMathOperator\tr{tr}
+\NewMathOperator\sk{sk}
+\NewMathOperator\cosk{cosk}
+\NewMathOperator\ev{ev}
+\NewMathOperator\Sing{Sing}
+\NewMathOperator\triv{triv}
+\let\lim\@undefined
+\NewMathOperator\lim{lim}
+\NewMathOperator\colim{colim}
+\NewMathOperator\res{res}
+\NewMathOperator\ind{ind}
+\NewMathOperator\coind{coind}
+\NewMathOperator\closure{cl}
+\NewMathOperator\interior{int}
+\NewMathOperator\cone{cone}
+\NewMathOperator\cyl{cyl}
+\NewMathOperator\Lan{Lan}
+\NewMathOperator\Ran{Ran}
+% Categories
+\NewDocumentCommand\cat{m}{\mathcal{#1}}
+\NewDocumentCommand\catName{m}{\mathbf{#1}}
+\NewDocumentCommand\catSet{}{\catName{Set}}
+\NewDocumentCommand\catPointedSet{}{\catName{Set}_*}
+\NewDocumentCommand\catCategory{}{\catName{Cat}}
+\NewDocumentCommand\catCATegory{}{\catName{CAT}}
+\NewDocumentCommand\catPointedCategory{}{\catName{Cat}_*}
+\NewDocumentCommand\catGroupoid{}{\catName{Grpd}}
+\NewDocumentCommand\catMonoid{}{\catName{Mon}}
+\NewDocumentCommand\catGroup{}{\catName{Grp}}
+\NewDocumentCommand\catAbelianGroup{}{\catName{Ab}}
+\NewDocumentCommand\catRing{}{\catName{Ring}}
+\NewDocumentCommand\catField{}{\catName{Field}}
+\NewDocumentCommand\catGraph{}{\catName{Graph}}
+\NewDocumentCommand\catQuiver{}{\catName{Quiv}}
+\NewDocumentCommand\catDirectedGraph{}{\catName{Graph}_{\to}}
+\NewDocumentCommand\catTopologicalSpace{}{\catName{Top}}
+\NewDocumentCommand\catLocalHomeomorphism{}{\catName{LocalHomeo}}
+\NewDocumentCommand\catCoveringSpace{}{\catName{Cov}}
+\NewDocumentCommand\catBasedTopologicalSpace{}{\catName{Top}_*}
+\NewDocumentCommand\catVectorSpace{o}{\IfNoValueTF{#1}{\catName{Vect}}{\catName{Vect}_{#1}}}
+\NewDocumentCommand\catModule{o}{\IfNoValueTF{#1}{\catName{Mod}}{\catName{Mod}_{#1}}}
+\NewDocumentCommand\catChainComplex{o}{\IfNoValueTF{#1}{\catName{Ch}}{\catName{Ch}_{#1}}}
+\NewDocumentCommand\catSimplex{}{\bm{\Delta}}
+\NewDocumentCommand\catSimplicial{m}{\catName{s}#1}
+\NewDocumentCommand\catSimplicialSet{}{\catSimplicial{\catSet}}
+\NewDocumentCommand\catAlgebra{o}{\IfNoValueTF{#1}{\catName{Alg}}{\catName{Alg}_{#1}}}
+\NewDocumentCommand\catCoalgebra{o}{\IfNoValueTF{#1}{\catName{coAlg}}{\catName{coAlg}_{#1}}}
+%% TODO: kerning on other side
+\NewDocumentCommand\catElements{}{\mkern-4mu\int\mkern-7mu}
+\DeclareMathOperator\catHomotopy{\catName{Ho}}
+\DeclareMathOperator\catK{\catName{K}}
+\DeclareMathOperator\catDerived{\catName{D}}
+\DeclareMathOperator\catFunctor{\catName{Fun}}
+\NewDocumentCommand\catOrbit{o}{\IfNoValueTF{#1}{\catName{Orb}}{\catName{Orb}_{#1}}}
+\DeclareMathOperator\catMap{\catName{Map}}
+\DeclareMathOperator\catPresheaf{\catName{PSh}}
+\DeclareMathOperator\catSheaf{\catName{Sh}}
+\DeclareMathOperator\catLocallyConstantSheaf{\catName{Sh}^{\textup{lc}}}
+\DeclareMathOperator\catAbelianPresheaf{\catName{PAb}}
+\DeclareMathOperator\catAbelianSheaf{\catAbelianGroup}
+\NewDocumentCommand\catWalkingEdge{}{\bm{\Gamma}}
+\NewDocumentCommand\catWalkingArrow{}{\vbb 2}
+\NewDocumentCommand\catTerminal{}{\vbb 1}
+
+\NewDocumentCommand\To{}{\Rightarrow}
+\NewDocumentCommand\weakequivalenceTo{}{\mathrel{\tilde{\To}}}
+\NewDocumentCommand\weakequivalenceto{}{\mathrel{\tilde{\to}}}
+\NewDocumentCommand\opp{}{^{\mathrm{op}}}
+\NewDocumentCommand\leftadj{}{\dashv}
+\NewDocumentCommand\rightadj{}{\vdash}
+\NewMathOperator\Homop{Hom}
+%% \HomX,Y produces \Homop(X,Y), \Hom[\cat C](X,Y) produces \Homop_{\cat C}(X,Y)
+\NewDocumentCommand\Hom{o}{\IfNoValueTF{#1}{\Homop}{\Homop_{#1}}}
+\RenewDocumentCommand\hom{o}{\Hom[#1]}
+%% Alternative definition of Hom:
+%% \Hom(X,Y) produces \Homop(X,Y), \Hom[\cat C](X,Y) produces \cat C(X,Y)
+% \NewDocumentCommand\Hom{O{\Homop}}{#1}
+\NewMathOperator\Autop{Aut}
+%% \Aut(X,Y) produces \Autop(X,Y), \Aut[\cat C](X,Y) produces \Autop_{\cat C}(X,Y)
+\NewDocumentCommand\Aut{o}{\IfNoValueTF{#1}{\Autop}{\Autop_{#1}}}
+\NewMathOperator\Endop{End}
+%% \End(X,Y) produces \Endop(X,Y), \End[\cat C](X,Y) produces \Endop_{\cat C}(X,Y)
+\NewDocumentCommand\End{o}{\IfNoValueTF{#1}{\Endop}{\Endop_{#1}}}
+\NewMathOperator\Extop{Ext}
+%% \ExtX,Y produces \Extop(X,Y), \Ext[\cat C](X,Y) produces \Extop_{\cat C}(X,Y)
+\NewDocumentCommand\Ext{o}{\IfNoValueTF{#1}{\Extop}{\Extop_{#1}}}
+\NewMathOperator\Torop{Tor}
+%% \TorX,Y produces \Torop(X,Y), \Tor[\cat C](X,Y) produces \Torop_{\cat C}(X,Y)
+\NewDocumentCommand\Tor{o}{\IfNoValueTF{#1}{\Torop}{\Torop^{#1}}}
+\NewDocumentCommand\inv{}{^{-1}}
+\NewDocumentCommand\deloop{}{\mathbf{B}}
+\NewDocumentCommand\classifying{}{E}
+\NewDocumentCommand\nerve{}{N}
+\NewDocumentCommand\centre{}{\mathrm{Z}}
+\NewDocumentCommand\normaliser{o}{\IfNoValueTF{#1}{\mathrm{N}}{\mathrm{N}_{#1}}}
+\NewDocumentCommand\initial{}{\emptyset}
+\NewDocumentCommand\terminal{}{{\mathord{*}}}
+\NewDocumentCommand\cotimes{}{\amalg}
+%% Alternative definition for cotimes:
+% \NewDocumentCommand\cotimes{}{+}
+\NewDocumentCommand\tensor{}{\otimes}
+\NewDocumentCommand\cotensor{}{\pitchfork}
+% \NewDocumentCommand\disjointunion{}{\sqcup}
+\NewDocumentCommand\disjointunion{}{\cotimes}
+%% unicode-math’s \pullback and \pushout are defined in \AtBeginDocument
+\AddToHook{begindocument/end}{%
+  \DeclareDocumentCommand\pullback{sm}{
+    \IfBooleanTF{#1}{%
+      \underset{#2}{\times}
+    }{%
+      \mathchoice{\underset{#2}{\times}}{\times_{#2}}{\times_{#2}}{\times_{#2}}
+    }
+  }
+  \DeclareDocumentCommand\pushout{sm}{
+    \IfBooleanTF{#1}{%
+      \underset{#2}{\cotimes}
+    }{%
+      \mathchoice{\underset{#2}{\cotimes}}{\cotimes_{#2}}{\cotimes_{#2}}{\cotimes_{#2}}
+    }
+  }
+  \DeclareDocumentCommand\union{sm}{
+    \IfBooleanTF{#1}{%
+      \underset{#2}{\cup}
+    }{%
+      \mathchoice{\underset{#2}{\cup}}{\cup_{#2}}{\cup_{#2}}{\cup_{#2}}
+    }
+  }
+}
+\NewDocumentCommand\homotopypullback{sm}{
+  \IfBooleanTF{#1}{%
+    \underset{#2}{\overset{h}{\times}}
+  }{%
+    \mathchoice{\underset{#2}{\overset{h}{\times}}}{\times^h_{#2}}{\times^h_{#2}}{\times^h_{#2}}
+  }
+}
+\NewDocumentCommand\chaincomplex{m}{{#1}_\bullet}
+\NewDocumentCommand\cochaincomplex{m}{{#1}^\bullet}
+\NewDocumentCommand\homology{o}{\IfNoValueTF{#1}{H}{H_{#1}}}
+\NewDocumentCommand\cycle{o}{\IfNoValueTF{#1}{Z}{Z_{#1}}}
+\NewDocumentCommand\bdary{o}{\IfNoValueTF{#1}{B}{B_{#1}}}
+\NewDocumentCommand\reducedhomology{o}{\IfNoValueTF{#1}{\tilde{H}}{\tilde{H}_{#1}}}
+\NewDocumentCommand\cohomology{o}{\IfNoValueTF{#1}{H}{H^{#1}}}
+\NewDocumentCommand\homotopy{o}{\IfNoValueTF{#1}{\pi}{\pi_{#1}}}
+\NewDocumentCommand\sphere{o}{\IfNoValueTF{#1}{S}{S^{#1}}}
+\NewDocumentCommand\disk{o}{\IfNoValueTF{#1}{D}{D^{#1}}}
+\NewDocumentCommand\opendisk{o}{\IfNoValueTF{#1}{\mathring{D}}{\mathring{D}^{#1}}}
+\NewDocumentCommand\simplex{o}{\IfNoValueTF{#1}{\Delta}{\Delta^{#1}}}
+\NewDocumentCommand\horn{oo}{\IfNoValueTF{#1}{\Lambda}{\IfNoValueTF{#2}{\Lambda^{#1}}{\Lambda^{#1}_{#2}}}}
+\NewDocumentCommand\spine{o}{\IfNoValueTF{#1}{I}{I^{#1}}}
+\NewDocumentCommand\simplicialsphere{o}{\catSimplicial\sphere[#1]}
+\NewDocumentCommand\simplicialdisk{o}{\catSimplicial\disk[#1]}
+\NewDocumentCommand\point{}{\vcenter{\hbox{\tiny\(\bullet\)}}}
+\NewDocumentCommand\selfloop{}{\vcenter{\hbox{\rotatebox[origin=c]{180}{\small\(\circlearrowright\)}}}}
+% \NewDocumentCommand\selfloop{}{\rotatebox[origin=c]{180}{\(\circlearrowright\)}}
+\NewDocumentCommand\interval{}{I}
+\NewDocumentCommand\leftderived{}{\mathbf{L}}
+\NewDocumentCommand\rightderived{}{\mathbf{R}}
+\DeclarePairedDelimiterX\setpred[2]{\{}{\}}{\,#1\;\delimsize\vert\;\mathopen{}#2\,}
+\DeclarePairedDelimiterX\grouppres[2]{\langle}{\rangle}{\,#1\;\delimsize\vert\;\mathopen{}#2\,}
+\NewDocumentCommand\opposingfunctors{mmmm}{#3 \colon #1 \rightleftarrows #2 \colon #4}
+\NewDocumentCommand\leftlifting{m}{{{}^{\boxslash} #1}}
+\NewDocumentCommand\rightlifting{m}{{#1}^{\boxslash}}
+% for decorative numbered faces in commutative diagram
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {\small #1};}}
+
+%% Classes of maps in model categories
+\NewDocumentCommand\weakequivalences{}{\mathcal{W}}
+\NewDocumentCommand\cofibrations{}{\mathcal{C}}
+\NewDocumentCommand\fibrations{}{\mathcal{F}}
+
+%% Do not fill to the bottom of the page
+% \@ifmemoirloaded{\raggedbottom}
+
+%% Fonts for chapter and section heads
+\@ifmemoirloaded{%
+  \RenewDocumentCommand\printchaptername{}{\LaptureCaption\LARGE\textls[120]{\textsc{lecture}}}
+  \RenewDocumentCommand\chapternamenum{}{\enskip\space}
+  \RenewDocumentCommand\printchapternum{}{\LaptureCaption\LARGE\textsc{\thechapter}}
+  \RenewDocumentCommand\midchapskip{}{12pt}
+  \RenewDocumentCommand\chaptitlefont{}{\LaptureCaption\Huge\itshape}
+  \setsecheadstyle{\sbseries\Large}
+  \setsubsecheadstyle{\sbseries\large}
+  % \newcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+  % \RenewDocumentCommand\printchaptername{}{\textls[120]{\chapnamefont\@chapapp}}
+  % \chapterstyle{hangnum}
+  % \hangsecnum{}
+  % \RenewDocumentCommand\chaptitlefont{}{\sffamily\Huge\bfseries}
+}
+\@ifarticleloaded{%
+  \RequirePackage{sectsty}
+  \allsectionsfont{\LaptureSubhead\bfseries}
+}
+
+%% Set page numbers at left resp. right on odd resp. even pages.
+% \@ifmemoirloaded{%
+%   \makeevenfoot{plain}{}{}{\thepage}
+%   \makeoddfoot{plain}{\thepage}{}{}
+% }
+
+% \@ifmemoirloaded{%
+%   \let\oldchapter\chapter
+%   \let\oldsection\section
+%   \let\oldsubsection\subsection
+%   \let\section\oldchapter
+%   \let\subsection\oldsection
+% }
+
+\AddToHook{begindocument/end}{%
+  \let\subset\subseteq
+}
+
+\tikzset{
+  dashtwocolors/.code args={#1,#2}{
+    \pgfkeysalso{dash pattern=on 4pt off 4pt, #1, postaction={draw=#2, dash phase=4pt}}
+  },
+  dashthreecolors/.code args={#1,#2,#3}{
+    \pgfkeysalso{dash pattern=on 4pt off 8pt, #1, postaction={draw=#2, dash phase=4pt}, postaction={draw=#3, dash phase=8pt}}
+  }
+}
+
+% Sheaf related commands
+% poset of opens
+\NewMathOperator\open{Open}
+\NewMathOperator\Map{Map}
+% continuous maps
+% \NewMathOperator\cont{Cont}
+\NewDocumentCommand\cont{o}{\IfNoValueTF{#1}{\catTopologicalSpace}{\catTopologicalSpace_{/{#1}}}}
+% constant sheaf
+\NewDocumentCommand\constSheaf{m}{\underline{#1}}
+\NewMathOperator\etalespace{sp}
+
+\RequirePackage{epigraph}
+\setlength\epigraphrule{0pt}
+\setlength\beforeepigraphskip{0pt}
+\setlength\afterepigraphskip{0pt}
+\NewDocumentCommand\remyquote{m}{\epigraph{\makebox[0pt][r]{`}{#1}'}{}}
+
+\DeclareMathOperator\cofilteredlim{\varprojlim}
+\makeatletter
+\newcommand{\colim@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font colim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\filteredcolim}{%
+  \mathop{\mathpalette\colim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
+}
+\renewcommand{\varprojlim}{%
+  \mathop{\mathpalette\varlim@{\leftarrowfill@\scriptscriptstyle}}\nmlimits@
+}
+\renewcommand{\varinjlim}{%
+  \mathop{\mathpalette\varlim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
+} % Source: https://tex.stackexchange.com/questions/284059/new-command-for-filtered-colimits-and-limits
+\makeatother
+
+% for subfile compilation
+\usepackage{subfiles} % best loaded last in preamble according to internet although do not know if that means here (?)
