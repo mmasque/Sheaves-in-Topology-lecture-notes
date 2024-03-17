@@ -19,20 +19,13 @@ jobs:
         with:
           name: main.pdf
           path: main.pdf
-  deploy:
-    needs: [build_latex]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          path: main.pdf
+      - name: move
+        run: mkdir -p outputs; mv main.pdf outputs
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./github_artifacts
+          publish_dir: ./outputs
           publish_branch: build
           force_orphan: true
         
