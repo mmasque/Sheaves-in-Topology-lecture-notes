@@ -6,11 +6,14 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+      - name: debug by installing font manually for now
+        run: sudo apt-get install fonts-inconsolata -y; sudo fc-cache -fv
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
-          latexmk_use_xelatex: true
+          texlive_version: 2022
+          latexmk_use_lualatex: true
           extra_fonts: ./fonts/*.ttf
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
