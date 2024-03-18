@@ -54,7 +54,7 @@ Compose the adjunction $\etalespace*\leftadj h_{-/X}$ and the equivalence $\catL
 
 The unit of the adjunction is the map $F\To F^\sharp$; it is an isomorphism if and only if $F$ is a sheaf.
 
-\begin{exmp}
+\begin{exmp}\label{exmp:sheaf-on-point-set}
 For the one-point space $*$, we have $\open(*) = \{\emptyset\hookrightarrow *\}$, so
 \[ \catPresheaf(X) = \catFunctor(\mathord{\to},\catSet) \]
 is the arrow category of $\catSet$.
@@ -177,7 +177,7 @@ The real content is the constant case: we have $\mathcal F\cong h_S = h_{X\times
         \item If $X$ is moreover semi-locally simply connected, then $F_x$ is an equivalence of categories. 
     \end{enumerate}
 \end{thm}
-\begin{proof}(Outline)\todo{Maybe type up the details Marcel}
+\begin{proof}[outline]\todo{Maybe type up the details Marcel}
     \begin{itemize}
         \item Any covering $f: Y \to X$ is locally path connected (easy). It is furthermore a disjoint union $\coprod_{i \in I} Y_i$ of path connected spaces $Y_i$ \cite[Theorem~25.4]{MunkresTopology}.
         \item Any map $Y \xrightarrow{\phi}Y' \in \catCoveringSpace_{/X}$ is itself a covering \cite[Lemma~80.2(a)]{MunkresTopology}.
@@ -195,8 +195,8 @@ The real content is the constant case: we have $\mathcal F\cong h_S = h_{X\times
         \end{itemize}
 \end{proof}
 \begin{exmp}
-Let $X = S^1$. Let $Y_1$ be the 4:1 covering of $S^1$, and let $Y_2$ be the double covering of $S^1$. Let $Y = Y_1 \coprod Y_2$. Then $Y \to X$ corresponds to the set $\{1,2,3,4,5,6\}$ where the single loop around the circle $1\in \homotopy[1](S^1, x)$ acts by $(12)(3456)$ \todo{Diagram below should have labels etc}.
-\begin{figure}[h!]
+Let $X = S^1$. Let $Y_1$ be the four-to-one covering of $S^1$, and let $Y_2$ be the double covering of $S^1$. Let $Y = Y_1 \coprod Y_2$. Then $Y \to X$ corresponds to the set $\{1,2,3,4,5,6\}$ where the single loop around the circle $1\in \homotopy[1](S^1, x)$ acts by $(12)(3456)$ \todo{Diagram below should have labels etc}.
+\begin{figure}
 \centering
 % https://tex.stackexchange.com/a/495715
 \begin{tikzpicture}[declare function={f(\x)=0.2*sin(\x)+\x/1000;},
@@ -217,7 +217,7 @@ Let $X = S^1$. Let $Y_1$ be the 4:1 covering of $S^1$, and let $Y_2$ be the doub
  \draw[line width=2pt] (0,-2) arc(-90:270:1cm and 0.2cm);
  % \draw[thick,-stealth]  (0,-0.4) -- (0,-1.4) node[midway,right]{$p$};
 \end{tikzpicture}
-\caption{Covering of the circle by a disjoint union of the 4:1 cover and the 2:1 cover.}
+\caption{Covering of the circle by a disjoint union of the four-to-one cover and the two-to-one cover.}
 \label{fig:circle-cover-quadruple-double}
 \end{figure}
 \end{exmp}

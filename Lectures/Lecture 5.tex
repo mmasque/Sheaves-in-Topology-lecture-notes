@@ -143,16 +143,15 @@ Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSh
 
 \section{Stalks, germs, skyscrapers}
 
-\begin{defn}[Stalks]
-Let $i_x\colon \{x\} \hookrightarrow X$ be the inclusion of a point in a space. Then $i_x^* \mathcal{F}$ is the \emph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$. 
+\begin{defn}
+Let $i_x\colon \{x\} \hookrightarrow X$ be the inclusion of a point in a space.
+Then $i_x^* \mathcal{F}$ is the \emph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
 Unravelling definitions, we have \[
-    \mathcal{F}_x = \colim_{U \ni x} \mathcal{F}(U).
+    \mathcal{F}_x = \colim_{U \ni x} \mathcal{F}(U)\text{.}
 \]
-An element of the stalk at $x$ is represented by a \emph{germ} $(s)_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \[
-    (s)_U = (t)_V \text{ if and only if } \exists x \in W \subset U \cap V
-\] such that $s|_{W} = t|_{W}$. 
+An element of the stalk at $x$ is represented by a \emph{germ} $[s]_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \([s]_U = [t]_V\) if and only if there exists an open neighbourhood \(W\subseteq U\cap V\) of \(x\) such that \(s|_W=t|_W\).
 \end{defn}
-Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ above $x$. 
+Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over $x$. 
 
 \begin{exmp}[orientation sheaf of a manifold]
 Let \(M\) be an \(n\)-dimensional topological manifold, by which we mean a Hausdorff space that is locally homeomorphic to \(\bb R^n\) (i.e., every point of \(M\) admits a neighbourhood homeomorphic to \(\bb R^n\)).
