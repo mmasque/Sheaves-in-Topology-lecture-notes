@@ -442,8 +442,8 @@
 \NewMathOperator\Sing{Sing}
 \NewMathOperator\triv{triv}
 \let\lim\@undefined
-\NewMathOperator\lim{lim}
-\NewMathOperator\colim{colim}
+\NewMathOperator*\lim{lim}
+\NewMathOperator*\colim{colim}
 \NewMathOperator\res{res}
 \NewMathOperator\ind{ind}
 \NewMathOperator\coind{coind}
@@ -492,9 +492,10 @@
 \DeclareMathOperator\catMap{\catName{Map}}
 \DeclareMathOperator\catPresheaf{\catName{PSh}}
 \DeclareMathOperator\catSheaf{\catName{Sh}}
-\DeclareMathOperator\catLocallyConstantSheaf{\catName{Sh}^{\textup{lc}}}
+\DeclareMathOperator\catLocallyConstantSheaf{\catName{Sh}^{\smash{\textup{lc}}}}
 \DeclareMathOperator\catAbelianPresheaf{\catName{PAb}}
 \DeclareMathOperator\catAbelianSheaf{\catAbelianGroup}
+\DeclareMathOperator\catLocallyConstantAbelianSheaf{\catAbelianGroup^{\smash{\textup{lc}}}}
 \NewDocumentCommand\catWalkingEdge{}{\bm{\Gamma}}
 \NewDocumentCommand\catWalkingArrow{}{\vbb 2}
 \NewDocumentCommand\catTerminal{}{\vbb 1}
@@ -674,7 +675,6 @@
 \NewDocumentCommand\remyquote{m}{\epigraph{\makebox[0pt][r]{`}{#1}'}{}}
 
 \DeclareMathOperator\cofilteredlim{\varprojlim}
-\makeatletter
 \newcommand{\colim@}[2]{%
   \vtop{\m@th\ialign{##\cr
     \hfil$#1\operator@font colim$\hfil\cr
@@ -690,7 +690,6 @@
 \renewcommand{\varinjlim}{%
   \mathop{\mathpalette\varlim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
 } % Source: https://tex.stackexchange.com/questions/284059/new-command-for-filtered-colimits-and-limits
-\makeatother
 
 % for subfile compilation
 \usepackage{subfiles} % best loaded last in preamble according to internet although do not know if that means here (?)
