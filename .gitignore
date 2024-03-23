@@ -1,0 +1,12 @@
+main.pdf
+*.aux
+*.toc
+*.out
+*.log
+*.bbl*
+*.bcf*
+*.blg*
+*.fdb*
+*.fls*
+*.run.xml*
+Lectures/*.aux

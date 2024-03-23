@@ -6,6 +6,47 @@
 \begin{defn}
     A \emph{diagram} in a category $\cat C$ is a functor $D: \cat J \to \cat C$ from a small category $\cat J$. 
 \end{defn}
+
+In this lecture, we will show that every diagram $D: \cat J \to \catPresheaf(X)$ or $D: \cat J \to \catAbelianPresheaf(X)$ has a limit and colimit, and we will describe them explicitly.
+
 \section{Limits and colimits in $\catSet$}
+
+We will begin with treating limits and colimits in $\catSet$. For a more complete treatment of this topic, we refer the reader to \cite[Chapter~3.2]{riehlCategoryTheoryContext2016}.
+\begin{prop}
+    The limit of $D: \cat J \to \catSet$ exists and is given by \[
+        \lim_{i\in \cat J}D(i) = \{(a_i)_{i \in \cat J} \in \prod_{i \in \cat J}D(i) \mid D(\phi)(a_i) = a_j \text{ for all } \phi: i \to j \text{ in } \cat J\}
+    \]
+\end{prop}
+\begin{proof}
+	Denote our candidate limit set $S$. There are maps $S \xrightarrow{\pi_i} D(i)$ for all $i \in \cat J$. For any $\phi: i \to j$ in $\cat J$ the diagram 
+    \[
+      \begin{tikzcd}
+                & S \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"] &      \\
+D(i) \arrow[rr] &                                            & D(j)
+\end{tikzcd}  
+    \]
+commutes. This commutativity is directly by construction of our set $S$. Given any cone $(C \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ there exists a unique map of cones to $(S \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ making the diagram 
+\[
+
+\begin{tikzcd}
+                & C \arrow[ldd, bend right] \arrow[rdd, bend left] \arrow[d, dashed] &      \\
+                & S \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"]                         &      \\
+D(i) \arrow[rr] &                                                                    & D(j)
+\end{tikzcd}\]
+
+commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
+
+\end{proof}
+
+\begin{cor}
+	For \emph{any} category \cat C we have 
+    \[
+        \Hom_{\cat C}(X, \lim_{i \in \cat J}D(i)) \cong \lim_{i \in \cat J} \Hom_{\cat C}(X, D(i))
+    \] and 
+    \[
+         \Hom_{\cat C}(\colim_{i \in J} D(i), Y) \cong \lim_{i \in \cat J} \Hom_{\cat C}(D(i), Y).   
+    \]
+\end{cor}
+
 
 \end{document}
