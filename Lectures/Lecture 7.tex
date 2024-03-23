@@ -37,7 +37,7 @@ commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
 
 \end{proof}
 
-\begin{rmk}
+\begin{rmk}\label{rmk:limits-are-products-and-equalisers-in-set}
 	The limit of a diagram $D: \cat J \to \catSet$ is the equalizer of 
 
 	\[
@@ -47,11 +47,11 @@ commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
 	\begin{align*}
 		(a_i)_{i \in \cat J} & \mapsto (a_j)_{\phi: i \to j} \\
 		(a_i)_{i \in \cat J} & \mapsto (D(\phi)(a_i))_{\phi: i \to j}.
-	\end{align*}
+	\end{align*} 
 \end{rmk}
 
 
-\begin{cor}
+\begin{cor}\label{cor:hom-limits-pass-to-set}
 	For any locally small category $\cat C$ we have 
     \[
         \Hom_{\cat C}(X, \lim_{i \in \cat J}D(i)) \cong \lim_{i \in \cat J} \Hom_{\cat C}(X, D(i))
@@ -68,6 +68,22 @@ D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
 \end{tikzcd}\] commutes. That is, it is to give a collection $(\pi_i)_{i \in \cat J} \in \prod_{i \in \cat J} \Hom(X, D(i))$ such that $\Hom_{\cat C}(X, D(\phi)) = \pi_j$ for all $\pi: i \to j$. 
 	
 \end{proof}
+
+\begin{cor}
+ A locally small category $\cat C$ has all small limits if and only if it has all small products and equalisers (the dual statement, requiring small coproducts and coequalisers, holds for colimits). 
+\end{cor}
+\begin{proof}
+	Small products and equalisers are small limits. We thus need only prove small limits exist if small products and equalisers exist. To this end, let $D: \cat J \to \cat C$ be a diagram. 
+	Consider the equalizer 
+	\[ E = \eq(\prod_{i \in \cat J}D(i) \rightrightarrows \prod_{\phi: i \to j}D(j)).\] By \cref{cor:hom-limits-pass-to-set}, the set of morphisms into $E$ can be computed as a limit in set: 
+	\[
+		\Hom_{\cat C}(X, E) \cong \eq(\Hom_{\cat C}(X, \prod_{i \in \cat J}D(i)) \rightrightarrows \Hom_{\cat C}(X, \prod_{\phi: i \to j}D(j))).
+	\] Applying \cref{cor:hom-limits-pass-to-set} again to the objects of this equalizer yields and using \cref{rmk:limits-are-products-and-equalisers-in-set} yields
+	\[
+		\Hom_\cat{C}(X, E) \cong \eq(\prod_{i \in J}\Hom_{\cat C}(X, D(i)) \rightrightarrows \prod_{\phi: i \to j} \Hom_{\cat C}(X, D(j))) \cong \lim_{i \in \cat J}\Hom_{\cat C}(X, D(i)).
+	\] 
+\end{proof}
+
 
 
 
