@@ -27,7 +27,6 @@ D(i) \arrow[rr] &                                            & D(j)
     \]
 commutes. This commutativity is directly by construction of our set $S$. Given any cone $(C \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ there exists a unique map of cones to $(S \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ making the diagram 
 \[
-
 \begin{tikzcd}
                 & C \arrow[ldd, bend right] \arrow[rdd, bend left] \arrow[d, dashed] &      \\
                 & S \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"]                         &      \\
@@ -38,8 +37,22 @@ commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
 
 \end{proof}
 
+\begin{rmk}
+	The limit of a diagram $D: \cat J \to \catSet$ is the equalizer of 
+
+	\[
+		\prod_{i \in \cat J} D(i) \rightrightarrows \prod_{\phi: i \to j} D(j)
+	\]
+	with maps 
+	\begin{align*}
+		(a_i)_{i \in \cat J} & \mapsto (a_j)_{\phi: i \to j} \\
+		(a_i)_{i \in \cat J} & \mapsto (D(\phi)(a_i))_{\phi: i \to j}.
+	\end{align*}
+\end{rmk}
+
+
 \begin{cor}
-	For \emph{any} category \cat C we have 
+	For any locally small category $\cat C$ we have 
     \[
         \Hom_{\cat C}(X, \lim_{i \in \cat J}D(i)) \cong \lim_{i \in \cat J} \Hom_{\cat C}(X, D(i))
     \] and 
@@ -47,6 +60,16 @@ commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
          \Hom_{\cat C}(\colim_{i \in J} D(i), Y) \cong \lim_{i \in \cat J} \Hom_{\cat C}(D(i), Y).   
     \]
 \end{cor}
+\begin{proof}(Sketch of the first isomorphism)
+To give a map $X \to \lim D(i)$ is to give a cone $$(X \to D(i))_{i \in \cat J};$$ this means giving maps $\pi_i \in \Hom_{\cat C}(X, D(i))$ such that for all $\phi: i \to j$ in $\cat J$ the diagram 
+\[\begin{tikzcd}
+                            & X \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"] &      \\
+D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
+\end{tikzcd}\] commutes. That is, it is to give a collection $(\pi_i)_{i \in \cat J} \in \prod_{i \in \cat J} \Hom(X, D(i))$ such that $\Hom_{\cat C}(X, D(\phi)) = \pi_j$ for all $\pi: i \to j$. 
+	
+\end{proof}
+
+
 
 
 \end{document}
