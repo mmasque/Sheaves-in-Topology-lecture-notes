@@ -11,7 +11,7 @@ In this lecture, we will show that every diagram $D: \cat J \to \catPresheaf(X)$
 
 \section{Limits and colimits in $\catSet$}
 
-We will begin with treating limits and colimits in $\catSet$. For a more complete treatment of this topic, we refer the reader to \cite[Chapter~3.2]{riehlCategoryTheoryContext2016}.
+We will begin by treating limits and colimits in $\catSet$. For a more complete treatment of this topic, we refer the reader to \cite[Chapter~3.2]{riehlCategoryTheoryContext2016}.
 \begin{prop}
     The limit of $D: \cat J \to \catSet$ exists and is given by \[
         \lim_{i\in \cat J}D(i) = \{(a_i)_{i \in \cat J} \in \prod_{i \in \cat J}D(i) \mid D(\phi)(a_i) = a_j \text{ for all } \phi: i \to j \text{ in } \cat J\}
@@ -69,7 +69,7 @@ D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
 	
 \end{proof}
 
-\begin{cor}
+\begin{cor}\label{cor:small-limits-from-eq-prod}
  A locally small category $\cat C$ has all small limits if and only if it has all small products and equalisers (the dual statement, requiring small coproducts and coequalisers, holds for colimits). 
 \end{cor}
 \begin{proof}
@@ -83,9 +83,63 @@ D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
 		\Hom_\cat{C}(X, E) \cong \eq(\prod_{i \in J}\Hom_{\cat C}(X, D(i)) \rightrightarrows \prod_{\phi: i \to j} \Hom_{\cat C}(X, D(j))) \cong \lim_{i \in \cat J}\Hom_{\cat C}(X, D(i)).
 	\] 
 \end{proof}
+\begin{cor}
+	The colimit of any diagram in $\catSet$ exists, and it is given by \[
+    	\coeq(\coprod_{\phi: i\to j} D(i) \rightrightarrows \coprod_{i \in j} D(i))
+    \]
+\end{cor}
 
+\begin{cor}
+	Let $D: \cat J \to \cat C$ be a diagram with $\cat J$ filtered. Then \[
+    	\filteredcolim_{i \in \cat J} D(i) = (\coprod_{i \in \cat J} D(i))/_\sim
+    \] where $a \sim b$ for $a \in D(i)$ and $b \in D(j)$ if and only if there exist maps $\phi: i \k$ and $\psi: j \to k$ such that $D(\phi)(a) = D(\psi)(b)$.
+\end{cor}\todo{proof of this, some prose.}
 
+\section{Abelian groups}
+\begin{lem}
+	Every diagram in $\catAbelianGroup$ has a limit and a colimit.
+\end{lem}
+\begin{proof}
+	We saw (co)products and (co)equalisers in the previous lecture. Products of abelian groups are products on the underlying sets with the usual group structure. Coproducts are direct sums. Equalisers are kernels, coequalisers are cokernels: \begin{align*}
+	  	\eq(A \mathrel{\mathop{\rightrightarrows}^{\mathrm{f}}_{\mathrm{g}}} B) & = \ker(f - g)\\
+		\coeq(A \mathrel{\mathop{\rightrightarrows}^{\mathrm{f}}_{\mathrm{g}}}B) & = \coker(f - g).
+    \end{align*} Thus we can use \cref{cor:small-limits-from-eq-prod} to compute limits and colimits from (co)products and (co)equalizers via kernels and cokernels.
+\end{proof}
+\begin{rmk}
+If $\cat J$ is filtered, the colimit is easier: the filtered colimit \[
+	\filteredcolim D(i) = (\coprod(i))/_\sim
+\] in $\catSet$ gets an abelian group structure as follows: if $a \in D(i)$ and $b \in D(j)$, then choose maps $\phi: i \to k$ and $\psi: j \to k$ (using that $\cat J$ is filtered) and set \[
+	a + b =  D(\phi)(a) + D(\psi)(b).
+\] One needs to check this is well defined and that it indeed turns the colimit in $\catSet$ to the colimit in $\catAbelianGroup$. This result actually follows from a more general fact: forgetful functors create filtered colimits \cite[Theorem~5.6.5]{riehlCategoryTheoryContext2016} \todo{this reference deals with monadic functors, not immediately obvious it proves our claim. A small discussion of this would be nice.}
+\end{rmk}
 
+\section{Limits and colimits of presheaves}
 
+Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in \catFunctor(\cat C\opp, \cat D)$. In this course the category $\cat D$ has been $\catSet$ or $\catAbelianGroup$, for which we know small limits and colimits exist. The following lemma appears as \cite[Proposition~3.3.9]{riehlCategoryTheoryContext2016} stripped of the context of presheaves. It tells us that if $\cat C$ is small, the work we've done so far for $\catSet$ and $\catAbelianGroup$ suffices to show presheaves into these categories have small limits and colimits. Furthermore, we can compute (co)limits of such presheaves objectwise. We have seen these claims before in \cref{lem:psh-category-set}. 
 
+\begin{lem}
+	Let $\cat C$ be a small category and $\cat D$ be a category with small limits and colimits.
+	Then any diagram $D: \cat J \to \catFunctor(\cat C\opp, \cat D)$ has a limit and a colimit, computed objectwise:
+	\begin{align*}
+    	(\lim_{i\in \cat J}D(i))(U) &= \lim_{i \in \cat J}(D(i)(U))\\
+    	(\colim_{i\in \cat J}D(i))(U) &= \colim_{i \in \cat J}(D(i)(U))
+    \end{align*} for all $U \in \cat C$. 
+
+\end{lem}
+\begin{proof}
+	We reproduce the proof given in \cite{riehlCategoryTheoryContext2016}. The idea is to show that $\catFunctor(\cat{C}\opp, \cat D) \to \catFunctor(\cat{C}^\text{disc}, \cat D)$ \todo{Write the details}	
+\end{proof}
+
+\begin{cor}
+	The presheaf categories $\catPresheaf(X)$ and $\catAbelianPresheaf(X)$ have all small limits and colimits.
+\end{cor}
+
+\chapter{Limits and colimits in sheaves}
+
+\begin{thm}
+	Any diagram $D: \cat J \to \catSheaf(X)$ (or $D: \cat J \to \catAbelianSheaf(X)$) has a limit, computed in $\catPresheaf(X)$ ($\catAbelianPresheaf(X)$).
+	Such a diagram also has a colimit in $\catSheaf(X)$ ($\catAbelianSheaf(X)$), obtained by sheafification of the colimit in $\catPresheaf(X)$ ($\catAbelianPresheaf(X)$).
+	% In other words, the forgetful functor $\catSheaf(X) \to \catPresheaf(X)$ reflects limits.
+\end{thm}
+\todo{Write the rest of the lecture}
 \end{document}
