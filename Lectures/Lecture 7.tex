@@ -4,12 +4,12 @@
 
 \chapter{Limits and colimits of (pre)sheaves}
 \begin{defn}
-    A \emph{diagram} in a category $\cat C$ is a functor $D: \cat J \to \cat C$ from a small category $\cat J$. 
+    A \emph{diagram} in a category $\cat C$ is a functor $D: \cat J \to \cat C$ from a small category $\cat J$.
 \end{defn}
 
 In this lecture, we will show that every diagram $D: \cat J \to \catPresheaf(X)$ or $D: \cat J \to \catAbelianPresheaf(X)$ has a limit and colimit, and we will describe them explicitly.
 
-\section{Limits and colimits in $\catSet$}
+\section{Limits and colimits of sets}
 
 We will begin by treating limits and colimits in $\catSet$. For a more complete treatment of this topic, we refer the reader to \cite[Chapter~3.2]{riehlCategoryTheoryContext2016}.
 \begin{prop}
@@ -18,70 +18,71 @@ We will begin by treating limits and colimits in $\catSet$. For a more complete 
     \]
 \end{prop}
 \begin{proof}
-	Denote our candidate limit set $S$. There are maps $S \xrightarrow{\pi_i} D(i)$ for all $i \in \cat J$. For any $\phi: i \to j$ in $\cat J$ the diagram 
+	Denote our candidate limit set $S$. There are maps $S \xrightarrow{\pi_i} D(i)$ for all $i \in \cat J$. For any $\phi: i \to j$ in $\cat J$ the diagram
     \[
       \begin{tikzcd}
                 & S \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"] &      \\
 D(i) \arrow[rr] &                                            & D(j)
-\end{tikzcd}  
+\end{tikzcd}
     \]
-commutes. This commutativity is directly by construction of our set $S$. Given any cone $(C \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ there exists a unique map of cones to $(S \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ making the diagram 
+commutes. This commutativity is directly by construction of our set $S$. Given any cone $(C \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ there exists a unique map of cones to $(S \xrightarrow{\pi_i} D(i))_{i \in \cat J}$ making the diagram
 \[
 \begin{tikzcd}
                 & C \arrow[ldd, bend right] \arrow[rdd, bend left] \arrow[d, dashed] &      \\
                 & S \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"]                         &      \\
 D(i) \arrow[rr] &                                                                    & D(j)
-\end{tikzcd}\]
+\end{tikzcd}
+\]
 
 commute. It is given by $c \mapsto (\phi_i(c))_{i \in \cat J}$.
 
 \end{proof}
 
 \begin{rmk}\label{rmk:limits-are-products-and-equalisers-in-set}
-	The limit of a diagram $D: \cat J \to \catSet$ is the equalizer of 
+	The limit of a diagram $D: \cat J \to \catSet$ is the equalizer of
 
 	\[
 		\prod_{i \in \cat J} D(i) \rightrightarrows \prod_{\phi: i \to j} D(j)
 	\]
-	with maps 
+	with maps
 	\begin{align*}
 		(a_i)_{i \in \cat J} & \mapsto (a_j)_{\phi: i \to j} \\
 		(a_i)_{i \in \cat J} & \mapsto (D(\phi)(a_i))_{\phi: i \to j}.
-	\end{align*} 
+	\end{align*}
 \end{rmk}
 
 
 \begin{cor}\label{cor:hom-limits-pass-to-set}
-	For any locally small category $\cat C$ we have 
+	For any locally small category $\cat C$ we have
     \[
-        \Hom_{\cat C}(X, \lim_{i \in \cat J}D(i)) \cong \lim_{i \in \cat J} \Hom_{\cat C}(X, D(i))
-    \] and 
+        \Hom_{\cat C}(X, \lim_{i \in \cat J}D(i)) \cong \lim_{i \in \cat J} \Hom_{\cat C}(X, D(i)),
+    \]
     \[
-         \Hom_{\cat C}(\colim_{i \in J} D(i), Y) \cong \lim_{i \in \cat J} \Hom_{\cat C}(D(i), Y).   
+         \Hom_{\cat C}(\colim_{i \in J} D(i), Y) \cong \lim_{i \in \cat J} \Hom_{\cat C}(D(i), Y).
     \]
 \end{cor}
 \begin{proof}(Sketch of the first isomorphism)
-To give a map $X \to \lim D(i)$ is to give a cone $$(X \to D(i))_{i \in \cat J};$$ this means giving maps $\pi_i \in \Hom_{\cat C}(X, D(i))$ such that for all $\phi: i \to j$ in $\cat J$ the diagram 
+To give a map $X \to \lim D(i)$ is to give a cone $$(X \to D(i))_{i \in \cat J};$$ this means giving maps $\pi_i \in \Hom_{\cat C}(X, D(i))$ such that for all $\phi: i \to j$ in $\cat J$ the diagram
 \[\begin{tikzcd}
                             & X \arrow[ld, "\pi_i"'] \arrow[rd, "\pi_j"] &      \\
 D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
-\end{tikzcd}\] commutes. That is, it is to give a collection $(\pi_i)_{i \in \cat J} \in \prod_{i \in \cat J} \Hom(X, D(i))$ such that $\Hom_{\cat C}(X, D(\phi)) = \pi_j$ for all $\pi: i \to j$. 
-	
+\end{tikzcd}\] commutes. That is, it is to give a collection $(\pi_i)_{i \in \cat J} \in \prod_{i \in \cat J} \Hom(X, D(i))$ such that $\Hom_{\cat C}(X, D(\phi)) = \pi_j$ for all $\pi: i \to j$.
+
 \end{proof}
 
 \begin{cor}\label{cor:small-limits-from-eq-prod}
- A locally small category $\cat C$ has all small limits if and only if it has all small products and equalisers (the dual statement, requiring small coproducts and coequalisers, holds for colimits). 
+ A locally small category $\cat C$ has all small limits if and only if it has all small products and equalisers (the dual statement, requiring small coproducts and coequalisers, holds for colimits).
 \end{cor}
 \begin{proof}
-	Small products and equalisers are small limits. We thus need only prove small limits exist if small products and equalisers exist. To this end, let $D: \cat J \to \cat C$ be a diagram. 
-	Consider the equalizer 
-	\[ E = \eq(\prod_{i \in \cat J}D(i) \rightrightarrows \prod_{\phi: i \to j}D(j)).\] By \cref{cor:hom-limits-pass-to-set}, the set of morphisms into $E$ can be computed as a limit in set: 
+	Small products and equalisers are small limits. We thus need only prove small limits exist if small products and equalisers exist. To this end, let $D: \cat J \to \cat C$ be a diagram.
+	Consider the equalizer
+	\[ E = \eq(\prod_{i \in \cat J}D(i) \rightrightarrows \prod_{\phi: i \to j}D(j)).\] By \cref{cor:hom-limits-pass-to-set}, the set of morphisms into $E$ can be computed as a limit in set:
 	\[
 		\Hom_{\cat C}(X, E) \cong \eq(\Hom_{\cat C}(X, \prod_{i \in \cat J}D(i)) \rightrightarrows \Hom_{\cat C}(X, \prod_{\phi: i \to j}D(j))).
 	\] Applying \cref{cor:hom-limits-pass-to-set} again to the objects of this equalizer yields and using \cref{rmk:limits-are-products-and-equalisers-in-set} yields
 	\[
 		\Hom_\cat{C}(X, E) \cong \eq(\prod_{i \in J}\Hom_{\cat C}(X, D(i)) \rightrightarrows \prod_{\phi: i \to j} \Hom_{\cat C}(X, D(j))) \cong \lim_{i \in \cat J}\Hom_{\cat C}(X, D(i)).
-	\] 
+	\]
 \end{proof}
 \begin{cor}
 	The colimit of any diagram in $\catSet$ exists, and it is given by \[
@@ -92,7 +93,7 @@ D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
 \begin{cor}
 	Let $D: \cat J \to \cat C$ be a diagram with $\cat J$ filtered. Then \[
     	\filteredcolim_{i \in \cat J} D(i) = (\coprod_{i \in \cat J} D(i))/_\sim
-    \] where $a \sim b$ for $a \in D(i)$ and $b \in D(j)$ if and only if there exist maps $\phi: i \k$ and $\psi: j \to k$ such that $D(\phi)(a) = D(\psi)(b)$.
+    \] where $a \sim b$ for $a \in D(i)$ and $b \in D(j)$ if and only if there exist maps $\phi: i \to k$ and $\psi: j \to k$ such that $D(\phi)(a) = D(\psi)(b)$.
 \end{cor}\todo{proof of this, some prose.}
 
 \section{Abelian groups}
@@ -115,7 +116,7 @@ If $\cat J$ is filtered, the colimit is easier: the filtered colimit \[
 
 \section{Limits and colimits of presheaves}
 
-Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in \catFunctor(\cat C\opp, \cat D)$. In this course the category $\cat D$ has been $\catSet$ or $\catAbelianGroup$, for which we know small limits and colimits exist. The following lemma appears as \cite[Proposition~3.3.9]{riehlCategoryTheoryContext2016} stripped of the context of presheaves. It tells us that if $\cat C$ is small, the work we've done so far for $\catSet$ and $\catAbelianGroup$ suffices to show presheaves into these categories have small limits and colimits. Furthermore, we can compute (co)limits of such presheaves objectwise. We have seen these claims before in \cref{lem:psh-category-set}. 
+Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in \catFunctor(\cat C\opp, \cat D)$. In this course the category $\cat D$ has been $\catSet$ or $\catAbelianGroup$, for which we know small limits and colimits exist. The following lemma appears as \cite[Proposition~3.3.9]{riehlCategoryTheoryContext2016} stripped of the context of presheaves. It tells us that if $\cat C$ is small, the work we've done so far for $\catSet$ and $\catAbelianGroup$ suffices to show presheaves into these categories have small limits and colimits. Furthermore, we can compute (co)limits of such presheaves objectwise. We have seen these claims before in \cref{lem:psh-category-set}.
 
 \begin{lem}
 	Let $\cat C$ be a small category and $\cat D$ be a category with small limits and colimits.
@@ -123,11 +124,11 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 	\begin{align*}
     	(\lim_{i\in \cat J}D(i))(U) &= \lim_{i \in \cat J}(D(i)(U))\\
     	(\colim_{i\in \cat J}D(i))(U) &= \colim_{i \in \cat J}(D(i)(U))
-    \end{align*} for all $U \in \cat C$. 
+    \end{align*} for all $U \in \cat C$.
 
 \end{lem}
 \begin{proof}
-	We reproduce the proof given in \cite{riehlCategoryTheoryContext2016}. The idea is to show that $\catFunctor(\cat{C}\opp, \cat D) \to \catFunctor(\cat{C}^\text{disc}, \cat D)$ \todo{Write the details}	
+	We reproduce the proof given in \cite{riehlCategoryTheoryContext2016}. The idea is to show that $\catFunctor(\cat{C}\opp, \cat D) \to \catFunctor(\cat{C}^\text{disc}, \cat D)$ \todo{Write the details}
 \end{proof}
 
 \begin{cor}
@@ -165,14 +166,14 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
     \end{enumerate}
 
 \end{enumerate}
-	
+
 \end{lem}
 
 \begin{defn}
-	A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$. 
+	A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
 \end{defn}
 \begin{rmk}
-	Note that these force $q \circ i$ and $p \circ j$ to be zero. To see this it suffices to show that $j \circ q \circ i = 0$, because $j$ is monic. 
+	Note that these force $q \circ i$ and $p \circ j$ to be zero. To see this it suffices to show that $j \circ q \circ i = 0$, because $j$ is monic.
 	This holds because $jqi = (\id_Z - ip)i = i - ipi = i - i = 0$.
 \end{rmk}
 
@@ -184,10 +185,10 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
     \end{enumerate}
 \end{proof}
 \begin{defn}
-	An \emph{additive} category is a pre-additive category with finite products. 
+	An \emph{additive} category is a pre-additive category with finite products.
 \end{defn}
 \begin{rmk}
-	By the lemma \todo{cite} if $\cat C$ is additive then 
+	By the lemma \todo{cite} if $\cat C$ is additive then
 	\begin{itemize}
     	\item the terminal object is also initial, hence a zero object $0$.
 		\item IF $X, Y \in \cat C$ then the biproduct $X \rightleftarrows{i}[p] X \oplus Y \leftrightarrows{j}[q] Y$ exists, so $\cat C$ has finite coproducts.
@@ -200,7 +201,7 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 \end{exc}
 
 \begin{defn}
-	A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that 
+	A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that
 	\begin{enumerate}
     	\item the natural map $ \emptyset \to *$ is an isomorphism (so $\cat C$ has a zero object $0$),
 		\item for $X_1, ..., X_n$ in $\cat C$ the map $X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n$ is an isomorphism.
@@ -209,25 +210,25 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 \end{defn}
 
 \begin{rmk}
-	While (pre)-additive is a \emph{structure}, being semi-additive is a \emph{property} of a category $\cat C$. 
+	While (pre)-additive is a \emph{structure}, being semi-additive is a \emph{property} of a category $\cat C$.
 \end{rmk}
 
 \begin{lem}
 	If $\cat C$ is semi-additive, then it is canonically enriched in commutative monoids. If $\cat C$ was additive, then this agrees with the given enrichment in abelian groups (under the inclusion $\catAbelianGroup \hookrightarrow \catCommutativeMonoid$).
 \end{lem}
 \begin{proof}
-	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be 
+	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be
 	\[
 		X \xrightarrow{\Delta} X \times X = X \oplus X \xrightarrow{f \oplus g} Y \oplus Y = Y \coprod Y \xrightarrow{\triangledown} Y
 	\] where $\Delta$ is the diagonal map and $\triangledown$ is the codiagonal.
 	For $f, g, h$ maps from $X$ to $Y$, commutativity of \todo{D1 manual notes} shows that $(f+g) + h = f + (g + h)$. For $f: X \to Y$ commutativity of \todo{D2 manual notes} shows $f + 0 = f$ and likewise $ 0 + f = f$.
 	 For $f,g: X \rightrightarrows Y$ commutativity of \todo{D3} gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \rightrightarrows Y$ and $g,g':Y  \rightrightarrows Z$ then commutativity of \todo{D4} shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
-	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let 
+	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
 	\[
-    	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X 
+    	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X
     \] be the biproduct, and likewise for $Y$. Then commutativity of \todo{D5} and \todo{D6} gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_1 p_1 + i_2 p_2) = i_1 f p_1 + i_2 g p_2$, and likewise $f \oplus 0 = i_1 f p_1$, $0 \oplus g = i_2 g p_2$, so \[
     	f \oplus g = (f \oplus 0) + (0 \oplus g).
-    \] Then bilinearity of composition shows that the composite 
+    \] Then bilinearity of composition shows that the composite
 	\[
     	X \xrightarrow{\Delta} X \oplus X \xrightarrow{f \oplus g} Y \oplus Y \triangledown Y
     \] is $f + g$ (in the enriched sense).
@@ -250,7 +251,7 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
     	\eq(X \rightrightarrows{f}[g] = \eq(X \rightrightarrows{(f-g)}[0] Y)) =: \ker(f-g)
     \] (if one of them exists).
 \end{exc}
-So an additive category $\cat C$ has finite limits (respectively colimits) if and only if it has kernels (respectively cokernels). 
+So an additive category $\cat C$ has finite limits (respectively colimits) if and only if it has kernels (respectively cokernels).
 \begin{defn}
 	A \emph{pre-abelian} category is an additive category with kernels and cokernels.
 \end{defn}
@@ -273,10 +274,10 @@ Warning: the zoo of names will get worse.
 And now the moment we have all been waiting for: the definition of an abelian category.
 
 \begin{defn}
-	An \emph{abelian} category is a pre-abelian category $A$ such that the $\coim(f) \to \im(f)$ is an isomorphism for all $f: X \to Y$ in $\cat A$. 
+	An \emph{abelian} category is a pre-abelian category $A$ such that the $\coim(f) \to \im(f)$ is an isomorphism for all $f: X \to Y$ in $\cat A$.
 \end{defn}
 \begin{exmp}
-	In $\catAbelianGroup$, $\catModule_R$ this is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$. 
+	In $\catAbelianGroup$, $\catModule_R$ this is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$.
 \end{exmp}
 \begin{lem}
 	If $\cat A$ is abelian and $\cat C$ is small, then $\catFunctor(\cat C\opp, \cat A)$ is abelian.
@@ -284,8 +285,15 @@ And now the moment we have all been waiting for: the definition of an abelian ca
 This lemma implies that the category of presheaves of abelian groups on a topological space is an abelian category.
 
 \begin{proof}
-	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise. 
+	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise.
 \end{proof}
 
+\section{Limits and colimits of abelian groups}
+\remyquote{Bootstrap, bootstrap, bootstrap.}
+
+\section{Limits and colimits of presheaves}
+\remyquote{Maybe let me write down what I just said because it's nice.}
+
+\section{Limits and colimits of sheaves}
 
 \end{document}
