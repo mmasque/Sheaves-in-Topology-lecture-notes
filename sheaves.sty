@@ -501,6 +501,13 @@
 \NewDocumentCommand\catWalkingArrow{}{\vbb 2}
 \NewDocumentCommand\catTerminal{}{\vbb 1}
 
+% Labelled double arrows in all directions
+\NewDocumentCommand\overunderlabels{mmO{}}{\overset{#2}{\underset{#3}{#1}}}
+\NewDocumentCommand\xrightrightarrows{mO{}}{\overunderlabels{\rightrightarrows}{#1}[#2]}
+\NewDocumentCommand\xrightleftarrows{mO{}}{\overunderlabels{\rightleftarrows}{#1}[#2]}
+\NewDocumentCommand\xleftrightarrows{mO{}}{\overunderlabels{\leftrightarrows}{#1}[#2]}
+\NewDocumentCommand\xleftleftarrows{mO{}}{\overunderlabels{\leftleftarrows}{#1}[#2]}
+
 \NewDocumentCommand\To{}{\Rightarrow}
 \NewDocumentCommand\weakequivalenceTo{}{\mathrel{\tilde{\To}}}
 \NewDocumentCommand\weakequivalenceto{}{\mathrel{\tilde{\to}}}

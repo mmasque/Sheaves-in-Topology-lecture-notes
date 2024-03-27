@@ -16,9 +16,9 @@
     \end{enumerate}
 	\item If $X, Y, Z \in \cat C$ then the following are equivalent:
 	\begin{enumerate}
-    	\item There are maps $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ making $Z$ the coproduct.
-    	\item There are maps $Z \xrightarrow{p} X$ and $X \xrightarrow{q} Y$ making $Z$ the product.
-		\item There are maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ such that $p \circ i = \id_X$ and $q \circ j = \id_Y$ and $i\circ p + j \circ q = \id_Z$.
+    	\item There are maps \[X \xrightarrow{i} Z \xleftarrow{j} Y\] making $Z$ the coproduct.
+    	\item There are maps \[Z \xrightarrow{p} X \xleftarrow Y\] making $Z$ the product.
+		\item There are maps \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] such that $p \circ i = \id_X$ and $q \circ j = \id_Y$ and $i\circ p + j \circ q = \id_Z$.
     \end{enumerate}
 
 \end{enumerate}
@@ -26,7 +26,7 @@
 \end{lem}
 
 \begin{defn}
-	A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
+	A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
 \end{defn}
 \begin{rmk}
 	Note that these force $q \circ i$ and $p \circ j$ to be zero. To see this it suffices to show that $j \circ q \circ i = 0$, because $j$ is monic.
@@ -37,7 +37,12 @@
 	\begin{enumerate}
     	\item If $x$ is initial, then $\Hom_{\cat C}(X, X) = 0$ so $\id_X = 0$.
 		Conversely, if $\id_x = 0$ then every map $f: X \to Y$ i n $\cat C$ satisfies $f = f \circ \id_X = f \circ 0 = 0$. So $X$ is initial. This proves (i) is equivalent to (ii) and that (ii) is equivalent to (iii) follows dually.
-		\item If $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ is a biproduct we saw $qi = 0$ and $pj = 0$. Then $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ is a coproduct. If $X \xrightarrow{f} W$ and $Y \xrightarrow{g} W$ is any co cone, set $h = fp + gq: Z \to W$. Then $hi = (fp + gq)i = fpi + gqi = f \circ \id_X + g \circ 0 = f$, and likewise $hj = g$. If $h': Z \to W$ satisfies $h'i = f$ and $h'j = g$ then $h' = h' \circ \id_Z = h' \circ (ip + jq) = h'ip + h'jq = fp + gq = h$. So $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ form a coproduct. Conversely, if these maps form a coproduct, then the cocones given by ($X \xrightarrow{\id} X$ and $Y \xrightarrow{0} X$) and by ($X \xrightarrow{0} Y$ and $Y \xrightarrow{\id} Y$) define maps $Z \xrightarrow{p} X$, $Z \xrightarrow{q} Y$ with $pi = \id_X, pj = 0, qi = 0, qj = \id_Y$. Then $ip + jq: Z \to Z$ satisfies $(ip + jq)i = ipi + jqi = i \circ \id_X + j \circ 0 = i$, and likewise $(ip + jq)\circ j = \cdots = j$. So $ip + jq = \id_Z$ by the universal property of the coproduct. This proves $(i) \Leftrightarrow (iii)$ and $(ii) \Leftrightarrow$ follows dually.
+		\item If \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] is a biproduct, we saw $qi = 0$ and $pj = 0$. Then $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ is a coproduct. If \[X \xrightarrow{f} W \xleftarrow{g} Y\] is any cocone, set $h = fp + gq: Z \to W$. Then $hi = (fp + gq)i = fpi + gqi = f \circ \id_X + g \circ 0 = f$, and likewise $hj = g$. If $h': Z \to W$ satisfies $h'i = f$ and $h'j = g$ then $h' = h' \circ \id_Z = h' \circ (ip + jq) = h'ip + h'jq = fp + gq = h$. So \[X \xrightarrow{i} Z \xleftarrow{j} Y\] form a coproduct. Conversely, if these maps form a coproduct, then the cocones 
+		\begin{align*}
+        	&X \xrightarrow{\id} X \xleftarrow{0} Y\\
+			&X \xrightarrow{0} Y \xleftarrow{\id} Y			
+        \end{align*}
+		 define maps $p: Z \to X$, $q: Z \to Y$ with $pi = \id_X, pj = 0, qi = 0, qj = \id_Y$. Then $ip + jq: Z \to Z$ satisfies $(ip + jq)i = ipi + jqi = i \circ \id_X + j \circ 0 = i$, and likewise $(ip + jq)\circ j = \cdots = j$. So $ip + jq = \id_Z$ by the universal property of the coproduct. This proves $(i) \Leftrightarrow (iii)$ and $(ii) \Leftrightarrow$ follows dually.
     \end{enumerate}
 \end{proof}
 \begin{defn}
@@ -47,7 +52,7 @@
 	By the lemma \todo{cite} if $\cat C$ is additive then
 	\begin{itemize}
     	\item the terminal object is also initial, hence a zero object $0$.
-		\item IF $X, Y \in \cat C$ then the biproduct $X \rightleftarrows{i}[p] X \oplus Y \leftrightarrows{j}[q] Y$ exists, so $\cat C$ has finite coproducts.
+		\item IF $X, Y \in \cat C$ then the biproduct \[X \xrightleftarrows{i}[p] X \oplus Y \xleftrightarrows{j}[q] Y\] exists, so $\cat C$ has finite coproducts.
 		\item If $X_1, \cdots, X_n \in \cat C$ then the map $X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n$ such that $X_i \to X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n \to X_j$ is $\id_X$ if $i = j$ and $0$ if $i \neq j$ is an isomorphism. We write $X_1 \oplus \cdots \oplus X_n$ for the n-ary biproduct.
     \end{itemize}
 
@@ -72,7 +77,7 @@
 \begin{lem}
 	If $\cat C$ is semi-additive, then it is canonically enriched in commutative monoids. If $\cat C$ was additive, then this agrees with the given enrichment in abelian groups (under the inclusion $\catAbelianGroup \hookrightarrow \catCommutativeMonoid$).
 \end{lem}
-\begin{proof}(Sketch, in which the commutativity of the many diagrams is left to the reader)
+\begin{proof}(Sketch, in which the commutativity of the many diagrams is left to the reader,)
 	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be
 	\[
 		X \xrightarrow{\Delta} X \times X = X \oplus X \xrightarrow{f \oplus g} Y \oplus Y = Y \coprod Y \xrightarrow{\triangledown} Y
@@ -140,7 +145,7 @@
 shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
 	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
 	\[
-    	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X
+    	X \xrightleftarrows{i_1}[p_1] X \oplus X \xleftrightarrows{i_2}[p_2] X
     \] be the biproduct, and likewise for $Y$. Then commutativity of 
 	
 \[\begin{tikzcd}
