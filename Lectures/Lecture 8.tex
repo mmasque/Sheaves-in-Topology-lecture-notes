@@ -7,7 +7,8 @@
 \begin{defn}
 	A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ are endowed with an abelian group structure.
 \end{defn}
-\begin{lem}
+\begin{lem}\label{lem:pre-additive-categories-are-nice}
+Let $\cat C$ be a pre-additive category.
 \begin{enumerate}
 	\item If $X \in \cat C$, then the following are equivalent:
 	\begin{enumerate}
@@ -50,7 +51,7 @@
 	An \emph{additive} category is a pre-additive category with finite products.
 \end{defn}
 \begin{rmk}
-	By the lemma \todo{cite} if $\cat C$ is additive then
+	By the lemma \cref{lem:pre-additive-categories-are-nice} if $\cat C$ is additive then
 	\begin{itemize}
     	\item the terminal object is also initial, hence a zero object $0$.
 		\item IF $X, Y \in \cat C$ then the biproduct \[X \xrightleftarrows{i}[p] X \oplus Y \xleftrightarrows{j}[q] Y\] exists, so $\cat C$ has finite coproducts.
@@ -58,9 +59,9 @@
     \end{itemize}
 
 \end{rmk}
-\begin{exc}
-	\todo{something about turning map into functor, additional exercises}.
-\end{exc}
+% \begin{exc}
+% 	\todo{something about turning map into functor, additional exercises}.
+% \end{exc}
 
 \begin{defn}
 	A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that
