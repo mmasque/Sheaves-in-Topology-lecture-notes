@@ -279,12 +279,12 @@ And now the moment we have all been waiting for: the definition of an abelian ca
 	In $\catAbelianGroup$, $\catModule_R$ this is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$. 
 \end{exmp}
 \begin{lem}
-	If $\cat A$ is abelian and $\cat C$ is small, then $\Fun(\cat C\opp, \cat A)$ is abelian.
+	If $\cat A$ is abelian and $\cat C$ is small, then $\catFunctor(\cat C\opp, \cat A)$ is abelian.
 \end{lem}
 This lemma implies that the category of presheaves of abelian groups on a topological space is an abelian category.
 
 \begin{proof}
-	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise.
+	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise. 
 \end{proof}
 
 
