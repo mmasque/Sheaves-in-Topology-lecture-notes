@@ -96,7 +96,8 @@ D(i) \arrow[rr, "D(\phi)"'] &                                            & D(j)
     \] where $a \sim b$ for $a \in D(i)$ and $b \in D(j)$ if and only if there exist maps $\phi: i \to k$ and $\psi: j \to k$ such that $D(\phi)(a) = D(\psi)(b)$.
 \end{cor}\todo{proof of this, some prose.}
 
-\section{Abelian groups}
+\section{Limits and colimits of abelian groups}
+\remyquote{Bootstrap, bootstrap, bootstrap.}
 \begin{lem}
 	Every diagram in $\catAbelianGroup$ has a limit and a colimit.
 \end{lem}
@@ -115,6 +116,7 @@ If $\cat J$ is filtered, the colimit is easier: the filtered colimit \[
 \end{rmk}
 
 \section{Limits and colimits of presheaves}
+% \remyquote{Maybe let me write down what I just said because it's nice.}
 
 Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in \catFunctor(\cat C\opp, \cat D)$. In this course the category $\cat D$ has been $\catSet$ or $\catAbelianGroup$, for which we know small limits and colimits exist. The following lemma appears as \cite[Proposition~3.3.9]{riehlCategoryTheoryContext2016} stripped of the context of presheaves. It tells us that if $\cat C$ is small, the work we've done so far for $\catSet$ and $\catAbelianGroup$ suffices to show presheaves into these categories have small limits and colimits. Furthermore, we can compute (co)limits of such presheaves objectwise. We have seen these claims before in \cref{lem:psh-category-set}.
 
@@ -135,7 +137,7 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 	The presheaf categories $\catPresheaf(X)$ and $\catAbelianPresheaf(X)$ have all small limits and colimits.
 \end{cor}
 
-\section{Limits and colimits in sheaves}
+\section{Limits and colimits of sheaves}
 
 \begin{thm}
 	Any diagram $D: \cat J \to \catSheaf(X)$ (or $D: \cat J \to \catAbelianSheaf(X)$) has a limit, computed in $\catPresheaf(X)$ ($\catAbelianPresheaf(X)$).
@@ -143,157 +145,5 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 	% In other words, the forgetful functor $\catSheaf(X) \to \catPresheaf(X)$ reflects limits.
 \end{thm}
 \todo{Write the rest of the lecture}
-
-
-\chapter{Additive and abelian categories}
-	\remyquote{We can only write down diagrams, prove they commute, and run away as fast as we can.}
-\begin{defn}
-	A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ are endowed with an abelian group structure.
-\end{defn}
-\begin{lem}
-\begin{enumerate}
-	\item If $X \in \cat C$, then the following are equivalent:
-	\begin{enumerate}
-    	\item $X$ is initial
-		\item $X$ is terminal
-		\item $\id_X = 0 \in \Hom_{\cat C}(X,X)$
-    \end{enumerate}
-	\item If $X, Y, Z \in \cat C$ then the following are equivalent:
-	\begin{enumerate}
-    	\item There are maps $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ making $Z$ the coproduct.
-    	\item There are maps $Z \xrightarrow{p} X$ and $X \xrightarrow{q} Y$ making $Z$ the product.
-		\item There are maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ such that $p \circ i = \id_X$ and $q \circ j = \id_Y$ and $i\circ p + j \circ q = \id_Z$.
-    \end{enumerate}
-
-\end{enumerate}
-
-\end{lem}
-
-\begin{defn}
-	A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
-\end{defn}
-\begin{rmk}
-	Note that these force $q \circ i$ and $p \circ j$ to be zero. To see this it suffices to show that $j \circ q \circ i = 0$, because $j$ is monic.
-	This holds because $jqi = (\id_Z - ip)i = i - ipi = i - i = 0$.
-\end{rmk}
-
-\begin{proof}(Of the lemma)
-	\begin{enumerate}
-    	\item If $x$ is initial, then $\Hom_{\cat C}(X, X) = 0$ so $\id_X = 0$.
-		Conversely, if $\id_x = 0$ then every map $f: X \to Y$ i n $\cat C$ satisfies $f = f \circ \id_X = f \circ 0 = 0$. So $X$ is initial. This proves (i) is equivalent to (ii) and that (ii) is equivalent to (iii) follows dually.
-		\item If $X \rightleftarrows{i}[p] Z \leftrightarrows{j}[q] Y$ is a biproduct we saw $qi = 0$ and $pj = 0$. Then $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ is a coproduct. If $X \xrightarrow{f} W$ and $Y \xrightarrow{g} W$ is any co cone, set $h = fp + gq: Z \to W$. Then $hi = (fp + gq)i = fpi + gqi = f \circ \id_X + g \circ 0 = f$, and likewise $hj = g$. If $h': Z \to W$ satisfies $h'i = f$ and $h'j = g$ then $h' = h' \circ \id_Z = h' \circ (ip + jq) = h'ip + h'jq = fp + gq = h$. So $X \xrightarrow{i} Z$ and $Y \xrightarrow{j} Z$ form a coproduct. Conversely, if these maps form a coproduct, then the cocones given by ($X \xrightarrow{\id} X$ and $Y \xrightarrow{0} X$) and by ($X \xrightarrow{0} Y$ and $Y \xrightarrow{\id} Y$) define maps $Z \xrightarrow{p} X$, $Z \xrightarrow{q} Y$ with $pi = \id_X, pj = 0, qi = 0, qj = \id_Y$. Then $ip + jq: Z \to Z$ satisfies $(ip + jq)i = ipi + jqi = i \circ \id_X + j \circ 0 = i$, and likewise $(ip + jq)\circ j = \cdots = j$. So $ip + jq = \id_Z$ by the universal property of the coproduct. This proves $(i) \Leftrightarrow (iii)$ and $(ii) \Leftrightarrow$ follows dually.
-    \end{enumerate}
-\end{proof}
-\begin{defn}
-	An \emph{additive} category is a pre-additive category with finite products.
-\end{defn}
-\begin{rmk}
-	By the lemma \todo{cite} if $\cat C$ is additive then
-	\begin{itemize}
-    	\item the terminal object is also initial, hence a zero object $0$.
-		\item IF $X, Y \in \cat C$ then the biproduct $X \rightleftarrows{i}[p] X \oplus Y \leftrightarrows{j}[q] Y$ exists, so $\cat C$ has finite coproducts.
-		\item If $X_1, \cdots, X_n \in \cat C$ then the map $X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n$ such that $X_i \to X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n \to X_j$ is $\id_X$ if $i = j$ and $0$ if $i \neq j$ is an isomorphism. We write $X_1 \oplus \cdots \oplus X_n$ for the n-ary biproduct.
-    \end{itemize}
-
-\end{rmk}
-\begin{exc}
-	\todo{something about turning map into functor, additional exercises}.
-\end{exc}
-
-\begin{defn}
-	A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that
-	\begin{enumerate}
-    	\item the natural map $ \emptyset \to *$ is an isomorphism (so $\cat C$ has a zero object $0$),
-		\item for $X_1, ..., X_n$ in $\cat C$ the map $X_1 \coprod \cdots \coprod X_n \to X_1 \times \cdots \times X_n$ is an isomorphism.
-    \end{enumerate}
-	(Note that we use (i) to define the map in (ii)).
-\end{defn}
-
-\begin{rmk}
-	While (pre)-additive is a \emph{structure}, being semi-additive is a \emph{property} of a category $\cat C$.
-\end{rmk}
-
-\begin{lem}
-	If $\cat C$ is semi-additive, then it is canonically enriched in commutative monoids. If $\cat C$ was additive, then this agrees with the given enrichment in abelian groups (under the inclusion $\catAbelianGroup \hookrightarrow \catCommutativeMonoid$).
-\end{lem}
-\begin{proof}
-	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be
-	\[
-		X \xrightarrow{\Delta} X \times X = X \oplus X \xrightarrow{f \oplus g} Y \oplus Y = Y \coprod Y \xrightarrow{\triangledown} Y
-	\] where $\Delta$ is the diagonal map and $\triangledown$ is the codiagonal.
-	For $f, g, h$ maps from $X$ to $Y$, commutativity of \todo{D1 manual notes} shows that $(f+g) + h = f + (g + h)$. For $f: X \to Y$ commutativity of \todo{D2 manual notes} shows $f + 0 = f$ and likewise $ 0 + f = f$.
-	 For $f,g: X \rightrightarrows Y$ commutativity of \todo{D3} gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \rightrightarrows Y$ and $g,g':Y  \rightrightarrows Z$ then commutativity of \todo{D4} shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
-	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
-	\[
-    	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X
-    \] be the biproduct, and likewise for $Y$. Then commutativity of \todo{D5} and \todo{D6} gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_1 p_1 + i_2 p_2) = i_1 f p_1 + i_2 g p_2$, and likewise $f \oplus 0 = i_1 f p_1$, $0 \oplus g = i_2 g p_2$, so \[
-    	f \oplus g = (f \oplus 0) + (0 \oplus g).
-    \] Then bilinearity of composition shows that the composite
-	\[
-    	X \xrightarrow{\Delta} X \oplus X \xrightarrow{f \oplus g} Y \oplus Y \triangledown Y
-    \] is $f + g$ (in the enriched sense).
-\end{proof}
-% What we have learnt from this long proof is that being an additive category is a \emph{property}.
-\begin{cor}
-	Being additive (i.e. admitting an additive structure) is a property.
-\end{cor}
-\begin{proof}
-	The category $\cat C$ is additive if and only if if it is semi-additive and all $\Hom$ monoids are groups.
-\end{proof}
-
-\begin{exmp}
-	$\catCommutativeMonoid$ is semi-additive (omitted), but not additive ($\Hom(\bb N, \bb N) = \bb N$ does not have inverses).
-\end{exmp}
-
-\section{Abelian categories}
-\begin{exc}
-	If $\cat C$ is pre-additive, show that \[
-    	\eq(X \rightrightarrows{f}[g] = \eq(X \rightrightarrows{(f-g)}[0] Y)) =: \ker(f-g)
-    \] (if one of them exists).
-\end{exc}
-So an additive category $\cat C$ has finite limits (respectively colimits) if and only if it has kernels (respectively cokernels).
-\begin{defn}
-	A \emph{pre-abelian} category is an additive category with kernels and cokernels.
-\end{defn}
-\begin{defn}
-	Let $\cat C$ be a pre-abelian category and $f: X \to Y$ in $\cat C$. The \emph{image} of $f$ is $\im(f) = \ker(Y \to \coker(f))$. The \emph{coimage} of $f$ is $\coim(f) = \coker(\ker(f) \to X)$.
-\end{defn}
-Warning: the zoo of names will get worse.
-\begin{lem}
-	Any $f: X \to Y$ in a pre-abelian category factors uniquely via \[
-    	X \to \coim(f) \to \im(f) \to Y.
-    \]
-\end{lem}
-\begin{proof}
-	The composition $\ker(f) \to X \to Y$ is $0$. So there is a unique factorisation \[
-    	X \to \coim(f) \to Y
-    \] of $f$. The composition $\coim(f) \to Y \to \coker(f)$ is $0$ (since this holds after precomposition with $X \to \coim(f)$). So there is a unique factorisation \[
-    	\coim(f) \to \im(f) \to Y.
-    \]
-\end{proof}
-And now the moment we have all been waiting for: the definition of an abelian category.
-
-\begin{defn}
-	An \emph{abelian} category is a pre-abelian category $A$ such that the $\coim(f) \to \im(f)$ is an isomorphism for all $f: X \to Y$ in $\cat A$.
-\end{defn}
-\begin{exmp}
-	In $\catAbelianGroup$, $\catModule_R$ this is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$.
-\end{exmp}
-\begin{lem}
-	If $\cat A$ is abelian and $\cat C$ is small, then $\catFunctor(\cat C\opp, \cat A)$ is abelian.
-\end{lem}
-This lemma implies that the category of presheaves of abelian groups on a topological space is an abelian category.
-
-\begin{proof}
-	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise.
-\end{proof}
-
-\section{Limits and colimits of abelian groups}
-\remyquote{Bootstrap, bootstrap, bootstrap.}
-
-\section{Limits and colimits of presheaves}
-\remyquote{Maybe let me write down what I just said because it's nice.}
-
-\section{Limits and colimits of sheaves}
 
 \end{document}
