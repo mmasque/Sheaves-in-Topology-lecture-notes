@@ -72,7 +72,7 @@
 \begin{lem}
 	If $\cat C$ is semi-additive, then it is canonically enriched in commutative monoids. If $\cat C$ was additive, then this agrees with the given enrichment in abelian groups (under the inclusion $\catAbelianGroup \hookrightarrow \catCommutativeMonoid$).
 \end{lem}
-\begin{proof}
+\begin{proof}(Sketch, in which the commutativity of the many diagrams is left to the reader)
 	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be
 	\[
 		X \xrightarrow{\Delta} X \times X = X \oplus X \xrightarrow{f \oplus g} Y \oplus Y = Y \coprod Y \xrightarrow{\triangledown} Y
@@ -141,7 +141,27 @@ shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving th
 	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
 	\[
     	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X
-    \] be the biproduct, and likewise for $Y$. Then commutativity of \todo{D5} and \todo{D6} gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_1 p_1 + i_2 p_2) = i_1 f p_1 + i_2 g p_2$, and likewise $f \oplus 0 = i_1 f p_1$, $0 \oplus g = i_2 g p_2$, so \[
+    \] be the biproduct, and likewise for $Y$. Then commutativity of 
+	
+\[\begin{tikzcd}
+	X & {X\oplus X} & X & X & {X\oplus X} & X \\
+	Y & {Y\oplus Y} & Y & Y & {Y\oplus Y} & Y
+	\arrow["f", from=1-1, to=2-1]
+	\arrow["{p_1}", from=1-1, to=1-2]
+	\arrow["{p_2}", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=2-3]
+	\arrow["{p_2}"', from=2-2, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow["{f\oplus g}"{description}, from=1-2, to=2-2]
+	\arrow["f"', from=1-4, to=2-4]
+	\arrow["{i_1}"', from=2-4, to=2-5]
+	\arrow["{i_1}", from=1-4, to=1-5]
+	\arrow["{i_2}"', from=1-6, to=1-5]
+	\arrow["{i_2}", from=2-6, to=2-5]
+	\arrow["g", from=1-6, to=2-6]
+	\arrow["{f\oplus g}", from=1-5, to=2-5]
+\end{tikzcd}\]
+gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_1 p_1 + i_2 p_2) = i_1 f p_1 + i_2 g p_2$, and likewise $f \oplus 0 = i_1 f p_1$, $0 \oplus g = i_2 g p_2$, so \[
     	f \oplus g = (f \oplus 0) + (0 \oplus g).
     \] Then bilinearity of composition shows that the composite
 	\[
