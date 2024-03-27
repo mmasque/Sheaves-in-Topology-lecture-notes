@@ -94,10 +94,50 @@
 	\arrow["\triangledown"', from=3-4, to=2-5]
 	\arrow["\Delta", from=1-4, to=2-5]
 	\arrow["{f\oplus g\oplus h}"{description}, from=2-2, to=2-4]
-\end{tikzcd}\]	
+\end{tikzcd}\]	\todo{map out of triple Y oplus}
 
-	shows that $(f+g) + h = f + (g + h)$. For $f: X \to Y$ commutativity of \todo{D2 manual notes} shows $f + 0 = f$ and likewise $ 0 + f = f$.
-	 For $f,g: X \rightrightarrows Y$ commutativity of \todo{D3} gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \rightrightarrows Y$ and $g,g':Y  \rightrightarrows Z$ then commutativity of \todo{D4} shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
+	shows that $(f+g) + h = f + (g + h)$. For $f: X \to Y$ commutativity of 
+\[\begin{tikzcd}
+	& {X\oplus X} && {Y\oplus Y} \\
+	X & {X \oplus 0} && {Y\oplus 0} & Y
+	\arrow[from=2-1, to=2-2]
+	\arrow["\id\oplus0", from=1-2, to=2-2]
+	\arrow["\Delta", from=2-1, to=1-2]
+	\arrow["{f\oplus \id}"', from=2-2, to=2-4]
+	\arrow["{f\oplus 0}", from=1-2, to=1-4]
+	\arrow["\triangledown", from=1-4, to=2-5]
+	\arrow[from=2-4, to=2-5]
+	\arrow["{\id \oplus 0}", from=2-4, to=1-4]
+\end{tikzcd}\]	
+	 shows $f + 0 = f$ and likewise $ 0 + f = f$.
+	 For $f,g: X \rightrightarrows Y$ commutativity of 
+	
+\[\begin{tikzcd}
+	& {X\oplus X} && {Y\oplus Y} \\
+	X &&&& Y \\
+	& {X\oplus X} && {Y\oplus Y}
+	\arrow["\triangledown", from=1-4, to=2-5]
+	\arrow["\triangledown"', from=3-4, to=2-5]
+	\arrow["{g \oplus f}"', from=3-2, to=3-4]
+	\arrow["{f\oplus g}", from=1-2, to=1-4]
+	\arrow["\Delta", from=2-1, to=1-2]
+	\arrow["\Delta"', from=2-1, to=3-2]
+	\arrow["{\text{swap}}"{description}, from=1-2, to=3-2]
+	\arrow["{\text{swap}}"{description}, from=1-4, to=3-4]
+\end{tikzcd}\]	 gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \rightrightarrows Y$ and $g,g':Y  \rightrightarrows Z$ then commutativity of 
+
+\[\begin{tikzcd}
+	X & {X\oplus X} & {Y\oplus Y} & Y \\
+	&& {Z\oplus Z} & Z
+	\arrow["{gf\oplus gf'}"', from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+	\arrow["\triangledown", from=1-3, to=1-4]
+	\arrow["g", from=1-4, to=2-4]
+	\arrow["\triangledown", from=2-3, to=2-4]
+	\arrow["{f\oplus f'}", from=1-2, to=1-3]
+	\arrow["\Delta", from=1-1, to=1-2]
+\end{tikzcd}\]
+shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
 	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
 	\[
     	X \rightleftarrows{i_1}[p_1] X \oplus X \leftrightarrows{i_2}[p_2] X
