@@ -145,7 +145,7 @@ Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSh
 
 \begin{defn}
 Let $i_x\colon \{x\} \hookrightarrow X$ be the inclusion of a point in a space.
-Then $i_x^* \mathcal{F}$ is the \emph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
+Then $i_x^* \mathcal{F}$ is the \emph{stalk}\index{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
 Unravelling definitions, we have \[
     \mathcal{F}_x = \colim_{U \ni x} \mathcal{F}(U)\text{.}
 \]
@@ -155,7 +155,7 @@ Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over 
 
 \begin{exmp}[orientation sheaf of a manifold]
 Let \(M\) be an \(n\)-dimensional topological manifold, by which we mean a Hausdorff space that is locally homeomorphic to \(\bb R^n\) (i.e., every point of \(M\) admits a neighbourhood homeomorphic to \(\bb R^n\)).
-For a subset \(K\subseteq M\), we write \(H_k(M\mid K;R) \coloneq H_k(M,M\setminus K;R)\) for the \(k\)th homology of \(M\) relative to \(M\setminus K\) with coefficients in a commutative ring \(R\).
+For a subset \(K\subseteq M\), we write \[H_k(M\mid K;R) \coloneq H_k(M,M\setminus K;R)\] for the \(k\)th homology of \(M\) relative to \(M\setminus K\) with coefficients in a commutative ring \(R\).
 
 A \emph{local \(R\)-orientation} at a point \(x\in M\) is a generator \(\mu_x\) of \(H_n(M\mid x;R)\cong R\) (note that we take homology in degree \(n\), the dimension of the manifold \(M\)).
 That \(H_n(M\mid x;R)\) is isomorphic to \(R\) (as \(R\)-modules) follows from excision; choosing a generator corresponds exactly to choosing such an isomorphism.

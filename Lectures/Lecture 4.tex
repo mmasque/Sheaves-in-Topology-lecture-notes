@@ -38,11 +38,11 @@ We conclude that the counit of the sheaf/space adjunction is an isomorphism for 
 \begin{defn}
 For a space $X$, the composite functor
 \[ (-)^\sharp \coloneq h_{-/X} \circ \etalespace* \colon \catPresheaf(X)\to\catSheaf(X) \]
-is called \emph{sheafification}.
+is called \indexdefnemph{sheafification}.
 It comes with a natural map $F\To F^\sharp$ for presheaves $F$ on $X$ given by the unit of the adjunction $\etalespace*\leftadj h_{-/X}$.
 \end{defn}
 
-The following result can be seen as the universal property of sheafification.
+The following result can be seen as the universal property of sheafification\index{sheafification!universal property}.
 
 \begin{cor}\label{cor:sheafification-left-adjoint-to-inclusion}
 Sheafification is left adjoint to the inclusion $\catSheaf(X)\hookrightarrow\catPresheaf(X)$.
@@ -64,7 +64,7 @@ Of course, we also have $\catLocalHomeomorphism_{/*} \simeq\catSet$ since having
 \end{exmp}
 
 \begin{exmp}
-Let $S=\{0,1\}$ be the Sierpiński space with
+Let $S=\{0,1\}$ be the \indexterm{Sierpiński space} with
 \[ \open(S) = \{\emptyset\hookrightarrow\{1\}\hookrightarrow S\}\text{.} \]
 Using a similar argument as in the previous example, we see
 \[ \catPresheaf(S) \simeq \catFunctor(\mathord{\to}\mathord{\to},\catSet) \]
@@ -81,15 +81,15 @@ Check that sheafification on $S$ is given by sending a presheaf $F$ -- that is, 
 
 \begin{defn}
 Let $U\subseteq X$ be open and let $F$ be a presheaf on $X$.
-Then the \emph{restriction} $F|_U$ of $F$ to $U$ is the restriction of the functor $F$ along the inclusion $\open(U)\hookrightarrow\open(X)$.
+Then the \emph{restriction}\index{restriction!of sheaves} $F|_U$ of $F$ to $U$ is the restriction of the functor $F$ along the inclusion $\open(U)\hookrightarrow\open(X)$.
 \end{defn}
 
 \begin{lem}
 If $\mathcal F$ is a sheaf on $X$, then so is its restriction $\mathcal F|_U$ to an open $U\subseteq X$.
-Under the equivalence $\catSheaf(X)\simeq\catLocalHomeomorphism_{/X}$, restriction to $U$ corresponds to sending a local homeomorphism $f\colon Y\to X$ to the pullback $f\inv(U)\to U$.
+Under the equivalence $\catSheaf(X)\simeq\catLocalHomeomorphism_{/X}$, restriction to $U$ corresponds to sending a local homeomorphism $f\colon Y\to X$ to the \indexterm{pullback} $f\inv(U)\to U$.
 \end{lem}
 
-In $\catLocalHomeomorphism_{/X}$, we have the subcategory $\catCoveringSpace_{/X}$ of \emph{covering spaces}: continuous maps $f\colon Y\to X$ such that $X$ has an open cover $X = \bigcup_{i\in I}U_i$ and there are sets $S_i$ such that $f\inv(U_i)\to U_i$ is isomorphic to $U_i\times S_I\to U_i$ (where $S_i$ has the discrete topology) over $U_i$ for all $i\in I$.
+In $\catLocalHomeomorphism_{/X}$, we have the subcategory $\catCoveringSpace_{/X}$ of \emph{covering spaces}\index{covering space}: continuous maps $f\colon Y\to X$ such that $X$ has an open cover $X = \bigcup_{i\in I}U_i$ and there are sets $S_i$ such that $f\inv(U_i)\to U_i$ is isomorphic to $U_i\times S_I\to U_i$ (where $S_i$ has the discrete topology) over $U_i$ for all $i\in I$.
 
 \todo{Pancake example}
 
@@ -98,7 +98,7 @@ We will not assume that the space $Y$ in a covering space $Y\to X$ is (path) con
 \end{rmk}
 
 \begin{defn}
-A sheaf $\mathcal F$ on a space $X$ is \emph{locally constant} if there is an open cover $X = \bigcup_{i\in I}U_i$ such that the restriction $\mathcal F|_{U_i}$ is a constant sheaf $h_{S_i}$ for some set $S_i$ for all $i\in I$.
+A sheaf $\mathcal F$ on a space $X$ is \emph{locally constant}\index{sheaf!locally constant} if there is an open cover $X = \bigcup_{i\in I}U_i$ such that the restriction $\mathcal F|_{U_i}$ is a constant sheaf $h_{S_i}$ for some set $S_i$ for all $i\in I$.
 
 We write $\catLocallyConstantSheaf(X)$ for the full subcategory of $\catSheaf(X)$ on the locally constant sheaves.
 \end{defn}
@@ -153,13 +153,13 @@ The real content is the constant case: we have $\mathcal F\cong h_S = h_{X\times
 \begin{defn}
     Let $X$ be a topological space. Then $X$ is 
     \begin{enumerate}
-        \item locally path connected if every open neighbourhood $x \in U$ of any $x \in X$ contains a path connected open neighbourhood $x \in V \in U$.
-        \item Semi-locally path connected if for every $x \in X$, there exists an open neighbourhood $x\in U$ such that the map $\homotopy[1](U, X) \to \homotopy[1](X,x)$ is trivial. 
+        \item \emph{locally path connected} if every open neighbourhood $x \in U$ of any $x \in X$ contains a path connected open neighbourhood $x \in V \in U$.
+        \item \emph{semi-locally path connected} if for every $x \in X$, there exists an open neighbourhood $x\in U$ such that the map $\homotopy[1](U, x) \to \homotopy[1](X,x)$ is trivial. 
     \end{enumerate}
 \end{defn}
 
 \begin{defn}
-    Let $X$ be a topological space and $x\in X$. The fibre functor is defined by
+    Let $X$ be a topological space and $x\in X$. The \indexdefnemph{fibre functor} is defined by
     \begin{align*}
         F_x: \catCoveringSpace_{/X} &\to \homotopy[1](X,x)\catSet\\
         (Y \xrightarrow{f} X) &\mapsto f^{-1}(x),
@@ -167,7 +167,7 @@ The real content is the constant case: we have $\mathcal F\cong h_S = h_{X\times
     where a loop $\gamma \in \homotopy[1](X,x)$ acts on $f^{-1}(x)$ by unique path lifting. 
 \end{defn}
 
-\begin{thm}[name=Monodromy correspondence]
+\begin{thm}[name={\indexterm{monodromy} correspondence}]
     Let $X$ be a topological space and $x \in X$. 
     \begin{enumerate}
         \item If $X$ is path connected and locally path connected, then

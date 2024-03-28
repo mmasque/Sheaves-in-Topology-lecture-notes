@@ -88,7 +88,7 @@ is a sheaf, where $U\colon \catAbelianGroup\to\catSet$ is the forgetful functor.
     \item The filtered limit of the rings \(\bb Z/p^n\bb Z\) for \(p\) a prime is the ring
       \[\cofilteredlim_{n} \bb Z / p^n\bb Z = \bb Z_p\]
       of the \(p\)-adic integers.
-    \item The stalk of a sheaf \(\mathcal F\) at a point \(x\) is a filtered colimit:
+    \item The stalk\index{stalk} of a sheaf \(\mathcal F\) at a point \(x\) is a filtered colimit:
       \[ \cat F_x = \filteredcolim_{U\ni x} \cat F(U)\text{.} \]
       Indeed the indexing category $\setpred{U\in\open(X)\opp}{x\in U}$ is filtered: if $x\in U, V \subseteq X$ are open then $x\in U\cap V$.
     \item Likewise, the pullback of a presheaf \(\mathcal F\) is given by
@@ -195,7 +195,7 @@ There is a `tensor product' \(\otimes\) on presentable categories for which we (
 \end{rmk}
 
 In order to do homological algebra for sheaves of abelian groups, we need a notion of \emph{exactness} for sequences of sheaves of abelian groups.
-Since the image presheaf of map of sheaves is in general not a sheaf itself, we define exactness in $\catAbelianGroup(X)$ via stalks.
+Since the image presheaf of map of sheaves is in general not a sheaf itself, we define exactness in $\catAbelianGroup(X)$ via stalks\index{stalk}.
 
 \begin{defn}
 A sequence

@@ -7,7 +7,7 @@
 
 \begin{defn}
 Let $\cat C$ be a small category.
-Then $\catPresheaf(\cat C)$ is the category $\catFunctor(\cat C\opp,\catSet)$: its objects are functors $F\colon\cat C\opp\to\catSet$, and its morphisms $\alpha\colon F\To G$ are \emph{natural transformations}, that is, collections of functions $\alpha_X\colon F(X)\to G(X)$ for all $X\in\cat C$ such that the diagram
+Then \indexdefn{$\catPresheaf(\cat C)$} is the functor category $\catFunctor(\cat C\opp,\catSet)$: its objects are functors $F\colon\cat C\opp\to\catSet$, and its morphisms $\alpha\colon F\To G$ are \emph{natural transformations}\index{natural transformation}, that is, collections of functions $\alpha_X\colon F(X)\to G(X)$ for all $X\in\cat C$ such that the diagram
 \begin{equation*}
     \begin{tikzcd}
         F(Y) \ar[r, "\alpha_Y"] \ar[d, "F(f)"'] & G(Y) \ar[d, "G(f)"] \\
@@ -19,7 +19,7 @@ commutes for all $f\colon X\to Y$ in $\cat C$.
 
 \begin{defn}
 Let $X$ be a topological space.
-Then the category of presheaves on $X$ is $\catPresheaf(X)\coloneqq\catPresheaf(\open(X))$ and the category of sheaves on $X$ is the full subcategory $\catSheaf(X)\subseteq\catPresheaf(X)$ on the sheaves.
+Then the category of presheaves on $X$ is $\catPresheaf(X)\coloneqq\catPresheaf(\open(X))$\indexdefn{$\catPresheaf(X)$} and the category of sheaves on $X$ is the full subcategory $\catSheaf(X)\subseteq\catPresheaf(X)$\indexdefn{$\catSheaf(X)$} on the sheaves.
 \end{defn}
 
 \begin{lem}\label{lem:psh-category-set}
@@ -27,7 +27,7 @@ Let $\cat C$ be a small category.
 Then:
 \begin{enumerate}
 \item $\catPresheaf(\cat C)$ is a category.
-\item The category $\catPresheaf(\cat C)$ has all (small) limits and colimits, and they are computed objectwise; e.g., for presheaves $F,G\in\catPresheaf(\cat C)$ the natural map
+\item The category $\catPresheaf(\cat C)$ has all (small) limits\index{limit} and colimits\index{colimit}, and they are computed objectwise; e.g., for presheaves $F,G\in\catPresheaf(\cat C)$ the natural map
     \[ (F\times G)(U) \to F(U)\times G(U) \]
     is an isomorphism for all open $U\subseteq X$.
 \item A natural transformation $\alpha\colon F\To G$ between presheaves $F$ and $G$ on $\cat C$ is invertible if and only if the component $\alpha_X\colon F(X)\to G(X)$ is a bijection for all $X\in\cat C$.
@@ -35,7 +35,7 @@ Then:
 \end{lem}
 
 \begin{rmk}
-Colimits in the category $\catSheaf(X)$ of sheaves will be more complicated.
+Colimits\index{colimit} in the category $\catSheaf(X)$ of sheaves will be more complicated.
 \end{rmk}
 
 \begin{exmp}
@@ -54,7 +54,6 @@ This is again natural in $U$.
 \end{exmp}
 
 In fact, the sheaf $h_Z$ is a special case of $h_{Y/X}$:
-
 \begin{lem}
 If $Y=Z\times X\xrightarrow{\pr_X} X$ in $\catTopologicalSpace_{/X}$, then the sheaves $h_{Y/X}$ and $h_Z$ are isomorphic.
 \end{lem}
@@ -76,7 +75,7 @@ commutes.
 \end{proof}
 
 \begin{exmp}
-Let $Y\to X$ be the two-to-one cover $\sphere[1]\to\sphere[1]$.
+Let $Y\to X$ be the two-to-one cover $\sphere[1]\to\sphere[1]$\index{circle covering}.
 Then $h_{Y/X}$ is not isomorphic to $h_Z$ for any $Z\in\catTopologicalSpace$ (but it is locally isomorphic to $h_{\{1,2\}}$, as we will see later\todo{Ref back}).
 
 Suppose $h_{Y/X}\cong h_Z$ for $Z\in\catTopologicalSpace$.
@@ -95,7 +94,7 @@ But last lecture, we saw that $h_{Y/X}(X)=\emptyset$.
 
 \begin{defn}
 Let $\cat C$ be a small category.
-Then the \emph{representable presheaf} on $X\in\cat C$ is the presheaf
+Then the \emph{representable presheaf}\index{presheaf!representable} on $X\in\cat C$ is the presheaf
 \[ h_X \colon \cat C\opp\to\catSet\text{,} \quad Y \mapsto \Hom[\cat C](Y,X) \]
 with restriction map
 \[ f^*\colon\Hom[\cat C](X,Y')\to\Hom[\cat C](X,Y)\text{,} \quad g\mapsto g\circ f\text{.} \]
@@ -110,7 +109,7 @@ The sheaf $h_Z$ can be regarded as the \emph{restriction} of the representable p
 
 In some sense, the representable presheaf represented by $X$ is `freely generated' by the section $\id_X\in h_X(X)$.
 
-\begin{lem}[name={Yoneda Lemma~\cite[Theorem~2.2.4]{riehlCategoryTheoryContext2016}}]\label{lem:yoneda}
+\begin{lem}[name={\indexdefn{Yoneda lemma}~\cite[Theorem~2.2.4]{riehlCategoryTheoryContext2016}}]\label{lem:yoneda}
     Let $F: \cat C\opp \to \catSet$ be a functor, $X \in \cat C$. Then the map \[
     \Phi: \Hom_{\catPresheaf(\cat C)}(h_X, F) \to F(X)\text{,} \quad \alpha\mapsto \alpha_X(\id_X)
     \] is a bijection that is natural in $F$ and $X$. 
@@ -141,7 +140,7 @@ In some sense, the representable presheaf represented by $X$ is `freely generate
 \section{Étalé space}
 
 In the coming lectures, we will show that every sheaf on a space $X$ is isomorphic to $h_{Y/X}$ for some map $Y\to X$.
-We will construct a functor $\etalespace*\colon\catPresheaf(X)\to\catTopologicalSpace_{/X}$ which sends a presheaf to its \emph{étalé space} (also called \emph{espace étalé}, (wrongly) \emph{étale space} or \emph{sheaf space} (but we do not like that)).
+We will construct a functor $\etalespace*\colon\catPresheaf(X)\to\catTopologicalSpace_{/X}$ which sends a presheaf to its \emph{étalé space} (also called \emph{espace étalé}\index{espace étalé|see{étalé space}}, (wrongly) \emph{étale space} or \emph{sheaf space} (but we do not like that)).
 
 The idea is as follows: a presheaf $F$ is determined by its values $F(U)$ for opens $U\subseteq X$ and the restriction maps.
 By the Yoneda lemma, the values can be written as $F(U)\cong\Hom[\catPresheaf(X)](h_U,F)$.
@@ -151,14 +150,14 @@ We define $\etalespace(F)\to X$ by glueing copies of $U$ `along the same colimit
 
 \begin{defn}\label{defn:espace-étalé}
 Let $F$ be a presheaf on $X$.
-The \emph{étalé space} $\etalespace(F)$ is the quotient of the coproduct
+The \indexdefnemph{étalé space} $\etalespace(F)$ is the quotient of the coproduct
 \[ \coprod_{U\in\open(X)} F(U)\times U \]
 (where $F(U)$ is endowed with the discrete topology), with notation $(s,x)_U$ for the point given by $s\in F(U)$ and $x\in U$ in the factor indexed by $U$, by the equivalence relation generated by
 \[ (s|_U, x)_U \sim (s, x)_V \]
 for $(s,x)\in F(V)\times U$ for $x\in U\subseteq V$.
 \end{defn}
 
-Categorically, the étalé space is the coequaliser
+Categorically, the étalé space is the \indexterm{coequaliser}
 \[ \etalespace(F) = \coeq\bigl(\coprod_{U\subseteq V\subseteq X} F(V)\times U \rightrightarrows \coprod_{U\subseteq X} F(U)\times U\bigr)\]
 where the arrows are given by
 \begin{equation*}
@@ -169,7 +168,7 @@ where the arrows are given by
 \end{equation*}
 where $\incl*\colon U\hookrightarrow V$ denotes the inclusion map.
 
-Alternatively, the étalé space $\etalespace(F)$ is the coend
+Alternatively, the étalé space $\etalespace(F)$ is the \indexterm{coend}
 \[ \etalespace(F) = \int^{U\in\open(X)} F(U)\times U\text{.} \]
 
 To understand the étalé space a bit better, we have to understand the equivalence relation generated by the given relation, with respect to which we take the quotient.
@@ -187,7 +186,7 @@ of elements $a_i\in X$ such that $x=a_0$, $y=a_{2n}$, $a_{2i}\sim a_{2i+1}$ for 
 \end{rmk}
 
 \begin{exmp}
-To compute the coequaliser of the diagram of sets
+To compute the \indexterm{coequaliser} of the diagram of sets
 \begin{equation*}
     \begin{tikzcd}
         \{1,2\} \ar[r, shift left, "-\cdot 1"] \ar[r, shift right, "-\cdot 2"'] & \{1,2,3,4\}
@@ -206,7 +205,7 @@ One can prove this lemma using the explicit description of $\approx$ given in \c
 A better proof shows that the relation on the right in the equivalence of the lemma is an equivalence relation and that the former statement implies the latter (i.e., `$\sim$ implies $\approx$').
 
 \begin{exmp}\label{exmp:representable-presheaf-espace-étalé}
-If $F = h_U$ is the representable presheaf on $X$ represented by an open $U\subseteq X$ (see \cref{fig:presheaf-represented-by-U}), then
+If $F = h_U$ is the representable presheaf\index{presheaf!representable} on $X$ represented by an open $U\subseteq X$ (see \cref{fig:presheaf-represented-by-U}), then
 \[ F(V) = \Hom[\open(X)](V,U) = \begin{cases}
     \terminal & \text{if } V\subseteq U\text{,} \\
     \emptyset & \text{if } V\not\subseteq U\text{.}
@@ -240,7 +239,7 @@ This just leaves $U$, so $\etalespace(h_U) = U$.
 
 \begin{rmk}
 In general, the étalé space $\etalespace(F)$ is not `computable'.
-It is, however, when $F$ is \emph{constructible}, which we will see in one of the final lectures.\todo{Ref back}
+It is, however, when $F$ is \emph{constructible}\index{constructible sheaf}, which we will see in one of the final lectures.\todo{Ref back}
 \end{rmk}
 
 \begin{prop}
@@ -248,5 +247,5 @@ It is, however, when $F$ is \emph{constructible}, which we will see in one of th
     $\catSheaf(X) \to \catTopologicalSpace_{/X}$.
 \end{prop}
 \begin{proof}
-    We can cheat and use the unproven remark that the étalé space is a coend. \todo{prove?}
+    We can cheat and use the unproven remark that the étalé space is a \indexterm{coend}. \todo{prove?}
 \end{proof}

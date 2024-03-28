@@ -15,7 +15,7 @@
 \noindent
 
 \begin{defn}
-    A continuous function $f\colon Y\to X$ is said to be a \emph{local homeomorphism} if for all $y\in Y$ there exists an open neighbourhood $V_y\subset Y$ such that $f|_{V_y}\colon V_y\to f(V)$ is a homeomorphism onto an open subset of $X$. 
+    A continuous function $f\colon Y\to X$ is said to be a \indexdefnemph{local homeomorphism} if for all $y\in Y$ there exists an open neighbourhood $V_y\subset Y$ such that $f|_{V_y}\colon V_y\to f(V)$ is a homeomorphism onto an open subset of $X$. 
 \end{defn}
 
 Later we will see that we may equivalently define an étalé space over $X$ as a topological space $Y$ together with a local homeomorphism $Y\to X$. 
@@ -46,9 +46,9 @@ In particular, by \cref{lem:localhomtriangle:f-g} of the above lemma, we can sho
 \begin{exmp} Let $X, Y \in \catTopologicalSpace$ and $U\subset X$ open.
 We have the following list of examples:
     \begin{enumerate}
-        \item  The inclusion $U\hookrightarrow X$ is a local homeomorphism.
-        \item Certain covering spaces $p\colon Y\to X$ are local homeomorphisms.\todo{work out}
-        \item  Consider the zero locus $V\subset \mathbb{R}^2$ of the polynomial $x-y^3-3y$.
+        \item The inclusion $U\hookrightarrow X$ is a local homeomorphism.
+        \item Certain covering spaces\index{covering space} $p\colon Y\to X$ are local homeomorphisms.\todo{work out}
+        \item Consider the zero locus $V\subset \mathbb{R}^2$ of the polynomial $x-y^3-3y$.
 \begin{figure}
     \centering
     \begin{tikzpicture}[scale=0.8]
@@ -82,7 +82,7 @@ We have the following list of examples:
         The projection on the $x$-axis $\pr*_x\colon V \to \mathbb{R}$ is not a local homeomorphism as shown in \cref{fig:zerolocuslocalhomeo}.
         However, after restricting to $V\setminus \{(\pm 2, \mp 1)\}$ it is.
         \item
-          Consider the line with two origins \(\bb R\pushout{\bb R\setminus\{0\}}\bb R\) obtained by gluing two copies of the real line \(\bb R\) along \(\bb R\setminus\{0\}\); see \cref{fig:local-homeomorphisms-line-two-origins}.
+          Consider the \indexterm{line with two origins} \(\bb R\pushout{\bb R\setminus\{0\}}\bb R\) obtained by gluing two copies of the real line \(\bb R\) along \(\bb R\setminus\{0\}\); see \cref{fig:local-homeomorphisms-line-two-origins}.
           There is a map \(q\) from the disjoint union \(\bb R\cotimes\bb R\) to the line with two origins which sends the origin in the first copy of \(\bb R\) to the one of the two origins in \(\bb R\pushout{\bb R\setminus\{0\}}\bb R\) and the origin in the other copy to the other of the two origins.
           There is a further map \(p\) down to \(\bb R\) which collapses the two origins.
           Both maps \(p\) and \(q\) are local homeomorphisms.
@@ -154,9 +154,9 @@ Let's check the adjunction for the sheaf $h_{U/X} = h_U = \Hom[\open(X)](-,U)$.
 We showed in \cref{exmp:representable-presheaf-espace-étalé} that $\etalespace(h_{U/X}) = U$ in $\catTopologicalSpace_{/X}$.
 On the other hand, the Yoneda~\cref{lem:yoneda} gives
 \[ \Hom[\catPresheaf(X)](h_U,h_{Y/X}) \cong h_{Y/X}(U) = \cont[X](U,Y)\text{.} \]
-Some formal nonsense if you want to feel fancy at dinner parties: $\etalespace*$ is `by definition' the left Kan extension of
+Some formal nonsense if you want to feel fancy at dinner parties: $\etalespace*$ is `by definition' the left \indexterm{Kan extension} of
 \[ \open(X)\to\catTopologicalSpace_{/X}\text{,} \quad U \mapsto (U\hookrightarrow X) \]
-along the Yoneda embedding $h\colon\open(X)\to\catPresheaf(X)$.
+along the Yoneda embedding\index{Yoneda lemma!Yoneda embedding} $h\colon\open(X)\to\catPresheaf(X)$.
 \end{exmp}
 
 \begin{proof}[of the adjunction in \cref{thm:sheaf-space-adjunction}]
@@ -194,7 +194,7 @@ for opens $U\subseteq V\subseteq X$.
 Hence $f = (\alpha_U)_U \in \prod_U \Map(F(U),h_{Y/X}(U))$ satisfies $fa=fb$ if and only if it is a natural transformation $F\To h_{Y/X}$.
 \end{proof}
 
-A fancy comment: we can express $\Hom[\catPresheaf(\cat C)](F,G)$ as an end
+A fancy comment: we can express $\Hom[\catPresheaf(\cat C)](F,G)$ as an \indexterm{end}
 \[ \Hom[\catPresheaf(\cat C)](F,G) \cong \int_{X\in\ob\cat C} \Map(F(X),G(X))\text{.} \]
 
 \begin{rmk}
