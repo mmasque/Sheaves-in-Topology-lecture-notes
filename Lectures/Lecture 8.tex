@@ -96,13 +96,12 @@ Let $\cat C$ be a pre-additive category.
 	\arrow["\Delta"', from=2-1, to=3-2]
 	\arrow["{f \oplus(g+h)}"', from=3-2, to=3-4]
 	\arrow["{(f+g)\oplus h}", from=1-2, to=1-4]
-	\arrow["{?}", from=2-4, to=1-4]
-	\arrow["{\id_Y \oplus \triangledown}", from=3-4, to=2-4]
+	\arrow["{\triangledown \oplus \id}", from=2-4, to=1-4]
+	\arrow["{\id_Y \oplus \triangledown}"', from=2-4, to=3-4]
 	\arrow["\triangledown"', from=3-4, to=2-5]
 	\arrow["\Delta", from=1-4, to=2-5]
 	\arrow["{f\oplus g\oplus h}"{description}, from=2-2, to=2-4]
-\end{tikzcd}\]	\todo{map out of triple Y oplus}
-
+\end{tikzcd}\]	
 	shows that $(f+g) + h = f + (g + h)$. For $f: X \to Y$ commutativity of 
 \[\begin{tikzcd}
 	& {X\oplus X} && {Y\oplus Y} \\
