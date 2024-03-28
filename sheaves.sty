@@ -701,3 +701,10 @@
 
 % for subfile compilation
 \usepackage{subfiles} % best loaded last in preamble according to internet although do not know if that means here (?)
+
+\NewDocumentCommand\indexterm{m}{#1\index{#1}}
+% \NewDocumentCommand\indexdefn{m}{#1\index{#1|textbf}}
+\NewDocumentCommand\indexdefn{m}{#1\index{#1}}
+\NewDocumentCommand\indexemph{m}{\emph{#1}\index{#1}}
+% \NewDocumentCommand\indexdefnemph{m}{\emph{#1}\index{#1|textbf}}
+\NewDocumentCommand\indexdefnemph{m}{\emph{#1}\index{#1}}

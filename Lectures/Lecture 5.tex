@@ -10,7 +10,7 @@ The goal of this lecture is to define a pair of adjoint functors
     \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
   \end{tikzcd}
 \end{equation*}
-for a continuous map \(f\colon Y\to X\), called \emph{pullback} and \emph{pushforward}.
+for a continuous map \(f\colon Y\to X\), called \indexemph{pullback} and \indexemph{pushforward}.
 The strategy will be to first define these operations for presheaves, and then restrict to sheaves.
 One of the functors will already send sheaves to sheaves, for the other we will postcompose the functor on the level of presheaves with sheafification.
 
@@ -20,7 +20,7 @@ A continuous map \(f\colon Y\to X\) induces a functor \(f\inv\colon\open(X)\to\o
 If \(U\subseteq V\subseteq X\) are open sets, then \(f\inv(U)\subseteq f\inv(V)\subseteq Y\), so this is indeed functorial.
 
 \begin{defn}
-The \emph{pushforward} of a presheaf \(G\) on \(Y\) along \(f\) is the composite presheaf
+The \indexdefnemph{pushforward} of a presheaf \(G\) on \(Y\) along \(f\) is the composite presheaf
 \begin{equation*}
   f_*G \colon \open(X)\opp \xrightarrow{f\inv} \open(Y)\opp \xrightarrow{G} \catSet
 \end{equation*}
@@ -49,7 +49,7 @@ Applied to this cover, the sheaf condition for \(\mathcal G\) gives us an equali
 \section{Pullback}
 \remyquote{Just sheafify the hell out of everything.}
 \noindent
-The \emph{pullback} of a sheaf on \(X\) along \(f\) should be a sheaf on \(Y\).
+The \indexemph{pullback} of a sheaf on \(X\) along \(f\) should be a sheaf on \(Y\).
 One way to approach the problem of constructing a presheaf on \(Y\) from a presheaf \(\mathcal F\) on \(X\), would be to try extending it along \(f\inv\) (and this is what we will attempt):
 \begin{equation*}
   \begin{tikzcd}[column sep=tiny]
@@ -60,13 +60,13 @@ One way to approach the problem of constructing a presheaf on \(Y\) from a presh
 In general, there might not be such an on-the-nose extension, but we can approximate an extension by considering extensions \emph{up to} a natural transformation.
 There could be many such approximations, so we want to consider the `best possible approximation' in some suitable sense.
 
-In category theory, the general problem of approximating an extension of a functor along another functor is studied using \emph{Kan extensions}; we refer to~\cite[Chapter~6]{riehlCategoryTheoryContext2016} for an introduction of Kan extensions, whose definition we actually do not need to know for our current purposes.
+In category theory, the general problem of approximating an extension of a functor along another functor is studied using \indexemph{Kan extensions}; we refer to~\cite[Chapter~6]{riehlCategoryTheoryContext2016} for an introduction of Kan extensions, whose definition we actually do not need to know for our current purposes.
 Here we will apply the general theory to our case to define the pullback of sheaves.\footnote{One can also construct and prove everything by hand, as was done in class, but this is rather tedious. We wish to illustrate with the following exposition that all the arguments will be completely formal.}
 
 \begin{prop}\label{prop:pullback-Kan-extension}
-Left Kan extensions of presheaves on \(X\) (functors \(\open(X)\opp\to\catSet\)) along the functor \(f\inv\colon\open(X)\opp\to\open(Y)\opp\) exist, and assemble into a functor
+Left Kan extensions\index{Kan extension} of presheaves on \(X\) (functors \(\open(X)\opp\to\catSet\)) along the functor \(f\inv\colon\open(X)\opp\to\open(Y)\opp\) exist, and assemble into a functor
 \[\Lan*_{f\inv}\colon\catPresheaf(X)\to\catPresheaf(Y)\]
-which is left adjoint to the pushforward functor \(f_*\):
+which is left adjoint to the \indexterm{pushforward} functor \(f_*\):
 \begin{equation*}
   \begin{tikzcd}
     \catPresheaf(Y) \ar[r, "f_*"'{name=rightadj}, shift right=2] &
@@ -91,7 +91,7 @@ Unravelling the construction in \cite[Theorem~6.2.1]{riehlCategoryTheoryContext2
 
 We may now define the pullback as follows:
 \begin{defn}
-The \emph{pullback} \(f^{\circledast}F\) of a presheaf \(F\) on \(X\) along \(f\) is the left Kan extension of \(F\) along \(f\inv\).
+The \emph{pullback}\index{pullback!of presheaves} \(f^{\circledast}F\) of a presheaf \(F\) on \(X\) along \(f\) is the left Kan extension of \(F\) along \(f\inv\).
 The pullback functor is denoted \(f^{\circledast}\coloneq\Lan*_{f\inv}\colon\catPresheaf(X)\to\catPresheaf(Y)\).
 \end{defn}
 
@@ -107,7 +107,7 @@ The pullback in presheaves at any point $\{*\} \subset Y$ is $f^{\circledast}(\{
 \end{exmp}
 
 \begin{defn}
-The \emph{pullback} \(f^*\mathcal F\) of a sheaf \(\mathcal F\) on \(X\) along \(f\) is the sheaf
+The \emph{pullback}\index{pullback!of sheaves} \(f^*\mathcal F\) of a sheaf \(\mathcal F\) on \(X\) along \(f\) is the sheaf
 \[ f^*\mathcal F \coloneq (f^{\circledast}\mathcal F)^\sharp\text{,} \]
 the sheafification of the presheaf pullback of \(\mathcal F\).
 The pullback functor of sheaves is thus the composite
@@ -145,23 +145,23 @@ Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSh
 
 \begin{defn}
 Let $i_x\colon \{x\} \hookrightarrow X$ be the inclusion of a point in a space.
-Then $i_x^* \mathcal{F}$ is the \emph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
+Then $i_x^* \mathcal{F}$ is the \indexdefnemph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
 Unravelling definitions, we have \[
     \mathcal{F}_x = \colim_{U \ni x} \mathcal{F}(U)\text{.}
 \]
-An element of the stalk at $x$ is represented by a \emph{germ} $[s]_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \([s]_U = [t]_V\) if and only if there exists an open neighbourhood \(W\subseteq U\cap V\) of \(x\) such that \(s|_W=t|_W\).
+An element of the stalk at $x$ is represented by a \indexdefnemph{germ} $[s]_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \([s]_U = [t]_V\) if and only if there exists an open neighbourhood \(W\subseteq U\cap V\) of \(x\) such that \(s|_W=t|_W\).
 \end{defn}
 Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over $x$. 
 
-\begin{exmp}[orientation sheaf of a manifold]
+\begin{exmp}[orientation sheaf of a \indexterm{manifold}]
 Let \(M\) be an \(n\)-dimensional topological manifold, by which we mean a Hausdorff space that is locally homeomorphic to \(\bb R^n\) (i.e., every point of \(M\) admits a neighbourhood homeomorphic to \(\bb R^n\)).
-For a subset \(K\subseteq M\), we write \(H_k(M\mid K;R) \coloneq H_k(M,M\setminus K;R)\) for the \(k\)th homology of \(M\) relative to \(M\setminus K\) with coefficients in a commutative ring \(R\).
+For a subset \(K\subseteq M\), we write \[H_k(M\mid K;R) \coloneq H_k(M,M\setminus K;R)\] for the \(k\)th homology of \(M\) relative to \(M\setminus K\) with coefficients in a commutative ring \(R\).
 
 A \emph{local \(R\)-orientation} at a point \(x\in M\) is a generator \(\mu_x\) of \(H_n(M\mid x;R)\cong R\) (note that we take homology in degree \(n\), the dimension of the manifold \(M\)).
 That \(H_n(M\mid x;R)\) is isomorphic to \(R\) (as \(R\)-modules) follows from excision; choosing a generator corresponds exactly to choosing such an isomorphism.
-An \emph{\(R\)-orientation} of \(M\) is a family of local orientations \((\mu_x)_{x\in M}\) with the property that every point \(y\in M\) admits a compact neighbourhood \(K\) and an element \(\mu_K\in H_n(M\mid K;R)\) such that \(\mu_K\) restricts to \(\mu_x\) for any \(x\in K\) under the map \(H_n(M\mid K;R)\to H_n(M\mid x;R)\) induced by the inclusion \(M\setminus K\to M\setminus\{x\}\).
+An \emph{\(R\)-orientation}\index{manifold!orientation} of \(M\) is a family of local orientations \((\mu_x)_{x\in M}\) with the property that every point \(y\in M\) admits a compact neighbourhood \(K\) and an element \(\mu_K\in H_n(M\mid K;R)\) such that \(\mu_K\) restricts to \(\mu_x\) for any \(x\in K\) under the map \(H_n(M\mid K;R)\to H_n(M\mid x;R)\) induced by the inclusion \(M\setminus K\to M\setminus\{x\}\).
 
-There is a sheaf \(\mathcal O_M\) of \(R\)-modules, the \emph{orientation sheaf} of \(M\), defined by
+There is a sheaf \(\mathcal O_M\) of \(R\)-modules, the \emph{orientation sheaf}\index{manifold!orientation sheaf} of \(M\), defined by
 \[\mathcal O_M(U)\coloneq H_n(M\mid U;R)\]
 for \(U\subseteq M\) open.
 The restriction map for opens \(U\subseteq V\subseteq M\) is induced by the inclusion of pairs \((M,M\setminus V)\hookrightarrow(M,M\setminus U)\).
@@ -169,7 +169,7 @@ The stalk of the orientation sheaf \(\mathcal O_M\) at \(x\in M\) is the \(R\)-m
 \end{exmp}
 
 \begin{rmk}
-One can show (as a generalisation of an exercise in Homework 3) that the étalé space of the pullback can be obtained as a fibre product. More precisely, given $f\colon Y \to X$, the diagram 
+One can show (as a generalisation of an exercise in Homework 3) that the étalé space of the pullback can be obtained as a \indexterm{fibre product}. More precisely, given $f\colon Y \to X$, the diagram 
 \[\begin{tikzcd}
 	{\etalespace(f^*\mathcal{F})} & {\etalespace(\mathcal{F})} \\
 	Y & X
@@ -197,7 +197,7 @@ of which $\mathcal{F}_x$ is a colimit.
 \end{proof}
 
 \begin{defn}
-    Let $\{x\} \to X$ be the inclusion of a point $x \in X$. Let $S \in \catSet$. The \emph{skyscraper sheaf} at $x$ with value $S$ is $i_{x,*}\underline{S}$, the pullback of the constant sheaf. We denote it $i_{*, S}$.
+    Let $\{x\} \to X$ be the inclusion of a point $x \in X$. Let $S \in \catSet$. The \indexemph{skyscraper sheaf} at $x$ with value $S$ is $i_{x,*}\underline{S}$, the pullback of the constant sheaf. We denote it $i_{*, S}$.
 \end{defn}
 
 \begin{exmp}
