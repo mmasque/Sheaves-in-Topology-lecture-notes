@@ -2,6 +2,8 @@
 
 \begin{document}
 \chapter{Additive and abelian categories}
+We will set sheaves aside for the moment and layout the algebraic foundations for the lectures to come, in which we will study the field of \emph{homological algebra}. In this lecture, we define \emph{abelian categories}. The idea is to axiomatize the defining properties of the category of modules over a ring. As a result, module categories will be abelian. Strikingly, this axiomatisation is `strict` in the sense of the Freyd-Mitchell theorem (which will not be treated in this course), which says that any small abelian category can be embedded in some module category \cite[Theorem~1.6.1]{WeibelHomologicalAlgebra}. 
+
 \section{Additive categories}
 \remyquote{We can only write down diagrams, prove they commute, and run away as fast as we can.}
 \begin{defn}
@@ -218,12 +220,13 @@ And now the moment we have all been waiting for: the definition of an abelian ca
 	An \emph{abelian} category is a pre-abelian category $A$ such that the $\coim(f) \to \im(f)$ is an isomorphism for all $f: X \to Y$ in $\cat A$.
 \end{defn}
 \begin{exmp}
-	In $\catAbelianGroup$, $\catModule_R$ this is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$.
+	The category of abelian groups $\catAbelianGroup$ and more generally the category of modules over a ring $\catModule_R$ are abelian categories, and the coimage-image isomorphims in these categories is the first isomorphism theorem: $X/\ker(f) \xrightarrow{\sim} \im(f)$.
 \end{exmp}
+
+The following lemma tells us that the category of presheaves of abelian groups on a topological space is an abelian category. 
 \begin{lem}
 	If $\cat A$ is abelian and $\cat C$ is small, then $\catFunctor(\cat C\opp, \cat A)$ is abelian.
 \end{lem}
-This lemma implies that the category of presheaves of abelian groups on a topological space is an abelian category.
 
 \begin{proof}
 	If $\alpha, \beta: F \implies G$ is a natural transformation, then define the sum $\alpha + \beta: F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theroem) are checked objectwise.
