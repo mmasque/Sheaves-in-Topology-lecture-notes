@@ -20,7 +20,7 @@ jobs:
           name: sheaves.pdf
           path: main.pdf
       - name: move
-        run: mkdir -p outputs; mv sheaves.pdf outputs
+        run: mkdir -p outputs; mv main.pdf outputs
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
