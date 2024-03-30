@@ -80,7 +80,7 @@ Let $\cat C$ be a pre-additive category.
 	If $\cat C$ is semi-additive, then it is canonically enriched in commutative monoids. If $\cat C$ was additive, then this agrees with the given enrichment in abelian groups (under the inclusion $\catAbelianGroup \hookrightarrow \catCommutativeMonoid$).
 \end{lem}
 \begin{proof}(Sketch, in which the commutativity of the many diagrams is left to the reader,)
-	For $f, g: X \rightrightarrows Y$ in $\cat C$, define $f + g$ to be
+	For $f, g: X \xrightrightarrows Y$ in $\cat C$, define $f + g$ to be
 	\[
 		X \xrightarrow{\Delta} X \times X = X \oplus X \xrightarrow{f \oplus g} Y \oplus Y = Y \coprod Y \xrightarrow{\triangledown} Y
 	\] where $\Delta$ is the diagonal map and $\triangledown$ is the codiagonal.
@@ -116,7 +116,7 @@ Let $\cat C$ be a pre-additive category.
 	\arrow["{\id \oplus 0}", from=2-4, to=1-4]
 \end{tikzcd}\]	
 	 shows $f + 0 = f$ and likewise $ 0 + f = f$.
-	 For $f,g: X \rightrightarrows Y$ commutativity of 
+	 For $f,g: X \xrightrightarrows Y$ commutativity of 
 	
 \[\begin{tikzcd}
 	& {X\oplus X} && {Y\oplus Y} \\
@@ -130,7 +130,7 @@ Let $\cat C$ be a pre-additive category.
 	\arrow["\Delta"', from=2-1, to=3-2]
 	\arrow["{\text{swap}}"{description}, from=1-2, to=3-2]
 	\arrow["{\text{swap}}"{description}, from=1-4, to=3-4]
-\end{tikzcd}\]	 gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \rightrightarrows Y$ and $g,g':Y  \rightrightarrows Z$ then commutativity of 
+\end{tikzcd}\]	 gives $f + g = g + f$ so have $\Hom_{\cat C}(X,Y)$ is a commutative monoid. If $f,f': X \xrightrightarrows Y$ and $g,g':Y  \xrightrightarrows Z$ then commutativity of 
 
 \[\begin{tikzcd}
 	X & {X\oplus X} & {Y\oplus Y} & Y \\
@@ -144,7 +144,7 @@ Let $\cat C$ be a pre-additive category.
 	\arrow["\Delta", from=1-1, to=1-2]
 \end{tikzcd}\]
 shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$, proving the first statement.
-	If $\cat C$ is additive and $f,g: X \rightrightarrows Y$ then let
+	If $\cat C$ is additive and $f,g: X \xrightrightarrows Y$ then let
 	\[
     	X \xrightleftarrows{i_1}[p_1] X \oplus X \xleftrightarrows{i_2}[p_2] X
     \] be the biproduct, and likewise for $Y$. Then commutativity of 
@@ -189,7 +189,7 @@ gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_
 \section{Abelian categories}
 \begin{exc}
 	If $\cat C$ is pre-additive, show that \[
-    	\eq(X \rightrightarrows{f}[g] = \eq(X \rightrightarrows{(f-g)}[0] Y)) =: \ker(f-g)
+    	\eq(X \xrightrightarrows{f}[g] = \eq(X \xrightrightarrows{(f-g)}[0] Y)) =: \ker(f-g)
     \] (if one of them exists).
 \end{exc}
 So an additive category $\cat C$ has finite limits (respectively colimits) if and only if it has kernels (respectively cokernels).
