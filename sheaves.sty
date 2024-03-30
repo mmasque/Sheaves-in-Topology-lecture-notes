@@ -159,7 +159,14 @@
 \let\mathbfcal\undefined
 \usepackage[cal=boondoxo,bb=pazo]{mathalpha}
 
-\setsansfont[Scale=MatchLowercase]{MerriweatherSansLight}
+\setsansfont[Scale=MatchLowercase]{Open Sans}
+\newfontfamily\OpenSansLight{OpenSansLight}[
+  UprightFont = {OpenSans-Light},
+  BoldFont = {OpenSans-SemiBold},
+  ItalicFont = {OpenSans-LightItalic},
+  BoldItalicFont = {OpenSans-SemiBoldItalic},
+  Scale = MatchLowercase,
+]
 
 \RequirePackage{microtype}
 

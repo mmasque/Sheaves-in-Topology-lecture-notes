@@ -7,7 +7,7 @@ We will set sheaves aside for the moment and layout the algebraic foundations fo
 \section{Additive categories}
 \remyquote{We can only write down diagrams, prove they commute, and run away as fast as we can.}
 \begin{defn}
-	A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ are endowed with an abelian group structure.
+	A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ is endowed with an abelian group structure.
 \end{defn}
 \begin{lem}\label{lem:pre-additive-categories-are-nice}
 Let $\cat C$ be a pre-additive category.
@@ -21,7 +21,7 @@ Let $\cat C$ be a pre-additive category.
 	\item If $X, Y, Z \in \cat C$ then the following are equivalent:
 	\begin{enumerate}
     	\item There are maps \[X \xrightarrow{i} Z \xleftarrow{j} Y\] making $Z$ the coproduct.
-    	\item There are maps \[Z \xrightarrow{p} X \xleftarrow Y\] making $Z$ the product.
+    	\item There are maps \[Z \xrightarrow{p} X \xleftarrow{q} Y\] making $Z$ the product.
 		\item There are maps \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] such that $p \circ i = \id_X$ and $q \circ j = \id_Y$ and $i\circ p + j \circ q = \id_Z$.
     \end{enumerate}
 
