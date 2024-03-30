@@ -9,4 +9,7 @@ main.pdf
 *.fdb*
 *.fls*
 *.run.xml*
+*.idx
+*.ilg
+*.ind
 Lectures/*.aux
