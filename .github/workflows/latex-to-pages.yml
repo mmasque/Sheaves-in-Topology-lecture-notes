@@ -17,10 +17,10 @@ jobs:
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          name: main.pdf
+          name: sheaves.pdf
           path: main.pdf
       - name: move
-        run: mkdir -p outputs; mv main.pdf outputs
+        run: mkdir -p outputs; mv sheaves.pdf outputs
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
