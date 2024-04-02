@@ -11,8 +11,13 @@ Strikingly, this axiomatisation is `strict' in the sense of the Freyd--Mitchell 
 \section{Additive categories}
 \remyquote{We can only write down diagrams, prove they commute, and run away as fast as we can.}
 \begin{defn}
-  A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ is endowed with an abelian group structure.
+  A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ is endowed with the structure of an abelian group.
 \end{defn}
+
+Expanding the definitions, this means in particular that between every two objects \(X\) and \(Y\) in a pre-additive category, there is a zero map \(0\colon X\to Y\), and that two parallel maps \(f,g\colon X\to Y\) have a sum \(f+g\colon X\to Y\).
+
+The following lemma shows that in a pre-additive category, finite coproducts and finite products coincide.
+
 \begin{lem}\label{lem:pre-additive-categories-are-nice}
 Let $\cat C$ be a pre-additive category.
 \begin{enumerate}
@@ -32,7 +37,7 @@ Let $\cat C$ be a pre-additive category.
 \end{lem}
 
 \begin{defn}
-  A biproduct in a pre-additive category of $X, Y \in \cat C$ is an object $Z$ with maps \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] with $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
+A \emph{biproduct} of two objects \(X\) and \(Y\) in a pre-additive category is an object $Z$ with maps \[X \xrightleftarrows{i}[p] Z \xleftrightarrows{j}[q] Y\] satisfying $pi = \id_X$, $qj = \id_Y$ and $ip + jq = \id_Z$.
 \end{defn}
 \begin{rmk}
   Note that these force $q \circ i$ and $p \circ j$ to be zero. To see this it suffices to show that $j \circ q \circ i = 0$, because $j$ is monic.
@@ -47,7 +52,7 @@ Let $\cat C$ be a pre-additive category.
     \begin{align*}
           X \xrightarrow{\id} X \xleftarrow{0} Y\text{,} && X \xrightarrow{0} Y \xleftarrow{\id} Y      
     \end{align*}
-    define maps $p\colon Z \to X$, $q\colon Z \to Y$ with $pi = \id_X, pj = 0, qi = 0, qj = \id_Y$. Then $ip + jq\colon Z \to Z$ satisfies $(ip + jq)i = ipi + jqi = i \circ \id_X + j \circ 0 = i$, and likewise $(ip + jq)\circ j = \cdots = j$. So $ip + jq = \id_Z$ by the universal property of the coproduct. This proves that \cref{lem:pre-additive-categories-are-nice:coproduct} is equivalent to \cref{lem:pre-additive-categories-are-nice:biproduct}, and the equivalence of \cref{lem:pre-additive-categories-are-nice:product} and \cref{lem:pre-additive-categories-are-nice:biproduct} follows dually. \qedhere
+    define maps $p\colon Z \to X$, $q\colon Z \to Y$ with $pi = \id_X, pj = 0, qi = 0, qj = \id_Y$. Then $ip + jq\colon Z \to Z$ satisfies $(ip + jq)i = ipi + jqi = i \circ \id_X + j \circ 0 = i$, and likewise $(ip + jq)\circ j = \ldots = j$. So $ip + jq = \id_Z$ by the universal property of the coproduct. This proves that \cref{lem:pre-additive-categories-are-nice:coproduct} is equivalent to \cref{lem:pre-additive-categories-are-nice:biproduct}, and the equivalence of \cref{lem:pre-additive-categories-are-nice:product} and \cref{lem:pre-additive-categories-are-nice:biproduct} follows dually. \qedhere
     \end{enumerate}
 \end{proof}
 \begin{defn}
@@ -69,7 +74,7 @@ Let $\cat C$ be a pre-additive category.
 % \end{exc}
 
 \begin{defn}\label{defn:semi-additive}
-A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that
+A \emph{semi-additive} category is a category $\cat C$ with finite products and coproducts such that the following conditions are satisfied:
 \begin{enumerate}
 \item\label{defn:semi-additive:zero-object} the natural map $\initial \to \terminal$ is an isomorphism (so $\cat C$ has a zero object $0$),
 \item\label{defn:semi-additive:biproduct} for $X_1, ..., X_n$ in $\cat C$ the map $X_1 \cotimes \cdots \cotimes X_n \to X_1 \times \cdots \times X_n$ is an isomorphism.
@@ -78,7 +83,7 @@ A \emph{semi-additive} category is a category $\cat C$ with finite products and 
 \end{defn}
 
 \begin{rmk}
-While (pre)-additive is a \emph{structure}, being semi-additive is a \emph{property} of a category $\cat C$.
+While being (pre-)additive is \emph{structure} on a category, being semi-additive is a \emph{property} of a category.
 \end{rmk}
 
 \begin{lem}
@@ -105,7 +110,7 @@ While (pre)-additive is a \emph{structure}, being semi-additive is a \emph{prope
   \arrow["{\nabla \oplus \id}", from=2-4, to=1-4]
   \arrow["{\id_Y \oplus \nabla}"', from=2-4, to=3-4]
   \arrow["\nabla"', from=3-4, to=2-5]
-  \arrow["\Delta", from=1-4, to=2-5]
+  \arrow["\nabla", from=1-4, to=2-5]
   \arrow["{f\oplus g\oplus h}"{description}, from=2-2, to=2-4]
 \end{tikzcd}\]  
   shows that $(f+g) + h = f + (g + h)$.
@@ -150,11 +155,11 @@ So far, we have proved that $\Hom_{\cat C}(X,Y)$ is a commutative monoid.
   \arrow[from=1-3, to=2-3]
   \arrow["\nabla", from=1-3, to=1-4]
   \arrow["g", from=1-4, to=2-4]
-  \arrow["\nabla", from=2-3, to=2-4]
+  \arrow["\nabla"', from=2-3, to=2-4]
   \arrow["{f\oplus f'}", from=1-2, to=1-3]
   \arrow["\Delta", from=1-1, to=1-2]
 \end{tikzcd}\]
-shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$
+shows that $g(f+ f') = gf + gf'$ and likewise $(g + g')f = gf + g'f$.
 
 This finishes the proof that \(\cat C\) is enriched in commutative monoids.
 
@@ -192,11 +197,11 @@ gives $f \oplus g = (f \oplus g) \circ \id_{X \oplus X} = (f \oplus g) \circ (i_
   Being additive (i.e. admitting an additive structure) is a property.
 \end{cor}
 \begin{proof}
-  The category $\cat C$ is additive if and only if if it is semi-additive and all $\Hom$ monoids are groups.
+  The category $\cat C$ is additive if and only if if it is semi-additive and all hom-monoids are groups.
 \end{proof}
 
 \begin{exmp}
-$\catCommutativeMonoid$ is semi-additive (omitted), but not additive since $\Hom(\bb N, \bb N) = \bb N$ does not have inverses.
+The category $\catCommutativeMonoid$ of commutative monoids is semi-additive (omitted), but not additive since $\Hom(\bb N, \bb N) = \bb N$ does not have inverses.
 \end{exmp}
 
 \section{Abelian categories}
@@ -205,12 +210,12 @@ $\catCommutativeMonoid$ is semi-additive (omitted), but not additive since $\Hom
       \eq\bigl(\!\!\begin{tikzcd} X \ar[r, shift left, "f"] \ar[r, shift right, "g"'] & Y \end{tikzcd}\!\!\bigr) = \eq\bigl(\!\!\begin{tikzcd} X \ar[r, shift left, "f-g"] \ar[r, shift right, "0"'] & Y \end{tikzcd}\!\!\bigr) \eqcolon \ker(f-g)
     \] (if one of them exists).
 \end{exc}
-So an additive category $\cat C$ has finite limits (respectively colimits) if and only if it has kernels (respectively cokernels).
+So an additive category $\cat C$ has finite limits or colimits if and only if it has respectively kernels or cokernels.
 \begin{defn}
   A \emph{pre-abelian} category is an additive category with kernels and cokernels.
 \end{defn}
 \begin{defn}
-  Let $\cat C$ be a pre-abelian category and $f\colon X \to Y$ in $\cat C$. The \emph{image} of $f$ is $\im(f) = \ker(Y \to \coker(f))$. The \emph{coimage} of $f$ is $\coim(f) = \coker(\ker(f) \to X)$.
+  Let $\cat C$ be a pre-abelian category and $f\colon X \to Y$ in $\cat C$. The \emph{image} of $f$ is $\im(f) \coloneq \ker(Y \to \coker(f))$. The \emph{coimage} of $f$ is $\coim(f) \coloneq \coker(\ker(f) \to X)$.
 \end{defn}
 Warning: the zoo of names will get worse.
 \begin{lem}
@@ -228,10 +233,10 @@ Warning: the zoo of names will get worse.
 And now the moment we have all been waiting for: the definition of an abelian category.
 
 \begin{defn}\label{defn:abelian-category}
-  An \emph{abelian} category is a pre-abelian category $A$ such that the induced map $\coim(f) \to \im(f)$ is an isomorphism for all $f\colon X \to Y$ in $\cat A$.
+  An \emph{abelian} category is a pre-abelian category $\cat A$ such that the induced map $\coim(f) \to \im(f)$ is an isomorphism for all $f\colon X \to Y$ in $\cat A$.
 \end{defn}
 \begin{exmp}
-  The category of abelian groups $\catAbelianGroup$ and more generally the category of (right or left) modules $\catModule_R$ over a ring \(R\) are abelian categories, and the coimage--image isomorphims in these categories is the first isomorphism theorem: $X/\ker(f) \cong \im(f)$.
+The category $\catAbelianGroup$ of abelian groups and more generally the category $\catModule_R$ of (left or right) modules over a ring \(R\) are abelian categories, and the coimage--image isomorphims in these categories is the first isomorphism theorem: $X/\ker(f) \cong \im(f)$.
 \end{exmp}
 
 Correspondingly, we also call the condition of \cref{defn:abelian-category} `the first isomorphism theorem' in general pre-abelian categories.
@@ -241,7 +246,6 @@ The following lemma tells us that the category of presheaves of abelian groups o
 If $\cat A$ is abelian and $\cat C$ is small, then $\catFunctor(\cat C\opp, \cat A)$ is abelian.
 In particular, the category \(\catAbelianPresheaf(X)\) of abelian presheaves on a space \(X\) is abelian.
 \end{lem}
-
 \begin{proof}
   If $\alpha, \beta\colon F \implies G$ is a natural transformation, then define the sum $\alpha + \beta\colon F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theorem) are checked objectwise.
 \end{proof}
