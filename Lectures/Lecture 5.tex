@@ -114,7 +114,7 @@ The pullback functor of sheaves is thus the composite
 \[ f^* \colon \catSheaf(X) \hookrightarrow \catPresheaf(X) \xrightarrow{f^{\circledast}} \catPresheaf(Y) \xrightarrow{(-)^\sharp} \catSheaf(Y)\text{.} \]
 \end{defn}
 
-\begin{lem}
+\begin{lem}\label{lem:pushforward-pullback-adjunction-sheaves}
 Pushforward and pullback of sheaves along \(f\) define an adjunction
 \begin{equation*}
   \begin{tikzcd}
@@ -143,7 +143,7 @@ Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSh
 
 \section{Stalks, germs, skyscrapers}
 
-\begin{defn}
+\begin{defn}\label{defn:stalk}
 Let $i_x\colon \{x\} \hookrightarrow X$ be the inclusion of a point in a space.
 Then $i_x^* \mathcal{F}$ is the \indexdefnemph{stalk} $\mathcal{F}_x$ of $\mathcal{F}$ at $x$; this is a sheaf on a point, so equivalently a set by \cref{exmp:sheaf-on-point-set} (the value of the sheaf on the whole space).
 Unravelling definitions, we have \[
@@ -188,7 +188,7 @@ Given a map $\alpha\colon \mathcal{F} \to \mathcal{G}$ between sheaves on a spac
 \[\setpred{\mathcal{F}(U)}{U \in \open(X),x \in U}\text{,}\]
 of which $\mathcal{F}_x$ is a colimit. 
 
-\begin{lem}
+\begin{lem}\label{lem:stalkwise-check-isomorphism}
     Let $\alpha\colon \mathcal{F} \to \mathcal{G}$ be a map in $\catSheaf(X)$. 
     Then $\alpha$ is an isomorphism of sheaves if and only if $\alpha_x\colon \mathcal{F}_x \to \mathcal{G}_x$ is a bijection for all $x \in X$. 
 \end{lem}

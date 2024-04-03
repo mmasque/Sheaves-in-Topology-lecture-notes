@@ -12,7 +12,7 @@ Let \(f\colon Y\to X\) be a continuous map.
 Then the pullback functors \(f^*\colon\catSheaf(X)\to\catSheaf(Y)\) and \(f^*\colon\catAbelianSheaf(X)\to\catAbelianSheaf(Y)\) preserve finite limits and all colimits.
 \end{lem}
 \begin{proof}
-Since the pullback functor \(f^*\) is left adjoint to the pushforward functor \(f_*\)\todo{ref}, it preserves colimits.
+Since the pullback functor \(f^*\) is left adjoint to the pushforward functor \(f_*\) (\cref{lem:pushforward-pullback-adjunction-sheaves}), it preserves colimits.
 
 For finite limits, there are two methods:
 \begin{enumerate}
@@ -21,7 +21,7 @@ For finite limits, there are two methods:
   which preserves finite limits, and finite limits in \(\catLocalHomeomorphism_{/-}\) are computed as in \(\catTopologicalSpace_{/-}\).\footnote{This does not hold for all limits; it fails for instance for infinite products, already when \(X\) is a point.}
 \item Use that
   \[(f^\circledast\mathcal F)(U) = \colim_{f(U)\subseteq V}\mathcal F(V) \]
-  is a filtered colimits, and filitered colimits in \(\catSet\) and \(\catAbelianGroup\) commute with finite limits (Additional exercise~9.1).
+  is a filtered colimit, and filitered colimits in \(\catSet\) and \(\catAbelianGroup\) commute with finite limits (Additional exercise~9.1).
   Check that sheafification preserves finite limits (Homework~5).
   \qedhere
 \end{enumerate}
@@ -31,7 +31,7 @@ For finite limits, there are two methods:
 If \(X\) is a topological space, then the category \(\catAbelianSheaf(X)\) of abelian sheaves on \(X\) is an abelian category.
 \end{prop}
 \begin{proof}
-Being a full subcategory of the abelian category \(\catAbelianPresheaf(X)\), the category \(\catAbelianSheaf(X)\) is pre-additive, and we have already shown that it has all limits and colimits\todo{ref}.
+Being a full subcategory of the abelian category \(\catAbelianPresheaf(X)\), the category \(\catAbelianSheaf(X)\) is pre-additive, and we have already shown in \cref{thm:limits-colimits-sheaves} that it has all limits and colimits.
 
 It remains to check that the first isomorphism theorem holds in \(\catAbelianSheaf(X)\).
 Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catAbelianSheaf(X)\).
@@ -39,12 +39,12 @@ We can factor \(f\) as
 \begin{equation}\label{eq:factorisation-coimage-image}
   \mathcal F \To \coim f \To \im f \To \mathcal G
 \end{equation}
-By \cref{lem:pullback-preserves-colimits-and-finite-limits}, the formation of the kernel, cokernel, image and coimage commutes with the stalk functor \(i_x^*\) for all \(i_x\colon\{x\}\to X\)\todo{ref}.
+By \cref{lem:pullback-preserves-colimits-and-finite-limits}, the formation of the kernel, cokernel, image and coimage commutes with the stalk functor \(i_x^*\) for all \(i_x\colon\{x\}\to X\) (see \cref{defn:stalk}).
 So \cref{eq:factorisation-coimage-image} induces the factorisation
 \[ \mathcal F_x \to (\coim f)_x = \coim f_x \to (\im f)_x = \im f_x \to \mathcal G_x \]
 of the map \(f_x\) induced on stalks.
 The map \(\coim f_x\to\im f_x\) is an isomorphism since \(\catAbelianGroup\) is an abelian category.
-Since this holds for all stalks, the map \(\coim f\to\im f\) is also an isomorphism.\todo{ref stalkwise iso check}
+Since this holds for all stalks, the map \(\coim f\to\im f\) is also an isomorphism by \cref{lem:stalkwise-check-isomorphism}.
 \end{proof}
 
 \section{Monomorphisms and epimorphisms}
@@ -91,7 +91,7 @@ By Additional exercise~7.3, we know that \(f\) is monic if and only if the diagr
   \end{tikzcd}
 \end{equation*}
 is a pullback square.
-So the equivalence of \cref{lem:monomorphisms-sheaves:monic-sheaves} and \cref{lem:monomorphisms-sheaves:monic-presheaves} follows since the inclusion \(\catSheaf(X)\hookrightarrow\catPresheaf(X)\) (resp.~\(\catAbelianSheaf(X)\hookrightarrow\catAbelianPresheaf(X)\)) creates limits\todo{ref}, and the equivalence of \cref{lem:monomorphisms-sheaves:monic-presheaves} and \cref{lem:monomorphisms-sheaves:injective-open} since limits in \(\catPresheaf(X)\) (resp.~\(\catAbelianPresheaf(X)\)) are computed objectwise.
+So the equivalence of \cref{lem:monomorphisms-sheaves:monic-sheaves} and \cref{lem:monomorphisms-sheaves:monic-presheaves} follows since the inclusion \(\catSheaf(X)\hookrightarrow\catPresheaf(X)\) (resp.~\(\catAbelianSheaf(X)\hookrightarrow\catAbelianPresheaf(X)\)) creates limits (\cref{thm:limits-colimits-sheaves}), and the equivalence of \cref{lem:monomorphisms-sheaves:monic-presheaves} and \cref{lem:monomorphisms-sheaves:injective-open} since limits in \(\catPresheaf(X)\) (resp.~\(\catAbelianPresheaf(X)\)) are computed objectwise.
 
 The functors
 \begin{equation*}
@@ -136,6 +136,111 @@ The equivalence of \cref{lem:epimorphisms-sheaves:locally-lift-section} and \cre
 Statement~\cref{lem:epimorphisms-sheaves:locally-lift-section} means that for all \(x\in U\) and all \(t\in\mathcal G(U)\) there exists \(x\in U'\subseteq U\) and \(s\in\mathcal F(U)\) such that \(f(s) = t|_{U'}\), which is \cref{lem:epimorphisms-sheaves:surjective-stalk}.
 
 In the abelian case, the equivalence of \cref{lem:epimorphisms-sheaves:epic-sheaves} and \cref{lem:epimorphisms-sheaves:surjective-etale-space} follows from the construction of the sheaf cokernel as the sheafification of the presheaf cokernel.
+\end{proof}
+
+\begin{defn}
+A map in an abelian category is called \emph{injective} if it is a monomorphism and \emph{surjective} if it is an epimorphism.
+\end{defn}
+
+\todo{warning sign?}
+
+\begin{rmk}
+If \(f\colon\mathcal F\To\mathcal G\) is a surjective map of abelian sheaves, then the component \(\mathcal F(U)\to\mathcal G(U)\) need not be surjective.
+
+In Homework~3, we constructed a surjection \(f\colon\mathcal F\To i_*i^*\mathcal F\) for any closed inclusion \(i\colon Z\hookrightarrow X\) and any abelian sheaf \(\mathcal F\) on \(X\).
+Taking \(X=\bb R\), \(Z = \{0,1\}\subseteq\bb R\) and \(F=\constSheaf{\bb Z}\).
+Then \(i^*\mathcal F = \constSheaf{\bb Z}\) (pullbacks of constant sheaves are constant sheaves) and \(\constSheaf{\bb Z}\to i_*\constSheaf{\bb Z}\) is surjective.
+But plugging in \(\bb R\) gives the map
+\[\constSheaf(\bb R) = \bb Z \to (i_*\constSheaf{\bb Z})(\bb R) = \constSheaf{\bb Z}(\bb R\cap\{0,1\}) = \bb Z\oplus\bb Z\text{,} \quad a \mapsto (a,a)\text{.} \]
+which is not surjective.
+However, any \((a,b)\in\bb Z\oplus\bb Z\) can be lifted: the open sets \(U_0\coloneq(-\infty,1)\), \(U_1\coloneq(0,\infty)\) cover \(\bb R\) and \((a,b)\) locally lifts to \(s_0\coloneq a\) and \(s_1\coloneq b\), but they do not glue.
+\todo{Picture}
+(Another example is on Homework~5.)
+\end{rmk}
+
+\section{Exact sequences}
+
+\begin{lem}\label{lem:mono-epi-abelian-category}
+Let \(\cat A\) be an abelian category and \(f\colon A\to B\) a map in \(\cat A\).
+Then:
+\begin{enumerate}
+\item\label{lem:mono-epi-abelian-category:i} The map \(\ker f\to A\) (resp.~\(B\to\coker f\)) is monic (resp.~epic), and an isomorphism if \(f=0\).
+\item\label{lem:mono-epi-abelian-category:ii} The map \(\im f\to B\) (resp.~\(A\to\coim f\)) is monic (resp.~epic), and an isomorphism if \(f\) is epic (resp.~monic).
+\item\label{lem:mono-epi-abelian-category:iii} \(\ker f\) is canonically isomorphic to \(\ker(A\to\coim f)\), and \(\coker f\) is canonically isomorphic to \(\coker(\im f\to B)\).
+\item\label{lem:mono-epi-abelian-category:iv} If \(f\) is monic (resp.~epic), then \(A\cong\ker(B\to\coker f)\) (resp.~\(B\cong\coker(\ker f\to A)\)).
+  (In particular, any monomorphism (resp.~epimorphism) is an equaliser (resp.~coequaliser), hence a \emph{regular} monomorphism (resp.~epimorphism).)
+\item\label{lem:mono-epi-abelian-category:v} If \(f\) is both monic and epic, then it is an isomorphism.
+  (\(\cat A\) is a \emph{balanced} category.)
+\end{enumerate}
+\end{lem}
+\begin{proof}
+\begin{enumerate}
+\item
+  The universal property of \(\ker f\) is
+  \[\Hom[\cat A](C,\ker f) \cong \setpred{\phi\in\Hom[\cat A](C,A)}{f\phi = 0}\text{,} \]
+  so \(\Hom[\cat A](C,\ker f)\to\Hom[\cat A](C,A)\) is injective for all \(C\), hence \(\ker f\to A\) is monic.
+  If \(f=0\), the condition \(f\phi=0\) on \(\phi\) is vacuous, so \(\Hom[\cat A](C,\ker f)\cong\Hom[\cat A](C,A)\).
+  The statements about \(B\to\coker f\) follow dually.
+\item
+  Apply \cref{lem:mono-epi-abelian-category:i} to \(B\to\coker f\) (resp.~\(\ker f\to A\)), which we saw is zero if \(f\) is epic (resp.~monic).
+\item
+  We have a factorisation
+  \begin{equation*}
+    \begin{tikzcd}[column sep=scriptsize]
+      A \ar[r, "\pi", epi] & \coim f \ar[r, iso'] & \im f \ar[r, mono] & B
+    \end{tikzcd}
+  \end{equation*}
+  of \(f\) by \cref{lem:mono-epi-abelian-category:ii}, so the map \(\coim f\to B\) is monic.
+  Then for any \(\phi\colon C\to A\), the composition \(\pi\phi=0\) if and only if \(f\phi=0\), so \(\ker\pi=\ker f\).
+  The other statement follows dually.
+\item
+  If \(f\) is monic, then \(A\cong\coim f\cong\im f\) by \cref{lem:mono-epi-abelian-category:ii}.
+  The other statement follows dually.
+\item
+  By \cref{lem:mono-epi-abelian-category:ii}, all maps
+  \begin{equation*}
+    \begin{tikzcd}[column sep=scriptsize]
+      A \ar[r] & \coim f \ar[r, iso'] & \im f \ar[r] & B
+    \end{tikzcd}
+  \end{equation*}
+  are isomorphisms.
+  \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{defn}
+A \emph{cochain complex} in an additive category \(\cat C\) is a diagram
+\begin{equation*}
+  \begin{tikzcd}
+    \ldots \ar[r] & C^{i-1} \ar[r, "d^{i-1}"] & C^i \ar[r, "d^i"] & C^{i+1} \ar[r] & \ldots
+  \end{tikzcd}
+\end{equation*}
+in \(\cat C\) such that \(d^{i+1}d^i=0\) for all \(i\in\bb Z\).
+(If it is only defined on a subset \(I\subseteq\bb Z\), we set \(C^i\coloneq 0\) for \(i\notin I\).)
+
+A cochain complex \(C^\bullet\) is \emph{exact} at \(C^i\) if the canonical map \(\im d^{i-1}\to\ker d^i\) is an isomorphism.
+
+A \emph{short exact sequence} is an exact complex \(0\to A\to B\to C\to 0\).
+
+A \emph{cochain map} \(f^\bullet\colon C^\bullet\to D^\bullet\) of cochain complexes is a natural transformation in \(\catFunctor(\bb Z,\cat C)\):
+\begin{equation*}
+  \begin{tikzcd}
+    \ldots \ar[r] & C^{i-1} \ar[r, "d^{i-1}"] \ar[d, "f^{i-1}"'] & C^i \ar[r, "d^i"] \ar[d, "f^i"] & C^{i+1} \ar[r] \ar[d, "f^{i+1}"] & \ldots \\
+    \ldots \ar[r] & D^{i-1} \ar[r, "d^{i-1}"'] & D^i \ar[r, "d^i"'] & D^{i+1} \ar[r] & \ldots
+  \end{tikzcd}
+\end{equation*}
+\end{defn}
+
+The following lemma shows that our previous \emph{ad hoc} notion of exactness of \cref{defn:short-exact-sequence-sheaves} agrees with the categorical notion.
+
+\begin{lem}
+Let \(\mathcal F^\bullet\) be a cochain complex in \(\catAbelianSheaf(X)\).
+Then \(\mathcal F^\bullet\) is exact at \(\mathcal F^i\) if and only if \(\mathcal F^\bullet_x\) is exact at \(\mathcal F^i_x\) is exact for all \(x\in X\).
+\end{lem}
+
+\begin{proof}
+We saw in \cref{lem:pullback-preserves-colimits-and-finite-limits} that \(i_x^*\colon\catAbelianSheaf(X)\to\catAbelianGroup\) preserves all finite limits and colimits, so in particular the kernel, cokernel, image and coimage.
+Thus, we conclude since \(\im d^{i-1}\To\ker d^i\) is an isomorphism if and only if \((\im d^{i-1})_x\to(\ker d^i)_x\) is an isomorphism for all \(x\in X\) by \cref{lem:stalkwise-check-isomorphism}.
 \end{proof}
 
 %%% Local Variables:
