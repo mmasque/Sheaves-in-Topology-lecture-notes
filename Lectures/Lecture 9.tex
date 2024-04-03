@@ -1,0 +1,144 @@
+\chapter{Monomorphisms and epimorphisms, chain complexes, exact sequences}
+
+In the last lecture, we defined abelian categories as \(\catAbelianGroup\)-enriched categories \(\cat A\) with finite limits and colimits in which the first isomorphism theorem holds (the natural map \(\coim f\to\im f\) is an isomorphism for all \(f\colon A\to B\) in \(\cat A\)).
+We also showed that the category \(\catAbelianPresheaf(X)\) of abelian presheaves on a space \(X\) is an abelian category.
+
+Today we will show that also the category \(\catAbelianSheaf(X)\) of abelian sheaves on \(X\) is an abelian category, and we will give a description of monomorphisms and epimorphisms.
+
+\section{Abelian category of abelian sheaves}
+
+\begin{lem}\label{lem:pullback-preserves-colimits-and-finite-limits}
+Let \(f\colon Y\to X\) be a continuous map.
+Then the pullback functors \(f^*\colon\catSheaf(X)\to\catSheaf(Y)\) and \(f^*\colon\catAbelianSheaf(X)\to\catAbelianSheaf(Y)\) preserve finite limits and all colimits.
+\end{lem}
+\begin{proof}
+Since the pullback functor \(f^*\) is left adjoint to the pushforward functor \(f_*\)\todo{ref}, it preserves colimits.
+
+For finite limits, there are two methods:
+\begin{enumerate}
+\item Use that \(f^*\) is given by
+  \[\catLocalHomeomorphism_{/X}\to\catLocalHomeomorphism_{/Y}\text{,} \quad (Z\to X) \mapsto \bigl(Z\pullback{X}Y\to Y\bigr)\text{,} \]
+  which preserves finite limits, and finite limits in \(\catLocalHomeomorphism_{/-}\) are computed as in \(\catTopologicalSpace_{/-}\).\footnote{This does not hold for all limits; it fails for instance for infinite products, already when \(X\) is a point.}
+\item Use that
+  \[(f^\circledast\mathcal F)(U) = \colim_{f(U)\subseteq V}\mathcal F(V) \]
+  is a filtered colimits, and filitered colimits in \(\catSet\) and \(\catAbelianGroup\) commute with finite limits (Additional exercise~9.1).
+  Check that sheafification preserves finite limits (Homework~5).
+  \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+If \(X\) is a topological space, then the category \(\catAbelianSheaf(X)\) of abelian sheaves on \(X\) is an abelian category.
+\end{prop}
+\begin{proof}
+Being a full subcategory of the abelian category \(\catAbelianPresheaf(X)\), the category \(\catAbelianSheaf(X)\) is pre-additive, and we have already shown that it has all limits and colimits\todo{ref}.
+
+It remains to check that the first isomorphism theorem holds in \(\catAbelianSheaf(X)\).
+Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catAbelianSheaf(X)\).
+We can factor \(f\) as
+\begin{equation}\label{eq:factorisation-coimage-image}
+  \mathcal F \To \coim f \To \im f \To \mathcal G
+\end{equation}
+By \cref{lem:pullback-preserves-colimits-and-finite-limits}, the formation of the kernel, cokernel, image and coimage commutes with the stalk functor \(i_x^*\) for all \(i_x\colon\{x\}\to X\)\todo{ref}.
+So \cref{eq:factorisation-coimage-image} induces the factorisation
+\[ \mathcal F_x \to (\coim f)_x = \coim f_x \to (\im f)_x = \im f_x \to \mathcal G_x \]
+of the map \(f_x\) induced on stalks.
+The map \(\coim f_x\to\im f_x\) is an isomorphism since \(\catAbelianGroup\) is an abelian category.
+Since this holds for all stalks, the map \(\coim f\to\im f\) is also an isomorphism.\todo{ref stalkwise iso check}
+\end{proof}
+
+\section{Monomorphisms and epimorphisms}
+
+\begin{lem}
+Let \(\cat A\) be an abelian category and \(f\colon A\to B\) a map in \(\cat A\).
+Then:
+\begin{enumerate}
+\item \(f\) is monic if and only if \(\ker f = 0\);
+\item \(f\) is epic if and only if \(\coker f = 0\).
+\end{enumerate}
+\end{lem}
+
+The recipe of the proof is: Yoneda + the same statement in \(\catAbelianGroup\).
+
+\begin{proof}
+\begin{enumerate}
+\item
+  By definition, \(\ker f\) represents \(\ker(\Hom[\cat A](-,A)\To\Hom[\cat A](-,B))\).
+  So \(\ker f = 0\) if and only if \(\Hom[\cat A](-,A)\To\Hom[\cat A](-,B)\) is an injective map of presheaves, that is, \(f\colon A\to B\) is monic.
+\item Follows dually. \qedhere
+\end{enumerate}
+\end{proof}
+
+For sheaves, let's make it quite concrete.
+
+\begin{lem}\label{lem:monomorphisms-sheaves}
+Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catSheaf(X)\) (resp.~\(\catAbelianSheaf(X)\)).
+Then the following are equivalent:
+\begin{enumerate}
+\item\label{lem:monomorphisms-sheaves:monic-sheaves} \(f\) is monic (in \(\catSheaf(X)\) resp.~\(\catAbelianSheaf(X)\));
+\item\label{lem:monomorphisms-sheaves:monic-presheaves} \(f\) is monic in \(\catPresheaf(X)\) (resp.~\(\catAbelianPresheaf(X)\));
+\item\label{lem:monomorphisms-sheaves:injective-open} \(f_U\) is injective for all open subsets \(U\subseteq X\);
+\item\label{lem:monomorphisms-sheaves:injective-stalk} \(f_x\) is injective for all points \(x\in X\);
+\item\label{lem:monomorphisms-sheaves:injective-etale-space} \(\etalespace(f)\to X\) is injective.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+By Additional exercise~7.3, we know that \(f\) is monic if and only if the diagram
+\begin{equation*}
+  \begin{tikzcd}[arrows=Rightarrow]
+    \mathcal F \ar[r, "\id"] \ar[d, "\id"'] & \mathcal F \ar[d, "f"] \\
+    \mathcal F \ar[r, "f"'] & \mathcal G
+  \end{tikzcd}
+\end{equation*}
+is a pullback square.
+So the equivalence of \cref{lem:monomorphisms-sheaves:monic-sheaves} and \cref{lem:monomorphisms-sheaves:monic-presheaves} follows since the inclusion \(\catSheaf(X)\hookrightarrow\catPresheaf(X)\) (resp.~\(\catAbelianSheaf(X)\hookrightarrow\catAbelianPresheaf(X)\)) creates limits\todo{ref}, and the equivalence of \cref{lem:monomorphisms-sheaves:monic-presheaves} and \cref{lem:monomorphisms-sheaves:injective-open} since limits in \(\catPresheaf(X)\) (resp.~\(\catAbelianPresheaf(X)\)) are computed objectwise.
+
+The functors
+\begin{equation*}
+  \begin{tikzcd}
+    \catSheaf(X) \ar[r, "\simeq"] & \catLocalHomeomorphism_{/X} \ar[r, inclusion] & \catTopologicalSpace_{/X} \ar[r, inclusion] & \catSet_{/X}
+  \end{tikzcd}
+\end{equation*}
+(and the corresponding functors for abelian sheaves) create fibre products, so they preserve and reflect monomorphisms.
+Since monomorphisms in \(\catSet_{/X}\) (resp.~\(\catAbelianGroup(\catSet_{/X})\)) are injective maps, this proves that \cref{lem:monomorphisms-sheaves:monic-sheaves} is equivalent to \cref{lem:monomorphisms-sheaves:injective-etale-space}.
+
+Finally, \cref{lem:monomorphisms-sheaves:injective-stalk} is equivalent to \cref{lem:monomorphisms-sheaves:injective-etale-space} since the fibres of \(\etalespace(\mathcal F)\to\etalespace(\mathcal G)\) over \(x\in X\) are the stalks \(f_x\).
+\end{proof}
+
+\begin{lem}\label{lem:epimorphisms-sheaves}
+Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catSheaf(X)\) (resp.~\(\catAbelianSheaf(X)\)).
+Then the following are equivalent:
+\begin{enumerate}
+\item\label{lem:epimorphisms-sheaves:epic-sheaves} \(f\) is epic (in \(\catSheaf(X)\) resp.~\(\catAbelianSheaf(X)\));
+\item\label{lem:epimorphisms-sheaves:locally-lift-section} for every open subset \(U\subseteq X\) and every section \(t\in\mathcal G(U)\), there exists an open cover \(U=\bigcup_{i\in I}U_i\) and sections \(s_i\in\mathcal F(U_i)\) such that \(f(s_i) = t|_{U_i}\);
+\item\label{lem:epimorphisms-sheaves:surjective-stalk} \(f_x\) is surjective for all points \(x\in X\);
+\item\label{lem:epimorphisms-sheaves:surjective-etale-space} \(\etalespace(f)\to X\) is surjective.
+\end{enumerate}
+In \(\catAbelianSheaf(X)\), these statements are also equivalent to:
+\begin{enumerate}[resume]
+\item\label{lem:epimorphisms-sheaves:surjective-etale-space} the sheafification of the presheaf cokernel is zero.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+Again, \(f\) is epic if and only if the diagram
+\begin{equation*}
+  \begin{tikzcd}[arrows=Rightarrow]
+    \mathcal F \ar[r, "f"] \ar[d, "f"'] & \mathcal G \ar[d, "\id"] \\
+    \mathcal G \ar[r, "\id"'] & \mathcal G
+  \end{tikzcd}
+\end{equation*}
+is a pushout square.
+If this holds, it holds for all stalks \(f_x\colon\mathcal F_x\to\mathcal G_x\) since \(i_x^*\) preserves colimits by \cref{lem:pullback-preserves-colimits-and-finite-limits}.
+This proves that \cref{lem:epimorphisms-sheaves:epic-sheaves} implies \cref{lem:epimorphisms-sheaves:surjective-stalk}, and the equivalence of \cref{lem:epimorphisms-sheaves:surjective-stalk} and \cref{lem:epimorphisms-sheaves:surjective-etale-space} is clear since surjectivity in \(\catTopologicalSpace_{/X}\) is checked fibrewise.
+Conversely, that \cref{lem:epimorphisms-sheaves:surjective-etale-space} implies \cref{lem:epimorphisms-sheaves:epic-sheaves} follows from the equivalence \(\catSheaf(X)\simeq\catLocalHomeomorphism_{/X}\) (resp.~\(\catAbelianSheaf(X)\simeq\catAbelianGroup(\catLocalHomeomorphism_{/X})\)) since a surjection in \(\catLocalHomeomorphism_{/X}\) is surely an epimorphism\footnote{This holds in any \emph{concrete category} \(\cat C\), a category with a faithful functor \(\cat C\to\catSet\), since faithful functors reflect epimorphisms.}.
+
+The equivalence of \cref{lem:epimorphisms-sheaves:locally-lift-section} and \cref{lem:epimorphisms-sheaves:surjective-stalk} is an unwinding of the definitions.
+Statement~\cref{lem:epimorphisms-sheaves:locally-lift-section} means that for all \(x\in U\) and all \(t\in\mathcal G(U)\) there exists \(x\in U'\subseteq U\) and \(s\in\mathcal F(U)\) such that \(f(s) = t|_{U'}\), which is \cref{lem:epimorphisms-sheaves:surjective-stalk}.
+
+In the abelian case, the equivalence of \cref{lem:epimorphisms-sheaves:epic-sheaves} and \cref{lem:epimorphisms-sheaves:surjective-etale-space} follows from the construction of the sheaf cokernel as the sheafification of the presheaf cokernel.
+\end{proof}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
