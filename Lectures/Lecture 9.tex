@@ -21,7 +21,7 @@ For finite limits, there are two methods:
   which preserves finite limits, and finite limits in \(\catLocalHomeomorphism_{/-}\) are computed as in \(\catTopologicalSpace_{/-}\).\footnote{This does not hold for all limits; it fails for instance for infinite products, already when \(X\) is a point.}
 \item Use that
   \[(f^\circledast\mathcal F)(U) = \colim_{f(U)\subseteq V}\mathcal F(V) \]
-  is a filtered colimit, and filitered colimits in \(\catSet\) and \(\catAbelianGroup\) commute with finite limits (Additional exercise~9.1).
+  is a filtered colimit, and filtered colimits in \(\catSet\) and \(\catAbelianGroup\) commute with finite limits (Additional exercise~9.1).
   Check that sheafification preserves finite limits (Homework~5).
   \qedhere
 \end{enumerate}
@@ -37,7 +37,7 @@ It remains to check that the first isomorphism theorem holds in \(\catAbelianShe
 Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catAbelianSheaf(X)\).
 We can factor \(f\) as
 \begin{equation}\label{eq:factorisation-coimage-image}
-  \mathcal F \To \coim f \To \im f \To \mathcal G
+  \mathcal F \To \coim f \To \im f \To \mathcal G\text{.}
 \end{equation}
 By \cref{lem:pullback-preserves-colimits-and-finite-limits}, the formation of the kernel, cokernel, image and coimage commutes with the stalk functor \(i_x^*\) for all \(i_x\colon\{x\}\to X\) (see \cref{defn:stalk}).
 So \cref{eq:factorisation-coimage-image} induces the factorisation
@@ -105,6 +105,10 @@ Since monomorphisms in \(\catSet_{/X}\) (resp.~\(\catAbelianGroup(\catSet_{/X})\
 Finally, \cref{lem:monomorphisms-sheaves:injective-stalk} is equivalent to \cref{lem:monomorphisms-sheaves:injective-etale-space} since the fibres of \(\etalespace(\mathcal F)\to\etalespace(\mathcal G)\) over \(x\in X\) are the stalks \(f_x\).
 \end{proof}
 
+The epimorphisms of sheaves are more subtle.
+Although the epimorphisms of presheaves are just objectwise epimorphisms (characterisation~\cref{lem:monomorphisms-sheaves:injective-open} of the last lemma), this is not true for epimorphisms of sheaves.
+This is perhaps to be expected: monomorphisms are related to limits (as discussed in the last proof), and the forgetful functor from sheaves to presheaves creates limits, but epimorphisms are related to colimits (in a dual way, made precise in the following proof), whose relation to colimits of presheaves is not so straightforward.
+
 \begin{lem}\label{lem:epimorphisms-sheaves}
 Let \(f\colon\mathcal F\To\mathcal G\) be a map in \(\catSheaf(X)\) (resp.~\(\catAbelianSheaf(X)\)).
 Then the following are equivalent:
@@ -148,7 +152,7 @@ A map in an abelian category is called \emph{injective} if it is a monomorphism 
 If \(f\colon\mathcal F\To\mathcal G\) is a surjective map of abelian sheaves, then the component \(\mathcal F(U)\to\mathcal G(U)\) need not be surjective.
 
 In Homework~3, we constructed a surjection \(f\colon\mathcal F\To i_*i^*\mathcal F\) for any closed inclusion \(i\colon Z\hookrightarrow X\) and any abelian sheaf \(\mathcal F\) on \(X\).
-Taking \(X=\bb R\), \(Z = \{0,1\}\subseteq\bb R\) and \(F=\constSheaf{\bb Z}\).
+Take \(X=\bb R\), \(Z = \{0,1\}\subseteq\bb R\) and \(F=\constSheaf{\bb Z}\).
 Then \(i^*\mathcal F = \constSheaf{\bb Z}\) (pullbacks of constant sheaves are constant sheaves) and \(\constSheaf{\bb Z}\to i_*\constSheaf{\bb Z}\) is surjective.
 But plugging in \(\bb R\) gives the map
 \[\constSheaf{\bb Z}(\bb R) = \bb Z \to (i_*\constSheaf{\bb Z})(\bb R) = \constSheaf{\bb Z}(\bb R\cap\{0,1\}) = \bb Z\oplus\bb Z\text{,} \quad a \mapsto (a,a)\text{.} \]
