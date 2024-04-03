@@ -11,7 +11,9 @@ Strikingly, this axiomatisation is `strict' in the sense of the Freyd--Mitchell 
 \section{Additive categories}
 \remyquote{We can only write down diagrams, prove they commute, and run away as fast as we can.}
 \begin{defn}
-  A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ is endowed with the structure of an abelian group.
+A \emph{pre-additive} category $\cat C$ is a locally small category where each hom-set $\Hom_{\cat C}(X, Y)$ is endowed with the structure of an abelian group such that composition
+\[ \Hom[\cat C](Y,Z)\times\Hom[\cat C](X,Y) \to \Hom[\cat C](X,Z)\text{,} \quad (g,f)\mapsto gf \]
+is bilinear.
 \end{defn}
 
 Expanding the definitions, this means in particular that between every two objects \(X\) and \(Y\) in a pre-additive category, there is a zero map \(0\colon X\to Y\), and that two parallel maps \(f,g\colon X\to Y\) have a sum \(f+g\colon X\to Y\).
