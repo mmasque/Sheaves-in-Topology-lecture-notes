@@ -251,4 +251,13 @@ In particular, the category \(\catAbelianPresheaf(X)\) of abelian presheaves on 
 \begin{proof}
   If $\alpha, \beta\colon F \implies G$ is a natural transformation, then define the sum $\alpha + \beta\colon F \implies G$ by $(\alpha + \beta)_U = \alpha_U + \beta_U$. This is natural since the maps $F(V) \to F(U)$ and $G(V) \to G(U)$ are group homorphisms for any map $U \to V$ in $\cat C$. This turns $\catFunctor(\cat C\opp, \cat A)$ into a pre-additive category. All the other questions (existence of finite, limits and colimits, the first isomorphism theorem) are checked objectwise.
 \end{proof}
+
+To summarise the various notions we introduced in this lecture:
+\begin{itemize}
+\item A \emph{pre-additive} category is a category enriched in \((\catAbelianGroup,\otimes)\).
+\item An \emph{additive} category is a pre-additive category with finite products (and then it automatically has finite coproducts which coincide with finite products).
+\item A \emph{pre-abelian} category is an additive category with kernels and cokernels (so a pre-additive category with finite limits and colimits).
+\item An \emph{abelian} category is a pre-abelian category in which the first isomorphism theorem holds, that is, the natural map \(\coim f\to\im f\) is an isomorphism for every map \(f\).
+  Spelling out everything, this means that it is enriched in \((\catAbelianGroup,\otimes)\), has finite limits and colimits, and that the first isomorphism theorem holds.
+\end{itemize}
 \end{document}

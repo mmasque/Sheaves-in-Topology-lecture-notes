@@ -130,7 +130,12 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 
 \end{lem}
 \begin{proof}
-	We reproduce the proof given in \cite{riehlCategoryTheoryContext2016}. The idea is to show that $\catFunctor(\cat{C}\opp, \cat D) \to \catFunctor(\cat{C}^\text{disc}, \cat D)$ \todo{Write the details}
+    We do limits; colimits follow dually. We will turn $U \mapsto \lim_{i \in \cat J}(D(i)(U))$ into a functor $\cat C^op \to \cat D$. Given $f: U \to V$ in $\cat C$, we get morphisms 
+    \[
+        \lim_{i \in \cat J} D(i)(V) \xrightarrow{\pi_i} D(i)(V) \xrightarrow{D(i)(f)} D(i)(U)
+    \] turning $\lim_{i \in \cat J} D(i)(V)$ into a cone over $D(-)(U)$ by naturality of $D(-)(f)$. This gives a unique map \[
+        \lim_{i \in \cat J} D(i)(V) \to \lim_{i \in \cat J} D(i)(U)
+    \] which turns $U \mapsto \lim_{i \in J} D(i)(U)$ into a functor. It is then clearly a limit of $D$. For more details, see \cite[Chapter~5.3]{maclane:71}
 \end{proof}
 
 \begin{cor}
@@ -144,6 +149,22 @@ Recall that a presheaf to a category $\cat D$ is a contravariant functor $F \in 
 	Such a diagram also has a colimit in $\catSheaf(X)$ ($\catAbelianSheaf(X)$), obtained by sheafification of the colimit in $\catPresheaf(X)$ ($\catAbelianPresheaf(X)$).
 	% In other words, the forgetful functor $\catSheaf(X) \to \catPresheaf(X)$ reflects limits.
 \end{thm}
-\todo{Write the rest of the lecture}
+\begin{proof}
+   For limits, it suffices to show that the limit in presheaves is a sheaf: we saw that limits in $\catPresheaf(X)$ are computed objectwise. If $U = \cup_{i \in I}U_i$ is an open cover, then \[
+    \lim_{k \in \cat J}D(k)(U) \to \prod_{i \in I} \lim_{k \in \cat J}D(k)(U_i) \rightrightarrows \prod_{i, j \in I} \lim_{k \in \cat J} D(k)(U_i \cap U_j)
+   \] is an equaliser: either check by hand, or use that limits commute with limits.
 
+   For colimits, we get a cocone $(D(j) \to (\colim D(i))^\#)_{j \in \cat J}$. Given any other cocone $(D(j) \to \mathcal{F})_{j \in \cat J}$, we get a unique morphism of co-cones in presheaves:
+   \[
+    (D(j) \to \colim_{i \in \cat J} D(i))_{j \in \cat J} \to (D(j) \to \mathcal{F})_{j \in \cat J}.
+   \] The universal property of sheafification gives a unique factorisation 
+   
+  \[\begin{tikzcd}
+\colim D(i) \arrow[rr] \arrow[rd] &                                           & \mathcal{F} \\
+                                  & (\colim D(i))^\# \arrow[ru, "\exists !"'] &            
+\end{tikzcd}\] which shows that the sheafified presheaf is the colimit. 
+\end{proof}
+\begin{exmp}
+    The terminal object in $\catSheaf{X}$ is the constant sheaf $**=h_{X/X}$ given by $U\mapsto *$ for all opens $U \subset X$. The coproduct $\coprod_{s \in S} *$ in $\catPresheaf(X)$ is the constant presheaf $U \mapsto S$, whose sheafification is the constant sheaf $\underline{S}$. Thus $\underline{S} \cong \coprod_{s \in S} *$ in $\catSheaf(X)$, which is also clear in $\catLocalHomeomorphism{/X}$. \todo{Give more detail in this and the last proof.}
+\end{exmp}
 \end{document}
