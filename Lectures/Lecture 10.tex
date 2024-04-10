@@ -1,0 +1,122 @@
+\chapter{Exact functors, diagram lemmas}
+
+\section{Exact functors}
+
+\begin{defn}
+Let \(\cat C\) and \(\cat D\) be categories and assume \(\cat C\) has finite limits (resp.~finite colimits).
+Then a functor \(F\colon\cat C\to\cat D\) is \emph{left exact} (resp.~\emph{right exact}) if it preserves finite limits (resp.~finite colimits).
+The functor \(F\) is \emph{exact} if it is both left and right exact.
+\end{defn}
+
+The goal of today is to show that this definition agrees with the definition in terms of short exact sequences.
+
+\begin{exmp}
+\begin{itemize}
+\item 
+  If \(F\) has a right adjoint, then it is right exact.
+  If \(F\) \emph{is} a right adjoint (so \emph{has} a left adjoint), then it is left exact.
+\item
+  We proved that \(f^*\colon\catSheaf(X)\to\catSheaf(Y)\) for \(f\colon Y\to X\) is exact in \cref{lem:pullback-preserves-colimits-and-finite-limits}.
+\item
+  On Homework~5, we show that sheafification \((-)^\sharp\colon\catPresheaf(X)\to\catSheaf(X)\) (or for abelian sheaves) is exact.
+\item
+  The forgetful functor \(\catTopologicalSpace\to\catSet\) is exact since it has adjoints on both sides, equipping a set with the discrete or indiscrete topology.
+\item
+  The forgetful functor \(\catAbelianGroup\to\catSet\) is left exact, but not right exact since \(A\oplus B\neq A\cotimes B\).
+\end{itemize}
+\end{exmp}
+
+\begin{defn}
+Let \(\cat C\) and \(\cat D\) be pre-additive categories.
+Then a functor \(F\colon\cat C\to\cat D\) is \emph{additive} if the maps \(\Hom[\cat C](X,Y)\to\Hom[\cat D](FX,FY)\) are group homomorphisms.
+\end{defn}
+
+Most functors between abelian categories in nature are additive.
+
+\begin{exmp}
+\begin{itemize}
+\item
+  If \(\cat C\) is a pre-additive category with an object \(X\), then the representable functor \(\Hom[\cat C](-,X)\colon\cat C\opp\to\catAbelianGroup\) is additive: the map
+  \[ \Hom[\cat C](Y,Z) \to \Hom[\catAbelianGroup](\Hom[\cat C](Z,X),\Hom[\cat C](Y,X))\text{,} \quad f \mapsto (g\mapsto g\circ f) \]
+  is a group homomorphism since composition in a pre-additive category is bilinear.
+  Likewise, the corepresentable functor \(\Hom[\cat C](X,-)\colon\cat C\to\catAbelianGroup\) is also additive.
+\item
+  The free--forgetful adjunction between abelian groups and sets gives a monad (in particular an endofunctor) on \(\catAbelianGroup\), which is not additive: it sends the zero object to \(\bb Z\) and the identity of \(0\), which is also the zero map, must be sent to the identity of \(\bb Z\) by functoriality and to the zero map of \(\bb Z\) by additivity.
+\end{itemize}
+\end{exmp}
+
+The problem in the last non-example was that the functor did not preserve the zero object.
+
+\begin{lem}\label{lem:characterisation-additive-functor}
+Let \(\cat C\) and \(\cat D\) be additive categories and \(F\colon\cat C\to\cat D\) a functor.
+Then the following are equivalent:
+\begin{enumerate}
+\item\label{lem:characterisation-additive-functor:additive} \(F\) is additive;
+\item\label{lem:characterisation-additive-functor:products} \(F\) preserves finite products;
+\item\label{lem:characterisation-additive-functor:coproducts} \(F\) preserves finite coproducts;
+\item\label{lem:characterisation-additive-functor:biproducts} \(F\) preserves binary biproducts.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+Note that \cref{lem:characterisation-additive-functor:biproducts} implies that \(F\) preserves the zero object: the biproduct of the zero object and itself is sent to
+\begin{equation*}
+  \begin{tikzcd}
+    0 \ar[r, shift left, "i"] & 0\oplus 0 \ar[l, shift left, "p"] \ar[r, shift right, "q"'] & 0 \ar[l, shift right, "j"']
+  \end{tikzcd}
+  \qquad
+  \overset{F}{\mapsto}
+  \qquad
+  \begin{tikzcd}
+    F(0) \ar[r, shift left, "F(i)"] & F(0)\oplus F(0) \ar[l, shift left, "F(p)"] \ar[r, shift right, "F(q)"'] & F(0) \ar[l, shift right, "F(j)"']
+  \end{tikzcd}
+\end{equation*}
+Then
+\[ \id*_{F(0)} = F(\id*_0) = F(0\colon F(0)\to F(0)) = F(qi) = F(q)F(i) = 0\text{,} \]
+so \(F(0)\) is a zero object.
+
+Then \cref{lem:characterisation-additive-functor:products}, \cref{lem:characterisation-additive-functor:coproducts} and \cref{lem:characterisation-additive-functor:biproducts} are equivalent, since binary products, binary coproducts and binary biproducts agree by \cref{lem:pre-additive-categories-are-nice}.
+
+Next, assume \(F\) is additive, and let
+\begin{equation*}
+  \begin{tikzcd}
+    X \ar[r, shift left, "i"] & X\oplus Y \ar[l, shift left, "p"] \ar[r, shift right, "q"'] & Y \ar[l, shift right, "j"']
+  \end{tikzcd}
+\end{equation*}
+be a biproduct in \(\cat C\), that is, \(pi=\id_X\), \(qj=\id_Y\) and \(ip+jq=\id_{X\oplus Y}\).
+These equations are preserved by \(F\), showing that \cref{lem:characterisation-additive-functor:additive} implies \cref{lem:characterisation-additive-functor:biproducts}.
+
+Conversely, assume \(F\) preserves binary biproducts, and let \(f,g\colon X\to Y\) be maps in \(\cat C\).
+We saw in \cref{lem:enrichment-commutative-monoids} that \(f+g\) is the composition
+\begin{equation*}
+  \begin{tikzcd}
+    X \ar[r, "\Delta"] & X\oplus X \ar[r, "f\oplus g"] & Y\oplus Y \ar[r, "\nabla"] & Y\text{.}
+  \end{tikzcd}
+\end{equation*}
+Applying \(F\) gives the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    F(X) \ar[r, "\Delta"] & F(X)\oplus F(X) \ar[r, "F(f)\oplus F(g)"] & F(Y)\oplus F(Y) \ar[r, "\nabla"] & F(Y)\text{.}
+  \end{tikzcd}
+\end{equation*}
+using the universal property of the product to show that \(F(\Delta)=\Delta\), the universal property of the coproduct to show that \(F(\nabla)=\nabla\), and the either universal property to show that \(F(f\oplus g)=F(f)\oplus F(g)\) since we already saw that preserving finite biproducts is equivalent to preserving finite products and finite coproducts.
+This shows that \(F(f+g)=F(f)+F(g)\), showing that \cref{lem:characterisation-additive-functor:biproducts} implies \cref{lem:characterisation-additive-functor:additive}.
+\end{proof}
+
+\begin{cor}
+Any left exact or right exact functor between pre-abelian categories is additive.
+\end{cor}
+
+\begin{lem}
+Let \(\cat A\) and \(\cat B\) be abelian categories and \(F\colon\cat A\to\cat B\) a functor.
+Then:
+\begin{enumerate}
+\item \(F\) is left exact if and only if for every short exact sequence \(0\to A\to B\to C\to 0\) in \(\cat A\), the sequence \(0\to F(A)\to F(B)\to F(C)\) is exact in \(\cat B\).
+\item \(F\) is right exact if and only if for every short exact sequence \(0\to A\to B\to C\to 0\) in \(\cat A\), the sequence \(F(A)\to F(B)\to F(C)\to 0\) is exact in \(\cat B\).
+\item \(F\) is exact if and only if for every short exact sequence \(0\to A\to B\to C\to 0\) in \(\cat A\), the sequence \(0\to F(A)\to F(B)\to F(C)\to 0\) is exact in \(\cat B\).
+\end{enumerate}
+\end{lem}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
