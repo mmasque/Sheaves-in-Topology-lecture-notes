@@ -1,7 +1,8 @@
 \chapter{Exact functors, diagram lemmas}
 
 \section{Exact functors}
-
+\remyquote{For the five lemma, if you look at three different sources, you'll get three different lemmas. That's the three lemma.}
+\noindent
 \begin{defn}
 Let \(\cat C\) and \(\cat D\) be categories and assume \(\cat C\) has finite limits (resp.~finite colimits).
 Then a functor \(F\colon\cat C\to\cat D\) is \emph{left exact} (resp.~\emph{right exact}) if it preserves finite limits (resp.~finite colimits).
@@ -106,7 +107,7 @@ This shows that \(F(f+g)=F(f)+F(g)\), showing that \cref{lem:characterisation-ad
 Any left exact or right exact functor between pre-abelian categories is additive.
 \end{cor}
 
-\begin{lem}
+\begin{lem}\label{lem:exactness-short-exact-sequence}
 Let \(\cat A\) and \(\cat B\) be abelian categories and \(F\colon\cat A\to\cat B\) a functor.
 Then:
 \begin{enumerate}
@@ -115,6 +116,156 @@ Then:
 \item \(F\) is exact if and only if for every short exact sequence \(0\to A\to B\to C\to 0\) in \(\cat A\), the sequence \(0\to F(A)\to F(B)\to F(C)\to 0\) is exact in \(\cat B\).
 \end{enumerate}
 \end{lem}
+
+\begin{rmk}
+For any biproduct
+\begin{equation*}
+  \begin{tikzcd}
+    A \ar[r, shift left, "i"] & A\oplus B \ar[l, shift left, "p"] \ar[r, shift right, "q"'] & B \ar[l, shift right, "j"']
+  \end{tikzcd}
+\end{equation*}
+the sequence \(0\to A\to A\oplus B\to B\to 0\) is exact:
+\begin{itemize}
+\item the inclusion \(i\colon A\to A\oplus B\) is a (split) monomorphism;
+\item the projection \(q\colon A\oplus B\to B\) is a (split) epimorphism;
+\item if \(f\colon C\to A\oplus B\) is a map such that the composite \(qf\colon C\to A\oplus B\to B\) is zero, then
+  \[ f = (ip+jq)f = ipf+jqf = ipf\text{,} \]
+  so \(f\) factors (uniquely) through \(i\).
+\end{itemize}
+\end{rmk}
+
+\begin{proof}[name={of \cref{lem:exactness-short-exact-sequence}}]
+\begin{enumerate}
+\item
+  Note: if \(F\) takes short exact sequences to left exact sequences, then it is additive: we apply the five lemma to the diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      0 \ar[r] & F(A) \ar[r, "{\begin{pmatrix} \id \\ 0 \end{pmatrix}}"] \ar[d, equal] & F(A)\oplus F(B) \ar[d, "{(F(i),F(j))}"] \ar[r, "{(0,\id)}"] & F(B) \ar[d, equal] \ar[r] & 0 \ar[d] \\
+      0 \ar[r] & F(A) \ar[r, "F(i)"'] & F(A\oplus B) \ar[r, "F(q)"'] & F(B) \ar[r] & \coker(F(q))
+    \end{tikzcd}
+  \end{equation*}
+  with exact rows.
+  The five lemma shows that \(F\) preserves binary coproducts, so \(F\) is additive.
+  The result now follows since \(F\) preserves finite limits if and only if it preserves finite products and kernels, and \(\ker(f\colon B\to C)=\ker(B\twoheadrightarrow\im f)\) so left exactness is equivalent to preserving kernels.
+\item Dually.
+\item From the previous two items. \qedhere
+\end{enumerate}
+\end{proof}
+
+\section{Diagram lemmas}
+\remyquote{Let me call it this proof a sketch, so I can bail out.}
+\noindent
+The exposition here follows~\cite{IversenCohomologyOfSheaves}.
+
+The following lemma is a variant of the four lemma, a bit more general than what is usually called the four lemma:
+\begin{lem}[four lemma]\label{lem:four-lemma}
+Let \(\cat A\) be an abelian category and let
+\begin{equation*}
+  \begin{tikzcd}
+    A \ar[r] \ar[d, "a"'] & B \ar[r] \ar[d, "b"] & C \ar[r] \ar[d, "c"] & D \ar[d, "d"] \\
+    A' \ar[r] \ar[d] & B' \ar[r] & C' \ar[r] & D' \\
+    0
+  \end{tikzcd}
+\end{equation*}
+be a commutative diagram with exact rows and columns.
+Then the sequence \(\ker b\to\ker c\to\ker d\) is exact.
+\end{lem}
+
+\begin{cor}[five lemma]\label{lem:five-lemma}
+Let \(\cat A\) be an abelian category and let
+\begin{equation*}
+  \begin{tikzcd}
+    A \ar[r] \ar[d, "a"'] & B \ar[r] \ar[d, "b"] & C \ar[r] \ar[d, "c"] & D \ar[r] \ar[d, "d"] & E \ar[d, "e"] \\
+    A' \ar[r] & B' \ar[r] & C' \ar[r] & D' \ar[r] & E'
+  \end{tikzcd}
+\end{equation*}
+be a commutative diagram with exact rows.
+If \(a\) is epic, \(e\) is monic and \(b\) and \(d\) are isomorphisms, then \(c\) is an isomorphism.
+\end{cor}
+\begin{proof}
+Apply the four lemma~\labelcref{lem:four-lemma} to \(a\), \(b\), \(c\) and \(d\) to get an exact sequence
+\[0=\ker b\to\ker c\to\ker d=0\text{,} \] so \(\ker c=0\).
+Dually, we see \(\coker c=0\), so \(c\) is an isomorphism by \cref{lem:mono-epi-abelian-category}.
+\end{proof}
+
+\begin{proof}[name={of \cref{lem:four-lemma}, sketch}]
+Let \(E\) and \(E'\) be the images of respectively \(B\to C\) and \(B'\to C'\).
+Their uiversal properties give commutative diagrams
+\begin{align*}
+  \begin{tikzcd}[ampersand replacement=\&]
+    A \ar[r] \ar[d, "a"'] \& B \ar[r] \ar[d, "b"] \& E \ar[r] \ar[d, "e"] \& 0 \\
+    A' \ar[r] \ar[d] \& B' \ar[r] \& E' \ar[r] \& 0 \\
+    0
+  \end{tikzcd}
+  &&
+  \begin{tikzcd}[ampersand replacement=\&]
+    0 \ar[r] \& E \ar[r] \ar[d, "e"'] \& C \ar[r] \ar[d, "c"] \& D \ar[d, "d"] \\
+    0 \ar[r] \& E' \ar[r] \& C' \ar[r] \& D'
+  \end{tikzcd}
+\end{align*}
+with exact rows and columns.
+We will check that the sequences
+\[ 0 \to \ker e \to \ker c\to \ker d \]
+and
+\[ \ker b\to \ker e\to 0 \]
+are exact.
+Then \(\ker b\to\ker c\) has image \(\ker e=\ker(\ker c\to\ker d)\).
+
+For the former, suppose we have a map \(f\) making the diagram:
+\begin{equation*}
+  \begin{tikzcd}
+    & & X \ar[rd, "0"] \ar[d, "f"'] \\
+    & \ker e \ar[r] \ar[d] & \ker c \ar[r] \ar[d] & \ker d \ar[d] \\
+    0 \ar[r] & E \ar[r] \ar[d, "e"'] & C \ar[r] \ar[d, "c"] & D \ar[d, "d"] \\
+    0 \ar[r] & E' \ar[r] & C' \ar[r] & D'
+  \end{tikzcd}
+\end{equation*}
+commute.
+Then \(X\to D\) is zero, so \(X\to C\) factors uniquely through \(E\).
+Then \(X\to E'\to C'\) is zero, so \(X\to E'\) is zero, so \(X\to E\) factors uniquely through \(\ker e\).
+Dually, the sequence
+\[\coker a=0\to\coker b\to\coker e\to 0\]
+is exact, so \(\coker b\to\coker e\) is an isomorphism.
+
+We get a commutative diagram
+\begin{equation*}
+  \begin{tikzcd}
+    0 \ar[r] & \im(A'\to B') \ar[r] \ar[d] & B' \ar[r] & E' \ar[r] \ar[d] & 0 \\
+    0 \ar[r] & 0 \ar[r] & \coker b \ar[r, iso'] & \coker e & 0
+  \end{tikzcd}
+\end{equation*}
+with exact rows, so by the first statement, we get an exact sequence
+\begin{equation*}
+  \begin{tikzcd}
+    0 \ar[r] & \im(A'\to B') \ar[r] & \im b \ar[r] & \im e \ar[r] & 0 \\
+    & A' \ar[u, epi] & B \ar[u, epi] \ar[r, epi] & E \ar[u, epi]
+  \end{tikzcd}
+\end{equation*}
+so also an exact sequence
+\[ A'\to \im b\to \im e\to 0\text{.} \]
+Now we get
+\begin{equation*}
+  \begin{tikzcd}
+    A \ar[r] \ar[d, "a'"', epi] & B \ar[r] \ar[d, "b'", epi] & E \ar[r] \ar[d, "e'", epi] & 0 \\
+    A' \ar[r] & \im b \ar[r] & \im e \ar[r] & 0
+  \end{tikzcd}
+\end{equation*}
+where \(\ker b'=\ker b\) and \(\ker e'=\ker e\).
+Then we claim that \(\im e = \coker(\ker b'\to E)\): given a map \(g\) making the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    & \ker b' \ar[rrd, "0"] \ar[d] \\
+    A \ar[r] \ar[d, "a'"', epi] & B \ar[r] \ar[d, "b'", epi] & E \ar[r, "g"'] \ar[d, "e'", epi] & Y \\
+    A' \ar[r] & \im b \ar[r] & \im e \ar[r] & 0
+  \end{tikzcd}
+\end{equation*}
+commute, the composite \(B\to Y\) factors uniquely through \(\im b\).
+Then \(A\to Y\) is zero, so \(A'\to Y\) is zero as \(a\) is an epimorphism.
+So \(\im b\to Y\) factors uniquely through \(\im e\).
+Then
+\[\ker b'\to E\xrightarrow{e'}\im e\to 0\]
+is exact, so the map \(\ker b'\to\ker e'\) is an epimorphism.
+\end{proof}
 
 %%% Local Variables:
 %%% mode: latex
