@@ -329,6 +329,12 @@
   style=mydefinition
 ]{exc}
 \declaretheorem[
+    name=Exercise,
+    numberwithin=chapter,
+    refname={Exercise,Exercises},
+    style=mydefinition,
+]{exe}
+\declaretheorem[
   name=Definition,
   sharenumber=thm,
   refname={Definition,Definitions},
@@ -352,6 +358,12 @@
   refname={Remark,Remarks},
   style=myremark
 ]{rmk}
+\declaretheorem[
+    name=Remarks,
+    sharenumber=thm,
+    refname={Remarks,Remarks},
+    style=myremark
+]{rmks}
 \declaretheorem[
   name=Notation,
   sharenumber=thm,
@@ -682,6 +694,9 @@
 % constant sheaf
 \NewDocumentCommand\constSheaf{m}{\underline{#1}}
 \NewMathOperator\etalespace{sp}
+
+% sheaf
+\NewDocumentCommand\sh{m}{\mathcal{#1}}
 
 \RequirePackage{epigraph}
 \setlength\epigraphrule{0pt}

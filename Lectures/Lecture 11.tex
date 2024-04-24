@@ -1,0 +1,339 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Injective and projective objects, resolutions}
+
+\remyquote{08N5 sounds like a bird flu variant - maybe a my generation joke.}
+
+%Last week, using Iverson's approach, we saw how several diagram lemmas (five and snake lemma) can be concisely proven in abelian categories by first proving the four lemma. The proof of this lemma was somewhat cumbersome however. One work around 
+
+\begin{rmks}[Remarks on the four and five lemma] \leavevmode
+    \begin{itemize}
+        \item Idea in Iverson: Check exactness \emph{once}
+
+        \item \textbf{Warning: } Checking exactness in an abelian category might be cumbersome. To check $A\to B\to C$ is exact we \emph{cannot} use $\operatorname{Hom}_{\cat A}(X, -)$ since
+        \[\operatorname{Hom}_{\cat A}(X,A) \to \operatorname{Hom}_{\cat A}(X, B) \to \operatorname{Hom}_{\cat A}(X,C)\] need not be exact.
+        \item (Related to additional exercise 10.3) An alternative method \cite[Tag~08N5]{stacks-project}: $A\to B\to C$ is exact if and only if for any $h\colon X\to B$ with $g\circ h= 0$, there exists an epimorphism $k\colon Y\twoheadrightarrow X$ such that $Y\xrightarrow{h\circ k} B$ lifts to $A$: 
+        % https://q.uiver.app//#q=WzAsNSxbMCwwLCJZIl0sWzEsMCwiWCJdLFsyLDEsIkMiXSxbMCwxLCJBIl0sWzEsMSwiQiJdLFswLDEsImsiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwyLCIwIl0sWzMsNCwiZiJdLFswLDNdLFsxLDRdLFs0LDIsImciXV0=
+        \[\begin{tikzcd}
+        	Y & X \\
+        	A & B & C
+        	\arrow["k", two heads, from=1-1, to=1-2]
+        	\arrow[from=1-1, to=2-1]
+        	\arrow[from=1-2, to=2-2]
+        	\arrow["0", from=1-2, to=2-3]
+        	\arrow["f", from=2-1, to=2-2]
+        	\arrow["g", from=2-2, to=2-3]
+        \end{tikzcd}\]
+        (Idea: take $Y\twoheadrightarrow X$ to be $A\times_{\ker g} X$ - see additional exercise 10.3 for surjectivity of $Y\twoheadrightarrow X$ since $A\twoheadrightarrow \ker g$). This reduces diagram lemmas to set-like statements, but is not easier.
+    \end{itemize}
+\end{rmks}
+
+The snake lemma was not proven last week, nor will it be this week, for the proof see \cite[Section~\RN{1}.1]{IversenCohomologyOfSheaves}.
+
+
+\section{Injective and projective objects}
+\remyquote{We do what we always do in commutative algebra: you Zorn it.}
+
+\begin{defn}
+    An object $X\in \cat C$ is \emph{injective}\index{to categorize!injective objects} (resp. \emph{projective}) if $\Hom[\cat C](-, X)$ (resp. $\Hom[\cat C](X,-)$) preserves epimorphisms. Explicitly, given a map $f\colon A\to X$ and a monomorphism $A\hookrightarrow B$, $f$ extends to $B$,
+       % https://q.uiver.app//#q=WzAsMyxbMCwwLCJBIl0sWzEsMCwiQiJdLFswLDEsIlgiXSxbMCwyLCJmIiwyXSxbMSwyLCJcXGV4aXN0cyIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+    \[\begin{tikzcd}
+    	A & B \\
+    	X
+    	\arrow[hook, from=1-1, to=1-2]
+    	\arrow["f"', from=1-1, to=2-1]
+    	\arrow["\exists", dashed, from=1-2, to=2-1]
+    \end{tikzcd}\] if $X$ is injective.
+    Dually, $X$ is projective whenever, given an $f\colon X\to B$ and an epimorphism $A\hookrightarrow B$ $f$ factors through $A$,
+     % https://q.uiver.app//#q=WzAsMyxbMSwwLCJBIl0sWzEsMSwiQiJdLFswLDEsIlAiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMiwxXSxbMiwwLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+    \[\begin{tikzcd}
+    	& A \\
+    	P & B.
+    	\arrow[two heads, from=1-2, to=2-2]
+    	\arrow[dashed, from=2-1, to=1-2]
+    	\arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]
+\end{defn}
+
+Recall that in additional exercise 10.1 parts $(h)\, \& \,(i)$ we showed that the functors
+
+\[\operatorname{Hom}_{\cat A}(-, X)\colon \cat A\opp \to \catAbelianGroup\]
+\[\operatorname{Hom}_{\cat A}(X, -)\colon \cat A\to \catAbelianGroup\] are left exact. Thus if $\cat C = \cat A$ is abelian, one way to characterise injective (resp. projective) objects is via exactness of the corresponding contra-, resp. covariant $\hom$-functor. Another characterisation of projective objects in abelian categories (which was brought up during the lecture) is the following,
+
+\begin{exc}\todo{reference}
+    Any short exact sequence $0\to A \to B \to C \to 0$ splits if and only if $C$ is projective.
+\end{exc}
+
+\begin{exmp}[Projective module is summand of free module]
+    In $_R\catModule$ or $\catModule[R]$, the free $R$-module $R^{\oplus I}$ is projective:
+    \[_R\operatorname{Hom}(R^{\oplus I}, M) \cong M^I, \quad \varphi \mapsto ((\varphi(e_i)))_{i\in I}.\]
+    If $P$ is projective there exists $Q$ (automatically projective) such that $P\oplus Q \cong R^{\oplus I}$:
+    \[\text{choose } R^{\oplus I} \twoheadrightarrow P \text{ (e.g. } R^{\oplus P} \twoheadrightarrow P \text{)}\]
+    Since $P$ is projective, by split exactness of
+    \[\begin{tikzcd}[column sep=scriptsize]
+        0 \ar[r] & \ker\pi \ar[r, mono] & R^{\oplus I} \ar[r, "\pi", epi, shift left=1] & P \ar[r] \ar[l, "\sigma", dashed, shift left=1] & 0
+    \end{tikzcd}\]
+    $\pi$ has a section $\sigma$. So $P\oplus Q\cong R^{\oplus I}$ where $Q = \ker \pi = \coker \sigma$.
+\end{exmp}
+
+\begin{exmp}
+ In $\catAbelianGroup$ every projective is free. The idea is to first prove this for finitely generated abelian groups and then by induction using Zorn's lemma. \todo{source} (Probably okay for $R$ PID) Key step: A subgroup of a free abelian group is free \todo{cite Lang Appendix 2 section 2} 
+\end{exmp}
+
+\begin{lem}
+    Let $R$ be a ring and $\cat A =  {}_R\catModule$ or $\catModule[R]$. Then $M\in \cat A$ is injective if and only if for every ideal $I\subseteq R$ every $I\to M$ extends to $R\to M$
+    % https://q.uiver.app//#q=WzAsMyxbMCwwLCJJIl0sWzEsMCwiUiJdLFswLDEsIk0iXSxbMCwyXSxbMSwyLCJcXGV4aXN0cyIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+\[\begin{tikzcd}
+	I & R \\
+	M.
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\exists", dashed, from=1-2, to=2-1]
+\end{tikzcd}\]
+\end{lem}
+\begin{proof}[Sketch]
+    $\implies$ is immediate. Conversely, suppose the condition holds and let $A\hookrightarrow B$ and $f\colon A\to M$ in $\cat A$. Consider the poset,
+    \[\{(A', f')\colon A\subseteq A' \subseteq B' \,\&\, f'\colon A' \to M \text{ extends } f\}\]
+    ordered by inclusion. This poset satisfies the conditions of Zorn's lemma thus has a maximal element $(A', f')$. We claim that $A' = B$. Suppose $A' \neq B$ and choose $x\in B\backslash A'$. Consider $\varphi\colon R \to B, r\mapsto rx$ and let $I = \varphi^{-1}(A')$. Then we obtain a pullback,
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJJIl0sWzEsMCwiUiJdLFsxLDEsIkIiXSxbMCwxLCJBJyJdLFswLDIsIk0iXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxLDIsIlxcdmFycGhpIl0sWzAsMywiXFxwc2kiLDJdLFszLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNCwiZiciLDJdLFswLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFsxLDQsImciLDAseyJsYWJlbF9wb3NpdGlvbiI6NzAsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRvdHRlZCJ9fX1dXQ==
+    \[\begin{tikzcd}
+    	I & R \\
+    	{A'} & B \\
+    	M.
+    	\arrow[hook, from=1-1, to=1-2]
+    	\arrow["\psi"', from=1-1, to=2-1]
+    	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+    	\arrow["\varphi", from=1-2, to=2-2]
+    	\arrow["g"{pos=0.7}, dotted, from=1-2, to=3-1]
+    	\arrow[hook, from=2-1, to=2-2]
+    	\arrow["{f'}"', from=2-1, to=3-1]
+    \end{tikzcd}\]
+    Where the map $g$ is the unique extension of $f'\circ \phi$ that we obtain by assumption. But since
+    \[\begin{tikzcd}[column sep=scriptsize]
+        0 \ar[r] & I \ar[r, "\begin{pmatrix} \phi \\ -\id\end{pmatrix}"] & A'\oplus R \ar[r, "{(\id, \phi)}"] &A' + Rx \ar[r] & 0
+    \end{tikzcd}\]
+    is exact the square
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJJIl0sWzEsMCwiUiJdLFswLDEsIkEnIl0sWzEsMSwiQScgKyBSeCJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsM10sWzEsM10sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+\[\begin{tikzcd}
+	I & R \\
+	{A'} & {A' + Rx}
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+\end{tikzcd}\] is cocartesian. Yet then the morphism $A' + Rx \to M$ induced by $f'$ and $g$ extends $f'$, contradicting maximality.
+\end{proof}
+
+\begin{exc}[Homework 6]
+    $A\in \catAbelianGroup$ is injective $\iff$ it is divisible. That is, $A\xrightarrow{n} A$ is surjective for all $n\in \bb Z_{>0}$.
+\end{exc}
+
+\begin{rmk}
+    If $\cat A$ is abelian and (locally) presentable, generated by $S\subseteq \operatorname{Ob}(\cat A)$, then $X\in\cat A$ is injective iff for every $B\in S$ 
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzEsMCwiQiJdLFswLDEsIlgiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDJdLFsxLDIsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	A & B \\
+	X
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[dashed, from=1-2, to=2-1]
+\end{tikzcd}\] has an extension. E.g. $_R\catModule$ and $\catModule[R]$ are generated by $S = \{R\}$. $\catAbelianGroup(X)$ is generated by $\underline{\bb Z}_U = j_{!}\underline{\bb Z}$ for $j\colon U\hookrightarrow X$ open (but what are the subobjects of $\underline{\bb Z}_U$). 
+\end{rmk}
+
+\begin{defn}
+    A sheaf $\mathcal F \in \catAbelianGroup(X)$ is \emph{flabby}\index{sheaf!flabby -} or \emph{flasque} if for all $U\subset V\subset X$ opens,
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHVuZGVybGluZXtcXGJiIFp9X1UiXSxbMSwwLCJcXHVuZGVybGluZXtcXGJiIFp9X1YiXSxbMCwxLCJcXHNoIEYiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxLDIsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDJdXQ==
+    \[\begin{tikzcd}
+    	{\underline{\bb Z}_U} & {\underline{\bb Z}_V} \\
+    	{\sh F}
+    	\arrow[hook, from=1-1, to=1-2]
+    	\arrow[from=1-1, to=2-1]
+    	\arrow[dashed, from=1-2, to=2-1]
+    \end{tikzcd}\]
+    has an extension. That is, $\sh F(V) \twoheadrightarrow \mathcal F(U)$ for all $U\subset V$ opens. 
+\end{defn}
+
+\begin{rmk}
+    These names are used differently by some authors e.g. in SGA 4$_{\RN{2}}$.
+\end{rmk}
+
+\begin{exmp}
+    Injective sheaves are flabby.
+\end{exmp}
+
+\section{Injective resolutions}
+
+\remyquote{This is why you teach courses, to shade on the literature.}
+
+\begin{defn}
+    An abelian category $\cat A$ has \emph{enough injectives}\index{to categorize!has enough injectives} (resp. \emph{enough projectives}) if every $X\in \cat A$ admits a map $X\hookrightarrow I$ with $I$ injective (resp. $P\twoheadrightarrow X$ with $P$ projective).
+\end{defn}
+
+\begin{defn}
+    Let $\cat A$ be an abelian category and $X\in \cat A$. An \emph{injective resolution} \index{to categorize!injective resolution} (resp. \emph{projective resolution}) of $X$ is an exact sequence
+    \[\begin{tikzcd}[column sep=scriptsize]
+        0 \ar[r] & X \ar[r] & I^0 \ar[r] & I^1\ar[r] & I^2 \ar[r] & \dots
+    \end{tikzcd}\]
+    for which $I^i$ is injective (resp.
+    \[\begin{tikzcd}
+        \dots \ar[r] & P_2 \ar[r] & P_1 \ar[r] & P_0 \ar[r] & X \ar[r] & 0
+    \end{tikzcd}\]
+    with all $P_i$ projective).
+\end{defn}
+
+In particular as we will prove soon, every object admits an injective (resp. projective) resolution in an abelian category with enough injectives (resp. projectives).
+
+\begin{exmps} \leavevmode
+    \begin{enumerate}
+        \item Let $\bb Z / n\bb Z \in \catAbelianGroup$. Then,
+        \[\begin{tikzcd}[column sep=scriptsize]
+            0 \ar[r] & \bb Z \ar[r, "n\cdot"] & \bb Z \ar[r] & \bb Z/ n\bb Z \ar[r] & 0
+        \end{tikzcd}\]
+        is a projective resolution.
+        \item Let $\bb Z \in\catAbelianGroup$. Then,
+        \[\begin{tikzcd}[column sep=scriptsize]
+            0\ar[r] & \bb Z \ar[r] & \bb Q \ar[r] & \bb Q / \bb Z \ar[r] & 0
+        \end{tikzcd}\]
+        is an injective resolution.
+    \end{enumerate}
+\end{exmps}
+
+\begin{lem}
+    If $\cat A$ has enough injective (resp. projectives) then every $X\in \cat A$ has an injective (resp. projective) resolution.
+\end{lem}
+\begin{proof}
+    We treat the injective case (projective follows dually). Since $\cat A$ has enough injectives
+    \[\begin{tikzcd}[column sep=scriptsize]
+        0\ar[r] & X \ar[r] & I^0
+    \end{tikzcd}\]
+    is exact. Now suppose
+    \[\begin{tikzcd}[column sep=scriptsize]
+        0 \ar[r] & X \ar[r] & I^0 \ar[r] & I^1 \ar[r] & \dots \ar[r] & I^n
+    \end{tikzcd}\]
+    were exact. Take $Y = \coker(I^{n-1} \to I^n)$, since $\cat A$ has enough injectives there exists an $I^{n+1}$ injective and a monomorphism $Y\hookrightarrow I^{n+1}$. Then
+    % https://q.uiver.app/#q=WzAsNyxbMCwwLCIwIl0sWzEsMCwiWCJdLFsyLDAsIkleMCJdLFszLDAsIlxcZG90cyJdLFs0LDAsIklebiJdLFs2LDAsIklee24rMX0iXSxbNSwxLCJZIl0sWzAsMV0sWzEsMl0sWzIsM10sWzMsNF0sWzQsNV0sWzQsNiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzYsNSwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+\[\begin{tikzcd}
+	0 & X & {I^0} & \dots & {I^n} && {I^{n+1}} \\
+	&&&&& Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-7]
+	\arrow[two heads, from=1-5, to=2-6]
+	\arrow[hook, from=2-6, to=1-7]
+\end{tikzcd}\]
+is exact since
+\begin{align*}
+    \im(I^{n-1} \to I^n) &= \ker(I^n \to \coker(I^{n-1} \to I^n)) \\
+    &= \ker(I^n \to Y) = \ker(I^n \to I^{n+1})
+\end{align*}
+where the third equality follows since post-composition with a monomorphism does not affect the kernel.
+\end{proof}
+
+\begin{lem}
+    Let $\cat A$ and $\cat B$ be abelian categories and consider the adjunction
+    \begin{equation*}
+      \begin{tikzcd}
+        \cat A \ar[r, "F"{name=leftadj}, shift left=2] & \cat B \ar[l, "G"{name=rightadj}, shift left=2]
+        \ar[from=leftadj, to=rightadj, phantom, "\leftadj" marking]
+      \end{tikzcd}
+    \end{equation*}
+  where $F$ is exact. Then $G$ preserves injective objects.
+\end{lem}
+\begin{proof}
+    Let $I\in \cat B$ be injective and $A \hookrightarrow B$ in $\cat A$. Then $FA \hookrightarrow FB$ by exactness of $F$ so
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEhvbVtcXGNhdCBBXShCLCBHKEkpKSJdLFsxLDAsIlxcSG9tW1xcY2F0IEFdKEEsIEcoSSkpIl0sWzAsMSwiXFxIb21bXFxjYXQgQl0oRkIsIEkpIl0sWzEsMSwiXFxIb21bXFxjYXQgQl0oRkEsIEkpIl0sWzAsMV0sWzAsMiwiXFxjb25nIiwyXSxbMiwzLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwzLCJcXGNvbmciXV0=
+\[\begin{tikzcd}
+	{\Hom[\cat A](B, G(I))} & {\Hom[\cat A](A, G(I))} \\
+	{\Hom[\cat B](FB, I)} & {\Hom[\cat B](FA, I)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow[two heads, from=2-1, to=2-2]
+\end{tikzcd}\]
+thus
+\[\Hom[\cat A](B, G(I)) \twoheadrightarrow \Hom[\cat A](A, G(I)). \qedhere \]   
+\end{proof}
+
+\begin{defn}
+    An abelian category $\cat A$ has \emph{functorial injectives}\index{to categorize!functorial injectives} if there exists a functor \\ $F\colon \cat A \to \catName{Fun}\left([1], \cat A\right)$ such that:
+    \begin{enumerate}
+        \item $F_0 = \id_{\cat A}$
+        \item each $F_1(X)$ is injective
+        \item $F_0(X)\hookrightarrow F_1(X)$ for all $X\in \cat A$
+    \end{enumerate}
+    We write $X\to I(X)$ for this functor. Dually, one may define the notion of \emph{functorial projectives}. 
+\end{defn}
+
+\begin{rmk}
+    If $\cat A$ has functorial injectives then it has functorial injective resolutions. \todo{interpretation?}
+\end{rmk}
+
+\begin{thm} \leavevmode
+    \begin{enumerate}
+        \item[(1)] ${}_R\catModule, \catModule[R]$ have functorial injectives and projectives.
+        \item[(2)] $\catName{PAb}(\cat C)$ has functorial injectives and projectives.
+        \item[(3)] $\catAbelianGroup(X)$ has functorial injectives.
+    \end{enumerate}
+\end{thm}
+\begin{proof}[Sketch]\leavevmode
+    \begin{enumerate}
+        \item[(1)] Free modules give functorial projectives: $F(M) := R^{\oplus M} \twoheadrightarrow M$. For the injective case, consider the map
+        \[(-)^\vee\colon {}_R\catModule\opp \to \catModule[R],\quad M\mapsto \Hom[\bb Z](M, \bb Q/ \bb Z)\] where $M^\vee$ is a right module via the action,
+        \[M^\vee \times R\to M^\vee,\quad (\phi, e)\mapsto (m\mapsto \phi(r\cdot m)).\]
+        Note that the functor $(-)^\vee$ is exact since $\bb Q /\bb Z$ is a divisible abelian group. Moreover \[\operatorname{ev}\colon M\to (M^\vee)^\vee, \quad m\mapsto (\phi \mapsto \phi(m))\] is injective. For suppose $m\neq 0$, if we take $\bb Zm \xrightarrow{\psi} \bb Q/ \bb Z$ with $\psi(m)\neq 0$ and extend this to $\phi\colon M\mapsto \bb Q/\bb Z$, then $\operatorname{ev}(m) \neq 0$ since $\varphi(m)\neq 0$. Now $F(M^\vee)\twoheadrightarrow M^\vee$ (recall $F$ is a functorial projective) gives
+        \[\begin{tikzcd}[column sep=scriptsize]
+            M \ar[r, "\operatorname{ev}", mono] & (M^\vee)^\vee \ar[r, mono] & F(M^\vee)^\vee
+        \end{tikzcd}\]
+        where we claim that $F(M^\vee)^\vee$ is injective. Let $S$ be a set, then $F(S)^\vee$ is injective since
+        \begin{align*}
+            {}_R\Hom(N, F(S)^\vee) &= {}_R\Hom(N, \Hom[\bb Z](F(S), \bb Q / \bb Z)) \\
+            &\cong \Hom[\bb Z](F(S)\otimes_R N, \bb Q / \bb Z) \tag{\text{\cref{exe:homtensoradjunction}}} \\
+            &= \Hom[\bb Z](N^{\oplus S}, \bb Q / \bb Z) \\ 
+            &= (N^\vee)^S
+        \end{align*}
+        which we saw was exact.
+        \item[(2)] Let $F\in \catAbelianPresheaf(X)$. For projectives, use $\bigoplus_{U\in \operatorname{Ob}(\cat C)} \underline{\bb Z}_U^{\oplus F(U)} \twoheadrightarrow F$ (supposedly easy to prove; this not longer works in $\catAbelianGroup(X)$ since $\underline{\bb Z}_U$ is no longer projective as we will see in HW6). For injectives, this is certainly true for $\catAbelianPresheaf(\cat C^{\text{disc}}) \cong \prod_{X\in \operatorname{Ob}(\cat C)} \catAbelianGroup$ by part (1). The inclusion of categories, $\cat C^{\text{disc}} \xhookrightarrow{i} \cat C$ gives rise to
+        \[i^*\colon \catAbelianPresheaf(\cat C) \to \catAbelianPresheaf(\cat C^{\text{disc}}),\quad F\mapsto F\circ i\] with right adjoint $i_* = \Ran_i$. \todo{reference pullback/pushforward adjunction} Then $i^*$ is exact, so $i_*$ preserves injectives. Thus the functorial injective $i^* F\hookrightarrow I(i^* F)$ gives
+        \[\begin{tikzcd}[column sep=scriptsize]
+            F \ar[r, "\text{unit}"] & i_*i^* F \ar[r] & i_* I(i^* F).
+        \end{tikzcd}\]
+        The unit is monic since $i^*$ is faithful and the second morphism is since $i_*$ is left exact.
+        \item[(3)] This once again holds in $\catAbelianGroup(\cat C^{\text{disc}}) \cong \prod_{x\in X} \catAbelianGroup$ by (1). The inclusion $i\colon X^{\text{disc}}\hookrightarrow X$ gives adjunction
+        \begin{equation*}
+          \begin{tikzcd}
+            \catAbelianGroup(X) \ar[r, "i^*"{name=leftadj}, shift left=2] & \catAbelianGroup(X^{\text{disc}}) \ar[l, "i_*"{name=rightadj}, shift left=2]
+            \ar[from=leftadj, to=rightadj, phantom, "\leftadj" marking]
+          \end{tikzcd}
+        \end{equation*}
+        with $i^*$ exact and faithful (look at stalks). Now run the same argument as in (2).\qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{exmp}
+    If $R = \bb Z$ then $F(S)^\vee = (\bb Z^{\oplus S})^\vee = (\bb Z^\vee)^S = (\bb Q/ \bb Z)^S$.
+\end{exmp}
+
+\section{Exercises}
+
+\todo{if we decide to do this, cite properly in intro w/ permission Remy}
+
+\begin{exe}[Products of injectives are injective]
+    Let $\cat A$ be an abelian category. Show that the subcategory of injective objects (resp. projective objects) is closed under products (resp. direct sums) that exist in $\cat A$.
+\end{exe}
+
+\begin{exe}[$\Hom$ is right adjoint to the tensor product]\label{exe:homtensoradjunction}
+    For rings $A$ and $B$, a $(A,B)$-\emph{bimodule} is an abelian group $M$ which is a left $A$-module and a right $B$-module such that $a(mb) = (am)b$ for all $a\in A, m\in M$ and $b\in B$. Let $M$ be an $(A, B)$-bimodule, let $N$ be a $(B,C)$-bimodule and let $P$ be an $(A,C)$-bimodule. Construct isomorphisms
+    \begin{align*}
+        {}_A\Hom\left(M\otimes_B N, P\right) &\cong\, _B\Hom\left(N, {}_A\Hom(M, K)\right) \\ 
+        \Hom[C]\left(M\otimes_B N, P\right) &\cong \Hom[B]\left(M, \Hom[C](N, K)\right)
+    \end{align*}
+    of $(C, C)$-bimodules and $(A, A)$-bimodules respectively. Restricting to elements on which the two $C$-actions (resp. $A$-actions) agree, deduce isomorphisms of abelian groups
+    \[_B\Hom[C]\left(N, {}_A\Hom(M,K)\right) \cong \,_A\Hom[C]\left(M\otimes_B N, P\right) \cong\, {}_A\Hom[B]\left(M, \Hom[C](N,K)\right).\]
+\end{exe}
+
+\end{document}
