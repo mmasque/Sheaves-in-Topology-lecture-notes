@@ -497,7 +497,9 @@
 \NewDocumentCommand\catCoveringSpace{}{\catName{Cov}}
 \NewDocumentCommand\catBasedTopologicalSpace{}{\catName{Top}_*}
 \NewDocumentCommand\catVectorSpace{o}{\IfNoValueTF{#1}{\catName{Vect}}{\catName{Vect}_{#1}}}
-\NewDocumentCommand\catModule{o}{\IfNoValueTF{#1}{\catName{Mod}}{\catName{Mod}_{#1}}}
+\NewDocumentCommand\catRightModule{o}{\IfNoValueTF{#1}{\catName{Mod}}{\catName{Mod}_{#1}}}
+\NewDocumentCommand\catLeftModule{o}{\IfNoValueTF{#1}{\catName{Mod}}{{}_{#1}\catName{Mod}}}
+\NewDocumentCommand\catModule{o}{\IfNoValueTF{#1}{\catRightModule}{\catRightModule[#1]}}
 \NewDocumentCommand\catChainComplex{o}{\IfNoValueTF{#1}{\catName{Ch}}{\catName{Ch}_{#1}}}
 \NewDocumentCommand\catSimplex{}{\bm{\Delta}}
 \NewDocumentCommand\catSimplicial{m}{\catName{s}#1}
@@ -542,6 +544,9 @@
 %% Alternative definition of Hom:
 %% \Hom(X,Y) produces \Homop(X,Y), \Hom[\cat C](X,Y) produces \cat C(X,Y)
 % \NewDocumentCommand\Hom{O{\Homop}}{#1}
+\NewDocumentCommand\leftmoduleHom{m}{{}_{#1}\Homop}
+\NewDocumentCommand\rightmoduleHom{m}{\Homop_{#1}}
+\NewDocumentCommand\bimoduleHom{mm}{{}_{#1}\Homop_{#2}}
 \NewMathOperator\Autop{Aut}
 %% \Aut(X,Y) produces \Autop(X,Y), \Aut[\cat C](X,Y) produces \Autop_{\cat C}(X,Y)
 \NewDocumentCommand\Aut{o}{\IfNoValueTF{#1}{\Autop}{\Autop_{#1}}}
