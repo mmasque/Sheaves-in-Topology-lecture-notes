@@ -61,7 +61,7 @@ If a morphism is homotopic to the zero morphism, it is called \emph{nullhomotopi
     \] is an isomorphism for all $i \in \mathbb{Z}$. 
 \end{defn}
 
-\begin{exc}
+\begin{exc}\label{exc:properties-of-homotopy}
 	Let $\cochaincomplex{f}, \cochaincomplex{g}: \cochaincomplex{A} \to \cochaincomplex{B}$ be morphisms of cochain complexes. 
 	\begin{enumerate}[label=(\alph*)]
     	\item If $\cochaincomplex{f} \sim \cochaincomplex{g}$ then $\cochaincomplex{f}$ and $\cochaincomplex{g}$ induce the same maps on homology. 
@@ -121,8 +121,13 @@ By \cref{lem:maps-from-exact-to-injective-nullhomotopic} \todo{rest.}
 \end{proof}
 
 \begin{cor}
-	Let $F: \ccat A \to \ccat B$ be a left exact functor between abelian categories, and suppose $\ccat A$ has enough injectives. Then the derived functors $R^iF$ are well defined for all $i$. 
+	Let $F: \cat A \to \cat B$ be a left exact functor between abelian categories, and suppose $\cat A$ has enough injectives. Then the derived functors $R^iF$ are well defined for all $i$. 
 \end{cor}
 \begin{proof}
-	Suppose $0 \to X \to \cochaincomplex{I}$ and $0 \to X \to \cochaincomplex{J}$ are injective resolutions. Then the identity map $\id_X: X \to X$ extends to two maps $\cochaincomplex{f}: \cochaincomplex{I} \to \cochaincomplex{J}$ and $\cochaincomplex{g}: \cochaincomplex{J} \to \cochaincomplex{I}$. 
+	Suppose $0 \to X \to \cochaincomplex{I}$ and $0 \to X \to \cochaincomplex{J}$ are injective resolutions. Then the identity map $\id_X: X \to X$ extends to two maps $\cochaincomplex{f}: \cochaincomplex{I} \to \cochaincomplex{J}$ and $\cochaincomplex{g}: \cochaincomplex{J} \to \cochaincomplex{I}$. Since either composition extends the identity on $X$ uniquely up to homotopy, and the identity on the complexes extends the identity on $X$, the map $\cochaincomplex{f}$ is a homotopy equivalence, so $F(f)$ is a quasi-isomorphism by \cref{exc:properties-of-homotopy}, and thus $H^i(F(\cochaincomplex{I})) \cong H^i(F(\cochaincomplex{J}))$. \todo{prove functoriality of the derived functors}.
 \end{proof}
+
+\begin{defn}
+	Let $X$ be a topological space, let $U \subset X$ be open. 
+	The $i$th \emph{sheaf cohomology} \todo{of $U$?} is $R^i \Gamma(U, -)$, the $i$th derived functor of the functor of sections $\Gamma(U, -)$ that sends a sheaf of abelian groups $\sh{F}$ on $X$ to the abelian group $\sh{F}(U)$. It is denoted $H^i(U, -)$.
+\end{defn}
