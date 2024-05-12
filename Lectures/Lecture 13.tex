@@ -1,0 +1,289 @@
+\chapter{Acyclic resolutions, supports}
+
+\section{Acyclic resolutions}
+\remyquote{``For the benefit of those millenials who believe that the Godement resolution is one of the founding documents of the United Nations, here is a translation of the above construction into contemporary language.''~\cite[Remark~7.1]{HarrisVenkateshDerivedHeckeAlgebras}}
+\noindent
+In this section, let \(\cat A\) and \(\cat B\) be abelian categories and assume \(\cat A\) has enough injectives.
+
+\begin{defn}
+Let \(F\colon\cat A\to\cat B\) be a left exact functor.
+Then an object \(A\) of \(\cat A\) is \emph{\(F\)-acyclic} if \(R^iF(A)=0\) for \(i>0\).
+\end{defn}
+
+\begin{exmp}
+If \(I\) is an injective object of \(\cat A\), then it is \(F\)-acyclic for any \(F\).
+Indeed, take the injective resolution
+\[ 0 \to I \to \underbracket{I \to 0 \to 0 \to \ldots} \]
+of \(I\).
+Then
+\[ R^iF(I) = H^i(F(I)\to 0\to 0\to\ldots) =
+  \begin{cases}
+    0 & \text{if } i>0\text{,} \\
+    F(I) & \text{if } i=0\text{.}
+  \end{cases}
+\]
+\end{exmp}
+
+The following lemma says that the right-derived functors of a left exact functor \(F\) can also be computed using \(F\)-acyclic resolutions rather than injective resolutions.
+
+\begin{lem}\label{lem:compute-right-derived-functor-acyclic-resolution}
+Let \(F\colon\cat A\to\cat B\) be a left exact functor, let \(A\) be an object of \(\cat A\) and let
+\[0\to A\to C^0\to C^1\to\ldots\]
+be a resolution of \(A\) with \(F\)-acyclic \(C^i\) all \(i\).
+Then \(R^iF(A)\cong H^i(F(C^\bullet))\) for all \(i\).
+\end{lem}
+\begin{proof}
+We proceed by induction on \(i\).
+
+For \(i=0\), left exactness gives
+\[ H^0(F(C^\bullet)) \cong \ker(F(C^0)\to F(C^1)) \cong F(A) \cong R^0F(A)\text{.} \]
+(We have not shown this yet, but it is not too hard to show that \(R^0F\cong F\).)
+
+Let \(B\coloneq\im(C^0\to C^1)\cong\ker(C^1\to C^2)\).
+By breaking of the resolution using \(B\), we get exact sequences
+\begin{equation}
+  \label{eq:compute-right-derived-functor-acyclic-resolution-ses}
+  0\to A\to C^0\to B\to 0 
+\end{equation}
+and
+\begin{equation}
+  \label{eq:compute-right-derived-functor-acyclic-resolution-les}
+  0\to B\to C^1\to C^2\to \ldots
+\end{equation}
+The short exact sequence~\cref{eq:compute-right-derived-functor-acyclic-resolution-ses} gives\todo{ref long exact sequence} a long exact sequence
+\[ 0\to F(A)\to F(C^0)\to F(B)\to R^1F(A)\to \underbrace{R^1F(C^0)}_{=0}\to R^1F(B)\to R^2F(A)\to \underbrace{R^2F(C^0)}_{=0}\to \ldots \]
+in which every third term is (eventually) zero since \(C^0\) is \(F\)-acyclic; hence we obtain isomorphisms \(R^iF(B)\cong R^{i+1}F(A)\) by exactness.
+The long exact sequence \cref{eq:compute-right-derived-functor-acyclic-resolution-les} gives an exact sequence
+\[ 0\to F(B)\to F(C^1)\to F(C^2) \]
+by left exactness of \(F\).
+Thus, we have
+\[ R^1F(A) \cong \frac{F(B)}{F(C^0)} \cong \frac{\ker(F(C^1)\to F(C^2))}{\im(F(C^0)\to F(C^1))} \cong H^1(F(C^\bullet))\text{,} \]
+proving the result for \(i=1\).
+
+For \(i>1\), assume the result for \(i-1\) (and for all \(A\) and \(C^\bullet\)).
+Applying the induction hypothesis to the \(F\)-acyclic resolution \cref{eq:compute-right-derived-functor-acyclic-resolution-les} of \(B\), we find
+\[ R^iF(A) \cong R^{i-1}F(B) \cong H^{i-1}(F(C^1)\to F(C^2)\to\ldots) = H^i(F(C^0)\to F(C^1)\to\ldots)\text{.} \qedhere \]
+\end{proof}
+
+So far, this lemma does not say anything specific about sheaves.
+The next lemma will be an important example for us.
+Recall that a sheaf \(\mathcal F\) is \emph{flasque} if the restriction \(\mathcal F(V)\to\mathcal F(U)\) is surjective for opens \(U\subseteq V\).
+We will use the result of the following exercise, which appears as Additional exercise~12.4.
+
+\begin{exc}\label{exc:additional-exercise-12.4}
+Let \(0\to\mathcal F\to\mathcal G\to\mathcal H\to 0\) be a short exact sequence of abelian sheaves on a space \(X\).
+Show the following:
+\begin{enumerate}
+\item If \(\mathcal F\) is flasque and \(U\subseteq X\) is open, then \(0\to\mathcal F(U)\to\mathcal G(U)\to\mathcal H(U)\to 0\) is exact.
+  (In other words, the functor \(\mathcal F\mapsto\mathcal F(U)\) is exact.)
+\item If \(\mathcal F\) and \(\mathcal G\) are flasque, then so is \(\mathcal H\).
+\end{enumerate}
+\end{exc}
+
+\begin{lem}\label{lem:flasque-sheaf-evaluation-acyclic}
+Let \(\mathcal F\) be a flasque abelian sheaf on a space \(X\).
+Then \(\mathcal F\) is \(H^0(U,-)\)-acyclic for any open \(U\subseteq X\), that is, \(H^i(U,\mathcal F)=0\) for \(i>1\).
+\end{lem}
+\begin{proof}
+Choose an injection \(\mathcal F\hookrightarrow\mathcal I\) into an injective sheaf and let \(\mathcal H\) be the quotient, giving a short exact sequence
+\[ 0\to\mathcal F\to\mathcal I\to\mathcal H\to 0\text{.}\]
+Injective sheaves are flasque (\cref{exmp:injective-sheaves-are-flasque}), so by \cref{exc:additional-exercise-12.4}, \(\mathcal H\) is too and
+\[ 0\to\mathcal F(U)\to\mathcal I(U)\to\mathcal H(U)\to 0 \]
+is exact for any open \(U\subseteq X\).
+Since injective sheaves are acyclic so \(H^i(U,\mathcal I)=0\), we get \(H^i(U,\mathcal F)=0\) for \(i>0\) and \(H^i(U,\mathcal F)\cong H^{i-1}(U,\mathcal H)\) for \(i>1\) from the long exact sequence.
+Since \(\mathcal H\) is flasque, we conclude by induction on \(i\).
+(This argument is similar to what we did in the proof of \cref{lem:compute-right-derived-functor-acyclic-resolution}.)
+\end{proof}
+
+\begin{exmp}
+If \(X\) is discrete, then any sheaf on \(X\) is flasque, so \(H^i(X,\mathcal F)=0\) for all \(i>0\) and all abelian sheaves \(\mathcal F\) on \(X\).
+\end{exmp}
+
+\begin{exmp}
+If \(f\colon Y\to X\) is continuous and \(\mathcal F\) is a flasque abelian sheaf on \(Y\), then \(f_*\mathcal F\) is flasque: if \(U\subseteq V\subseteq X\) are open, then the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    f_*\mathcal F(V) \ar[d, equal] \ar[r] & f_*\mathcal F(U) \ar[d, equal] \\
+    \mathcal F(f\inv(V)) \ar[r, epi] & \mathcal F(f\inv(U))
+  \end{tikzcd}
+\end{equation*}
+commutes, so surjectivity of the bottom map (by flasqueness of \(\mathcal F\)) implies surjectivity of the top map.
+\end{exmp}
+
+\begin{rmk}
+Recall that we constructed enough injectives in \(\catAbelianSheaf(X)\) as follows: take \(f\colon {X^{\disc}\hookrightarrow X}\) and choose an injection \(f^*\mathcal F\hookrightarrow\mathcal I\) into an injective in \(\catAbelianGroup(X^{\disc})\).
+Then the composite \[\mathcal F\hookrightarrow f_*f^*\mathcal F\hookrightarrow f_*\mathcal I\] gives our required injection into an injective object.
+But the map \(\mathcal F\hookrightarrow f_*f^*\mathcal F\) is already an injection into a flasque sheaf.
+Iterating this construction gives a canonical flasque resolution
+\[ 0\to\mathcal F\to f_*f^*\mathcal F\to f_*f^*(\coker(\mathcal F\to f_*f^*\mathcal F))\to\ldots\text{,} \]
+which is called the \emph{Godement resolution} of \(\mathcal F\).
+This resolution has some advantages: it is very explicit, functorial and additive.
+\end{rmk}
+
+\section{Supports}
+
+\begin{defn}
+Let \(\mathcal F\) be an abelian sheaf on \(X\) and let \(s\in\mathcal F(U)\) be a section.
+Then the support of \(s\) is the set \(\supp(s) \coloneq \setpred{x\in U}{s_x\neq 0}\).
+\end{defn}
+
+\begin{lem}\label{lem:support-closed}
+If \(s\in\mathcal F(U)\) is a section, then \(\supp(s)\subseteq U\) is closed.
+\end{lem}
+\begin{proof}
+The locus where the two sections \(0,s\colon U\to\etalespace(\mathcal F)\) agree is open since \[\Delta_{\etalespace(F)/X}\subseteq\etalespace(F)\pullback{X}\etalespace(\mathcal F)\] is open.\todo{why?}
+\end{proof}
+
+\begin{defn}
+For a topological space \(X\), define a functor
+\[ H^0_c(X,-)\colon\catAbelianSheaf(X)\to\catAbelianGroup\text{,}\quad\mathcal F\mapsto\setpred{s\in\mathcal F(X)}{\supp(s)\text{ is compact}}\text{,} \]
+sending a sheaf to its global sections with compact support.
+This functor is left exact and the derived functors \(H^i_c(X,-)\) are the \emph{cohomology with compact support}.
+\end{defn}
+
+We will derive properties of cohomology \(H^i\) and compactly supported cohomology \(H^i_c\) in parallel.
+A more general unified strategy using `families of supports' is presented in \cite[\S~\RN{2}.9]{BredonSheafTheory}.
+
+For a sheaf \(\mathcal F\) on a space \(X\) and any subspace \(i\colon Y\hookrightarrow X\), we write \(\mathcal F|_Y\) for the \emph{restriction} of \(\mathcal F\) to \(Y\), which is defined to be the pullback \(i^*\mathcal F\) of \(\mathcal F\) along \(i\).
+
+\begin{defn}
+An abelian sheaf \(\mathcal F\) on a space \(X\) is \emph{soft} (resp.~\emph{c-soft}) if the restriction \(\mathcal F(X)\to\mathcal F|_Z(Z)\) is surjective for every closed (resp.~compact closed) subset \(Z\subseteq X\).
+\end{defn}
+
+By abuse of notation, we write \(\mathcal F(W)=\mathcal F|_W(W)\) when \(W\subseteq X\) is locally closed.
+
+\begin{rmk}
+Some authors (such as~\cite{IversenCohomologyOfSheaves}) say `soft' for what we call `c-soft'.
+\end{rmk}
+
+We will show that soft (resp.~c-soft) shaves are \(H^0(X,-)\)-acyclic (resp.~\(H^0_c(X,-)\)-acyclic) under suitable assumptions on the space \(X\).
+
+\section{Paracompactness}
+\remyquote{We're diving into point-set topology, it's happening: it's no longer a category theory course.}
+% \remyquote{Recall that everything in~\cite{MunkresTopology} is trivial.}
+\noindent
+Recall that a space \(X\) is \emph{paracompact} if every open cover \(X=\bigcup_{i\in I}U_i\) has a refinement \(\bigcup_{j\in J}V_j=X\) (that is, there exists a function \(\phi\colon J\to I\) with \(V_j\subseteq U_{\phi(j)}\) for all \(j\in J\)) that is locally finite: every point \(x\in X\) has an open neighbourhood \(U\) meeting finitely many \(V_j\).
+
+\begin{exmp}
+All compact spaces, metrisable spaces and CW-complexes are paracompact.
+Most authors \emph{assume} manifolds to be paracompact.
+\end{exmp}
+
+We will use the following point-set topological result about paracompact spaces.
+
+\begin{lem}[name={\cite[Lemma~41.6]{MunkresTopology}}]\label{lem:paracompact-locally-finite-cover}
+If \(X\) is a paracompact Hausdorff space and \(\bigcup_{i\in I}U_i=X\) is an open cover, then there exists a locally finite cover \(\bigcup_{i\in I}V_i=X\) with \(\overline{V_i}\subseteq U_i\) for all \(i\in I\).
+\end{lem}
+
+\begin{prop}\label{prop:restriction-map-isomorphism-paracompact}
+Let \(X\) be a Hausdorff space, let \(i\colon Z\hookrightarrow X\) be a closed subspace and let \(\mathcal F\) be an abelian sheaf on \(X\).
+Then the map
+\begin{equation}
+  \label{eq:restriction-map-isomorphism-paracompact}
+  \colim_{Z\subseteq U\text{, }U\textup{ open}}\mathcal F(U) \xrightarrow{(-)|_Z} \mathcal F(Z)
+\end{equation}
+is an isomorphism if:
+\begin{enumerate}
+\item\label{prop:restriction-map-isomorphism-paracompact:paracompact} \(X\) is paracompact, or
+\item\label{prop:restriction-map-isomorphism-paracompact:locally-compact} \(X\) is locally compact and \(Z\) is compact.
+\end{enumerate}
+\end{prop}
+\begin{proof}[sketch]
+Recall that \(\colim_{Z\subseteq U}\mathcal F(U)=(i^\circledast\mathcal F)(Z)\) (see \cref{prop:pullback-Kan-extension}) and we defined \(\mathcal F(Z)\coloneq(i^*\mathcal F)(Z)\).
+
+The map \cref{eq:restriction-map-isomorphism-paracompact} is always injective: suppose \(s\in\mathcal F(U)\) is a section with \(s|_Z=0\).
+Then the support of \(s\) is a closed subset (by \cref{lem:support-closed}) of the complement \(U\setminus Z\), so \(V\coloneq U\setminus\supp(s)\) is an open neighbourhood of \(Z\) such that \(s|_V=0\).
+
+For surjectivity, we treat the cases separately:
+\begin{enumerate}
+\item
+  If \(s\in\mathcal F(Z)\) is a section, then it \emph{locally} extends to an open neighbourhood: there exist opens \(U_i\subseteq X\) such that \(Z\subseteq\bigcup_{i\in I}U_i\) and sections \(t_i\in\mathcal F(U_i)\) with \(t|_{Z\cap U_i}=s|_{Z\cap U_i}\) for all \(i\in I\).
+  Without loss of generality, we may assume that the open cover \((U_i)_{i\in I}\) is locally finite since closed subspaces of paracompact spaces are paracompact.
+  (This is \cite[Theorem~41.2]{MunkresTopology}; the idea of the proof is to add \(X\setminus Z\) to the cover and restrict the refined cover by intersecting with \(Z\).)
+  Using \cref{lem:paracompact-locally-finite-cover}, choose an open cover \(Z=\bigcup_{i\in I}V_i=X\) with \(\overline{V_i}\subseteq U_i\) for all \(i\in I\).
+  Set
+  \[ W\coloneq\setpred{x\in X}{x\in\overline{V_i}\cap\overline{V_j}\implies t_{i,x}=t_{j,x}}\text{,} \]
+  which contains \(Z\) and write \(J(x)\coloneq\setpred{i\in I}{x\in\overline{V_i}}\) for a point \(x\in X\).
+  Then for all \(x\), the set \(J(x)\) is finite and there is an open neighbourhood \(U\) of \(x\) such that \(J(y)\subseteq J(x)\) for all \(y\in U\): indeed, there exists an open neighbourhood \(V\) of \(x\) meeting finitely only many \(U_i\), and we can take
+  \[ U\coloneq V\setminus\bigcup_{\substack{i\in I \\ U_i\cap V\neq\emptyset \\ x\notin V_i}}\overline{V_i}\text{.} \]
+  If \(x\in W\), the sections \(t_{i,x}\) for \(i\in J(x)\) all agree, so the same holds in a neighbourhood of \(x\) since \(J(x)\) is finite.
+  Hence \(W\) is open and the \(t_i\) glue to a well-defined section \(t\in\mathcal F(W)\).
+\item
+  Since \(X\) is locally compact, there exists a compact neighbourhood \(W\) of \(Z\) in \(X\).
+  Replace \(X\) by \(W\) and use part~\cref{prop:restriction-map-isomorphism-paracompact:paracompact}.
+  \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{cor}
+If \(\mathcal F\) is a flasque abelian sheaf on \(X\), then \(\mathcal F\) is:
+\begin{enumerate}
+\item soft if \(X\) is paracompact Hausdorff, and
+\item c-soft if \(X\) is locally compact Hausdorff.
+\end{enumerate}
+\end{cor}
+
+\begin{prop}\label{prop:global-sections-exact-soft}
+Let \(0\to\mathcal F\to\mathcal G\to\mathcal H\to 0\) be a short exact sequence of abelian sheaves on a space \(X\).
+\begin{enumerate}
+\item\label{prop:global-sections-exact-soft:soft}
+  If \(X\) is paracompact Hausdorff and \(\mathcal F\) is soft, then the short sequence
+  \[ 0\to\mathcal F(X)\to\mathcal G(X)\to\mathcal H(X)\to 0 \]
+  is exact.
+\item\label{prop:global-sections-exact-soft:c-soft}
+  If \(X\) is locally compact Hausdorff and \(\mathcal F\) is c-soft, then the short sequence
+  \[ 0\to H^0_c(X,\mathcal F)\to H^0_c(X,\mathcal G)\to H^0_c(X,\mathcal H)\to 0 \]
+  is exact.
+\end{enumerate}
+\end{prop}
+
+Before proving the proposition, we note the following consequence.
+
+\begin{cor}
+A soft (resp.~c-soft) sheaf on a paracompact (resp.~locally compact) Hausdorff space \(X\) is \(H^0(X,-)\)-acyclic (resp.~\(H^0_c(X,-)\)-acyclic).
+\end{cor}
+\begin{proof}
+Similar to the proof of \cref{lem:flasque-sheaf-evaluation-acyclic}, using a result similar to \cref{exc:additional-exercise-12.4} for softness or c-softness instead of flasqueness.
+\end{proof}
+
+\begin{proof}[name={of \cref{prop:global-sections-exact-soft}, sketch}]
+\begin{enumerate}
+\item
+  Exactness on the left is general, so it remains to prove that \(\mathcal G(X)\to\mathcal H(X)\) is surjective.
+  Let \(s\in\mathcal H(Z)\) be a section and let \(\bigcup_{i\in I}U_i=X\) be a locally finite cover with \(s_i\in\mathcal G(U_i)\) lifting \(s|_{U_i}\) for all \(i\in I\).
+  By \cref{lem:paracompact-locally-finite-cover}, choose a locally finite cover \(\bigcup_{i\in I}V_i=X\) with \(\overline{V_i}\subseteq U_i\) for all \(i\in I\).
+  \emph{Now we are going to do one of the most ugly tricks in the book}:
+  Put all well-order on \(I\) and let \(I^\triangleright\coloneq I\cup\{\infty\}\) be the successor of \(I\), that is, with \(i<\infty\) for all \(i\in I\).
+  For \(i\in I^\triangleright\) set \(W_i\coloneq\bigcup_{j<i}\overline{V_j}\); in particular, \(W_\infty=X\).
+  Since the open cover \((U_i)_{i\in I}\) is locally finite, each \(W_i\) is closed.
+  Using transfinite induction we define \(t_i\in\mathcal G(W_i)\) for all \(i\in I^\triangleright\) lifting \(s|_{W_i}\) such that \(t_i|_{W_j}=t_j\) if \(j\leq i\).
+
+  For the smallest element \(i_0\) of \(I^\triangleright\), we have \(W_{i_0}=\emptyset\), so we must choose \(t_{i_0}=0\in\mathcal F(W_{i_0})=\mathcal F(\emptyset)=0\), and this clearly lifts \(s|_{W_i}=0\).
+
+  In the successor case \(i=j+1\) for \(j\in I\), then \(t_j\) and \(s_i\) both lift \(s|_{W_j\cap\overline{V}_j}\), so their difference is in \(\mathcal F(W_j\cap\overline{V_j})\) (by exactness of pullback, \cref{lem:pullback-preserves-colimits-and-finite-limits}, restriction to a closed subspace is exact).
+  This difference extends to some \(t_{ij}\in\mathcal F(X)\) since \(\mathcal F\) is soft, and then \(t_j\in\mathcal G(W_j)\) and \(s_i-t_{ij}|_{\overline{V_j}}\in\mathcal G(\overline{V_j})\) glue to some \(t_i\in\mathcal G(W_i)\).
+  (One of the additional exercises shows you can do this.\todo{which one?})
+
+  Finally, if \(i\) is a limit ordinal, then glue \(t_j\) for \(j<i\) to get \(t_i\).
+\item
+  If \(s\in H^0_c(X,\mathcal H)\) is a section with compact support, then apply part~\cref{prop:global-sections-exact-soft:soft} to a compact neighbourhood \(W\) of \(\supp(s)\) to get \(t\in\mathcal G(W)\) lifting \(s|_W\).
+  On the boundary \(\partial W\) of \(W\), we have \(s|_{\partial W}=0\), so \(t|_{\partial W}\) is in \(\mathcal F(\partial W)\).
+  Lift to a global section of \(\mathcal F\), subtract and extend by zero.
+  \qedhere
+\end{enumerate}
+\end{proof}
+
+The conclusion of all the work we did is the following picture for abelian sheaves on a Hausdorff space \(X\):
+\begin{equation*}
+  \begin{tikzcd}[arrows=Rightarrow, column sep=small, row sep=small]
+    & & \textup{soft} \ar[r] & \textup{\(H^0(X,-)\)-acyclic} \\
+    \textup{injective} \ar[r] & \textup{flasque} \ar[ru] \ar[rd] \\
+    & & \textup{c-soft} \ar[r] & \textup{\(H^0_c(X,-)\)-acyclic}
+  \end{tikzcd}
+\end{equation*}
+The top implications hold under the assumption that \(X\) is paracompact and the bottom implications under the assumption that \(X\) is locally compact.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
