@@ -1,0 +1,128 @@
+\chapter{Derived functors, sheaf cohomology}
+This week's lecturer was Dr. Soumya Sankar. 
+
+\section{Derived functors}
+
+Let $\cochaincomplex{C}$ be a cochain complex. 
+	The kernels $Z^i:= \ker(d^i: C^i \to C^{i+1})$ are called cocycles, and the images $B^i := \im(d^{i-1}: C^{i-1} \to C^i)$ are called coboundaries. Check that the universal property of the kernel gives a map $B^i \to Z^i$. 
+\begin{defn}
+	The cokernel $\coker(B^i \to Z^i)$ is the $i$th cohomology of $\cochaincomplex{C}$. It is denoted by $\cohomology^i(\cochaincomplex{C})$. One checks that in abelian groups $\cohomology^i(\cochaincomplex{C})$ is the quotient $Z^i/B^i$. \todo{this is not so clear...}
+	Given a morphism $\cochaincomplex{C} \to \cochaincomplex{D}$, taking the $i$th cohomology functorially induces a map $\cohomology^i{\cochaincomplex{C}} \to \cohomology^i{\cochaincomplex{D}}$.
+\end{defn}
+If $\cochaincomplex{C}$ is exact, $\cohomology^i(\cochaincomplex{C}) = 0$ for all $i$. 
+
+\begin{exc}
+	Let $\cochaincomplex{C} = 0 \to X \to I^0 \to I^1 \to ... $ be an injective resolution. Then $\cohomology^0(\cochaincomplex{C}) = X$ and $\cohomology^i(\cochaincomplex{C}) = 0$ for $i > 0$. 
+\end{exc}
+
+\begin{lem}
+	Let $0 \to \cochaincomplex{A} \to \cochaincomplex{B} \to \cochaincomplex{C} \to 0$ be a short exact sequence of chain complexes. Then there is a canonical long exact sequence 
+	\[
+    	\cdots \to \cohomology^{i-1}(\cochaincomplex{A}) \to \cohomology^{i-1}(\cochaincomplex{B}) \to \cohomology^{i-1}(\cochaincomplex{C}) \to \cohomology^{i}(\cochaincomplex{A}) \to \cohomology^{i}(\cochaincomplex{B}) \to \cohomology^{i}(\cochaincomplex{C}) \to \cdots 
+    \]
+\end{lem}
+\begin{proof}
+	The proof from the lecture used abelian groups. \todo{rewrite in general abelian categories}. 
+\end{proof}
+
+\section{Homotopies and quasi-isomorphisms}
+\begin{defn}
+Let $\cochaincomplex{f}, \cochaincomplex{g}: \cochaincomplex{A} \to \cochaincomplex{B}$ be morphisms of cochain complexes. A \emph{homotopy} between $\cochaincomplex{f}$ and $\cochaincomplex{g}$ is a collection of maps $h^i: A^i \to B^{i-1}$ such that \[
+	f^i - g^i = d^{i-1}_B h^i + h^{i+1}d^i_A.
+\]
+The maps $\cochaincomplex{f}$ and $\cochaincomplex{g}$ are \emph{homotopic}, we write $\cochaincomplex{f} \sim \cochaincomplex{g}$. It helps to keep the following `parallelogram diagram' in mind: 
+\[\begin{tikzcd}
+	{\cdots } & {A^{i-1}} && {A^i} && {A^{i+1}} & \cdots \\
+	\cdots & {B^{i-1}} && {B^{i}} && {B^{i+1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-4]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{d^i_A}"', from=1-4, to=1-6]
+	\arrow["{h^i}"{description}, dashed, from=1-4, to=2-2]
+	\arrow["{f^i - g^i}"{description}, from=1-4, to=2-4]
+	\arrow[from=1-6, to=1-7]
+	\arrow["{h^{i+1}}"{description}, from=1-6, to=2-4]
+	\arrow[from=1-6, to=2-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{d^{i-1}_B}"', from=2-2, to=2-4]
+	\arrow[from=2-4, to=2-6]
+	\arrow[from=2-6, to=2-7]
+\end{tikzcd}\]
+If a morphism is homotopic to the zero morphism, it is called \emph{nullhomotopic}.
+\end{defn}
+
+\begin{defn}(Homotopy equivalence)
+	A map $\cochaincomplex{f}: \cochaincomplex{A} \to \cochaincomplex{B}$ is a \emph{homotopy equivalence} if there exists a map $\cochaincomplex{g}: \cochaincomplex{B} \to \cochaincomplex{A}$ such that $\cochaincomplex{g} \circ \cochaincomplex{f} \sim \id_{\cochaincomplex{g}}$ and $\cochaincomplex{g} \sim \id_{\cochaincomplex{f}}$. 
+\end{defn}
+
+\begin{defn}(Quasi-isomorphism)
+	A map $\cochaincomplex{f}: \cochaincomplex{A} \to \cochaincomplex{B}$ is a \emph{quasi-isomorphism} if the induced map \[
+    	\cohomology^i{\cochaincomplex{f}}: \cohomology^i{\cochaincomplex{A}} \to \cohomology^i{\cochaincomplex{B}}
+    \] is an isomorphism for all $i \in \mathbb{Z}$. 
+\end{defn}
+
+\begin{exc}
+	Let $\cochaincomplex{f}, \cochaincomplex{g}: \cochaincomplex{A} \to \cochaincomplex{B}$ be morphisms of cochain complexes. 
+	\begin{enumerate}[label=(\alph*)]
+    	\item If $\cochaincomplex{f} \sim \cochaincomplex{g}$ then $\cochaincomplex{f}$ and $\cochaincomplex{g}$ induce the same maps on homology. 
+		\item If $\cochaincomplex{f}$ is a homotopy equivalence then it is a quasi isomorphism.
+		\item If $F: \cat A \to \cat B$ is an additive functor between abelian categories and $h$ is a homotopy between $\cochaincomplex{f}$ and $\cochaincomplex{g}$ then $F(h)$ is a homotopy between $F(\cochaincomplex{f})$ and $F(\cochaincomplex{g})$\footnote{This is a slight abuse of notation. A homotopy is not a morphism of complexes, but a set of maps $h^i$ for $i \in \mathbb{Z}$. Here $F(h)$ means we apply $F$ to each $h^i$}.
+		\item If $f$ is a homotopy equivalence and $F$ is additive then $F(f)$ is a quasi-isomorphism. 
+    \end{enumerate}
+\end{exc}
+
+\begin{lem}\label{lem:maps-from-exact-to-injective-nullhomotopic}
+	Let $\cochaincomplex{C}$ be an exact cocomplex and \[
+    	\cochaincomplex{I}: 0 \to I^k \to I^{k+1} \to I^{k+2} \to \cdots 
+    \] be a cocomplex of injective objects (we call a cocomplex which is zero for all $i$ smaller or larger than some $k \in \mathbb{Z}$ a \emph{bounded} cocomplex). 
+	Then any map of complexes $\cochaincomplex{f}: \cochaincomplex{C} \to \cochaincomplex{I}$ is nullhomotopic. 
+\end{lem}
+\begin{proof}
+	We want to construct maps $h^i: C^i \to I^{i-1}$ that satisfy the homotopy condition with respect to $\cochaincomplex{f}$ and $0$: \[
+    	f^i - 0 = d_B^{i-1}h^i + h^{i+1}d_I^i
+    \] for all $i \in \mathbb{Z}$. We proceed inductively. For $i < k$ we let $h^i = 0$. Assume now that $h^j$ is defined for all $j \leq i$ for some $i \in \mathbb{Z}$. 
+	Some computation yields an insight. We have 
+	\begin{align*}
+    	&(f^i - d_I^{i-1}h^i) \circ d_C^{i-1} = f^i \circ d_C^{i-1} - d_I ^{i-1} \circ h^i \circ d_C^{i-1}\\
+		& d_I^{i-1}f^{i-1} - d_I^{i-1}\circ h^i \circ d_C^{i-1} = d_I^{i-1}(f^{i-1} - h^i \circ d_C^{i-1})\\
+		& d^{i-1}_I \circ d_I^{i-2} \circ h^{i-1} = 0
+    \end{align*} the last step by the inductive hypothesis. 
+	We see that $f^i - d_I^{i-1}$ factors via the cokernel of $d_C^{i-1}$ which by exactness is the image of .... \todo{finish}. 
+\end{proof}
+
+\begin{cor}
+	Let $0 \to Y \to I^0 \to I^1 \to \cdots$ be a bounded cocomplex of injectives, and let $0 \to X \to C^0 \to C^1 \to ...$ be an exact cocomplex. Then any map $f: X \to Y$ extends to the cocomplexes uniquely up to homotopy. 
+\end{cor}
+\begin{proof}
+Construct the following solid commutative diagram 	
+\[\begin{tikzcd}
+	X & {C^0} & {C^1} & {C^2} & \cdots \\
+	Y \\
+	{I^0} & {I^1} & {I^2} & {I^3} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f^0}"{pos=0.6}, dashed, from=1-2, to=3-1]
+	\arrow["0"{pos=0.2}, from=1-2, to=3-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{f^1}"{pos=0.6}, dashed, from=1-3, to=3-2]
+	\arrow["0"{pos=0.2}, from=1-3, to=3-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f^2}"{pos=0.6}, from=1-4, to=3-3]
+	\arrow["0"{pos=0.2}, from=1-4, to=3-4]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+\end{tikzcd}\]
+giving a map of cocomplexes from $X \to C^0 \to C^1 \to C^2 \to \cdots$ to $I^0 \to I^1 \to I^2 \to \cdots$. 
+By \cref{lem:maps-from-exact-to-injective-nullhomotopic} \todo{rest.}
+\end{proof}
+
+\begin{cor}
+	Let $F: \ccat A \to \ccat B$ be a left exact functor between abelian categories, and suppose $\ccat A$ has enough injectives. Then the derived functors $R^iF$ are well defined for all $i$. 
+\end{cor}
+\begin{proof}
+	Suppose $0 \to X \to \cochaincomplex{I}$ and $0 \to X \to \cochaincomplex{J}$ are injective resolutions. Then the identity map $\id_X: X \to X$ extends to two maps $\cochaincomplex{f}: \cochaincomplex{I} \to \cochaincomplex{J}$ and $\cochaincomplex{g}: \cochaincomplex{J} \to \cochaincomplex{I}$. 
+\end{proof}
