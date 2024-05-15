@@ -101,5 +101,10 @@ We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the fo
 \end{lem}
 \begin{proof}
 	We proved in \cref{prop:restriction-map-isomorphism-paracompact} that the statement holds for $i = 0$.
-	Note that the pullback $i^*: \catAbelianSheaf(X) \to \catAbelianSheaf(Z)$ preserves soft sheaves if $X$ is paracompact Hausdorff (respectively c-soft sheaves if $X$ is locally compact Hausdorff, irrespective of whether $Z$ is compact). 
+	Note that the pullback $i^*: \catAbelianSheaf(X) \to \catAbelianSheaf(Z)$ preserves soft sheaves if $X$ is paracompact Hausdorff (respectively c-soft sheaves if $X$ is locally compact Hausdorff, irrespective of whether $Z$ is compact): if $W \subset Z$ is closed, then any $s \in \sh{F}(W)$ extends to $\sh{F}(X)$ hence also to $\sh{F}(Z)$ \todo{where have we used the assumptions on $X$?} (note that $W$ is compact if $Z$ is). 
+	Now given an injective resolution $0 \to \sh{F} \to \cochaincomplex{I}$, it is (c)-soft, and $i^*\cochaincomplex{I}$ is a (c)-soft resolution of $i^*\sh{F}$. Unravelling the definitions, we obtain the desired result: 
+	\begin{align*}
+    	\cohomology^i(Z, \sh{F}|_Z) &= \cohomology^i(\Gamma(Z, i^* \cochaincomplex{I})) \\ &\cong \cohomology^i(\filteredcolim_{Z \subset U} \Gamma(U, i^*\cochaincomplex{I}))\\ & \cong \filteredcolim_{Z\subset U} \cohomology^i(\Gamma(U, i^*\cochaincomplex{I}))\\ &= \filteredcolim_{Z \subset U} \cohomology^i(U, \sh{F}).
+	\end{align*}
 \end{proof}
+
