@@ -1,4 +1,4 @@
-\chapter{The proper base change theorem}
+\chapter{Proper maps, proper pushforward, the proper base change theorem}
 
 We begin with some general theory of proper maps. 
 
@@ -8,4 +8,98 @@ We begin with some general theory of proper maps.
 	A continuous map $f: X \to Y$ between topological spaces is \emph{universally closed} if for any map $X' \to X$ the base change $X \times_X Y \to Y$ is a closed map.
 \end{defn}
 
+\remyquote{The proof I'll give for this lemma is taken from Bourbaki. You'll hate it.}
+\begin{lem}
+	Let $X \in \catTopologicalSpace$. The map $X \to *$ is universally closed if and only if $X$ is compact. 
+\end{lem}
+\begin{proof}
+	If $X$ is compact, we need to show that the projection map $\pi: X\times Y \to Y$ is closed for any $Y \in \catTopologicalSpace$. Let $Z \subset X \times Y$ closed and let $y \in Y \setminus \pi(Z)$. We will construct an open set around $y$ that does not intersect $\pi(Z)$. 
+	Notice that $X \cong X \times \{y\} \subset Z^{c}$, so we can cover $X \times \{y\}$ by finitely many opens contained in $Z^c$. Their intersection is still an open open $U$, and the projection map is open so $\pi(U)$ is open containing $y$ and not intersecting $\pi(Z)$. 
+	Conversely, assume $X \to *$ is universally closed.
+	To prove compactness we will use prove that any collection of closed subsets of $X$ with the finite intersection property has nonempty intersection. So let $Z_i \subset X$ ($i \in I$) be a such a collection. We use the notation $Z_J = \cap_{j \in J}Z_j$ for $J \subset I$.
+	Define a new space \[
+    	X' = X^{\text{disc}} \cup \{\infty\}
+    \] where $U \subset X'$ is open if and only if $\infty \in U$ implies $Z_J \subset U$ for some finite subset $J \subset I$.
+	One checks this defines a topology on $X'$. Note that the subspace topology on $X'$ is still the discrete topology. Furthermore, any open subset $U$ containing $\infty$ contains some $Z_J$ for $J$ finite, and since $Z_J \neq \emptyset$ we have $U \cap X^\text{disc} \neq \emptyset$: $X^{\text{disc}}$ is dense in $X'$. Let $\overline{\Delta}$ be the closure of $\{(x,x) \mid x \in X\} \subset X \times X'$. The image in $X'$ of $\overline{\Delta}$ is closed by assumption and contains $X$ so it is equal to $X'$ because $X$ is dense in $X'$. Thus there exists a point $(x, \infty) \in \overline{\Delta}$ for some $x \in X$. Now for all opens $U \subset X$ containing $x$ and all $J \subset I$ finite, there exists a point $y \in X$ with $(y, y) \in U \times (Z_j \cup \{\infty\})$ \todo{why? Look at Remy's notes}, and thus $x \in \overline{Z_J} = Z_J$ for all $J \subset I$ finite.
+\end{proof}
 
+\begin{prop}
+	Let $f: Y \to X$ be a morphism of topological spaces. The following are equivalent: 
+	\begin{enumerate}
+    	\item $f$ is universally closed,
+		\item $f \times \id_W: Y \times W \to X \times W$ is closed,
+		\item $f$ is closed and $f^{-1}(x)$ is closed for all $x \in X$,
+		\item $f$ is closed and $f^{-1}(Z)$ is compact for all $Z \subset X$ closed. 
+    \end{enumerate}
+\end{prop}
+\todo{Add the proof}
+
+\begin{defn}
+	A map $f: Y \to X$ of topological spaces is called \emph{separated} if the diagonal map $
+    	\Delta_{Y/X}: Y \to Y\times_X Y
+    $ is closed. The map $f$ is called \emph{proper} if it is universally closed and separated. 
+\end{defn}
+\begin{rmk}
+	Some authors do not include the separated condition.
+\end{rmk}
+
+\section{Proper pushforward}
+
+\begin{defn}
+	Let $f: Y \to X$ be a map of topological spaces. The \emph{proper pushforward} (sometimes called the \emph{pushforward with proper support}) is the functor $f_{!}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ defined, given a sheaf $\sh{F} \in \catAbelianSheaf(Y)$, by \[
+		(f_{!}\sh{F})(U) = \{s \in \sh{F}(f^{-1}(U)) \mid \supp(s) \to U \text{ is proper}\}.
+    \]
+\end{defn}
+\begin{rmk}
+	In Homework 8 you are asked to show this assignment gives a sheaf on $X$. 
+\end{rmk}
+\begin{exc}
+	In additional exercise 15.3 you are asked to show that for the inclusion of an open subset $j: U \hookrightarrow X$ the proper pushforward becomes the extension by zero functor. 
+\end{exc}
+We have a functor $f_!$ between abelian categories. One checks it is left exact. 
+\begin{defn}
+	The $i$th \emph{higher pushforward with proper support} are the derived functors $\rightderived^if_!: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ of the \emph{proper pushforward}. 
+\end{defn}
+
+\begin{exc}
+	If $j: U \hookrightarrow X$ is an open subset then $R^ij_! = 0$ for all $i > 0$ since $j_!$ is exact.
+\end{exc}
+
+\begin{exc}
+	If $X$ is Hausdorff then $\cohomology_C(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f: X \to *$. 
+\end{exc}
+
+\section{The proper base change theorem}
+We are now ready to state one of the main results of the course. We do so in two versions, one involving the pushforward and one involving the proper pushforward.
+
+\begin{thm}\label{thm:proper-base-change-theorem-1}
+	Let $f: Y \to X$ be a proper map of topological spaces and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff. For $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
+    	(\rightderived^i f_* \sh{F})_x \to \cohomology^i(f^{-1}(x), \sh{F})
+    \] is an isomorphism for all $x \in X$ and for all $i \geq 0$. 
+\end{thm}
+
+\begin{rmk}
+	\cref{thm:proper-base-change-theorem-1} is true for $f$ proper with no further hypotheses, but we will not prove it in this course. See \cite[Lemma 09V6]{stacks-project} for a proof of the general case. 
+\end{rmk}
+
+\begin{thm}\label{thm:proper-base-changed-theorem-2}
+	Let $f: Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
+    	(\rightderived^i f_! \sh{F})_x \to \cohomology^i_C(f^{-1}(x), \sh{F})
+    \] is an isomorphism for all $x \in X$ and all $i \geq 0$.
+\end{thm}
+
+We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the following lemma.
+
+\begin{lem}
+	Let $i: Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}[label=(\roman*)]
+    	\item $X$ is paracompact Hausdorff or 
+		\item $X$ is locally compact Hausdorff and that $Z$ is compact.
+    \end{enumerate}
+	Then there is an isomorphism \[
+    	\colim_{Z \subset U \text{ open}}\cohomology^i(U, \sh{F}) \xrightarrow{\sim} \cohomology^i(Z, \sh{F})
+    \] for all sheaves and all $i \geq 0$. 
+\end{lem}
+\begin{proof}
+	We proved in \cref{prop:restriction-map-isomorphism-paracompact} that the statement holds for $i = 0$.
+	Note that the pullback $i^*: \catAbelianSheaf(X) \to \catAbelianSheaf(Z)$ preserves soft sheaves if $X$ is paracompact Hausdorff (respectively c-soft sheaves if $X$ is locally compact Hausdorff, irrespective of whether $Z$ is compact). 
+\end{proof}
