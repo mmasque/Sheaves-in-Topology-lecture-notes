@@ -702,6 +702,8 @@
 \NewDocumentCommand\constSheaf{m}{\underline{#1}}
 \NewMathOperator\etalespace{sp}
 
+\renewcommand{\O}{\mathcal{O}}
+
 % sheaf
 \NewDocumentCommand\sh{m}{\mathcal{#1}}
 
@@ -730,6 +732,7 @@
 
 % Neat function restriction
 \newcommand{\restr}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
 
 % for subfile compilation
 \usepackage{subfiles} % best loaded last in preamble according to internet although do not know if that means here (?)
