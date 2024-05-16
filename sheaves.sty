@@ -728,6 +728,9 @@
   \mathop{\mathpalette\varlim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
 } % Source: https://tex.stackexchange.com/questions/284059/new-command-for-filtered-colimits-and-limits
 
+% Neat function restriction
+\newcommand{\restr}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
 % for subfile compilation
 \usepackage{subfiles} % best loaded last in preamble according to internet although do not know if that means here (?)
 
