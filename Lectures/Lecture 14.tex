@@ -2,52 +2,55 @@
 
 \begin{document}
 
-\chapter{Soft sheaves of rings}
+\chapter{Soft sheaves, exponential sequence, higher pushforwards}
+
+\section{Soft sheaves of rings}
+
+We will show that the sheaves \(C^0(-,\bb R)=h_{\bb R}\) and \(C^\infty(-,\bb R)\) (on a manifold) are soft.
 
 \begin{prop}
     Let $X$ be a Hausdorff space.
     \begin{enumerate}
-        \item[(i)] If $X$ is paracompact then $C^0(-, \bb R) = h_{\bb R}$
-        \item[(ii)] If $X$ us locally compact, then $C^0(-, \bb R)$ is c-soft.
+        \item\label{prop:sheaf-of-real-sections-soft:soft} If $X$ is paracompact then $C^0(-, \bb R) = h_{\bb R}$ is soft.
+        \item\label{prop:sheaf-of-real-sections-soft:c-soft} If $X$ is locally compact, then $C^0(-, \bb R)$ is c-soft.
     \end{enumerate}
 \end{prop}
 
-\begin{proof} \leavevmode
+\begin{proof}
     \begin{enumerate}
-        \item[(i)] Let $Z$ be closed and $s\in \restr{C^0(-, \bb Z)}{Z}(Z)$. We saw that $s$ extends to some open $U\supseteq Z$. Note that $X$ is normal: two disjoint closed subsets have disjoint closed neighbourhoods. Thus we may produce $A\supseteq Z$ and $B\supseteq X\backslash U$ closed with $A\cap B = \varnothing$. By Urysohn's lemma, there exists an $f\colon X\to [0,1]$ such that $\restr{f}{A} = 1$ and $\restr{f}{B} = 0$. So $f\cdot s$ (the obvious extension) agrees on $\interior A$ with $s$ and hence extends by extends by $0$ to a section $t\in C^0(X, \bb R)$ lifting $s\in \restr{C^0(-, \bb R)}{Z}(Z)$. 
-        \item[(ii)] Apply (i) on a compact neighborhood $Z\subseteq A$ and extend by $0$ on $X\backslash A$. \qedhere
+        \item Let $Z$ be closed and $s\in \restr{C^0(-, \bb Z)}{Z}(Z)$. We saw that $s$ extends to some open $U\supseteq Z$. Note that $X$ is normal: two disjoint closed subsets have disjoint closed neighbourhoods. Thus we may produce $A\supseteq Z$ and $B\supseteq X\backslash U$ closed with $A\cap B = \varnothing$. By Urysohn's lemma, there exists an $f\colon X\to [0,1]$ such that $\restr{f}{A} = 1$ and $\restr{f}{B} = 0$. So $f\cdot s$ (the obvious extension) agrees on $\interior A$ with $s$ and hence extends by extends by $0$ to a section $t\in C^0(X, \bb R)$ lifting $s\in \restr{C^0(-, \bb R)}{Z}(Z)$. 
+        \item Apply \cref{prop:sheaf-of-real-sections-soft:soft} on a compact neighborhood $Z\subseteq A$ and extend by $0$ on $X\backslash A$. \qedhere
     \end{enumerate}
 \end{proof}
 
-Using partitions of unity this result can be generalized to any $C^k$-manifold.
+Using partitions of unity this result can be generalized to any $C^k$-manifold (where we assume manifolds to be paracompact).
 
 \begin{prop}
-    Let $X$ be a $C^k$-manifold, then $C^k(-, \bb R)$ is soft.
+    Let $X$ be a $C^k$-manifold. Then $C^k(-, \bb R)$ is soft.
 \end{prop}
 
 \begin{lem}
     Let $X$ be a Hausdorff space and $\O_X$ a sheaf of rings. Let $\sh F$ be a sheaf of $\O_X$-modules.
     \begin{enumerate}
-        \item[(i)] If $X$ is paracompact and $\O_X$ is soft then $\sh F$ is soft.
-        \item[(ii)] If $X$ is locally compact and $\O_X$ is c-soft then $\sh F$ is c-soft.
+        \item\label{lem:sheaf-of-rings-soft:soft} If $X$ is paracompact and $\O_X$ is soft, then $\sh F$ is soft.
+        \item\label{lem:sheaf-of-rings-soft:c-soft} If $X$ is locally compact and $\O_X$ is c-soft, then $\sh F$ is c-soft.
     \end{enumerate}
 \end{lem}
 \begin{proof}
-    Let $Z\subseteq X$ be closed and $s\in \restr{\sh F}{Z}(Z)$ and extend to $s\in \sh F(U)$ for $U\supseteq Z$ open (in (ii) assume both $Z$ and $\overline{U}$ are compact). If $A = X\backslash U$ then $Z \coprod A \subset Z$ closed (and compact in case (ii)). The section $(1,0) \in \O_X(Z\coprod A) = \O_X(A)\times \O_X(Z)$ extends to $f\in \O_X(X)$ (compactly supported in case (ii)). Then $f\cdot s \in \sh F(U)$ extends by $0$ to a (compactly supported) section $\sh F(X)$. \todo{is proof of (ii) correct?}
+    Let $Z\subseteq X$ be closed and $s\in \restr{\sh F}{Z}(Z)$ and extend to $s\in \sh F(U)$ for $U\supseteq Z$ open (in \cref{lem:sheaf-of-rings-soft:c-soft} assume both $Z$ and $\overline{U}$ are compact). If $A = X\backslash U$ then $Z \coprod A \subset Z$ closed (and compact in case \cref{lem:sheaf-of-rings-soft:c-soft}). The section $(1,0) \in \O_X(Z\coprod A) = \O_X(A)\times \O_X(Z)$ extends to $f\in \O_X(X)$ (compactly supported in case \cref{lem:sheaf-of-rings-soft:c-soft}). Then $f\cdot s \in \sh F(U)$ extends by $0$ to a (compactly supported) section $\sh F(X)$. \todo{is proof of \cref{lem:sheaf-of-rings-soft:c-soft} correct?}
 \end{proof}
 
 \begin{exmp}
-    On a manifold $X$ the sheaf $\Omega^i_X$ of $C^\infty$-sections of the cotangent bundle $\bigwedge^i T_X^*$ is a sheaf of $C^\infty(-, \bb R)$ modules and hence $\Omega_X^i$ is soft and in particular acyclic. (We will use this for the de Rham comparison).
+    On a manifold $X$ the sheaf $\Omega^i_X$ of $C^\infty$-sections of the cotangent bundle $\bigwedge^i T_X^*$ is a sheaf of $C^\infty(-, \bb R)$ modules and hence $\Omega_X^i$ is soft and in particular acyclic. (We will use this for the comparison to de Rham cohomology).
 \end{exmp}
 
 \section{The exponential sequence}
 
-\begin{lem}
-    For $X\in\textbf{Top}$ the sequence $0\to \underline{\bb Z} \to h_{\bb R}\to h_{S^1} \to 0$ is exact.
+\begin{lem}\label{lem:exponential-sequence}
+On any topological space \(X\), the sequence $0\to \underline{\bb Z} \to h_{\bb R}\to h_{S^1} \to 0$ is a short exact sequence of abelian sheaves.
 \end{lem}
-
 \begin{proof}
-    Exactness of $0\to \underline{\bb Z}\to h_{\bb R}\to h_{S^1}$ is readily verified. Surjectivity (of $h_{\bb R}\to h_{S^1}$) follows since any $U\to S^1$ locally lifts to $U_i\to \bb R$ (since $\bb R\to S^1$ is a local homeomorphism).
+Exactness of $0\to \underline{\bb Z}\to h_{\bb R}\to h_{S^1}$ is readily verified. Surjectivity of $h_{\bb R}\to h_{S^1}$ follows since any $U\to S^1$ locally lifts to $U_i\to \bb R$ since $\bb R\to S^1$ is a local homeomorphism.
 \end{proof}
 
 \begin{rmk}
@@ -65,32 +68,30 @@ Using partitions of unity this result can be generalized to any $C^k$-manifold.
 \end{proof}
 
 \begin{cor}
-    \leavevmode
     \begin{enumerate}
-        \item[(i)] If $X$ is either $\bb R$, $[0,1]$ or $[0,1)$ then $H^i(X, \underline{\bb Z}) = \begin{cases}
-            \bb Z & i = 0 \\ 
-            0 & i>0.
-        \end{cases}$
-        \item[(ii)] We have
+        \item If $X$ is either $\bb R$, $[0,1]$ or $[0,1)$ then the cohomology of \(X\) with coefficients in the constant sheaf \(\underline{\bb Z}\) is $$H^i(X, \underline{\bb Z}) = \begin{cases}
+            \bb Z & \text{if } i = 0\text{,} \\ 
+            0 & \text{if } i>0\text{.}
+        \end{cases}$$
+        \item The compactly supported cohomology of \(\bb R\), \([0,1]\) and \([0,1)\) with coefficients in the constant sheaf \(\underline{\bb Z}\) is:
         \begin{align*}
             H^i_c(\bb R, \underline{\bb Z}) &= \begin{cases}
-                \bb Z & i = 1 \\
-                0 & \text{else}
+                \bb Z & \text{if } i = 1\text{,} \\
+                0 & \text{else,}
             \end{cases} \\
             H^i_c([0,1], \underline{\bb Z}) &= \begin{cases}
-                \bb Z & i = 0 \\
-                0 & \text{else}
+                \bb Z & \text{if } i = 0\text{,} \\
+                0 & \text{else,}
             \end{cases} \\
-            H^i_c([0,1), \underline{\bb Z}) &= 0
+            H^i_c([0,1), \underline{\bb Z}) &= 0 \qquad \text{for all } i\text{.}
         \end{align*}
     \end{enumerate}
 \end{cor}
 
 \begin{proof}
-    \leavevmode
     \begin{enumerate}
-        \item Follows from results above, have found soft resolution of $\underline{\bb Z}$ that gives result.
-        \item  For $X = [0,1]$, $H^i_c = H^i$. So by the lemma below,
+        \item \Cref{lem:exponential-sequence} gives a soft resolution of $\underline{\bb Z}$ that gives result.
+        \item  For $X = [0,1]$, we have $H^i_c = H^i$. So by the lemma below, we obtain a long exact sequence
         \[\begin{tikzcd}
             0 \ar[r] & H^0_c([0,1), \underline{\bb Z}) \ar[r] & H^0_c([0,1], \underline{\bb Z}) \ar[r] \ar[draw=none]{d}[name=X, anchor=center]{} & H^0_c(\{1\}, \underline{\bb Z})
             \ar[rounded corners,
@@ -110,6 +111,9 @@ Using partitions of unity this result can be generalized to any $C^k$-manifold.
         \qedhere
     \end{enumerate}
 \end{proof}
+
+\section{Higher pushforwards}
+\remyquote{The fact that you can draw something doesn't mean it commutes -- put that as a quote!}
 
 \section*{Exercise}
 
