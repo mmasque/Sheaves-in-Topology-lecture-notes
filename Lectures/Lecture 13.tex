@@ -18,8 +18,8 @@ of \(I\).
 Then
 \[ R^iF(I) = H^i(F(I)\to 0\to 0\to\ldots) =
   \begin{cases}
-    0 & \text{if } i>0\text{,} \\
-    F(I) & \text{if } i=0\text{.}
+    F(I) & \text{if } i=0\text{,} \\
+    0 & \text{if } i>0\text{.}
   \end{cases}
 \]
 \end{exmp}
@@ -29,7 +29,7 @@ The following lemma says that the right-derived functors of a left exact functor
 \begin{lem}\label{lem:compute-right-derived-functor-acyclic-resolution}
 Let \(F\colon\cat A\to\cat B\) be a left exact functor, let \(A\) be an object of \(\cat A\) and let
 \[0\to A\to C^0\to C^1\to\ldots\]
-be a resolution of \(A\) with \(F\)-acyclic \(C^i\) all \(i\).
+be a resolution of \(A\) with \(F\)-acyclic \(C^i\) for all \(i\).
 Then \(R^iF(A)\cong H^i(F(C^\bullet))\) for all \(i\).
 \end{lem}
 \begin{proof}

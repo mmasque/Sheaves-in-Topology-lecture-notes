@@ -40,7 +40,7 @@ We begin with some general theory of proper maps.
     $ is closed. The map $f$ is called \emph{proper} if it is universally closed and separated. 
 \end{defn}
 \begin{rmk}
-	Some authors do not include the separated condition.
+	Some authors do not include the separated condition, which is automatic if $X$ and $Y$ are both locally compact Hausdorff spaces.
 \end{rmk}
 
 \section{Proper pushforward}
@@ -51,10 +51,10 @@ We begin with some general theory of proper maps.
     \]
 \end{defn}
 \begin{rmk}
-	In Homework 8 you are asked to show this assignment gives a sheaf on $X$. 
+	In Homework~8 you are asked to show this assignment gives a sheaf on $X$. 
 \end{rmk}
 \begin{exc}
-	In additional exercise 15.3 you are asked to show that for the inclusion of an open subset $j: U \hookrightarrow X$ the proper pushforward becomes the extension by zero functor. 
+	In additional exercise~15.3 you are asked to show that for the inclusion of an open subset $j: U \hookrightarrow X$ the proper pushforward becomes the extension by zero functor. 
 \end{exc}
 We have a functor $f_!$ between abelian categories. One checks it is left exact. 
 \begin{defn}
@@ -66,7 +66,7 @@ We have a functor $f_!$ between abelian categories. One checks it is left exact.
 \end{exc}
 
 \begin{exc}
-	If $X$ is Hausdorff then $\cohomology_C(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f: X \to *$. 
+	If $X$ is Hausdorff then $\cohomology^i_c(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f\colon X \to *$. 
 \end{exc}
 
 \section{The proper base change theorem}
@@ -79,19 +79,19 @@ We are now ready to state one of the main results of the course. We do so in two
 \end{thm}
 
 \begin{rmk}
-	\cref{thm:proper-base-change-theorem-1} is true for $f$ proper with no further hypotheses, but we will not prove it in this course. See \cite[Lemma 09V6]{stacks-project} for a proof of the general case. 
+	\Cref{thm:proper-base-change-theorem-1} is true for $f$ proper with no further hypotheses, but we will not prove it in this course. See \cite[Lemma 09V6]{stacks-project} for a proof of the general case. 
 \end{rmk}
 
 \begin{thm}\label{thm:proper-base-changed-theorem-2}
 	Let $f: Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
-    	(\rightderived^i f_! \sh{F})_x \to \cohomology^i_C(f^{-1}(x), \sh{F})
+    	(\rightderived^i f_! \sh{F})_x \to \cohomology^i_c(f^{-1}(x), \sh{F})
     \] is an isomorphism for all $x \in X$ and all $i \geq 0$.
 \end{thm}
 
 We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the following lemma.
 
 \begin{lem}
-	Let $i: Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}[label=(\roman*)]
+	Let $i: Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}
     	\item $X$ is paracompact Hausdorff or 
 		\item $X$ is locally compact Hausdorff and that $Z$ is compact.
     \end{enumerate}

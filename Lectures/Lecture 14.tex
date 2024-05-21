@@ -107,13 +107,78 @@ Exactness of $0\to \underline{\bb Z}\to h_{\bb R}\to h_{S^1}$ is readily verifie
                       -- (\tikztotarget)}]{dll}[at end]{} \\
             & \dots & {} & {}
         \end{tikzcd}\]
-        So since $H^i([0,1), \underline{Z}) \xrightarrow{\sim} H^i_c(\{1\}, \underline{\bb Z})$ for all $i\geq 0$, $H^i_c([0,1], \underline{\bb Z}) = 0$. Similarly for $X = \bb R \cong (0,1)$, take $U = (0,1), X = [0,1)$ and $Z = \{0\}$ (as in lemma below). We conclude that $H^i_c(\bb R, \underline{\bb Z}) = \bb Z$ and $H^i_c(\bb R, \underline{\bb Z}) = 0$ for all other $i$. 
+        So since $H^i([0,1), \underline{Z}) \xrightarrow{\sim} H^i_c(\{1\}, \underline{\bb Z})$ for all $i\geq 0$, $H^i_c([0,1], \underline{\bb Z}) = 0$. Similarly for $X = \bb R \cong (0,1)$, take $U = (0,1),\, X = [0,1)$ and $Z = \{0\}$ (as in lemma below). We conclude that $H^i_c(\bb R, \underline{\bb Z}) = \bb Z$ and $H^i_c(\bb R, \underline{\bb Z}) = 0$ for all other $i$. 
         \qedhere
     \end{enumerate}
 \end{proof}
 
+For an alternative proof using the winding number, see \cite[Section~\RN{3}.4]{IversenCohomologyOfSheaves}. The following lemma was used in our proof.
+
+\begin{lem}
+    Let $X$ be a locally compact Hausdorff topological space and $U\subseteq X$ open with complement $Z$. Then for any sheaf $\sh F \in \catAbelianGroup(X)$ there is a long exact sequence,
+    \[\begin{tikzcd}
+            0 \ar[r] & H^0_c(U, \restr{\sh F}{U}) \ar[r] & H^0_c(X, \sh F) \ar[r] \ar[draw=none]{d}[name=X, anchor=center]{} & H^0_c(Z, \restr{\sh F}{Z})
+            \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (X.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\
+            & H^1_c(U, \restr{\sh F}{U}) \ar[r] & H^1_c(X, \sh F) \ar[r] \ar[draw=none]{d}[name=Y, anchor=center]{} & H^1_c(Z, \restr{\sh F}{Z})
+            \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (Y.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\
+            & \dots & {} & {}
+    \end{tikzcd}\]
+\end{lem}
+\begin{proof}
+    By exercise 4 of homework 3, we have an exact sequence 
+    \begin{equation}\label{eq:ses-homework3}
+        0 \to j_{!} \restr{\sh F}{U} \to \sh F \to i_*\restr{\sh F}{Z} \to 0
+    \end{equation}
+     where $j\colon U\hookrightarrow X$ and $i\colon Z\hookrightarrow X$ are the open and closed inclusions. By additional exercise 13.1.(d) we have
+    $H^i_c(U, \restr{F}{U}) = H^i_c(X, j_{!}\restr{F}{U})$ for all $i\in \bb Z_{\geq 0}$. Likewise, $H^i_c(Z, \restr{\sh F}{Z}) = H^i_c(X, i_* \restr{\sh F}{Z})$. So applying the long exaxt sequence to \ref{eq:ses-homework3} we get the desired result.
+\end{proof}
+
+\todo{strategy going forward}
+
 \section{Higher pushforwards}
 \remyquote{The fact that you can draw something doesn't mean it commutes -- put that as a quote!}
+
+\begin{defn}
+    Let $f\colon Y \to X$ be a continuous map.
+    Then the derived functors of the pushforward $f_*\colon \catAbelianGroup(Y) \to \catAbelianGroup(X)$ are called the \emph{higher pushforwards}\index{to categorize!higher pushforward} $R^i f_*$. 
+\end{defn}
+
+\begin{defn}
+    Write $\underline{H}^i\colon \catAbelianGroup(X) \to \catAbelianPresheaf(X)$ for the derived functors of the inclusion $\catAbelianPresheaf(X) \hookrightarrow \catAbelianGroup(X)$. Note that $(\underline{H}^i(\sh F))(U) = H^i(U, \sh F)$: since the composite
+    \[\catAbelianGroup(X) \hookrightarrow \catAbelianPresheaf(X) \xrightarrow{\Gamma^{\smash{\textup{pre}}}(U, -)} \catAbelianGroup\] is $\Gamma(U, -)$ and $\Gamma^{\smash{\textup{pre}}}(U, -)$ is an exact functor this follows from Homework~7, Exercise~2(i).
+\end{defn}
+
+\begin{lem}
+    For a continuous map $f\colon Y \to X$ and an abelian sheaf $\sh F$, the sheaf $R^i f_* \sh F$ is the sheafification of \[\open(X)\opp \to \catAbelianGroup,\quad U \mapsto H^i(f^{-1}(U), \sh F).\]
+\end{lem}
+\begin{proof}
+    Observe that $U\mapsto H^i(f^{-1}(U), \sh F)$ is the same as $f_* \underline{H}^i(\sh F)$ where $f_* \colon \catAbelianPresheaf(Y) \to \catAbelianPresheaf(X)$. Consider the following commutative diagram (up to natural isomorphism):
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXGNhdEFiZWxpYW5Hcm91cChZKSJdLFsxLDAsIlxcY2F0QWJlbGlhblByZXNoZWFmKFkpIl0sWzEsMSwiXFxjYXRBYmVsaWFuUHJlc2hlYWYoWCkiXSxbMCwxLCJcXGNhdEFiZWxpYW5Hcm91cChYKSJdLFsyLDEsIlxcY2F0QWJlbGlhbkdyb3VwKFgpIl0sWzAsMSwiaV9ZIl0sWzEsMiwiZl8qIl0sWzAsMywiZl8qIiwyXSxbMywyLCJpX1giLDJdLFswLDIsIkYiLDFdLFsyLDQsIigtKV5cXHNoYXJwIl1d
+\[\begin{tikzcd}
+	{\catAbelianGroup(Y)} & {\catAbelianPresheaf(Y)} \\
+	{\catAbelianGroup(X)} & {\catAbelianPresheaf(X)} & {\catAbelianGroup(X)}
+	\arrow["{i_Y}", from=1-1, to=1-2]
+	\arrow["{f_*}"', from=1-1, to=2-1]
+	\arrow["F"{description}, from=1-1, to=2-2]
+	\arrow["{f_*}", from=1-2, to=2-2]
+	\arrow["{i_X}"', from=2-1, to=2-2]
+	\arrow["{(-)^\sharp}", from=2-2, to=2-3]
+\end{tikzcd}\]
+
+    Note that $f_*\colon \catAbelianPresheaf(Y) \to \catAbelianPresheaf(X)$ is exact (since limits are computed objectwise, or since it has a left and a right adjoint). Also $(-)^\sharp$ is exact (see \cref{exmp:exact-functors}). The result now follows by two applications of Homework~7, Exercise~2. Firstly, since $f_*$ is exact on $\catAbelianPresheaf$, we have $f_* \underline{H}^i(\sh F) = R^i F(\sh F)$. Additionally, as the composition $(-)^\sharp \circ i_X = \id$ we have $(-)^\sharp \circ F = f_*$. So exactness of $(-)^\sharp$ gives $R^i f_* \sh F = (R^i F(\sh F))^\sharp = (f_* \underline{H}^i(\sh F))^\sharp$.
+\end{proof}
+
+Likewise, since $(-)^\sharp \circ i_X = \id$ and $(-)^\sharp$ is exact, we get
+\[(\underline{H}^i(\sh F))^\sharp = R^i((-)^\sharp \circ i_X)(\sh F) = R^i \id(\sh F) = 0\]
+if $i>0$ since $\id$ is exact.
 
 \section*{Exercise}
 
