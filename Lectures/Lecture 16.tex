@@ -26,7 +26,7 @@ For \(i=0\), there is a canonical map
 \[ \colim_{i\in\cat I}\mathcal F_i(X) \to (\colim_{i\in\cat I}\mathcal F_i)(X)\text{.} \]
 We will show that this is an isomorphism.
 
-For injectivity, if a section \(s\in\mathcal F_i(X)\) maps to zero, then there exists a finite cover \(X=U_1\cup\cdots\cup U_n\) (by compactness of \(X\)) such that \(s|_{U_k}\) is zero in \(\colim_{i\in\cat I}\mathcal F_i(U_k)\) for all \(k\in\{1,\ldots,n\}\), so there is some arrow \(i\to j\) in \(\cat I\) such that \(s|_{U_k}\) iz ero in \(\mathcal F_j(U_k)\) for all \(k\) (since \(\cat I\) is filtered).
+For injectivity, if a section \(s\in\mathcal F_i(X)\) maps to zero, then there exists a finite cover \(X=U_1\cup\cdots\cup U_n\) (by compactness of \(X\)) such that \(s|_{U_k}\) is zero in \(\colim_{i\in\cat I}\mathcal F_i(U_k)\) for all \(k\in\{1,\ldots,n\}\), so there is some arrow \(i\to j\) in \(\cat I\) such that \(s|_{U_k}\) is zero in \(\mathcal F_j(U_k)\) for all \(k\) (since \(\cat I\) is filtered).
 Then \(s\) becomes zero in \(\mathcal F_j(X)\); so the kernel of the map is zero, whence it is injective.
 
 For surjectivity, let \(s\in(\colim_{i\in\cat I}\mathcal F_i)(X)\) and choose an open cover \(X=U_1\cup\cdots\cup U_n\) and \(i\in\cat I\) such that \(s|_{U_k}\) comes from \(t_k\in\mathcal F_i(U_k)\) for all \(k\) (using compactness of \(X\) and since the sheaf colimit is the sheafification of the presheaf colimit, \cref{thm:limits-colimits-sheaves}).
@@ -163,7 +163,7 @@ where the first map is applying the unit only to \(B\).
 The unit \(\mathcal F\to f_*f^*\mathcal F\) of the pushforward--pullback adjunction \(f^*\leftadj f_*\) is an isomorphism for every sheaf \(\mathcal F\) on \(X\): for each \(x\in X\), the stalk of this map is
 \[ \mathcal F_x \to (f_*f^*\mathcal F)_x = H^0(f\inv(x),f^*\mathcal F) \]
 by \cref{thm:proper-base-change-theorem-1}.
-But \((f^*\mathcal F)|_{f\inv(x)}=\underline{\mathcal F_x}\) by commutatity of the diagram
+But \((f^*\mathcal F)|_{f\inv(x)}=\underline{\mathcal F_x}\) by commutativity of the diagram
 \begin{equation*}
   \begin{tikzcd}
     f\inv(x) \ar[r] \ar[d] \ar[rd, pullback] & Y \ar[d, "f"] \\
