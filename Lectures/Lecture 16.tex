@@ -1,0 +1,249 @@
+\chapter{Homotopy invariance, Čech cohomology}
+
+\section{Homotopy invariance}
+\remyquote{It's just annoying homological algebra, and this is slightly less annoying homological algebra.}
+\noindent
+In this section, we prove that sheaf cohomology is homotopy invariant: we will show that homotopic maps \(f\colon X\to Y\) induce the same map \(H^i(X,\underline{A})\to H^i(Y,\underline{A})\) on cohomology with coefficients in the constant sheaf on some abelian group \(A\).
+From this, it follows that homotopy equivalences induce isomorphisms in cohomology, whence we obtain in particular a computation of the sheaf cohomology with constant coefficients of all contractible spaces.
+Although homotopy invariance holds for continuous maps between arbitrary topological spaces, we will restrict to paracompact Hausdorff or locally compact spaces, because we have only developed the machinery for this class of spaces.
+
+The first lemma of today shows that compactly supported sheaf cohomology preserves filtered colimits.
+We could have presented this proof right after defining compactly support cohomology; it does not use later results.
+
+\begin{lem}
+If \(X\) is a locally compact Hausdorff space, then the compactly supported cohomology \(H^i_c(X,-)\colon\catAbelianSheaf(X)\to\catAbelianGroup\) preserves filtered colimits.
+\end{lem}
+\begin{proof}
+Consider the one-point compactification \(j\colon X\hookrightarrow\overline{X}\) of \(X\).
+For any sheaf \(\mathcal F\), we have
+\[ H^i_c(X,\mathcal F) = H^i_c(\overline{X},j_!\mathcal F) = H^i(\overline{X},j_!\mathcal F) \]
+by Additional exercise~13.1(d) and since \(\overline{X}\) is compact\todo{ref result}.
+Note that \(j_!\) preserves filtered colimits, for instance because it is the left adjoint of the pullback \(j^*\) (Additional exercise~16.1).
+Thus we may assume \(X\) is compact.
+
+Now let \(\mathcal F_{-}\colon\cat I\to\catAbelianSheaf(X)\) be a filtered diagram of sheaves.
+For \(i=0\), there is a canonical map
+\[ \colim_{i\in\cat I}\mathcal F_i(X) \to (\colim_{i\in\cat I}\mathcal F_i)(X)\text{.} \]
+We will show that this is an isomorphism.
+
+For injectivity, if a section \(s\in\mathcal F_i(X)\) maps to zero, then there exists a finite cover \(X=U_1\cup\cdots\cup U_n\) (by compactness of \(X\)) such that \(s|_{U_k}\) is zero in \(\colim_{i\in\cat I}\mathcal F_i(U_k)\) for all \(k\in\{1,\ldots,n\}\), so there is some arrow \(i\to j\) in \(\cat I\) such that \(s|_{U_k}\) iz ero in \(\mathcal F_j(U_k)\) for all \(k\) (since \(\cat I\) is filtered).
+Then \(s\) becomes zero in \(\mathcal F_j(X)\); so the kernel of the map is zero, whence it is injective.
+
+For surjectivity, let \(s\in(\colim_{i\in\cat I}\mathcal F_i)(X)\) and choose an open cover \(X=U_1\cup\cdots\cup U_n\) and \(i\in\cat I\) such that \(s|_{U_k}\) comes from \(t_k\in\mathcal F_i(U_k)\) for all \(k\) (using compactness of \(X\) and since the sheaf colimit is the sheafification of the presheaf colimit, \cref{thm:limits-colimits-sheaves}).
+Using \cref{lem:paracompact-locally-finite-cover}, choose an open cover \(X=V_1\cup\cdots\cup V_n\) such that \(\overline{V_k}\subseteq U_k\) for all \(k\).
+Note that \((-)|_{\overline{V_k}}\) preserves colimits (it is the pullback \(i_k^*\) along the closed inclusion \(i_k\colon\overline{V_k}\hookrightarrow X\), which is right adjoint to the pushforward \((i_k)_*\) by \cref{prop:pullback-Kan-extension}).
+Thus, since the map
+\[ \colim_{i\in\cat I}\mathcal F_i(\overline{V_k}\cap\overline{V_\ell}) \to (\colim_{i\in\cat I}\mathcal F_i)(\overline{V_k}\cap\overline{V_\ell}) \]
+is injective by the above, there is an arrow \(i\to j\) in \(\cat I\) such that \(t_k|_{\overline{V_k}\cap\overline{V_\ell}}-t_\ell|_{\overline{V_k}\cap\overline{V_\ell}}\) maps to zero in \(\mathcal F_j(\overline{V_k}\cap\overline{V_\ell})\) for all \(k,\ell\in\{1,\ldots,n\}\).
+Then the sections \((t_k|_{V_k})_{k=0}^n\) glue to a section in \(\mathcal F_j(X)\) lifting \(s\), proving the result for \(i=0\).
+
+This also shows that filtered colimits of soft sheaves are soft.
+So if \[\mathcal F\mapsto (0\to\mathcal F\to\mathcal S_0(\mathcal F)\to\mathcal S_1(\mathcal F)\to\ldots)\] is a functorial soft resolution (such as the Godement resolution of \cref{rmk:Godement-resolution}), then
+\[ 0\to\colim_{i\in\cat I}\mathcal F_i\to\colim_{i\in\cat I}\mathcal S_0(\mathcal F_i) \to \colim_{i\in\cat I}\mathcal S_1(\mathcal F_i) \to \ldots \]
+is a soft resolution, so we win by the \(i=0\) case.
+\end{proof}
+
+\begin{cor}\label{cor:coefficients-cohomology-integers}
+If \(X\) is a locally compact Hausdorff space with compactly supported cohomology with \(\underline{\bb Z}\) coefficients given by
+\[ H^i_c(X,\underline{\bb Z}) =
+  \begin{cases}
+    \bb Z & \text{if } i=0\text{,} \\
+    0 & \text{if } i>0\text{,}
+  \end{cases}
+\]
+then we have
+\[ H^i_c(X,\underline{A}) =
+  \begin{cases}
+    A & \text{if } i=0\text{,} \\
+    0 & \text{if } i>0\text{,}
+  \end{cases}
+\]
+for any abelian group \(A\).
+\end{cor}
+
+\begin{exmp}
+We saw in \cref{cor:computation-cohomology-interval-real-line} that the hypothesis of \cref{cor:coefficients-cohomology-integers} is satisfied by \([0,1]\).
+In Homework~8, Exercise~4(b) you show that \([0,1]^n\) satisfies the hypothesis for all \(n\geq 0\).
+\end{exmp}
+
+\begin{proof}[name={of \cref{cor:coefficients-cohomology-integers}}]
+If \(A\) is finitely generated, say by a short exact sequence
+\[ 0\to\bb Z^r\to\bb Z^s\to A\to 0\text{,} \]
+then exactness of
+\[ 0\to\underline{\bb Z^r}\to\underline{\bb Z^s}\to\underline{A}\to 0 \]
+by \cref{lem:pullback-preserves-colimits-and-finite-limits} gives exact sequences
+\begin{equation*}
+  \begin{tikzcd}
+    0 \ar[r] & H^0_c(X,\underline{\bb Z^r}) \ar[r] \ar[d, equal] & H^0_c(X,\underline{\bb Z^r}) \ar[r] \ar[d, equal] & H^0_c(X,\underline{A}) \ar[r] \ar[d, dashed, iso] & 0 \\
+    0 \ar[r] & \bb Z^r \ar[r] & \bb Z^s \ar[r] & A \ar[r] & 0
+  \end{tikzcd}
+\end{equation*}
+and
+\[ \underbrace{H^i_c(X,\underline{\bb Z}^s)}_{=0} \to H^i_c(X,\underline{A})\to \underbrace{H^{i+1}_c(X,\underline{\bb Z}^r)}_{=0} \]
+for \(i>0\).
+This proves the result for finitely generated \(A\).
+
+For general abelian groups \(A\), write \(A\) as the filtered colimit
+\( A = \colim_{B\subseteq A \textup{ f.g.}}B \)
+of all finitely-generated subgroups \(B\) and use that \(A\mapsto\underline{A}\) preserves colimits (again \cref{lem:pullback-preserves-colimits-and-finite-limits}).
+\end{proof}
+
+\begin{thm}[Vietoris--Begle mapping theorem]\label{thm:Vietoris-Begle-mapping-theorem}
+Let \(f\colon Y\to X\) be a proper map such that
+\[ H^i(f\inv(x),\underline{\bb Z}) =
+  \begin{cases}
+    \bb Z & \text{if } i = 0\text{,} \\
+    0 & \text{if } i>0
+  \end{cases}
+\]
+for all \(x\in X\).
+Then for all abelian sheaves \(\mathcal F\) on \(X\), the maps
+\[ H^i(X,\mathcal F)\to H^i(Y,f^*\mathcal F) \]
+are isomorphisms for all \(i\in\bb N\).
+\end{thm}
+
+Again, we will only prove this when \(X\) is paracompact Hausdorff or locally compact Hausdorff.
+
+For the statement of the theorem to make sense, we still need to define the maps; we will do this in a more general context.
+Let
+\begin{equation*}
+  \begin{tikzcd}
+    \cat A \ar[r, "F"'{name=rightadj}, shift right=2] &
+    \cat B \ar[l, "L"'{name=leftadj}, shift right=2] \ar[r, "G"] &
+    \cat C
+    \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
+  \end{tikzcd}
+\end{equation*}
+be left exact functors between abelian categories where \(\cat A\) and \(\cat B\) have enough injectives.
+(Since \(L\) is a left adjoint, it will also be exact.)
+We proved in \cref{lem:right-adjoint-to-exact-functor-preserves-injectives} that \(F\) preserves injective objects.
+For an object \(B\) of \(\cat B\), we will construct maps
+\[ R^iG(B) \to R^i(GF)(LB) \]
+for all \(i\).
+To obtain the maps from the theorem, we apply this to the functors
+\begin{equation*}
+  \begin{tikzcd}
+    \catAbelianSheaf(Y) \ar[r, "f_*"'{name=rightadj}, shift right=2] &
+    \catAbelianSheaf(X) \ar[l, "f^*"'{name=leftadj}, shift right=2] \ar[r, "{\Gamma(X,-)}"] &
+    \catAbelianGroup
+    \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
+  \end{tikzcd}
+\end{equation*}
+
+Choose injective resolutions
+\[ 0\to B\to I^0\to I^1\to\ldots\text{,} \quad 0\to LB\to J^0\to J^1\to\ldots\text{.} \]
+Exactness of \(L\) gives an exact sequence
+\[ 0\to LB\to LI^0\to LI^1\to\ldots\text{,} \]
+but this need not be a \(G\)-acyclic resolution, so we cannot use this to compute derived functors.
+We saw in \cref{cor:extend-map-exact-complex-to-complex-of-injectives} that we can extend the identity of \(LB\) to a chain map
+\begin{equation*}
+  \begin{tikzcd}
+    0 \ar[r] & LB \ar[r] \ar[d, equal] & LI^0 \ar[r] \ar[d, dashed] & LI^1 \ar[r] \ar[d, dashed] & \ldots \\
+    0 \ar[r] & LB \ar[r] & J^0 \ar[r] & J^1 \ar[r] & \ldots
+  \end{tikzcd}
+\end{equation*}
+which is unique up to homotopy.
+The desired map can now be defined as the composite
+\[ R^iG(B) = H^i(G(I^\bullet)) \xrightarrow{\eta} H^i(GF(LI^\bullet)) \to H^i(GF(J^\bullet)) = R^i(GF)(LB) \]
+where \(\eta\) is the unit of the adjunction \(L\leftadj F\).
+
+\begin{exc}
+Show that the above construction is independent of choices.
+\end{exc}
+
+\begin{rmk}
+One can even construct maps
+\[ R^iG(FA) \to R^i(GF)(A) \]
+for all objects \(A\) of \(\cat A\), without assuming the existence of \(L\) but assuming \(F\) takes injective objects to \(G\)-acyclic objects, and then the above map coincides with the composite
+\[ R^iG(B) \to R^iG(FLB) \to R^i(GF)(LB) \]
+where the first map is applying the unit only to \(B\).
+\end{rmk}
+
+\begin{proof}[name={of \cref{thm:Vietoris-Begle-mapping-theorem}}]
+The unit \(\mathcal F\to f_*f^*\mathcal F\) of the pushforward--pullback adjunction \(f^*\leftadj f_*\) is an isomorphism for every sheaf \(\mathcal F\) on \(X\): for each \(x\in X\), the stalk of this map is
+\[ \mathcal F_x \to (f_*f^*\mathcal F)_x = H^0(f\inv(x),f^*\mathcal F) \]
+by \cref{thm:proper-base-change-theorem-1}.
+But \((f^*\mathcal F)|_{f\inv(x)}=\underline{\mathcal F_x}\) by commutatity of the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    f\inv(x) \ar[r] \ar[d] \ar[rd, pullback] & Y \ar[d, "f"] \\
+    * \ar[r, "x"'] & X
+  \end{tikzcd}
+\end{equation*}
+since \(\underline{\mathcal F_x}\) is the pullback along \(x\colon *\to X\).
+\Cref{cor:coefficients-cohomology-integers} shows that
+\[ H^i(f\inv(x),f^*\mathcal F) =
+  \begin{cases}
+    \mathcal F_x & \text{if } i = 0\text{,} \\
+    0 & \text{if } i > 0\text{,}
+  \end{cases}
+\]
+so \(\mathcal F_x\to(f_*f^*\mathcal F)_x\) is an isomorphism.
+Likewise, \(R^if_*(f^*\mathcal F)_x = H^i(f\inv(x),f^*\mathcal F)=0\) for \(i>0\).
+Then Homework~7, Exercise~2 shows that
+\[ H^i(Y,f^*\mathcal F) = H^i(X,f_*f^*\mathcal F) = H^i(X,\mathcal F)\text{.} \qedhere \]
+\end{proof}
+
+\begin{cor}\label{cor:sheaf-cohomology-homotopy-invariant}
+If \(f,g\colon Y\to X\) are homotopic maps, then the maps
+\[ f^*,g^*\colon H^i(X,\underline{A}) \to H^i(Y,\underline{A}) \]
+agree for all \(i\geq 0\) and all abelian groups \(A\).
+\end{cor}
+
+Once again, we will prove this under the assumption that \(X\) and \(Y\) are paracompact Hausdorff or locally compact Hausdorff.
+
+\begin{proof}
+Consider the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    H^i(Y,\underline{A}) \ar[r, "\pr_Y^*", iso] & H^i(Y\times[0,1],\underline{A}) \ar[r, "0^*", shift left] \ar[r, "1^*"', shift right] & H^i(Y,\underline{A})
+  \end{tikzcd}
+\end{equation*}
+in which \(\pr_Y^*\) is an isomorphism by \cref{thm:Vietoris-Begle-mapping-theorem} and in which both composites are the identity.
+Then \(0^*=1^*\) (both being the inverse of \(\pr_Y^*\)), so if \(h\colon Y\times[0,1]\to X\) is a homotopy from \(f\) to \(g\), then
+\[ f^* = 0^*\circ h^* = 1^*\circ h^* = g^*\text{.} \qedhere \]
+\end{proof}
+
+\begin{cor}\label{cor:sheaf-cohomology-homotopy-equivalence}
+If \(f\colon X\to Y\) is a homotopy equivalence (of paracompact Hausdorff or locally compact Hausdorff spaces), then
+\[ f^*\colon H^i(X,\underline{A})\xrightarrow{\cong} H^i(Y,\underline{A}) \]
+is an isomorphism for any abelian group \(A\).
+In particular, if \(X\) and \(Y\) are homotopy equivalent, then \(H^i(X,\underline{A})\cong H^i(Y,\underline{A})\) for any \(A\).
+\end{cor}
+\begin{proof}
+If \(g\colon Y\to X\) is a homotopy inverse of \(f\), then
+\[ g^*\circ f^* = (gf)^* = \id^* = \id \]
+by \cref{cor:sheaf-cohomology-homotopy-invariant} and similarly \(f^*\circ g^*=\id\), so \(f^*\) is an isomorphism.
+\end{proof}
+
+\begin{cor}
+If \(X\) is contractible (paracompact Hausdorff or locally compact Hausdorff), then
+\[ H^i(X,\underline{A}) =
+  \begin{cases}
+    A & \text{if } i = 0\text{,} \\
+    0 & \text{if } i > 0
+  \end{cases}
+\]
+for any abelian group \(A\).
+\end{cor}
+\begin{proof}
+Directly from \cref{cor:sheaf-cohomology-homotopy-equivalence} and the computation of \(H^i(*,\underline{A})\) (for example by \cref{cor:coefficients-cohomology-integers}).
+\end{proof}
+
+\begin{exmp}
+We can finally compute that
+\[ H^i(\bb R^n,\underline{A}) =
+  \begin{cases}
+    A & \text{if } i = 0\text{,} \\
+    0 & \text{if } i > 0\text{.}
+  \end{cases}
+\]
+Next week, we will compute the sheaf cohomology of \(\bb R^n\setminus\{0\}\simeq\sphere[n-1]\).
+\end{exmp}
+
+\section{Čech cohomology}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

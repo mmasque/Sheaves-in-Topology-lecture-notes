@@ -5,7 +5,7 @@ We begin with some general theory of proper maps.
 \section{Proper maps}
 
 \begin{defn}
-	A continuous map $f: X \to Y$ between topological spaces is \emph{universally closed} if for any map $X' \to X$ the base change $X \times_X Y \to Y$ is a closed map.
+	A continuous map $f: Y \to X$ between topological spaces is \emph{universally closed} if for any map $X' \to X$ the base change $X' \pullback{X} Y \to Y$ is a closed map.
 \end{defn}
 
 \remyquote{The proof I'll give for this lemma is taken from Bourbaki. You'll hate it.}
@@ -24,19 +24,19 @@ We begin with some general theory of proper maps.
 \end{proof}
 
 \begin{prop}
-	Let $f: Y \to X$ be a morphism of topological spaces. The following are equivalent: 
+	Let $f: Y \to X$ be a continuous map. The following are equivalent: 
 	\begin{enumerate}
     	\item $f$ is universally closed,
-		\item $f \times \id_W: Y \times W \to X \times W$ is closed for all $W \in \catTopologicalSpace$,
-		\item $f$ is closed and $f^{-1}(x)$ is compact for all $x \in X$,
-		\item $f$ is closed and $f^{-1}(Z)$ is compact for all $Z \subset X$ closed. 
+		\item the product $f \times \id_W: Y \times W \to X \times W$ is closed for every space \(W\),
+		\item $f$ is closed and the fibre $f^{-1}(x)$ is compact for all $x \in X$,
+		\item $f$ is closed and the fibre $f^{-1}(Z)$ is compact for all $Z \subset X$ closed. 
     \end{enumerate}
 \end{prop}
 \todo{Add the proof}
 
 \begin{defn}
 	A map $f: Y \to X$ of topological spaces is called \emph{separated} if the diagonal map $
-    	\Delta_{Y/X}: Y \to Y\times_X Y
+    	\Delta_{Y/X}: Y \to Y\pullback{X} Y
     $ is closed. The map $f$ is called \emph{proper} if it is universally closed and separated. 
 \end{defn}
 \begin{rmk}

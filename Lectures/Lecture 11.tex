@@ -237,7 +237,7 @@ where the third equality follows since postcomposition with a monomorphism does 
 This completes the induction.
 \end{proof}
 
-\begin{lem}
+\begin{lem}\label{lem:right-adjoint-to-exact-functor-preserves-injectives}
     Let $\cat A$ and $\cat B$ be abelian categories and let
     \begin{equation*}
       \begin{tikzcd}
@@ -293,7 +293,7 @@ commutes, whence the top map is surjective.
         \end{tikzcd}\]
         and we claim that $F(M^\vee)^\vee$ is injective. Indeed, if $S$ is a set, then $F(S)^\vee$ is injective since
         \begin{align*}
-            \leftmoduleHom[R](N, F(S)^\vee) &= \leftmoduleHom[R](N, \Hom[\bb Z](F(S), \bb Q / \bb Z)) \\
+            \leftmoduleHom{R}(N, F(S)^\vee) &= \leftmoduleHom{R}(N, \Hom[\bb Z](F(S), \bb Q / \bb Z)) \\
             &\cong \Hom[\bb Z](F(S)\otimes_R N, \bb Q / \bb Z) \tag{\text{\cref{exe:homtensoradjunction}}} \\
             &= \Hom[\bb Z](N^{\oplus S}, \bb Q / \bb Z) \\ 
             &= (N^\vee)^S\text{,}
