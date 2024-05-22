@@ -16,7 +16,7 @@ We begin with some general theory of proper maps.
 	If $X$ is compact, we need to show that the projection map $\pi: X\times Y \to Y$ is closed for any $Y \in \catTopologicalSpace$. Let $Z \subset X \times Y$ closed and let $y \in Y \setminus \pi(Z)$. We will construct an open set around $y$ that does not intersect $\pi(Z)$. 
 	Notice that $X \cong X \times \{y\} \subset Z^{c}$, so we can cover $X \times \{y\}$ by finitely many opens contained in $Z^c$. Their intersection is still an open open $U$, and the projection map is open so $\pi(U)$ is open containing $y$ and not intersecting $\pi(Z)$. 
 	Conversely, assume $X \to *$ is universally closed.
-	To prove compactness we will use prove that any collection of closed subsets of $X$ with the finite intersection property has nonempty intersection. So let $Z_i \subset X$ ($i \in I$) be a such a collection. We use the notation $Z_J = \cap_{j \in J}Z_j$ for $J \subset I$.
+	To prove compactness we will use prove that any collection of closed subsets of $X$ with the finite intersection property has nonempty intersection. So let $Z_i \subset X$ ($i \in I$) be a such a collection. We use the notation $Z_J = \bigcap_{j \in J}Z_j$ for $J \subset I$.
 	Define a new space \[
     	X' = X^{\text{disc}} \cup \{\infty\}
     \] where $U \subset X'$ is open if and only if $\infty \in U$ implies $Z_J \subset U$ for some finite subset $J \subset I$.

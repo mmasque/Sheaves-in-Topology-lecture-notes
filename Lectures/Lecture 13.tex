@@ -110,7 +110,7 @@ If \(f\colon Y\to X\) is continuous and \(\mathcal F\) is a flasque abelian shea
 commutes, so surjectivity of the bottom map (by flasqueness of \(\mathcal F\)) implies surjectivity of the top map.
 \end{exmp}
 
-\begin{rmk}
+\begin{rmk}\label{rmk:Godement-resolution}
 Recall that we constructed enough injectives in \(\catAbelianSheaf(X)\) as follows: take \(f\colon {X^{\disc}\hookrightarrow X}\) and choose an injection \(f^*\mathcal F\hookrightarrow\mathcal I\) into an injective in \(\catAbelianGroup(X^{\disc})\).
 Then the composite \[\mathcal F\hookrightarrow f_*f^*\mathcal F\hookrightarrow f_*\mathcal I\] gives our required injection into an injective object.
 But the map \(\mathcal F\hookrightarrow f_*f^*\mathcal F\) is already an injection into a flasque sheaf.
@@ -131,7 +131,7 @@ Then the support of \(s\) is the set \(\supp(s) \coloneq \setpred{x\in U}{s_x\ne
 If \(s\in\mathcal F(U)\) is a section, then \(\supp(s)\subseteq U\) is closed.
 \end{lem}
 \begin{proof}
-The locus where the two sections \(0,s\colon U\to\etalespace(\mathcal F)\) agree is open since \[\Delta_{\etalespace(F)/X}\subseteq\etalespace(F)\pullback{X}\etalespace(\mathcal F)\] is open.\todo{why?}
+The locus where the two sections \(0,s\colon U\to\etalespace(\mathcal F)\) agree is open since the diagonal \[\Delta_{\etalespace(F)/X}\subseteq\etalespace(F)\pullback{X}\etalespace(\mathcal F)\] is open.\todo{why?}
 \end{proof}
 
 \begin{defn}

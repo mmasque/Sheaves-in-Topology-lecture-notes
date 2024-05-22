@@ -243,6 +243,80 @@ Next week, we will compute the sheaf cohomology of \(\bb R^n\setminus\{0\}\simeq
 
 \section{Čech cohomology}
 
+\begin{notn}
+If \(\{U_i\hookrightarrow X\}_{i\in I}\) is an open cover of a space \(X\), we write
+\[ U_{i_0,\ldots,i_n} \coloneq U_{i_0} \cap \cdots U_{i_n} \]
+for \(i_0,\ldots,i_n\in I\).
+If \(J\subseteq I\) is a subset, we write
+\[ U_j \coloneq \bigcap_{j\in J}U_j\text{.} \]
+\end{notn}
+
+\begin{defn}
+Let \(X\) be a topological space and let \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) be an open cover of \(X\).
+The \emph{(alternating) Čech complex} of an abelian presheaf \(F\) on \(X\) with respect to \(\mathcal U\) is the cochain complex
+\[ 0 \to \check{C}^0(\mathcal U, F) \xrightarrow{d^0} \check{C}^1(\mathcal U, F) \xrightarrow{d^1} \check{C}^2(\mathcal U, F) \to \ldots \]
+where the cochains in degree \(n\) are given by
+\[ \check{C}^n(\mathcal U, F) \coloneq \Bigl\{(s_{i_0,\ldots, i_n})_{(i_0,\ldots,i_n)\in I^{n+1}}\in\prod_{\mathclap{(i_0,\ldots,i_n)\in I^{n+1}}}F(U_{i_0,\ldots,i_n})\,\Bigl|\,{{s_{i_0,\ldots, i_n}=0 \text{ if } \#\{i_0,\ldots,i_n\}\leq n} \atop {s_{\sigma(i_0),\ldots,\sigma(i_n)}=\sgn(\sigma)\cdot s_{i_0,\ldots,i_n} \text{ for } \sigma \in S_{n+1}}}\Bigr\} \]
+with differential \(d^n\colon\check{C}^n(\mathcal U,F)\to\check{C}^{n+1}(\mathcal U,F)\) given by
+\[ (s_{i_0,\ldots,i_n})_{(i_0,\ldots,i_n)\in I^{n+1}} \mapsto \bigl(\sum_{j=0}^{n+1}(-1)^j s_{i_0,\ldots,i_{j-1},i_{j+1},\ldots,i_{n+1}}|_{U_{i_0,\ldots,i_{n+1}}}\bigr)_{(i_0,\ldots,i_{n+1})\in I^{n+2}}\text{.} \]
+
+The \emph{Čech cohomology} \(\check{H}^\bullet(\mathcal U,F)\) of \(F\) with respect to \(\mathcal U\) is the cohomology of the Čech complex:
+\[ \check{H}^i(\mathcal U,F) \coloneq H^i(\check{C}^\bullet(\mathcal U,F))\text{.} \]
+\end{defn}
+
+\begin{exc}
+Show that the Čech complex is a cochain complex, that is, \(d^{n+1}d^n=0\) for all \(n\).
+\end{exc}
+
+There are some variants of the Čech complex:
+\begin{itemize}
+\item
+  Instead of alternating cochains, one can take
+  \[ \check{C}_{\textup{full}}^n(\mathcal U,F) \coloneq \prod_{\mathclap{(i_0,\ldots,i_n)\in I^{n+1}}}F(U_{i_0,\ldots,i_n})\text{.} \]
+\item
+  The \emph{choice} of a linear order on \(I\) gives an isomorphism
+  \[ \check{C}^n(\mathcal U,F) \cong \prod_{\mathclap{i_0<\ldots<i_n}}F(U_{i_0,\ldots,i_n}) \eqcolon \check{C}_{\textup{ord}}^n(\mathcal U,F)\text{.} \]
+\end{itemize}
+These complexes are related by maps
+\begin{equation*}
+  \begin{tikzcd}
+    \check{C}^\bullet(\mathcal U,F) \ar[r, hook] \ar[rr, bend right=15, iso] & \check{C}_{\textup{full}}^\bullet(\mathcal U,F) \ar[r, epi] & \check{C}_{\textup{ord}}^\bullet(\mathcal U,F)
+  \end{tikzcd}
+\end{equation*}
+One can show that these maps are chain homotopy equivalences, but this is annoying combinatorics; see~\cite{ConradCechCohomologyAlternatingCochains}.
+
+\begin{exmp}
+If \(\mathcal U=\{U_1\hookrightarrow X,U_2\hookrightarrow X\}\), the ordered Čech complex is
+\begin{equation*}
+  \begin{tikzcd}[row sep=tiny, column sep=small]
+    0 \ar[r] & F(U_1) \times F(U_2) \ar[r, "d^0"] & F(U_1\cap U_2) \ar[r, "d^1"] & 0 \ar[r] & \ldots \\
+    & {(s_1,s_2)} \ar[r, mapsto] & s_2|_{U_1\cap U_2}-s_1|_{U_1\cap U_2}
+  \end{tikzcd}
+\end{equation*}
+\end{exmp}
+
+\begin{exmp}
+If \(\mathcal U=\{U_1\hookrightarrow X,U_2\hookrightarrow X,U_3\hookrightarrow X\}\), the ordered Čech complex is
+\begin{equation*}
+  \small
+  \begin{tikzcd}[row sep=tiny, column sep=small]
+    0 \ar[r] & F(U_1) \times F(U_2) \times F(U_3) \ar[r, "d^0"] & F(U_1\cap U_2) \times F(U_1\cap U_3) \times F(U_2\cap U_3) \ar[r, "d^1"] & F(U_1\cap U_2\cap U_3) \ar[r, "d^2"] & 0 \ar[r] & \ldots \\
+    & {(s_1,s_2,s_3)} \ar[r, mapsto] & {(s_2-s_1,s_3-s_1,s_3-s_2)} \\
+    & & {(t_{12},t_{13},t_{23})} \ar[r, mapsto] & t_{23}-t_{13}+t_{12}
+  \end{tikzcd}
+\end{equation*}
+(Here we notationally suppress the restrictions.)
+\end{exmp}
+
+\begin{rmk}
+There is a map
+\[ F(X) \to \check{C}^0(\mathcal U)\text{,} \quad s\mapsto (s|_{U_i})_{i\in I} \]
+and the composition \(F(X)\to\check{C}^0(\mathcal U,F)\to\check{C}^1(\mathcal U,F)\) is zero.
+The sheaf condition says that \(\mathcal F(U)\to\check{H}^0(U,\mathcal F)\) is an isomorphism for all \(U\subseteq X\) open and all open covers \(\mathcal U\) of \(U\) when \(\mathcal F\) is a sheaf.
+\end{rmk}
+
+Next week, we will show that \(\check{H}^i(\mathcal U,-)\) is the \(i\)th right derived functor \(R^i\check{H}^0(\mathcal U,-)\) as functors \(\catAbelianPresheaf(X)\to\catAbelianGroup\).
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
