@@ -90,7 +90,7 @@ We are now ready to state one of the main results of the course. We do so in two
 
 We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the following lemma.
 
-\begin{lem}
+\begin{lem}\label{lem:proper-base-change-1}
 	Let $i: Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}
     	\item $X$ is paracompact Hausdorff or 
 		\item $X$ is locally compact Hausdorff and that $Z$ is compact.
@@ -108,5 +108,49 @@ We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the fo
 	\end{align*}
 \end{proof}
 
+We are now ready to prove the first version of the Proper Base Change Theorem. 
+\begin{proof}(\cref{thm:proper-base-change-theorem-1})
+	Recall that $\rightderived^i f_* \sh{F}$ is the sheafification of the assignment $U \mapsto H^i(f^{-1}(U), \sh{F})$, so that \[
+    	(\rightderived^i f_* \sh{F})_x = \colim_{x \in U \text{ open}} \cohomology^i(f^{-1}(U), \sh{F}).
+    \] By \cref{lem:proper-base-change-1} we know that \[
+    	\cohomology^i(f^{-1}(x), \sh{F}) = \colim_{f^{-1}(x) \subset V \text{ open}} \cohomology^i(V, \sh{F}),
+    \] since $f^{-1}$ is compact. By properness, the opens $f^{-1}(U)$ are coinitial amongst the $V \supset f^{-1}(x)$: an open $V$ contains $f^{-1}(f(V^C)^C)$. So the colimits agree. \todo{Clarify argument at the end.}
+\end{proof}
 
+\begin{lem}\label{lem:proper-base-change-2}
+	Let $i: X \to X$ be a closed subspace of a locally compact Hausdorff space. Let $\sh{F} \in \catAbelianGroup(X)$ be a c-soft sheaf of abelian groups. Then $i*\sh{F}$ is c-soft and the map \[
+    	\cohomology^0_c(X, \sh{F}) \to \cohomology^0_c(Z, \sh{F})
+    \] is surjective.
+\end{lem}
+\begin{proof}
+	We already proved in \cref{lem:proper-base-change-1} that $i^*\sh{F}$ is c-soft. Given $s \in\cohomology^0_c(Z, \sh{F})$, choose a compact neighborhood $K \subset X$ of $\sup(s)$. The section $s|_{Z \cap K}$ extends to a section \[
+    	s_1 \in \cohomology^0((Z\cap K) \cup \partial K, \sh{F})
+    \] that is $0$ on the boundary $\partial K$. This section further extends to $s_2 \in \cohomology^0(K, \sh{F})$ by c-softness. We can extend by $0$ to a section in $\cohomology_c^0(X, \sh{F})$, since $s_2|_{\partial K} = 0$. \todo{Add details and verify.}
+\end{proof}
 
+\begin{proof}(\cref{thm:proper-base-changed-theorem-2})
+	We have a map \[
+    	(f_!\sh{F})_x = \filteredcolim_{x \in U \text{ open}}(f_!\sh{F})(U) \xrightarrow{\phi} \cohomology_c^0(f^{-1}(x), \sh{F})
+    \] given by $s \mapsto s|_{f^{-1}(x)}$ which we claim is injective.
+	If $s \in (f_!\sh{F})(U)$ maps to zero under this map, then \[
+    	\sup(s) \cap f^{-1}(x) = \emptyset.
+    \] Since the map $\sup(s) \to U$ is proper, the set $V = U \setminus f(\sup(s))$ is an open neighborhood of $x$ with the property that $\sup(s) \cap f^{-1}(V) = \emptyset$. 
+	Thus $s$ maps to zero in $(f_!\sh{F})(V)$, proving injectivity of $\phi$. If $\sh{F}$ is c-soft, then the composition \[
+    	\cohomology^0_c(Y, \sh{F}) \hookrightarrow (f_! \sh{F})(X) \to (f_!\sh{F})_x \xrightarrow{\phi} \cohomology^0_c(f^{-1}(x), \sh{F})
+    \] is surjective by \cref{lem:proper-base-change-2} so the map $\phi$ is an isomorphism.
+
+	Now take an injective resolution \[
+    	0 \to \sh{F} \to I^0 \to I^1 \to \cdots
+    \] Then $i^*\cochaincomplex{I}$ is a c-soft resolution of $i^*\sh{F}$ by \cref{lem:proper-base-change-2}, so we have \[
+    	\cohomology^i_c(f^{-1}(x), \sh{F}) = \cohomology^i(\cohomology^0_c(f^{-1}(x), \cochaincomplex{I})) = \cohomology^i(\filteredcolim_{x \in U \text{ open}}(f_!\cochaincomplex{I}(U))) = \filteredcolim_{x \in U} \cohomology^i((f_!\cochaincomplex{I})(U)) = (\rightderived^i f_!\sh{F})_x,
+    \] and we are done.\todo{expand details, verify}
+\end{proof}
+
+The next corollary explains the use of \emph{base change} in the naming of \cref{thm:proper-base-change-theorem-1} and \cref{thm:proper-base-changed-theorem-2}. 
+
+\begin{cor}\label{cor:proper-base-change}
+	\todo{write}
+\end{cor}
+\begin{proof}(Sketch)
+	\todo{write}
+\end{proof}
