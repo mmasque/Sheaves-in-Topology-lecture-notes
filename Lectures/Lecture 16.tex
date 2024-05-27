@@ -118,7 +118,7 @@ be left exact functors between abelian categories where \(\cat A\) and \(\cat B\
 (Since \(L\) is a left adjoint, it will also be exact.)
 We proved in \cref{lem:right-adjoint-to-exact-functor-preserves-injectives} that \(F\) preserves injective objects.
 For an object \(B\) of \(\cat B\), we will construct maps
-\[ R^iG(B) \to R^i(GF)(LB) \]
+\[ \rightderived^iG(B) \to \rightderived^i(GF)(LB) \]
 for all \(i\).
 To obtain the maps from the theorem, we apply this to the functors
 \begin{equation*}
@@ -144,7 +144,7 @@ We saw in \cref{cor:extend-map-exact-complex-to-complex-of-injectives} that we c
 \end{equation*}
 which is unique up to homotopy.
 The desired map can now be defined as the composite
-\[ R^iG(B) = H^i(G(I^\bullet)) \xrightarrow{\eta} H^i(GF(LI^\bullet)) \to H^i(GF(J^\bullet)) = R^i(GF)(LB) \]
+\[ \rightderived^iG(B) = H^i(G(I^\bullet)) \xrightarrow{\eta} H^i(GF(LI^\bullet)) \to H^i(GF(J^\bullet)) = \rightderived^i(GF)(LB) \]
 where \(\eta\) is the unit of the adjunction \(L\leftadj F\).
 
 \begin{exc}
@@ -153,9 +153,9 @@ Show that the above construction is independent of choices.
 
 \begin{rmk}
 One can even construct maps
-\[ R^iG(FA) \to R^i(GF)(A) \]
+\[ \rightderived^iG(FA) \to \rightderived^i(GF)(A) \]
 for all objects \(A\) of \(\cat A\), without assuming the existence of \(L\) but assuming \(F\) takes injective objects to \(G\)-acyclic objects, and then the above map coincides with the composite
-\[ R^iG(B) \to R^iG(FLB) \to R^i(GF)(LB) \]
+\[ \rightderived^iG(B) \to \rightderived^iG(FLB) \to \rightderived^i(GF)(LB) \]
 where the first map is applying the unit only to \(B\).
 \end{rmk}
 
@@ -179,7 +179,7 @@ since \(\underline{\mathcal F_x}\) is the pullback along \(x\colon *\to X\).
   \end{cases}
 \]
 so \(\mathcal F_x\to(f_*f^*\mathcal F)_x\) is an isomorphism.
-Likewise, \(R^if_*(f^*\mathcal F)_x = H^i(f\inv(x),f^*\mathcal F)=0\) for \(i>0\).
+Likewise, \(\rightderived^if_*(f^*\mathcal F)_x = H^i(f\inv(x),f^*\mathcal F)=0\) for \(i>0\).
 Then Homework~7, Exercise~2 shows that
 \[ H^i(Y,f^*\mathcal F) = H^i(X,f_*f^*\mathcal F) = H^i(X,\mathcal F)\text{.} \qedhere \]
 \end{proof}
@@ -217,7 +217,7 @@ by \cref{cor:sheaf-cohomology-homotopy-invariant} and similarly \(f^*\circ g^*=\
 \end{proof}
 
 \begin{cor}
-If \(X\) is contractible (paracompact Hausdorff or locally compact Hausdorff), then
+If \(X\) is contractible (and paracompact Hausdorff or locally compact Hausdorff), then
 \[ H^i(X,\underline{A}) =
   \begin{cases}
     A & \text{if } i = 0\text{,} \\
@@ -283,7 +283,7 @@ These complexes are related by maps
     \check{C}^\bullet(\mathcal U,F) \ar[r, hook] \ar[rr, bend right=15, iso] & \check{C}_{\textup{full}}^\bullet(\mathcal U,F) \ar[r, epi] & \check{C}_{\textup{ord}}^\bullet(\mathcal U,F)
   \end{tikzcd}
 \end{equation*}
-One can show that these maps are chain homotopy equivalences, but this is annoying combinatorics; see~\cite{ConradCechCohomologyAlternatingCochains}.
+One can show that these maps are chain homotopy equivalences -- so in particular quasi-isomorphisms, whence the complexes have the same cohomology --, but this is annoying combinatorics; see~\cite{ConradCechCohomologyAlternatingCochains}.
 
 \begin{exmp}
 If \(\mathcal U=\{U_1\hookrightarrow X,U_2\hookrightarrow X\}\), the ordered Čech complex is
@@ -315,7 +315,7 @@ and the composition \(F(X)\to\check{C}^0(\mathcal U,F)\to\check{C}^1(\mathcal U,
 The sheaf condition says that \(\mathcal F(U)\to\check{H}^0(U,\mathcal F)\) is an isomorphism for all \(U\subseteq X\) open and all open covers \(\mathcal U\) of \(U\) when \(\mathcal F\) is a sheaf.
 \end{rmk}
 
-Next week, we will show that \(\check{H}^i(\mathcal U,-)\) is the \(i\)th right derived functor \(R^i\check{H}^0(\mathcal U,-)\) as functors \(\catAbelianPresheaf(X)\to\catAbelianGroup\).
+Next week, we will show that \(\check{H}^i(\mathcal U,-)\) is the \(i\)th right derived functor \(\rightderived^i\check{H}^0(\mathcal U,-)\) as functors \(\catAbelianPresheaf(X)\to\catAbelianGroup\).
 
 %%% Local Variables:
 %%% mode: latex

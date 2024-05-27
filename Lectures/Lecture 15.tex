@@ -46,30 +46,32 @@ We begin with some general theory of proper maps.
 \section{Proper pushforward}
 
 \begin{defn}
-	Let $f: Y \to X$ be a map of topological spaces. The \emph{proper pushforward} (sometimes called the \emph{pushforward with proper support}) is the functor $f_{!}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ defined, given a sheaf $\sh{F} \in \catAbelianSheaf(Y)$, by \[
-		(f_{!}\sh{F})(U) = \{s \in \sh{F}(f^{-1}(U)) \mid \supp(s) \to U \text{ is proper}\}.
+	Let $f\colon Y \to X$ be a map of topological spaces. The \emph{proper pushforward} (sometimes called the \emph{pushforward with proper support}) is the functor $f_{!}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ defined, given a sheaf $\sh{F} \in \catAbelianSheaf(Y)$, by \[
+		(f_{!}\sh{F})(U) = \setpred{s \in \sh{F}(f^{-1}(U))}{\restr{f}{\supp(s)}\colon \supp(s) \to U \text{ is proper}}\text{.}
     \]
 \end{defn}
 \begin{rmk}
 	In Homework~8 you are asked to show this assignment gives a sheaf on $X$. 
 \end{rmk}
-\begin{exc}
-	In additional exercise~15.3 you are asked to show that for the inclusion of an open subset $j: U \hookrightarrow X$ the proper pushforward becomes the extension by zero functor. 
-\end{exc}
+\begin{exmp}
+	In Additional exercise~15.3 you are asked to show that for the inclusion of an open subset $j\colon U \hookrightarrow X$ the proper pushforward becomes the extension-by-zero functor.
+\end{exmp}
 We have a functor $f_!$ between abelian categories. One checks it is left exact. 
 \begin{defn}
-	The $i$th \emph{higher pushforward with proper support} is the derived functor $\rightderived^if_!: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ of the \emph{proper pushforward}. 
+	The $i$th \emph{higher pushforward with proper support} is the \(i\)th right derived functor $\rightderived^if_!\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ of the \emph{proper pushforward}.
 \end{defn}
 
-\begin{exc}
-	If $j: U \hookrightarrow X$ is an open subset then $R^ij_! = 0$ for all $i > 0$ since $j_!$ is exact.
-\end{exc}
+\begin{exmp}
+	If $j\colon U \hookrightarrow X$ is an open subset then $R^ij_! = 0$ for all $i > 0$ since $j_!$ is exact.
+\end{exmp}
 
 \begin{exc}
 	If $X$ is Hausdorff then $\cohomology^i_c(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f\colon X \to *$. 
 \end{exc}
 
 \section{The proper base change theorem}
+\remyquote{We can't prove this because we're dumb. Which is fine.}
+\noindent
 We are now ready to state one of the main results of the course. We do so in two versions, one involving the pushforward and one involving the proper pushforward.
 
 \begin{thm}\label{thm:proper-base-change-theorem-1}
@@ -79,7 +81,7 @@ We are now ready to state one of the main results of the course. We do so in two
 \end{thm}
 
 \begin{rmk}
-	\Cref{thm:proper-base-change-theorem-1} is true for $f$ proper with no further hypotheses, but we will not prove it in this course. See \cite[Lemma 09V6]{stacks-project} for a proof of the general case. 
+	\Cref{thm:proper-base-change-theorem-1} is true for $f$ proper with no further hypotheses, but we will not prove it in this course. See \cite[Lemma~\textsc{09v6}]{stacks-project} for a proof of the general case.
 \end{rmk}
 
 \begin{thm}\label{thm:proper-base-changed-theorem-2}
@@ -109,7 +111,7 @@ We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the fo
 \end{proof}
 
 We are now ready to prove the first version of the Proper Base Change Theorem. 
-\begin{proof}(\cref{thm:proper-base-change-theorem-1})
+\begin{proof}{name={of \cref{thm:proper-base-change-theorem-1}}}
 	Recall that $\rightderived^i f_* \sh{F}$ is the sheafification of the assignment $U \mapsto H^i(f^{-1}(U), \sh{F})$, so that \[
     	(\rightderived^i f_* \sh{F})_x = \colim_{x \in U \text{ open}} \cohomology^i(f^{-1}(U), \sh{F}).
     \] By \cref{lem:proper-base-change-1} we know that \[
@@ -118,7 +120,7 @@ We are now ready to prove the first version of the Proper Base Change Theorem.
 \end{proof}
 
 \begin{lem}\label{lem:proper-base-change-2}
-	Let $i: X \to X$ be a closed subspace of a locally compact Hausdorff space. Let $\sh{F} \in \catAbelianGroup(X)$ be a c-soft sheaf of abelian groups. Then $i*\sh{F}$ is c-soft and the map \[
+	Let $i\colon Z \hookrightarrow X$ be a closed subspace of a locally compact Hausdorff space. Let $\sh{F} \in \catAbelianGroup(X)$ be a c-soft sheaf of abelian groups. Then $i^*\sh{F}$ is c-soft and the map \[
     	\cohomology^0_c(X, \sh{F}) \to \cohomology^0_c(Z, \sh{F})
     \] is surjective.
 \end{lem}
@@ -128,7 +130,7 @@ We are now ready to prove the first version of the Proper Base Change Theorem.
     \] that is $0$ on the boundary $\partial K$. This section further extends to $s_2 \in \cohomology^0(K, \sh{F})$ by c-softness. We can extend by $0$ to a section in $\cohomology_c^0(X, \sh{F})$, since $s_2|_{\partial K} = 0$. \todo{Add details and verify.}
 \end{proof}
 
-\begin{proof}(\cref{thm:proper-base-changed-theorem-2})
+\begin{proof}{name={of \cref{thm:proper-base-changed-theorem-2}}}
 	We have a map \[
     	(f_!\sh{F})_x = \filteredcolim_{x \in U \text{ open}}(f_!\sh{F})(U) \xrightarrow{\phi} \cohomology_c^0(f^{-1}(x), \sh{F})
     \] given by $s \mapsto s|_{f^{-1}(x)}$ which we claim is injective.
@@ -151,6 +153,6 @@ The next corollary explains the use of \emph{base change} in the naming of \cref
 \begin{cor}\label{cor:proper-base-change}
 	\todo{write}
 \end{cor}
-\begin{proof}(Sketch)
+\begin{proof}[sketch]
 	\todo{write}
 \end{proof}
