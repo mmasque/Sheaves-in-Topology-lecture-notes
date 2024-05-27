@@ -25,6 +25,18 @@ If $\cochaincomplex{C}$ is exact, $\cohomology^i(\cochaincomplex{C}) = 0$ for al
 	The proof from the lecture used abelian groups. \todo{rewrite in general abelian categories}. 
 \end{proof}
 
+\begin{defn}
+Let \(F\colon\cat A\to\cat B\) be a left exact functor between abelian categories and suppose \(\cat A\) has enough injectives.
+Define the \emph{\(i\)th right derived functor} \(\rightderived^iF\colon\cat A|to\cat B\) as follows: for an object \(X\) of \(\cat A\), choose an injective resolution
+\[ 0\to X\to I^0\to I^1\to I^2\to\ldots\text{,} \]
+apply \(F\) levelwise to the resolution to obtain the complex
+\[ 0\to FI^0\to FI^1\to FI^2\to\ldots \]
+and set \(\rightderived^iF(X)\coloneq H^i(F(I^\bullet))\) to be the \(i\)th cohomology of this complex.
+\end{defn}
+
+In the remainder of this lecture, we will verify that this definition makes sense and we apply it to introduce \emph{sheaf cohomology}.
+Additional exercise~12.3 shows the functoriality of this construction.
+
 \section{Homotopies and quasi-isomorphisms}
 \begin{defn}
 Let $\cochaincomplex{f}, \cochaincomplex{g}: \cochaincomplex{A} \to \cochaincomplex{B}$ be morphisms of cochain complexes. A \emph{homotopy} between $\cochaincomplex{f}$ and $\cochaincomplex{g}$ is a collection of maps $h^i: A^i \to B^{i-1}$ such that \[
@@ -51,11 +63,11 @@ The maps $\cochaincomplex{f}$ and $\cochaincomplex{g}$ are \emph{homotopic}, we 
 If a morphism is homotopic to the zero morphism, it is called \emph{nullhomotopic}.
 \end{defn}
 
-\begin{defn}(Homotopy equivalence)
+\begin{defn}
 	A map $\cochaincomplex{f}: \cochaincomplex{A} \to \cochaincomplex{B}$ is a \emph{homotopy equivalence} if there exists a map $\cochaincomplex{g}: \cochaincomplex{B} \to \cochaincomplex{A}$ such that $\cochaincomplex{g} \circ \cochaincomplex{f} \sim \id_{\cochaincomplex{g}}$ and $\cochaincomplex{g} \sim \id_{\cochaincomplex{f}}$. 
 \end{defn}
 
-\begin{defn}(Quasi-isomorphism)
+\begin{defn}
 	A map $\cochaincomplex{f}: \cochaincomplex{A} \to \cochaincomplex{B}$ is a \emph{quasi-isomorphism} if the induced map \[
     	\cohomology^i{\cochaincomplex{f}}: \cohomology^i{\cochaincomplex{A}} \to \cohomology^i{\cochaincomplex{B}}
     \] is an isomorphism for all $i \in \mathbb{Z}$. 
@@ -121,13 +133,40 @@ By \cref{lem:maps-from-exact-to-injective-nullhomotopic} \todo{rest.}
 \end{proof}
 
 \begin{cor}
-	Let $F: \cat A \to \cat B$ be a left exact functor between abelian categories, and suppose $\cat A$ has enough injectives. Then the derived functors $R^iF$ are well defined for all $i$. 
+	Let $F: \cat A \to \cat B$ be a left exact functor between abelian categories, and suppose $\cat A$ has enough injectives. Then the derived functors $\rightderived^iF$ are well defined for all $i$. 
 \end{cor}
 \begin{proof}
 	Suppose $0 \to X \to \cochaincomplex{I}$ and $0 \to X \to \cochaincomplex{J}$ are injective resolutions. Then the identity map $\id_X: X \to X$ extends to two maps $\cochaincomplex{f}: \cochaincomplex{I} \to \cochaincomplex{J}$ and $\cochaincomplex{g}: \cochaincomplex{J} \to \cochaincomplex{I}$. Since either composition extends the identity on $X$ uniquely up to homotopy, and the identity on the complexes extends the identity on $X$, the map $\cochaincomplex{f}$ is a homotopy equivalence, so $F(f)$ is a quasi-isomorphism by \cref{exc:properties-of-homotopy}, and thus $H^i(F(\cochaincomplex{I})) \cong H^i(F(\cochaincomplex{J}))$. \todo{prove functoriality of the derived functors}.
 \end{proof}
 
+\section{Sheaf cohomology}
+
+The \emph{sections functor} \(\Gamma(U,-)\colon\catAbelianSheaf(X)\to\catAbelianGroup,\ \mathcal F\mapsto\mathcal F(U)\) is left exact for any open \(U\) of a space \(X\).
+Hence the right derived functors \(\rightderived^i\Gamma(U,-)\) exist and are well-defined.
+
 \begin{defn}
-	Let $X$ be a topological space, let $U \subset X$ be open. 
-	The $i$th \emph{sheaf cohomology} \todo{of $U$?} is $R^i \Gamma(U, -)$, the $i$th derived functor of the functor of sections $\Gamma(U, -)$ that sends a sheaf of abelian groups $\sh{F}$ on $X$ to the abelian group $\sh{F}(U)$. It is denoted $H^i(U, -)$.
+	Let $X$ be a topological space and let $U \subset X$ be an open subset. 
+	The $i$th \emph{sheaf cohomology} \todo{of $U$?} is the \(i\)th right derived functor $\rightderived^i \Gamma(U, -)$. It is denoted $H^i(U, -)$.
 \end{defn}
+
+\begin{exmp}
+In Homework~6, Exercise~2, you constructed a short exact sequence
+\[ 0\to\underline{\bb Z}\xrightarrow{2\pi i}\mathcal O\xrightarrow{\exp}\mathcal O^\times\to 0 \]
+of sheaves on \(\bb C^n\).
+For some fixed open \(U\subseteq\bb C^n\), the sheaf cohomology \(H^i(U,-)\) is the \(i\)th right derived functor of \(\Gamma(U,-)\).
+The short exact sequence gives rise to a long exact sequence
+        \[\begin{tikzcd}[row sep=small]
+            0 \ar[r] & H^0(U, \underline{\bb Z}) \ar[r] & H^0(U, \mathcal O) \ar[r] \ar[draw=none]{d}[name=X, anchor=center]{} & H^0(U, \mathcal O^\times)
+            \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (X.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\
+            & H^1(U, \underline{\bb Z}) \ar[r] & H^1(U, \mathcal O) \ar[r] & H^1(U, \mathcal O^\times) \ar[r] & \ldots
+        \end{tikzcd}\]
+\end{exmp}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
