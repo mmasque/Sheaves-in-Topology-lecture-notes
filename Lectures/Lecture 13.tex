@@ -7,7 +7,7 @@ In this section, let \(\cat A\) and \(\cat B\) be abelian categories and assume 
 
 \begin{defn}
 Let \(F\colon\cat A\to\cat B\) be a left exact functor.
-Then an object \(A\) of \(\cat A\) is \emph{\(F\)-acyclic} if \(R^iF(A)=0\) for \(i>0\).
+Then an object \(A\) of \(\cat A\) is \emph{\(F\)-acyclic} if \(\rightderived^iF(A)=0\) for \(i>0\).
 \end{defn}
 
 \begin{exmp}
@@ -16,7 +16,7 @@ Indeed, take the injective resolution
 \[ 0 \to I \to \underbracket{I \to 0 \to 0 \to \ldots} \]
 of \(I\).
 Then
-\[ R^iF(I) = H^i(F(I)\to 0\to 0\to\ldots) =
+\[ \rightderived^iF(I) = H^i(F(I)\to 0\to 0\to\ldots) =
   \begin{cases}
     F(I) & \text{if } i=0\text{,} \\
     0 & \text{if } i>0\text{.}
@@ -30,14 +30,14 @@ The following lemma says that the right-derived functors of a left exact functor
 Let \(F\colon\cat A\to\cat B\) be a left exact functor, let \(A\) be an object of \(\cat A\) and let
 \[0\to A\to C^0\to C^1\to\ldots\]
 be a resolution of \(A\) with \(F\)-acyclic \(C^i\) for all \(i\).
-Then \(R^iF(A)\cong H^i(F(C^\bullet))\) for all \(i\).
+Then \(\rightderived^iF(A)\cong H^i(F(C^\bullet))\) for all \(i\).
 \end{lem}
 \begin{proof}
 We proceed by induction on \(i\).
 
 For \(i=0\), left exactness gives
-\[ H^0(F(C^\bullet)) \cong \ker(F(C^0)\to F(C^1)) \cong F(A) \cong R^0F(A)\text{.} \]
-(We have not shown this yet, but it is not too hard to show that \(R^0F\cong F\).)
+\[ H^0(F(C^\bullet)) \cong \ker(F(C^0)\to F(C^1)) \cong F(A) \cong \rightderived^0F(A)\text{.} \]
+(We have not shown this yet, but it is not too hard to show that \(\rightderived^0F\cong F\).)
 
 Let \(B\coloneq\im(C^0\to C^1)\cong\ker(C^1\to C^2)\).
 By breaking of the resolution using \(B\), we get exact sequences
@@ -51,18 +51,18 @@ and
   0\to B\to C^1\to C^2\to \ldots
 \end{equation}
 The short exact sequence~\cref{eq:compute-right-derived-functor-acyclic-resolution-ses} gives\todo{ref long exact sequence} a long exact sequence
-\[ 0\to F(A)\to F(C^0)\to F(B)\to R^1F(A)\to \underbrace{R^1F(C^0)}_{=0}\to R^1F(B)\to R^2F(A)\to \underbrace{R^2F(C^0)}_{=0}\to \ldots \]
-in which every third term is (eventually) zero since \(C^0\) is \(F\)-acyclic; hence we obtain isomorphisms \(R^iF(B)\cong R^{i+1}F(A)\) by exactness.
+\[ 0\to F(A)\to F(C^0)\to F(B)\to \rightderived^1F(A)\to \underbrace{\rightderived^1F(C^0)}_{=0}\to \rightderived^1F(B)\to \rightderived^2F(A)\to \underbrace{\rightderived^2F(C^0)}_{=0}\to \ldots \]
+in which every third term is (eventually) zero since \(C^0\) is \(F\)-acyclic; hence we obtain isomorphisms \(\rightderived^iF(B)\cong \rightderived^{i+1}F(A)\) by exactness.
 The long exact sequence \cref{eq:compute-right-derived-functor-acyclic-resolution-les} gives an exact sequence
 \[ 0\to F(B)\to F(C^1)\to F(C^2) \]
 by left exactness of \(F\).
 Thus, we have
-\[ R^1F(A) \cong \frac{F(B)}{F(C^0)} \cong \frac{\ker(F(C^1)\to F(C^2))}{\im(F(C^0)\to F(C^1))} \cong H^1(F(C^\bullet))\text{,} \]
+\[ \rightderived^1F(A) \cong \frac{F(B)}{F(C^0)} \cong \frac{\ker(F(C^1)\to F(C^2))}{\im(F(C^0)\to F(C^1))} \cong H^1(F(C^\bullet))\text{,} \]
 proving the result for \(i=1\).
 
 For \(i>1\), assume the result for \(i-1\) (and for all \(A\) and \(C^\bullet\)).
 Applying the induction hypothesis to the \(F\)-acyclic resolution \cref{eq:compute-right-derived-functor-acyclic-resolution-les} of \(B\), we find
-\[ R^iF(A) \cong R^{i-1}F(B) \cong H^{i-1}(F(C^1)\to F(C^2)\to\ldots) = H^i(F(C^0)\to F(C^1)\to\ldots)\text{.} \qedhere \]
+\[ \rightderived^iF(A) \cong \rightderived^{i-1}F(B) \cong H^{i-1}(F(C^1)\to F(C^2)\to\ldots) = H^i(F(C^0)\to F(C^1)\to\ldots)\text{.} \qedhere \]
 \end{proof}
 
 So far, this lemma does not say anything specific about sheaves.

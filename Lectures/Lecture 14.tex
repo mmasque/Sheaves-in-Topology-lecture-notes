@@ -148,7 +148,7 @@ For an alternative proof using the winding number, see \cite[Section~\RN{3}.4]{I
 
 \begin{defn}
     Let $f\colon Y \to X$ be a continuous map.
-    Then the derived functors of the pushforward $f_*\colon \catAbelianGroup(Y) \to \catAbelianGroup(X)$ are called the \emph{higher pushforwards}\index{to categorize!higher pushforward} $R^i f_*$. 
+    Then the derived functors of the pushforward $f_*\colon \catAbelianGroup(Y) \to \catAbelianGroup(X)$ are called the \emph{higher pushforwards}\index{to categorize!higher pushforward} $\rightderived^i f_*$. 
 \end{defn}
 
 \begin{defn}
@@ -157,7 +157,7 @@ For an alternative proof using the winding number, see \cite[Section~\RN{3}.4]{I
 \end{defn}
 
 \begin{lem}
-    For a continuous map $f\colon Y \to X$ and an abelian sheaf $\sh F$, the sheaf $R^i f_* \sh F$ is the sheafification of \[\open(X)\opp \to \catAbelianGroup,\quad U \mapsto H^i(f^{-1}(U), \sh F).\]
+    For a continuous map $f\colon Y \to X$ and an abelian sheaf $\sh F$, the sheaf $\rightderived^i f_* \sh F$ is the sheafification of \[\open(X)\opp \to \catAbelianGroup,\quad U \mapsto H^i(f^{-1}(U), \sh F).\]
 \end{lem}
 \begin{proof}
     Observe that $U\mapsto H^i(f^{-1}(U), \sh F)$ is the same as $f_* \underline{H}^i(\sh F)$ where $f_* \colon \catAbelianPresheaf(Y) \to \catAbelianPresheaf(X)$. Consider the following commutative diagram (up to natural isomorphism):
@@ -173,11 +173,11 @@ For an alternative proof using the winding number, see \cite[Section~\RN{3}.4]{I
 	\arrow["{(-)^\sharp}", from=2-2, to=2-3]
 \end{tikzcd}\]
 
-    Note that $f_*\colon \catAbelianPresheaf(Y) \to \catAbelianPresheaf(X)$ is exact (since limits are computed objectwise, or since it has a left and a right adjoint). Also $(-)^\sharp$ is exact (see \cref{exmp:exact-functors}). The result now follows by two applications of Homework~7, Exercise~2. Firstly, since $f_*$ is exact on $\catAbelianPresheaf$, we have $f_* \underline{H}^i(\sh F) = R^i F(\sh F)$. Additionally, as the composition $(-)^\sharp \circ i_X = \id$ we have $(-)^\sharp \circ F = f_*$. So exactness of $(-)^\sharp$ gives $R^i f_* \sh F = (R^i F(\sh F))^\sharp = (f_* \underline{H}^i(\sh F))^\sharp$.
+    Note that $f_*\colon \catAbelianPresheaf(Y) \to \catAbelianPresheaf(X)$ is exact (since limits are computed objectwise, or since it has a left and a right adjoint). Also $(-)^\sharp$ is exact (see \cref{exmp:exact-functors}). The result now follows by two applications of Homework~7, Exercise~2. Firstly, since $f_*$ is exact on $\catAbelianPresheaf$, we have $f_* \underline{H}^i(\sh F) = \rightderived^i F(\sh F)$. Additionally, as the composition $(-)^\sharp \circ i_X = \id$ we have $(-)^\sharp \circ F = f_*$. So exactness of $(-)^\sharp$ gives $\rightderived^i f_* \sh F = (\rightderived^i F(\sh F))^\sharp = (f_* \underline{H}^i(\sh F))^\sharp$.
 \end{proof}
 
 Likewise, since $(-)^\sharp \circ i_X = \id$ and $(-)^\sharp$ is exact, we get
-\[(\underline{H}^i(\sh F))^\sharp = R^i((-)^\sharp \circ i_X)(\sh F) = R^i \id(\sh F) = 0\]
+\[(\underline{H}^i(\sh F))^\sharp = \rightderived^i((-)^\sharp \circ i_X)(\sh F) = \rightderived^i \id(\sh F) = 0\]
 if $i>0$ since $\id$ is exact.
 
 \section*{Exercise}
