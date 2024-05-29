@@ -141,6 +141,17 @@ of \cref{cor:sheafification-left-adjoint-to-inclusion} and \cref{prop:pullback-K
 
 Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSheaf(X)](\mathcal F,f_*\mathcal G)$ which are naturally isomorphic by the adjunction, there is also an `intermediate' set of maps, called \emph{$f$-maps}; see~\cite[\href{https://stacks.math.columbia.edu/tag/008K}{Lemma 008K}]{stacks-project}.
 
+The following corollary roughly says that pushforward and pullback are `functorial in the map' (respectively co- and contravariantly).\footnote{This statement can probably be made precise in terms of \(2\)-categories.}
+
+\begin{cor}
+For any space \(X\), we have \((\id_X)_*=\id_{\catSheaf(X)}\cong(\id_X)^*\), and for any maps \(f\colon Z\to Y\) and \(g\colon Y\to X\) we have \((gf)_*=g_*f_*\colon\catSheaf(Z)\to\catSheaf(X)\) and \((gf)^*\cong f^*g^*\colon\catSheaf(X)\to\catSheaf(Z)\).
+\end{cor}
+Note that the identities for the pushforward hold on-the-nose, whereas we only prove the identities for the pullback up to natural isomorphism.
+\begin{proof}
+The identities for the pushforward follow directly from the definition since \((gf)\inv(U)=f\inv(g\inv(U))\).
+The identities for the pullback follow from those for the pushforward and the adjunction of \cref{lem:pushforward-pullback-adjunction-sheaves}: we have adjunctions \((gf)^*\leftadj(gf)_*\) and \(f^*g^*\leftadj g_*f_*\) and the right adjoints in these adjunctions are equal.
+\end{proof}
+
 \section{Stalks, germs, skyscrapers}
 
 \begin{defn}\label{defn:stalk}
