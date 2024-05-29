@@ -138,8 +138,19 @@ The locus where the two sections \(0,s\colon U\to\etalespace(\mathcal F)\) agree
 For a topological space \(X\), define a functor
 \[ H^0_c(X,-)\colon\catAbelianSheaf(X)\to\catAbelianGroup\text{,}\quad\mathcal F\mapsto\setpred{s\in\mathcal F(X)}{\supp(s)\text{ is compact}}\text{,} \]
 sending a sheaf to its global sections with compact support.
-This functor is left exact and the derived functors \(H^i_c(X,-)\) are the \emph{cohomology with compact support}.
+This functor is left exact and the derived functors \(H^i_c(X,-)\coloneq\rightderived^iH^0_c(X,-)\) are the \emph{sheaf cohomology with compact support}.
 \end{defn}
+
+The following lemma shows that ordinary sheaf cohomology and sheaf cohomology with compact support agree for all sheaves on compact spaces.
+
+\begin{lem}
+Let \(\mathcal F\) be an abelian sheaf on a compact space \(X\).
+Then \(H^i(X,\mathcal F)\cong H^i_c(X,\mathcal F)\) for all \(i\geq 0\).
+\end{lem}
+\begin{proof}
+By \cref{lem:support-closed}, the support of any global section \(s\in\mathcal F(X)\) is closed in the compact space \(X\), so also compact.
+Hence we have \(H^0_c(X,-) = \Gamma(X,-) = H^0(X,-)\), and then also their derived functors \(H^i_c(X,-)\) and \(H^i(X,-)\) agree for all \(i\geq 0\).
+\end{proof}
 
 We will derive properties of cohomology \(H^i\) and compactly supported cohomology \(H^i_c\) in parallel.
 A more general unified strategy using `families of supports' is presented in \cite[\S~\RN{2}.9]{BredonSheafTheory}.
