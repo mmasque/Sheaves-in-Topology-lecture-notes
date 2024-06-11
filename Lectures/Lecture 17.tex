@@ -1,0 +1,153 @@
+\chapter{Čech cohomology, \todo{}}
+
+\section{Čech cohomology}
+\remyquote{Since I don't know what I'm doing, let me take a break.}
+\noindent
+Recall from the last lecture that we can define the cochains in degree \(n\) of the Čech complex of an abelian presheaf \(F\) on a space \(X\) with respect to an open cover \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) as
+\[ \check{C}^n(\mathcal U,F) \cong \prod_{i_0<\ldots<i_n}\mathcal F(U_{i_0,\ldots,i_n}) \]
+if the indexing set \(I\) is totally ordered.
+Throughout this lecture, we work with this definition, so we assume \(I\) is totally ordered; we can also do without this assumption, but prefer the notational simplicity we obtain with this assumption.
+
+The Čech cohomology, which is the cohomology of the Čech complex, is defined for all presheaves, not just sheaves.
+Today, we will discuss some results about Čech cohomology which do hold on the category of presheaves, but not on the full subcategory of sheaves.
+In the following lemma we already see why this is important.
+
+\begin{lem}
+The functor \(\check{H}^i(\mathcal U,-)\colon\catAbelianPresheaf(X)\to\catAbelianGroup\) define a \(\delta\)-functor.\todo{define}
+\end{lem}
+\begin{proof}
+If \(0\to F\to G\to H\to 0\) is a short exact sequence of presheaves, then for all \(i_0<\ldots<i_n\), the sequence
+\[ 0 \to F(U_{i_0,\ldots,i_n}) \to G(U_{i_0,\ldots,i_n}) \to H(U_{i_0,\ldots,i_n}) \to 0 \]
+is exact (but this is not true in the category of sheaves!).
+Thus, the sequence
+\[ 0 \to \check{C}^\bullet(\mathcal U,F) \to \check{C}^\bullet(\mathcal U,G) \to \check{C}^\bullet(\mathcal U,H)\to 0 \]
+of complexes is exact, giving the required long exact sequence.
+\end{proof}
+
+\begin{thm}\label{thm:Čech-chomology-vanishes-injective-presheaf}
+If \(I\) is an injective abelian presheaf on a space \(X\), then the Čech cohomology \(\check{H}^i(\mathcal U,I)\) vanishes for all \(i>0\).
+\end{thm}
+
+To prove this theorem, we introduce some notation and prove a lemma.
+
+\begin{notn}
+Let \(\cochaincomplex{K}\) be the cochain complex of presheaves
+\[ \ldots \to K^{-2}\to K^{-1} \to K^0\to 0\to \ldots \]
+given by
+\[ K^{-n}\coloneq\bigoplus_{i_0<\ldots<i_n}\underline{\bb Z}^{\smash{\textup{pre}}}_{U_{i_0,\ldots,i_n}} \]
+with differential \(d^{-n}\colon K^{-n}\to K^{-n+1}\) given on the factor \(\underline{\bb Z}^{\smash{\textup{pre}}}_{U_{i_0,\ldots,i_n}}\) by
+\begin{align*}
+  \sum_{k=0}^n(-1)^k\bigl(\underline{\bb Z}^{\smash{\textup{pre}}}_{U_{i_0,\ldots,i_n}}\to\underline{\bb Z}^{\smash{\textup{pre}}}_{U_{i_0,\ldots,i_{k-1},i_{k+1},\ldots,i_n}}\bigr) \colon \underline{\bb Z}^{\smash{\textup{pre}}}_{U_{i_0,\ldots,i_n}} \to K^{-(n-1)}=\bigoplus_{j_0<\ldots<j_{n-1}}\underline{\bb Z}^{\smash{\textup{pre}}}_{U_{j_0,\ldots,j_{n-1}}}
+\end{align*}
+of the maps induced by the inclusions \(U_{i_0,\ldots,i_n}\hookrightarrow U_{i_0,\ldots,i_{k-1},i_{k+1},\ldots,i_n}\).
+Then we have \(\Hom[\catAbelianPresheaf(X)](K^{-\bullet}, F) \cong \check{C}^\bullet(\mathcal U,F)\), more or less by definition.
+\end{notn}
+
+\begin{lem}
+Let \(\underline{\bb Z}^{\smash{\textup{pre}}}_{\mathcal U}\subseteq\underline{\bb Z}^{\smash{\textup{pre}}}_X\) be the image of \(K^0=\bigoplus_{i\in I}\underline{\bb Z}^{\smash{\textup{pre}}}_{U_i}\to\underline{\bb Z}^{\smash{\textup{pre}}}_X\), whose value on an open \(V\) is \(\bb Z\) if \(V\subseteq U_i\) for some \(i\), and zero otherwise.
+Then the sequence
+\[ K^\bullet_+ = (\ldots\to K^{-2}\to K^{-1}\to K^0\to\underline{\bb Z}^{\smash{\textup{pre}}}_{\mathcal U}\to 0\to\ldots) \]
+is exact in \(\catAbelianPresheaf(X)\).
+In other words, the cohomology of \(K^\bullet\) is
+\[ H^i(K^\bullet) =
+  \begin{cases}
+    \underline{\bb Z}^{\smash{\textup{pre}}}_{\mathcal U} & \text{if } i = 0\text{,} \\
+    0 & \text{if } i > 0\text{.}
+  \end{cases}
+\]
+\end{lem}
+\begin{proof}
+\todo{write}
+\end{proof}
+
+\begin{proof}[name={of \cref{thm:Čech-chomology-vanishes-injective-presheaf}}]
+We saw that \(\check{C}^\bullet_{\smash{\textup{ord}}}(\mathcal U,I) = \Hom[\catAbelianPresheaf(X)](K^\bullet,I)\), and \(K^\bullet_+\) is exact.
+Since \(\Hom(-,I)\) is exact (because \(I\) is injective), we conclude that the sequence
+\[ 0\to \Hom(\underline{\bb Z}^{\smash{\textup{pre}}}_{\mathcal U},I) \to \check{C}^0(\mathcal U,I) \to \check{C}^1(\mathcal U,I)\to\ldots \]
+is exact, so \(\check{H}^i(\mathcal U,I)=0\) for \(i>0\).
+\end{proof}
+
+\begin{cor}
+The \(\delta\)-functor \(\check{H}^i(\mathcal U,-)\colon\catAbelianPresheaf(X)\to\catAbelianGroup\) is isomorphic as a \(\delta\)-functor to \(\rightderived^i\check{H}^0(\mathcal U,-)\).
+\end{cor}
+The proof of this corollary is Additional exercise~16.2(c).
+
+\begin{rmk}
+The higher Čech cohomology functors are derived functors from the category of presheaves, not the category of sheaves.
+In fact, the composite
+\[ \catAbelianSheaf(X)\hookrightarrow\catAbelianPresheaf(X)\xrightarrow{\check{H}^0(\mathcal U,-)}\catAbelianGroup \]
+is the global sections functor \(\Gamma(X,-)\).
+\end{rmk}
+
+\todo{write}
+
+\begin{cor}
+Let \(X\) be a topological space with an open cover \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) and let \(\mathcal F\) be an abelian sheaf on \(X\).
+If \(H^i(U_{i_0,\ldots,i_n},\mathcal F)=0\) for all \(i>0\), all \(n\geq 0\) and all \(i_0,\ldots,i_n\in I\), then the map
+\[ \check{H}^i(\mathcal U,\mathcal F) \to H^i(X,\mathcal F) \]
+is an isomorphism.
+\end{cor}
+\begin{proof}
+\todo{write}
+\end{proof}
+
+\begin{exmp}
+If all intersecitons \(U_{i_0,\ldots,i_n}\) are disjoint unions of contractibles, then \(H^i(U_{i_0,\ldots,i_n},\underline{\bb Z})=0\) for all \(i>0\), so \(\check{H}^i(\mathcal U,\underline{\bb Z})=H^i(X,\underline{\bb Z})\).
+\end{exmp}
+
+\begin{exmp}
+We will compute the cohomology \(H^i(\sphere[1],\underline{\bb Z})\) of the circle again.
+Let \(x_1\) and \(x_2\) denote the `north pole' and `south pole' of the circle, and define \(U_1\coloneq\sphere[1]\setminus\{x_2\}\) and \(U_2\coloneq\sphere[1]\setminus\{x_1\}\); write \(\mathcal U\) for the open cover \(\{U_1\hookrightarrow\sphere[1],U_2\hookrightarrow\sphere[1]\}\).\todo{picture}
+The cohomology of the circle can be computed with the Mayer--Vietoris sequence associated to this cover, but we can also use Čech cohomology: since \(U_1\cong U_2\cong\bb R\) and \(U_1\cap U_2\cong\bb R\cotimes\bb R\), we have \(H^i(U_{i_0,\ldots,i_n},\underline{\bb Z})=0\) for \(i>0\).
+So we get \(H^i(\sphere[1],\underline{\bb Z}) = \check{H}^i(\mathcal U,\underline{\bb Z})\), the cohomology of the Čech complex which has the form
+\begin{equation*}
+  \begin{tikzcd}[row sep=tiny, column sep=small]
+    \bb Z\oplus\bb Z \ar[r] & \bb Z\oplus\bb Z \ar[r] & 0 \ar[r] & \ldots \\
+    {(a,b)} \ar[r, mapsto] & {(b-a,b-a)}
+  \end{tikzcd}
+\end{equation*}
+Thus we obtain:
+\[ H^i(\sphere[1],\underline{\bb Z}) =
+  \begin{cases}
+    \bb Z & \text{if } i = 0,1\text{,} \\
+    0 & \text{if } i > 1\text{.}
+  \end{cases}
+\]
+\end{exmp}
+
+\section{Čech cohomology on paracompact Hausdorff spaces}
+\remyquote{I'm basically mumbling right now.}
+
+\begin{thm}
+If \(X\) is a paracompact Hausdorff space and \(\mathcal F\) is an abelian sheaf on \(X\), then there is an isomorphism
+\[ \colim_{\mathcal U}\check{H}^i(\mathcal U,\mathcal F) \xrightarrow{\cong} H^i(X,\mathcal F)\text{.} \]
+\end{thm}
+
+\begin{defn}
+Write \(\catOpenCover{X}\) for the category of open covers of \(X\), whose objects are the open covers \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) and whose maps are \emph{refining maps}, that is, a map \(\mathcal V=\{V_j\hookrightarrow X\}_{j\in J}\to\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) is a function \(\phi\colon J\to I\) such that \(V_j\subseteq U_{\phi(j}\) for all \(j\in J\).
+\end{defn}
+
+\begin{exc}[name={Additional exercise~17.3}]
+The category \(\catOpenCover{X}\) is not cofiltered, but the homotopy \((1,0)\)-category \(h_0\catOpenCover{X}\) is.
+The objects of this category are the same as \(\catOpenCover{X}\), but there is a unique arrow \(\mathcal V\to\mathcal U\) if there exists a refining map \(\mathcal V\to\mathcal U\), and no arrow otherwise.
+\end{exc}
+
+\begin{exc}[name={Additional exercise~17.4}]
+Čech cohomology defines functors
+\[ \check{H}^i \colon h_0\catOpenCover{X}\opp\times\catAbelianPresheaf(X)\to\catAbelianGroup\text{,} \quad (\mathcal U,F)\mapsto\check{H}^i(\mathcal U,F)\text{.} \]
+\end{exc}
+
+\begin{defn}\label{defn:Čech-cohomology-colimit}
+Define \(\check{H}^i(X,F)\coloneq\colim_{\mathcal U\in h_0\catOpenCover{X}}\check{H}^i(\mathcal U,F)\).
+\end{defn}
+
+\begin{rmk}
+Note that Čech cohomology is contravariant in the open cover; the colimit of \cref{defn:Čech-cohomology-colimit} can be thought of as the Čech cohomology of \(F\) with respect to the `finest' cover (such a cover might not exist).
+\end{rmk}
+
+\todo{write}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
