@@ -141,6 +141,65 @@ so \(\overline{X_p}\subseteq X_{\leq p}\).
 The converse holds if \(P=\bb N\) or if \(P\) is finite, but not in general (see Additional exercise~18.4).
 \end{rmk}
 
+\todo{example \(n\)-cube}
+
+\begin{exmp}
+The unit interval \(I=[0,1]\) can be stratified over \([1]\) as in the following picture:
+\begin{center}
+  \begin{tikzpicture}
+    \draw[thick,blue] (0,0)--(1,0);
+    \draw[fill,red] (0,0) circle (0.04);
+    \draw[fill,blue] (1,0) circle (0.04);
+  \end{tikzpicture}
+\end{center}
+sending the left endpoint \(0\) (red) to \(0\) and the rest of the interval to \(1\).
+\end{exmp}
+
+\begin{exmp}
+The circle can be stratified as in the picture
+\begin{center}
+  \begin{tikzpicture}
+    \draw[thick,red] (-1,0) arc[start angle=180, end angle=0, x radius=1, y radius=1];
+    \draw[thick,blue] (-1,0) arc[start angle=180, end angle=360, x radius=1, y radius=1];
+    \draw[fill] (-1,0) circle (0.04);
+    \draw[fill,black!40] (1,0) circle (0.04);
+    \node at (-1.25,0) {\(p\)};
+    \node at (1.25,0) {\(q\)};
+    \node at (0,1.25) {\(\alpha\)};
+    \node at (0,-1.25) {\(\beta\)};
+  \end{tikzpicture}
+\end{center}
+over the poset with elements \(\{p,q,\alpha,\beta\}\) with \(p<\alpha\), \(p<\beta\), \(q<\alpha\) and \(q<\beta\).
+\end{exmp}
+
+\begin{exmp}
+We can stratify the \(2\)-sphere over \([2]=\{0<1<2\}\) as in the following picture:
+\begin{center}
+  \begin{tikzpicture}
+    % inspiration from https://people.uncw.edu/hermanr/phy495/Bloch_Sphere.pdf
+    \draw[thick] (0,0) circle (1);
+    \draw[thick,blue] plot[domain=pi:2*pi] ({cos(\x r)},{.2*sin(\x r)});
+    \draw[thick,dashed,blue] plot[domain=0:pi] ({cos(\x r)},{.2*sin(\x r)});
+    \draw[fill,red] (-1, 0) circle (0.04);
+  \end{tikzpicture}
+\end{center}
+sending the red point to \(0\), the blue equator to \(1\), and the two hemispheres to \(2\).
+We can also stratify the \(2\)-sphere over the poset with elements \(\{0,1,2,2'\}\) with \(0<1\), \(1<2\) and \(1<2'\) by sending the upper hemisphere to \(2\) and the lower hemisphere to \(2'\).
+\end{exmp}
+
+\begin{exmp}
+The plane \(\bb R^2\) can be stratified as in the picture
+\begin{center}
+  \begin{tikzpicture}
+    \fill[black!15] (-1,-1) rectangle (1,1);
+    \draw[thick,blue] (0,-1) -- (0,1);
+    \draw[thick,red] (-1,0) -- (1,0);
+    \draw[fill] (0,0) circle (0.04);
+  \end{tikzpicture}
+\end{center}
+over the poset with elements \(\{0,1,1',2\}\) with \(0<1\), \(0<1'\), \(1<2\) and \(1'<2\) by sending the origin to \(0\), the \(x\)-axis minus the origin to \(1\), the \(y\)-axis minus the origin to \(1'\) and the rest to \(2\).
+\end{exmp}
+
 \todo{write}
 
 \section{Conical stratifications}
