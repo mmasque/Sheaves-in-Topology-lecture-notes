@@ -2,9 +2,145 @@
 \remyquote{Now it's just three weeks of me having fun.}
 
 \section{Stratified spaces and exodormy}
-\todo{write}
+In \cref{lecture:4}, we discussed the following diagram:
+\begin{equation*}
+    \begin{tikzcd}
+        \catSheaf(X) \ar[r, "\simeq"] & \catLocalHomeomorphism_{/X} \\
+        \catLocallyConstantSheaf(X) \ar[u, inclusion] \ar[r, "\simeq"'] & \catCoveringSpace_{/X} \ar[u, inclusion] \ar[r, "\simeq"'] & \catFunctor(\deloop\homotopy[1](X,x_0),\catSet)
+    \end{tikzcd}
+\end{equation*}
+(To avoid choosing a basepoint, we can replace \(\deloop\homotopy[1](X,x_0)\) by the fundamental groupoid \(\Pi_1(X)\), whose objects are the points \(x\in X\) and whose maps \(x\to y\) are homotopy classes of paths from \(x\) to \(y\).)
+
+We will discuss in the following weeks in more detail the question: is there something in the top right spot?
+This will be partially answered by \emph{exodromy}, but only for \emph{constructible sheaves}.
+In this week's lecture, we discuss the topological setup, and next week we introduce constructible sheaves and discuss exodromy.
 
 \section{Stratifications}
+The most basic version of a stratification (a notion we will introduce momentarily) is a \emph{filtration}.
+
+\begin{defn}
+A \emph{filtration} of a topological space \(X\) is a sequence of closed subspaces
+\[ \emptyset=Z_{-1}\subseteq Z_0\subseteq Z_1\subseteq\ldots\subseteq X \]
+indexed by the natural numbers (and \(-1\), but we always set \(Z_{-1}\coloneq\emptyset\)) such that \(X=\bigcup_{i\in\bb N}Z_i\).
+\end{defn}
+
+\begin{exmp}
+One may filter the \(n\)-cube \([0,1]^n\) by
+\[ Z_i \coloneq \setpred{(x_1,\ldots,x_n)}{\#\{x_j\neq 0,1\}\leq i}\text{.} \]
+The picture for \(n=2\) is as follows:
+\begin{center}
+  \begin{tikzpicture}
+    \draw[fill] (0, 0) circle (0.025);
+    \draw[fill] (0, 1) circle (0.025);
+    \draw[fill] (1, 0) circle (0.025);
+    \draw[fill] (1, 1) circle (0.025);
+    \node at (0.5, -.75) {\(Z_0\)};
+    \node at (2, 0.5) {\(\subseteq\)};
+    \draw[thick] (3, 0) -- (3, 1);
+    \draw[thick] (3, 0) -- (4, 0);
+    \draw[thick] (3, 1) -- (4, 1);
+    \draw[thick] (4, 0) -- (4, 1);
+    \node at (3.5, -.75) {\(Z_1\)};
+    \node at (5, 0.5) {\(\subseteq\)};
+    \fill[black!30] (6, 0) rectangle (7, 1);
+    \node at (6.5, -.75) {\(Z_2=[0,1]^2\)};
+  \end{tikzpicture}
+\end{center}
+\end{exmp}
+
+\begin{exmp}
+Generalising the previous example, a CW-complex \(X\) is filtered by its skeleta:
+\[ X_0 \subseteq X_1 \subseteq X_2 \subseteq\ldots \subseteq X\]
+The \(i\)-skeleton \(X_i\) is the union of the cells of dimension \(\leq i\).
+\end{exmp}
+
+It is often convenient to describe the locally closed subsets \(Z_i\setminus Z_{i-1}\) instead of the subsets \(Z_i\).
+This is captured in the following definition.
+
+\begin{defn}\label{defn:N-stratification}
+An \emph{\(\bb N\)-stratification} of a topological space \(X\) is a decomposition
+\[ X = \coprod_{i\in\bb N}X_i \]
+into locally closed subsets \(X_i\) such that \(\overline{X_i}\subseteq X_{\leq i}\coloneq\bigcup_{j\leq i}X_j\).
+The disjoint union here is a disjoint union of \emph{sets}; \(X\) need not have the disjoint union topology with respect to the \(X_i\).
+\end{defn}
+
+\begin{lem}
+Let \(X=\coprod_{i\in\bb N}X_i\) be a decomposition of a topological space into subsets \(X_i\).
+Then the following are equivalent:
+\begin{enumerate}
+\item the subsets \(X_i\) are locally closed and \(\overline{X_i}\subseteq X_{\leq i}\) (the decomposition is an \(\bb N\)-stratification in the above sense);
+\item the subsets \(X_{\leq i}\) are closed.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+If the latter holds, then the \(X_i=X_{\leq i}\setminus X_{\leq i-1}\) are locally closed and since \(X_i\) is contained in the closed subset \(X_{\leq i}\), so is its closure.
+Conversely, if the former statement holds, then
+\[ \overline{X_{\leq i}} = \bigcup_{j\leq i}\overline{X_j} \subseteq \bigcup_{j\leq i}X_{\leq j} = X_{\leq i}\text{,} \]
+so the \(X_{\leq i}\) are closed.
+\end{proof}
+
+\begin{lem}
+Filtrations of a topological space \(X\) correspond bijectively to \(\bb N\)-stratifications of \(X\) via the maps
+\begin{align*}
+  (Z_0\subseteq Z_1\subseteq\ldots) & \mapsto \bigl(X=\coprod_{i\in\bb N}Z_i\setminus Z_{i-1}\bigr)\text{,} \\
+  (X_{\leq 0}\subseteq X_{\leq 1}\subseteq\ldots) & \mapsfrom \bigl(X=\coprod_{i\in\bb N}X_i\bigr)\text{.}
+\end{align*}
+\end{lem}
+\begin{proof}
+If \((Z_0\subseteq Z_1\subseteq\ldots)\) is a filtration of \(X\), then \(Z_i\setminus Z_{i-1}\) is locally closed, and \(X_{\leq i}=\bigcup_{j\leq i}Z_j\setminus Z_{j-1}=Z_i\) is closed.
+Conversely, if \(X=\coprod_{i\in\bb N}X_i\) is an \(\bb N\)-stratification, then the \(X_{\leq i}\) are closed, and \(\bigcup_{i\in\bb N}X_{\leq i}=X\).
+Clearly, \(X_{\leq i}\setminus X_{\leq i-1}=X_i\).
+We have thus seen that the maps are well-defined and are inverses.
+\end{proof}
+
+It is often useful to allow other posets than \(\bb N\).
+
+\begin{defn}
+The \emph{Alexandroff topology} on a poset \(P\) is the topology whose opens are the \emph{upwards closed subsets} (also called \emph{cosieves}): those subsets \(U\subseteq P\) such that if \(p\in U\) and \(p\leq q\in P\), then \(q\in U\).
+\end{defn}
+
+\begin{rmk}
+The Alexandroff topology is a topology; in fact, both arbitrary unions and arbitrary intersections of cosieves are cosieves.
+The closed subsets are the \emph{downward closed subsets} (\emph{sieves}), which also form a topology: the Alexandroff topology on \(P\opp\).
+\end{rmk}
+
+\begin{exmp}
+For \(P=[1]=\{0<1\}\), the opens in the Alexandroff topology on \(P\) are \(\emptyset\), \(\{1\}\) and \(\{0,1\}\), so this is the Sierpiński space.
+\end{exmp}
+
+\begin{exmp}
+The sets \(P_{\geq p}=\setpred{q\in P}{q\geq p}\) are open, and \(P_{\leq p}\) is closed.
+Likewise, \(P_{>p}\) is open and \(P_{<p}\) is closed.
+The singletons \(\{p\}=P_{\geq p}\cap P_{\leq p}\) are locally closed.
+\end{exmp}
+
+\begin{defn}
+Let \(X\) be a topological space and \(P\) a poset.
+Then a \emph{\(P\)-stratification} on \(X\) is a continuous map \(f\colon X\to P\) (where \(P\) is endowed with the Alexandroff topology).
+A \emph{stratification} on \(X\) is a \(P\)-stratification for some \(P\).
+\end{defn}
+
+\begin{exmp}
+If \(P=\bb N\), then a continuous map \(f\colon X\to\bb N\) is a the same thing as an \(\bb N\)-stratification in the sense of \cref{defn:N-stratification}: the closed subsets (sieves) on \(\bb N\) are exactly \(\bb N_{\leq i}\) for some \(i\in\bb N\), and \(\emptyset\) and \(\bb N\).
+\end{exmp}
+
+\begin{exmp}
+If \(P=[1]\), we saw on Homework~1 that a \(P\)-stratification \(f\colon X\to P\) is given by an open subsets \(U\coloneq f\inv(1)\) (with closed complement \(Z\coloneq f\inv(0)\))
+\end{exmp}
+
+\begin{defn}
+Given a map \(f\colon X\to P\) (not necessarly continuous) from a topological space \(X\) to a poset \(P\), we write
+\[ X_{\geq p} \coloneq f\inv(P_{\geq p})\text{,} \quad X_{>p}\coloneq f\inv(P_{>p})\text{,} \quad X_{\leq p}\coloneq f\inv(P_{\leq p})\text{,} \quad X_{<p}\coloneq f\inv(P_{<p})\text{.} \]
+The set \(X_p\coloneq f\inv(p)\) is called the \emph{\(p\)th stratum}; it is locally closed if \(f\) is continuous.
+\end{defn}
+
+\begin{rmk}
+Continuity of \(f\colon X\to P\) implies
+\[ f(\overline{X_p}) \subseteq \overline{f(X_p)} = \overline{\{p\}} = P_{\leq p}\text{,} \]
+so \(\overline{X_p}\subseteq X_{\leq p}\).
+The converse holds if \(P=\bb N\) or if \(P\) is finite, but not in general (see Additional exercise~18.4).
+\end{rmk}
+
 \todo{write}
 
 \section{Conical stratifications}
