@@ -9,7 +9,7 @@ In \cref{lecture:4}, we discussed the following diagram:
         \catLocallyConstantSheaf(X) \ar[u, inclusion] \ar[r, "\simeq"'] & \catCoveringSpace_{/X} \ar[u, inclusion] \ar[r, "\simeq"'] & \catFunctor(\deloop\homotopy[1](X,x_0),\catSet)
     \end{tikzcd}
 \end{equation*}
-(To avoid choosing a basepoint, we can replace \(\deloop\homotopy[1](X,x_0)\) by the fundamental groupoid \(\Pi_1(X)\), whose objects are the points \(x\in X\) and whose maps \(x\to y\) are homotopy classes of paths from \(x\) to \(y\).)
+(To avoid choosing a basepoint, we can replace \(\deloop\homotopy[1](X,x_0)\) by the fundamental groupoid\footnote{If you want to be fancy, this is the homotopy \(1\)-category of the fundamental \(\infty\)-groupoid of \(X\) (modelled as a Kan complex by the singular simplicial set of \(X\)).} \(\Pi_1(X)\), whose objects are the points \(x\in X\) and whose maps \(x\to y\) are homotopy classes of paths from \(x\) to \(y\).)
 
 We will discuss in the following weeks in more detail the question: is there something in the top right spot?
 This will be partially answered by \emph{exodromy}, but only for \emph{constructible sheaves}.
@@ -199,6 +199,16 @@ The plane \(\bb R^2\) can be stratified as in the picture
 \end{center}
 over the poset with elements \(\{0,1,1',2\}\) with \(0<1\), \(0<1'\), \(1<2\) and \(1'<2\) by sending the origin to \(0\), the \(x\)-axis minus the origin to \(1\), the \(y\)-axis minus the origin to \(1'\) and the rest to \(2\).
 \end{exmp}
+
+\begin{rmk}
+The examples above all satisfy extra properties:
+\begin{enumerate}
+\item if \(p\leq q\), then \(X_p\cap\overline{X_q}\neq\emptyset\);
+\item \(\overline{X_p}\) is a union of strata (\(X_p\cap\overline{X_q}\neq\emptyset\) implies \(X_p\subseteq\overline{X_q}\)).
+\end{enumerate}
+Together, these properties are equivalent to \(\overline{X_q}=X_{\leq q}\); this condition is called the `axiom of the frontier'.
+We will not explicitly impose this condition, but many authors \emph{do} assume the axiom of the frontier or other additional aximos.
+\end{rmk}
 
 \todo{write}
 
