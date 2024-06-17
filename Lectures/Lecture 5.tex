@@ -97,7 +97,7 @@ The pullback functor is denoted \(f^{\circledast}\coloneq\Lan*_{f\inv}\colon\cat
 
 We have defined the pullback functor in such a way that it is left adjoint to the pushforward of presheaves.
 
-We use the circled asterisk \(\circledast\) in the notation for the pullback of presheaves to distinguish it from the pullback of sheaves, which we will define momentarily, and for which we use a normal asterisk.\footnote{In class, we used the notation $f^{\textup{pre,*}}$ for $f^\circledast$, which we do not like.}
+We use the circled asterisk \(\circledast\) in the notation for the pullback of presheaves to distinguish it from the pullback of sheaves, which we will define momentarily, and for which we use a normal asterisk.\footnote{In class, we used the notation $f^{\textup{pre,*}}$ for $f^\circledast$, which we do not find very elegant.}
 Unlike the pushforward, namely, the pullback of presheaves does not directly restrict to sheaves; that is to say, there are sheaves which are sent by \(f^{\circledast}\) to a presheaf which does not satisfy the sheaf condition, as witnessed by the following counterexample:
 
 \begin{exmp}
@@ -107,14 +107,16 @@ The pullback in presheaves at any point $\{*\} \subset Y$ is $f^{\circledast}(\{
 \end{exmp}
 
 \begin{defn}
-The \emph{pullback}\index{pullback!of sheaves} \(f^*\mathcal F\) of a sheaf \(\mathcal F\) on \(X\) along \(f\) is the sheaf
-\[ f^*\mathcal F \coloneq (f^{\circledast}\mathcal F)^\sharp\text{,} \]
-the sheafification of the presheaf pullback of \(\mathcal F\).
+The \emph{pullback}\index{pullback!of sheaves} \(f^*\mathcal F\) of a sheaf \(\mathcal F\) on \(X\) along a continuous map \(f\colon Y\to X\) is the sheaf
+\[ f^*\mathcal F \coloneq (f^{\circledast}\mathcal F)^\sharp \]
+on \(Y\), the sheafification of the presheaf pullback of \(\mathcal F\).
 The pullback functor of sheaves is thus the composite
 \[ f^* \colon \catSheaf(X) \hookrightarrow \catPresheaf(X) \xrightarrow{f^{\circledast}} \catPresheaf(Y) \xrightarrow{(-)^\sharp} \catSheaf(Y)\text{.} \]
 \end{defn}
 
-\begin{lem}\label{lem:pushforward-pullback-adjunction-sheaves}
+Note that the definition of the pullback also makes sense for presheaves; we also denote the functor \(\catPresheaf(X)\to\catSheaf(Y)\) sending a presheaf \(F\) to the pullback \(f^*F = (f^\circledast)^\sharp\) by \(f^*\).
+
+\begin{prop}\label{lem:pushforward-pullback-adjunction-sheaves}
 Pushforward and pullback of sheaves along \(f\) define an adjunction
 \begin{equation*}
   \begin{tikzcd}
@@ -123,7 +125,7 @@ Pushforward and pullback of sheaves along \(f\) define an adjunction
     \ar[from=leftadj, to=rightadj, phantom, "\leftadj" rotate=-90]
   \end{tikzcd}
 \end{equation*}
-\end{lem}
+\end{prop}
 \begin{proof}
 Compose the adjunctions
 \begin{equation*}
@@ -140,6 +142,41 @@ of \cref{cor:sheafification-left-adjoint-to-inclusion} and \cref{prop:pullback-K
 \end{proof}
 
 Between the sets $\Hom[\catSheaf(Y)](f^*\mathcal F,\mathcal G)$ and $\Hom[\catSheaf(X)](\mathcal F,f_*\mathcal G)$ which are naturally isomorphic by the adjunction, there is also an `intermediate' set of maps, called \emph{$f$-maps}; see~\cite[\href{https://stacks.math.columbia.edu/tag/008K}{Lemma 008K}]{stacks-project}.
+
+From the fact that the pushforward already sends sheaves to sheaves (so its definition `doesn't need sheafification'), we obtain the following corollary, showing that pulling back the sheafification of a presheaf is the same as pulling back the presheaf.
+
+\begin{cor}\label{cor:pullback-sheafification}
+Let \(f\colon Y\hookrightarrow X\) be a continuous map.
+Then the functors
+\[ \catPresheaf(X) \xrightarrow{f^*} \catSheaf(Y) \qquad \text{and} \qquad \catPresheaf(X) \xrightarrow{(-)^\sharp} \catSheaf(X) \xrightarrow{f^*} \catSheaf(Y) \]
+are naturally isomorphic.
+\end{cor}
+\begin{proof}
+  % and write \(\iota\colon\catSheaf(X)\hookrightarrow\catPresheaf(X)\) for the full subcategory inclusion
+By definition, the former functor is the composite
+\begin{equation*}
+  \begin{tikzcd}
+    \catPresheaf(X) \ar[r, "f^\circledast"{name=leftadj1}, shift left=2] &
+    \catPresheaf(*) \ar[l, "f_*"{name=rightadj1}, shift left=2] \ar[r, "(-)^\sharp"{name=leftadj2}, shift left=2] &
+    \catSheaf(*) \ar[l, ""{name=rightadj2}, shift left=2, inclusion]
+    \ar[from=leftadj1, to=rightadj1, phantom, "\leftadj" rotate=-90]
+    \ar[from=leftadj2, to=rightadj2, phantom, "\leftadj" rotate=-90]
+  \end{tikzcd}
+\end{equation*}
+of the presheaf pullback along \(f\) and sheafification, which have right adjoints given by respectively the pushforward along \(f\) and the full subcategory inclusion by \cref{prop:pullback-Kan-extension} and \cref{cor:sheafification-left-adjoint-to-inclusion}.
+The latter functor has a right adjoint
+\begin{equation*}
+  \begin{tikzcd}
+    \catPresheaf(X) \ar[r, "(-)^\sharp"{name=leftadj1}, shift left=2] &
+    \catSheaf(X) \ar[l, ""{name=rightadj1}, shift left=2, inclusion] \ar[r, "f^*"{name=leftadj2}, shift left=2] &
+    \catSheaf(*) \ar[l, "f_*"{name=rightadj2}, shift left=2]
+    \ar[from=leftadj1, to=rightadj1, phantom, "\leftadj" rotate=-90]
+    \ar[from=leftadj2, to=rightadj2, phantom, "\leftadj" rotate=-90]
+  \end{tikzcd}
+\end{equation*}
+given by pushforward along \(f\) followed by the full subcategory inclusion by \cref{cor:sheafification-left-adjoint-to-inclusion} and \cref{lem:pushforward-pullback-adjunction-sheaves}.
+These two right adjoint are equal by definition, so we find the required natural isomorphism.
+\end{proof}
 
 The following corollary roughly says that pushforward and pullback are `functorial in the map' (respectively co- and contravariantly).\footnote{This statement can probably be made precise in terms of \(2\)-categories.}
 
@@ -163,6 +200,10 @@ Unravelling definitions, we have \[
 An element of the stalk at $x$ is represented by a \indexdefnemph{germ} $[s]_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \([s]_U = [t]_V\) if and only if there exists an open neighbourhood \(W\subseteq U\cap V\) of \(x\) such that \(s|_W=t|_W\).
 \end{defn}
 Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over $x$. 
+
+\begin{rmk}
+\Cref{cor:pullback-sheafification} tells us that we can compute the stalks of the sheafification of a presheaf by computing the stalks of the presheaf itself.
+\end{rmk}
 
 \begin{exmp}[orientation sheaf of a \indexterm{manifold}]
 Let \(M\) be an \(n\)-dimensional topological manifold, by which we mean a Hausdorff space that is locally homeomorphic to \(\bb R^n\) (i.e., every point of \(M\) admits a neighbourhood homeomorphic to \(\bb R^n\)).
