@@ -213,6 +213,81 @@ We will not explicitly impose this condition, but many authors \emph{do} assume 
 \todo{write}
 
 \section{Conical stratifications}
+\begin{defn}
+The \emph{left cone} \(\leftcone{\cat C}\) on a category \(\cat C\) is the category with objects \(\cat C\cotimes\{-\infty\}\) and maps
+\[ \Hom[\leftcone{\cat C}](x,y) =
+  \begin{cases}
+    \Hom[\cat C](x,y) & \text{if } x,y\in\cat C\text{,} \\
+    \terminal & \text{if } x = -\infty\text{,} \\
+    \emptyset & \text{if } x\in\cat C, y = -\infty\text{.}
+  \end{cases}
+\]
+Dually, the \emph{right cone} \(\rightcone{\cat C}\) of \(\cat C\) is the category \((\leftcone{(\cat C\opp)})\opp\).
+\end{defn}
+
+The left cone of a category \(\cat C\) is obtained by formally adjoining an initial object to \(\cat C\); dually, the right cone of \(\cat C\) is \(\cat C\) where a terminal object is formally adjoined.
+
+\begin{rmk}
+If \(\cat C\) is a preorder, that is, if \(\#\Hom[\cat C](x,y)\leq 1\) for all \(x,y\in\cat C\), then so is the left cone \(\leftcone{\cat C}\).
+If \(\cat C\) is a poset (that is, a preorder such that \(\Hom[\cat C](x,y)\times\Hom[\cat C](y,x)\neq\emptyset\) implies \(x=y\)), then so is the left cone \(\leftcone{\cat C}\).
+\end{rmk}
+
+We will only deal with left cones of posets in this and next week's lecture, but since the definition makes sense for all categories, we have presented it in this generality.
+
+\begin{exmp}
+For the totally ordered set \([n]=\{0<1<\ldots<n\}\) with \(n+1\) elements, we have  
+\[ \leftcone{[n]} \cong [n+1] \cong \rightcone{[n]}\text{.} \]
+\end{exmp}
+
+\begin{defn}
+The \emph{cone} \(CX\) of a topological space \(X\) is the space \(CX\coloneq (X\times\bb R_{>0})\cup\{*\}\) where \(U\subseteq CX\) is open if and only if \(U\cap(X\times\bb R_{>0})\) is open and if \(*\in U\) implies that \(X\times(0,\epsilon)\subseteq U\) for some \(\epsilon>0\).
+\end{defn}
+
+\begin{rmk}
+Usually, one defines the cones as the pushout \(X\times\bb R_{\geq 0}\pushout{X\times\{0\}}\{*\}\).
+Then the second condition becomes: if \(*\in U\), then for all \(x\in X\) there exists an open neighbourhood \(V_x\subseteq X\) of \(x\) and an \(\epsilon_x>0\) such that \(V_x\times(0,\epsilon_x)\subseteq U\).
+
+The natural map \((X\times\bb R_{\geq 0})\pushout{X\times\{0\}}\{*\}\to CX\) is a homeomorphism if \(X\) is compact, but not when \(X=\bb R\) for instance.
+\end{rmk}
+
+\begin{defn}
+If \(f\colon X\to P\) is a stratification, define the \emph{left cone} \(\leftcone{f}\colon CX\to\leftcone{P}\) of \(f\) by \(*\mapsto-\infty\) and \((x,t)\mapsto f(x)\) for \((x,t)\in X\times\bb R_{>0}\).
+\end{defn}
+
+This definition makes sense as the point \(*\) is closed, and contained in the closure of \(Z\times\bb R_{>0}\) for any closed subset \(Z\subseteq X\).
+
+The picture for the left cone of a \(P\)-stratification of the circle is as follows:
+\begin{center}
+  \begin{tikzpicture}
+    \draw[fill,blue!20] (0,0) -- (2,1) -- (2,-1);
+    \draw[blue, very thick, fill=white] (2,0) ellipse [x radius=.2, y radius=1];
+    \draw[blue, very thick] (0,0) -- (2,1);
+    \draw[blue, very thick] (0,0) -- (2,-1);
+    \draw[red, fill] (0,0) circle (0.04);
+    \draw[thick,->] (0,-1.15) -- (0,-1.65);
+    \node at (-.3,-1.40) {\(\leftcone{f}\)};
+    \node[red] at (0,-2) {\(-\infty\)};
+    \draw[thick,->] (1.5,-1.15) -- (1.5,-1.65);
+    \node at (1.8,-1.40) {\(f\)};
+    \node[blue] at (1.5,-2) {\(P\)};
+    \draw[thick,->] (.45,-2) -- (1.15,-2);
+  \end{tikzpicture}
+\end{center}
+
+\begin{defn}
+A stratification \(f\colon X\to P\) is \emph{conical} if every point \(x\in X\) has an open neighbourhood \(U\subseteq X_{\leq p}\) where \(p\coloneq f(x)\) such that \(f|_U\colon U\to P_{\geq p}\) is isomorphic to \(Z\times CY\) for some \(P_{>p}\)-stratified space \(Y\) and a path connected and locally path connected \footnote{This should probably include `semi-locally simply connected'.} space \(Z\).
+Such a neighbourhood \(U\) is called a \emph{basic neighbourhood}.
+\end{defn}
+
+Note for this definition that \(\leftcone{(P_{>p})}\cong P_{\geq p}\).
+
+We state the following fact without explaining what we mean precisely.
+\begin{prop}
+Stratifications by closed embedded submanifolds are conical.
+\end{prop}
+
+\todo{Examples and counterexamples}
+
 \todo{write}
 
 %%% Local Variables:
