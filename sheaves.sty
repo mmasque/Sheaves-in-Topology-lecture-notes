@@ -629,6 +629,8 @@
 \NewDocumentCommand\opposingfunctors{mmmm}{#3 \colon #1 \rightleftarrows #2 \colon #4}
 \NewDocumentCommand\leftlifting{m}{{{}^{\boxslash} #1}}
 \NewDocumentCommand\rightlifting{m}{{#1}^{\boxslash}}
+\NewDocumentCommand\leftcone{m}{{#1}^{\triangleleft}}
+\NewDocumentCommand\rightcone{m}{{#1}^{\triangleright}}
 % for decorative numbered faces in commutative diagram
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {\small #1};}}
