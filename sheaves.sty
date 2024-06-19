@@ -428,6 +428,8 @@
 %% Shorthand for blackboard bold
 \NewDocumentCommand\bb{m}{\mathbb{#1}}
 \NewDocumentCommand\vbb{m}{\varmathbb{#1}}
+%% Shorthand for \infty
+\NewDocumentCommand\oo{}{\ensuremath{\infty}}
 %% Common operators
 \NewMathOperator\id{id}
 % \NewDocumentCommand\id{}{1}
@@ -470,10 +472,12 @@
 \NewMathOperator\Ran{Ran}
 \NewMathOperator\disc{disc}
 \NewMathOperator\supp{supp}
+\NewMathOperator\GL{GL}
 % Categories
 \NewDocumentCommand\cat{m}{\mathcal{#1}}
 \NewDocumentCommand\catName{m}{\mathbf{#1}}
 \NewDocumentCommand\catSet{}{\catName{Set}}
+\NewDocumentCommand\catSpace{}{\catName{Spc}}
 \NewDocumentCommand\catPointedSet{}{\catName{Set}_*}
 \NewDocumentCommand\catCategory{}{\catName{Cat}}
 \NewDocumentCommand\catCATegory{}{\catName{CAT}}
