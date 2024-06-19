@@ -81,7 +81,7 @@ is the global sections functor \(\Gamma(X,-)\).
 
 \todo{write}
 
-\begin{cor}
+\begin{cor}\label{cor:Čech-cohomology-vanishing-intersections}
 Let \(X\) be a topological space with an open cover \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) and let \(\mathcal F\) be an abelian sheaf on \(X\).
 If \(H^i(U_{i_0,\ldots,i_n},\mathcal F)=0\) for all \(i>0\), all \(n\geq 0\) and all \(i_0,\ldots,i_n\in I\), then the map
 \[ \check{H}^i(\mathcal U,\mathcal F) \to H^i(X,\mathcal F) \]
@@ -91,8 +91,8 @@ is an isomorphism.
 \todo{write}
 \end{proof}
 
-\begin{exmp}
-If all intersecitons \(U_{i_0,\ldots,i_n}\) are disjoint unions of contractibles, then \(H^i(U_{i_0,\ldots,i_n},\underline{\bb Z})=0\) for all \(i>0\), so \(\check{H}^i(\mathcal U,\underline{\bb Z})=H^i(X,\underline{\bb Z})\).
+\begin{exmp}\label{exmp:Čech-cohomology-intersections-disjoint-unions-of-contractibles}
+If all intersections \(U_{i_0,\ldots,i_n}\) are disjoint unions of contractibles, then \(H^i(U_{i_0,\ldots,i_n},\underline{\bb Z})=0\) for all \(i>0\), so \(\check{H}^i(\mathcal U,\underline{\bb Z})=H^i(X,\underline{\bb Z})\).
 \end{exmp}
 
 \begin{exmp}
@@ -118,7 +118,7 @@ Thus we obtain:
 \section{Čech cohomology on paracompact Hausdorff spaces}
 \remyquote{I'm basically mumbling right now.}
 
-\begin{thm}
+\begin{thm}\label{thm:Čech-cohomology-paracompact-Hausdorff-space}
 If \(X\) is a paracompact Hausdorff space and \(\mathcal F\) is an abelian sheaf on \(X\), then there is an isomorphism
 \[ \colim_{\mathcal U}\check{H}^i(\mathcal U,\mathcal F) \xrightarrow{\cong} H^i(X,\mathcal F)\text{.} \]
 \end{thm}

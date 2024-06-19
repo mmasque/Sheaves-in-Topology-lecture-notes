@@ -1,0 +1,147 @@
+\chapter{Computing sheaf cohomology and higher pushforwards}
+
+In this appendix, we summarise some strategies for computing sheaf cohomology and higher pushforwards.
+
+\section{Sheaf cohomology}
+
+\subsection{Compact spaces}
+\begin{lem}[name={\cref{lem:compactly-supported-cohomology-is-ordinary-cohomology-on-compact-space}}]
+Let \(\mathcal F\) be an abelian sheaf on a compact space \(X\).
+Then \(H^i(X,\mathcal F)\cong H^i_c(X,\mathcal F)\) for all \(i\geq 0\).
+\end{lem}
+
+This result has the following consequences for computing the sheaf cohomology of a space \(X\):
+\begin{itemize}
+\item If \(X\) is compact, we can use both strategies for ordinary cohomology and strategies for compactly supported cohomology to compute either one.
+\item If it is possible to relate \(X\) to a compact space \(K\) (one example we encountered was the embedding \(\bb R^n\cong(0,1)^n\hookrightarrow [0,1]^n\)), it might be possible to use strategies for compactly supported cohomology of \(K\) to say something about ordinary cohomology of \(X\).
+\end{itemize}
+
+\subsection{Open and closed subsets}
+\begin{lem}
+Let \(i\colon Z\hookrightarrow X\) be a closed subset of a topological space \(X\) and let \(\mathcal F\) be a sheaf on \(Z\).
+Then we have
+\[ H^i(X,i_*\mathcal F) \cong H^i(Z,\mathcal F) \]
+for all \(i\geq 0\).
+\end{lem}
+
+\begin{lem}[name={Additional exercise~13.1(d)}]
+Let \(j\colon U\hookrightarrow X\) be an open subset of a topological space \(X\) and let \(\mathcal F\) be a sheaf on \(U\).
+Then we have
+\[ H^i_c(X,j_!\mathcal F) \cong H^i_c(U,\mathcal F) \]
+for all \(i\geq 0\).
+\end{lem}
+
+\begin{lem}[name={Homework 3, Exercise~4(d)}]
+Let \(\mathcal F\) be an abelian sheaf on a locally compact Hausdorff space \(X\) and let \(j\colon U\hookrightarrow X\) be an open subset with closed complement \(i\colon Z\hookrightarrow X\).
+Then there is a short exact sequence of sheaves of the form
+\[ 0 \to j_!j^*\mathcal F \to \mathcal F \to i_*i^*\mathcal F \to 0\text{.} \]
+\end{lem}
+
+Note that \(j^*\mathcal F=\mathcal F|_U\) and \(i^*\mathcal F=\mathcal F|_Z\).
+
+\begin{cor}[name={open--closed sequence, \cref{lem:open-closed-sequence}}]
+Let \(\mathcal F\) be an abelian sheaf on a locally compact Hausdorff space \(X\) and let \(U\subseteq X\) be an open subset with closed complement \(Z\).
+Then there is a long exact sequence of the form
+\[ \dots \to H^i_c(U,\mathcal F|_U) \to H^i_c(X,\mathcal F) \to H^i_c(Z,\mathcal F|_Z) \to H^1(U,\mathcal F|_U) \to \dots\text{.} \]
+\end{cor}
+
+\subsection{Mayer--Vietoris}
+The Mayer--Vietoris sequence for ordinary sheaf cohomology:
+\begin{prop}[name={Mayer--Vietoris sequence, Homework 7~Exercise 1(c)}]
+Let \(\mathcal F\) be an abelian sheaf on a topological space \(X\) and let \(U\) and \(V\) be open subsets of \(X\).
+Then there is a long exact sequence of the form
+\[ \dots \to H^i(U\cup V,\mathcal F) \to H^i(U,\mathcal F)\oplus H^i(V,\mathcal F) \to H^i(U\cap V,\mathcal F) \to H^{i+1}(U\cup V,\mathcal F)\to\dots\text{.} \]
+\end{prop}
+
+There is a variant for compactly supported sheaf cohomology.
+Note that the order is flipped:
+\begin{prop}[name={compactly supported Mayer--Vietoris sequence, Additional exercise~13.2}]
+Let \(\mathcal F\) be an abelian sheaf on a topological space \(X\) and let \(U\) and \(V\) be open subsets of \(X\).
+Then there is a long exact sequence of the form
+\[ \dots \to H^i_c(U\cap V,\mathcal F) \to H^i_c(U,\mathcal F)\oplus H^i_c(V,\mathcal F) \to H^i_c(U\cup V,\mathcal F) \to H^{i+1}_c(U\cap V,\mathcal F)\to\dots\text{.} \]
+\end{prop}
+
+\subsection{Coefficients}
+
+\begin{lem}[name={\cref{cor:coefficients-cohomology-integers}}]
+If \(X\) is a locally compact Hausdorff space with compactly supported cohomology with \(\underline{\bb Z}\) coefficients given by
+\[ H^i_c(X,\underline{\bb Z}) =
+  \begin{cases}
+    \bb Z & \text{if } i=0\text{,} \\
+    0 & \text{if } i>0\text{,}
+  \end{cases}
+\]
+then we have
+\[ H^i_c(X,\underline{A}) =
+  \begin{cases}
+    A & \text{if } i=0\text{,} \\
+    0 & \text{if } i>0\text{,}
+  \end{cases}
+\]
+for any abelian group \(A\).
+\end{lem}
+
+\subsection{Homotopy invariance}
+
+\begin{thm}[name={Vietoris--Begle mapping theorem, \cref{thm:Vietoris-Begle-mapping-theorem}}]
+Let \(f\colon Y\to X\) be a proper map such that
+\[ H^i(f\inv(x),\underline{\bb Z}) =
+  \begin{cases}
+    \bb Z & \text{if } i = 0\text{,} \\
+    0 & \text{if } i>0
+  \end{cases}
+\]
+for all \(x\in X\).
+Then for all abelian sheaves \(\mathcal F\) on \(X\), the maps
+\[ H^i(X,\mathcal F)\to H^i(Y,f^*\mathcal F) \]
+are isomorphisms for all \(i\in\bb N\).
+\end{thm}
+
+\begin{cor}[name={\cref{cor:sheaf-cohomology-homotopy-invariant}}]
+If \(f,g\colon Y\to X\) are homotopic maps, then the maps
+\[ f^*,g^*\colon H^i(X,\underline{A}) \to H^i(Y,\underline{A}) \]
+agree for all \(i\geq 0\) and all abelian groups \(A\).
+\end{cor}
+
+\begin{cor}[name={\cref{cor:sheaf-cohomology-homotopy-equivalence}}]
+If \(f\colon X\to Y\) is a homotopy equivalence (of paracompact Hausdorff or locally compact Hausdorff spaces), then
+\[ f^*\colon H^i(X,\underline{A})\xrightarrow{\cong} H^i(Y,\underline{A}) \]
+is an isomorphism for any abelian group \(A\).
+In particular, if \(X\) and \(Y\) are homotopy equivalent, then \(H^i(X,\underline{A})\cong H^i(Y,\underline{A})\) for any \(A\).
+
+In particular, if \(X\) is contractible (and paracompact Hausdorff or locally compact Hausdorff), then
+\[ H^i(X,\underline{A}) =
+  \begin{cases}
+    A & \text{if } i = 0\text{,} \\
+    0 & \text{if } i > 0
+  \end{cases}
+\]
+for any abelian group \(A\).
+\end{cor}
+
+\subsection{Čech cohomology}
+
+\begin{prop}[name={\cref{cor:Čech-cohomology-vanishing-intersections}}]
+Let \(X\) be a topological space with an open cover \(\mathcal U=\{U_i\hookrightarrow X\}_{i\in I}\) and let \(\mathcal F\) be an abelian sheaf on \(X\).
+If \(H^i(U_{i_0,\ldots,i_n},\mathcal F)=0\) for all \(i>0\), all \(n\geq 0\) and all \(i_0,\ldots,i_n\in I\), then the map
+\[ \check{H}^i(\mathcal U,\mathcal F) \to H^i(X,\mathcal F) \]
+is an isomorphism.
+\end{prop}
+
+\begin{cor}[name={\cref{exmp:Čech-cohomology-intersections-disjoint-unions-of-contractibles}}]
+If all intersections \(U_{i_0,\ldots,i_n}\) are disjoint unions of contractibles, then \(H^i(U_{i_0,\ldots,i_n},\underline{\bb Z})=0\) for all \(i>0\), so \(\check{H}^i(\mathcal U,\underline{\bb Z})=H^i(X,\underline{\bb Z})\).
+\end{cor}
+
+\begin{prop}[name={\cref{thm:Čech-cohomology-paracompact-Hausdorff-space}}]
+Let \(\mathcal F\) be an abelian sheaf on a paracompact Hausdorff space \(X\).
+Then there is an isomorphism
+\[ \colim_{\mathcal U\in h_0\catOpenCover{X}}\check{H}^i(\mathcal U,\mathcal F) \xrightarrow{\cong} H^i(X,\mathcal F)\text{.} \]
+\end{prop}
+
+\section{Higher pushforwards}
+\todo{write}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../main"
+%%% End:
