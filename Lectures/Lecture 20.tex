@@ -52,8 +52,17 @@ If \(X\) is a manifold, then \(H^i_{\smash{\textup{dR}}}(X)\cong\check{H}^i(\mat
 If \(X\) is locally contractible, then \(H^i_{\smash{\textup{sing}}}(X,A) \cong H^i(X,\underline{A})\) for every abelian group \(A\).
 \end{prop}
 \begin{proof}
-\todo{write}
+Let \(\mathcal C^i_{\smash{\textup{sing}}}(A)\) be the sheafification of the presheaf \(U\mapsto C^i_{\smash{\textup{sing}}}(U,A)\) sending an open to the singular \(i\)-cochains\footnote{This can be taken to be the set of functions from the set \(\Hom[\catTopologicalSpace](\simplex[i],U)\) to \(A\), which inherits an abelian group structure from \(A\). Here \(\simplex[i]\) denotes the standard topological \(i\)-simplex.} on \(U\) with coefficients in \(A\).
+The sequence of sheaves
+\[ 0 \to \underline{A} \to \mathcal C^0_{\smash{\textup{sing}}}(A) \to \mathcal C^1_{\smash{\textup{sing}}}(A)\to\dots \]
+is exact as \(X\) is locally contractible.
+Each presheaf \(C^i_{\smash{\textup{sing}}}\) is flasque: extend by taking any simplex \(\simplex[i]\to X\) that does not land in \(U\) to \(0\).
+Now \(\mathcal C^i_{\smash{\textup{sing}}}(A)(U)\) is \(C^i_{\smash{\textup{sing}}}\) modulo locally trivial cochains, so \(\mathcal C^i_{\smash{\textup{sing}}}(A)\) is flasque as well.
+Finally, the map
+\[ C^\bullet_{\smash{\textup{sing}}}(X,A) \to \Gamma(X,\mathcal C^\bullet_{\smash{\textup{sing}}}(A)) = C^\bullet_{\smash{\textup{sing}}}/\{\text{locally trivial cochains}\} \]
+is a quasi-isomorphism (this result is known as the `theorem on small chains').
 \end{proof}
+\todo{add refs}
 
 \begin{prop}\label{prop:comparison-singular-cohomology-Čech-cohomology}
 If \(X\) admits a cover \(\mathcal U\) such that each intersection \(U_{i_0}\cap\dots\cap U_{i_k}\) is a disjoint union of contractible spaces, then \(H^i_{\smash{\textup{sing}}}(X,A)\cong\check{H}^i(X,\underline{A})\) for every abelian group \(A\).
