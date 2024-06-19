@@ -1,16 +1,5 @@
 \chapter{Review and outlook}
 
-\begin{center}
-  \begin{tikzpicture}
-    % inspiration from https://people.uncw.edu/hermanr/phy495/Bloch_Sphere.pdf
-    \draw[thick] plot[domain=0.01:2,samples=5000] (\x,{sin(1/\x r)});
-    % \draw[thick] (0,0) circle (1);
-    % \draw[thick,blue] plot[domain=pi:2*pi] ({cos(\x r)},{.2*sin(\x r)});
-    % \draw[thick,dashed,blue] plot[domain=0:pi] ({cos(\x r)},{.2*sin(\x r)});
-    % \draw[fill,red] (-1, 0) circle (0.04);
-  \end{tikzpicture}
-\end{center}
-
 \section{Comparison between cohomology theories}
 \remyquote{I should say something at some point, let me not do that yet.}
 \noindent
@@ -106,6 +95,11 @@ If \(X\) is paracompact Hausdorff, then \([X,K(A,i)]\cong H^i(X,\underline{A})\)
 We saw this for \(K(\bb Z,1)\simeq\sphere[1]\) in Homework~8, Exercise~2.
 
 \todo{Warsaw circle}
+% \begin{center}
+%   \begin{tikzpicture}
+%     \draw[thick] plot[domain=0.01:2,samples=5000] (\x,{sin(1/\x r)});
+%   \end{tikzpicture}
+% \end{center}
 
 We conclude that sheaf cohomology gives the `best answer':
 \begin{itemize}
