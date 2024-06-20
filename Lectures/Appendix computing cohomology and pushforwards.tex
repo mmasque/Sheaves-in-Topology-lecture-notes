@@ -139,7 +139,41 @@ Then there is an isomorphism
 \end{prop}
 
 \section{Higher pushforwards}
-\todo{write}
+
+\begin{thm}[name={\cref{thm:proper-base-change-theorem-1}}]
+Let $f\colon Y \to X$ be a proper map and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff.
+For an abelian sheaf \(\sh F\) on \(Y\), the natural map \[
+  (\rightderived^i f_* \sh{F})_x \to \cohomology^i(f^{-1}(x), \sh{F})
+\] is an isomorphism for all $x \in X$ and for all $i \geq 0$.
+\end{thm}
+
+\begin{thm}[name={\cref{thm:proper-base-changed-theorem-2}}]
+Let $\colon: Y \to X$ be a map of locally compact Hausdorff spaces. For an abelian sheaf \(\sh{F}\) on \(Y\), the natural map \[
+  (\rightderived^i f_! \sh{F})_x \to \cohomology^i_c(f^{-1}(x), \sh{F})
+\] is an isomorphism for all $x \in X$ and all $i \geq 0$.
+\end{thm}
+
+\begin{cor}[name={proper base change theorem, \cref{cor:proper-base-change}}]
+Let the diagram
+\[\begin{tikzcd}
+	{Y'} \ar[pullback]{rd} & {X'} \\
+	Y & X
+	\arrow["{\hat f}", from=1-1, to=1-2]
+	\arrow["{\hat g}"', from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}\]
+be a pullback square in $\catTopologicalSpace$.
+Then:
+\begin{enumerate}
+	\item If $f$ is a proper map and $X$ and $X'$ are either both paracompact Hausdorff or both locally compact Hausdorff, then there are canonical isomorphisms \[
+    	g^* \circ \rightderived^i f_* \xrightarrow{\cong} \rightderived^i \hat f_* \circ \hat g^*\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X).
+    \]
+	\item If $X,X'$ and $Y'$ are locally compact Hausdorff, then there are canonical isomorphisms \[
+    	g^* \circ \rightderived^i f_! \xrightarrow{\cong} \rightderived^i \hat f_! \circ \hat g^*\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X').
+    \]
+\end{enumerate}
+\end{cor}
 
 %%% Local Variables:
 %%% mode: LaTeX

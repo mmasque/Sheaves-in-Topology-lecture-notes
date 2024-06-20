@@ -75,7 +75,7 @@ We have a functor $f_!$ between abelian categories. One checks it is left exact.
 We are now ready to state one of the main results of the course. We do so in two versions, one involving the pushforward and one involving the proper pushforward.
 
 \begin{thm}\label{thm:proper-base-change-theorem-1}
-	Let $f: Y \to X$ be a proper map of topological spaces and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff. For $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
+	Let $f\colon Y \to X$ be a proper map of topological spaces and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff. For $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
     	(\rightderived^i f_* \sh{F})_x \to \cohomology^i(f^{-1}(x), \sh{F})
     \] is an isomorphism for all $x \in X$ and for all $i \geq 0$. 
 \end{thm}
@@ -85,7 +85,7 @@ We are now ready to state one of the main results of the course. We do so in two
 \end{rmk}
 
 \begin{thm}\label{thm:proper-base-changed-theorem-2}
-	Let $f: Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
+	Let $\colon: Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
     	(\rightderived^i f_! \sh{F})_x \to \cohomology^i_c(f^{-1}(x), \sh{F})
     \] is an isomorphism for all $x \in X$ and all $i \geq 0$.
 \end{thm}
@@ -153,21 +153,20 @@ The next corollary explains the use of \emph{base change} in the namings of \cre
 \begin{cor}\label{cor:proper-base-change}
 Let the diagram 
 \[\begin{tikzcd}
-	{Y'} & {X'} \\
+	{Y'} \ar[rd, pullback] & {X'} \\
 	Y & X
 	\arrow["{f'}", from=1-1, to=1-2]
 	\arrow["{g'}"', from=1-1, to=2-1]
-	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 	\arrow["g", from=1-2, to=2-2]
 	\arrow["f"', from=2-1, to=2-2]
 \end{tikzcd}\]
 be a pullback square in $\catTopologicalSpace$. 
-\begin{enumerate}[label=(\roman*)]
-	\item If $f$ is a proper map and $X$ and $X'$ are either both paracompact Hausdorff or both locally compact Hausdorff then there are canonical isomorphisms \[
-    	g^* \rightderived^i f_* \xrightarrow{\sim} (\rightderived^i f'_*)g'^{*}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X).
+\begin{enumerate}
+	\item If $f$ is a proper map and $X$ and $X'$ are either both paracompact Hausdorff or both locally compact Hausdorff, then there are canonical isomorphisms \[
+    	g^* \rightderived^i f_* \xrightarrow{\cong} (\rightderived^i f'_*)g'^{*}\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X).
     \]
-	\item If $X,X'$ and $Y'$ are locally compact Hausdorff then there are canonical isomorphisms \[
-    	g^*\rightderived^i f_! \xrightarrow{\sim} (\rightderived^i f'_!)g'^{*}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X').
+	\item If $X,X'$ and $Y'$ are locally compact Hausdorff, then there are canonical isomorphisms \[
+    	g^*\rightderived^i f_! \xrightarrow{\cong} (\rightderived^i f'_!)g'^{*}\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X').
     \]
 \end{enumerate}
 \end{cor}
