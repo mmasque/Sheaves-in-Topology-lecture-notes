@@ -102,12 +102,32 @@ If \(X\) is paracompact Hausdorff, then \([X,K(A,i)]\cong H^i(X,\underline{A})\)
 We saw this for \(K(\bb Z,1)\simeq\sphere[1]\) in Homework~8, Exercise~2.
 We are not sure about a reference for the general statement.
 
-\todo{Warsaw circle}
-% \begin{center}
-%   \begin{tikzpicture}
-%     \draw[thick] plot[domain=0.01:2,samples=5000] (\x,{sin(1/\x r)});
-%   \end{tikzpicture}
-% \end{center}
+We have seen that the different cohomology theories agree on sufficiently nice spaces.
+In general, however, the answers can be genuinely different for pathological spaces, as illustrated by the following example.
+
+\begin{exmp}
+Let \(X\) denote the Warsaw circle (the union of the topologist's sine curve \((x,1/\sin x)\) for all \(x\in(0,1]\), a straight line segment from \((0,1)\) to \((0,-1)\) and an arc connecting the right endpoint of the sine curve to the line segment at the \(y\)-axis) and \(Y\) the `separated' Warsaw circle (where the line segment at the \(y\)-axis is moved to the left) as displayed in \cref{fig:Warsaw-circle}.
+
+Then we have \(H^i_{\smash{\textup{sing}}}(X,A)=0\) for all \(i>0\): any \(i\)-simplex \(\simplex[i]\to X\) factors through \(Y\) since the standard topological simplex is path connected, so \(H^i_{\smash{\textup{sing}}}(X,A)\cong H^i_{\textup{sing}}(Y,A)\) for \(i>0\), and \(Y\) is contractible so its higher singular cohomology vanishes.
+
+On the other hand, there is a natural map \(X\to\sphere[1]\) which projects the sine curve to the \(x\)-axis, and this maps is not nullhomotopic since it cannot be lifted to \(\bb R\).
+By the isomorphism \(H^1(X,\underline{\bb Z})\cong [X,\sphere[1]]\) of Homework~8, Exercise~2, we see that \(H^1(X,\underline{\bb Z})\) does not vanish.
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw[thick] plot[domain=0.01:2,samples=5000] (\x,{sin(1/\x r)});
+    \draw[thick] (0,1) -- (0,-1);
+    \draw[thick] (2,{sin(0.5 r)}) to[out=0, in=0] (1,-2) to[out=180, in=180] (0,0);
+  \end{tikzpicture}
+  \begin{tikzpicture}
+    \draw[thick] plot[domain=0.01:2,samples=5000] (\x,{sin(1/\x r)});
+    \draw[thick] (-1,1) -- (-1,-1);
+    \draw[thick] (2,{sin(0.5 r)}) to[out=0, in=0] (0,-2) to[out=180, in=180] (-1,0);
+  \end{tikzpicture}
+  \caption{The Warsaw circle and the separated Warsaw circle}
+  \label{fig:Warsaw-circle}
+\end{figure}
+\end{exmp}
 
 We conclude that sheaf cohomology gives the `best answer':
 \begin{itemize}
