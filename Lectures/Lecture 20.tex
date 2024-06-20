@@ -1,4 +1,4 @@
-\chapter{Review and outlook}
+\chapter{Outlook}
 
 \section{Comparison between cohomology theories}
 \remyquote{I should say something at some point, let me not do that yet.}
@@ -31,7 +31,7 @@ The arrows' labels point to the comparison results.
 If \(X\) is paracompact Hausdorff, then \(\check{H}^i(X,\mathcal F)\cong H^i(X,\mathcal F)\) for all abelian sheaves \(\mathcal F\) on \(X\).
 Moreover, if \(\mathcal U\) is an open cover of \(X\) such that each intersection \(U_{i_0}\cap\dots\cap U_{i_k}\) is a disjoint union of contractible spaces, then \(\check{H}^i(\mathcal U,\underline{A})\cong H^i(X,\underline{A})\) for every abelian group \(A\).
 \end{prop}
-\todo{ref proof}
+These results were proven in \cref{thm:Čech-cohomology-paracompact-Hausdorff-space}, \cref{cor:Čech-cohomology-vanishing-intersections} and \cref{exmp:Čech-cohomology-intersections-disjoint-unions-of-contractibles}.
 
 \begin{prop}\label{prop:comparison-de-Rham-cohomology-sheaf-cohomology}
 If \(X\) is a \(C^\infty\)-manifold (assumed to be paracompact), then \(H^i_{\smash{\textup{dR}}}(X)\cong H^i(X,\underline{\bb R})\).
@@ -43,12 +43,11 @@ The de Rham complex
 Since \(\Omega^i_X\) is a sheaf of \(C^\infty(-,\bb R)\)-modules, it is soft, so the above is an acyclic resolution of \(\underline{\bb R}\).
 \end{proof}
 
-\begin{prop}\label{prop:comparison-de-Rham-cohomology-Čech-chomology}
+\begin{prop}[name={\cite[Theorem~8.9]{bottDifferentialFormsAlgebraic1982}}]\label{prop:comparison-de-Rham-cohomology-Čech-chomology}
 If \(X\) is a manifold, then \(H^i_{\smash{\textup{dR}}}(X)\cong\check{H}^i(\mathcal U,\underline{\bb R})\) for any cover \(\mathcal U\) such that each intersection \(U_{i_0}\cap \dots\cap U_{i_k}\) is a disjoint union of contractible spaces.
 \end{prop}
-\todo{ref Bott-Tu}
 
-\begin{prop}\label{prop:comparison-singular-cohomology-sheaf-cohomology}
+\begin{prop}[name={\cite[Theorem~4.47]{voisinHodgeTheoryComplex2002}}]\label{prop:comparison-singular-cohomology-sheaf-cohomology}
 If \(X\) is locally contractible, then \(H^i_{\smash{\textup{sing}}}(X,A) \cong H^i(X,\underline{A})\) for every abelian group \(A\).
 \end{prop}
 \begin{proof}
@@ -62,7 +61,6 @@ Finally, the map
 \[ C^\bullet_{\smash{\textup{sing}}}(X,A) \to \Gamma(X,\mathcal C^\bullet_{\smash{\textup{sing}}}(A)) = C^\bullet_{\smash{\textup{sing}}}/\{\text{locally trivial cochains}\} \]
 is a quasi-isomorphism (this result is known as the `theorem on small chains').
 \end{proof}
-\todo{add refs}
 
 \begin{prop}\label{prop:comparison-singular-cohomology-Čech-cohomology}
 If \(X\) admits a cover \(\mathcal U\) such that each intersection \(U_{i_0}\cap\dots\cap U_{i_k}\) is a disjoint union of contractible spaces, then \(H^i_{\smash{\textup{sing}}}(X,A)\cong\check{H}^i(X,\underline{A})\) for every abelian group \(A\).
@@ -102,6 +100,7 @@ Since singular homology \(H^i(-,A)\colon\catTopologicalSpace\to\catAbelianGroup\
 If \(X\) is paracompact Hausdorff, then \([X,K(A,i)]\cong H^i(X,\underline{A})\) for every abelian group \(A\).
 \end{prop}
 We saw this for \(K(\bb Z,1)\simeq\sphere[1]\) in Homework~8, Exercise~2.
+We are not sure about a reference for the general statement.
 
 \todo{Warsaw circle}
 % \begin{center}
