@@ -101,8 +101,8 @@ We use the circled asterisk \(\circledast\) in the notation for the pullback of 
 Unlike the pushforward, namely, the pullback of presheaves does not directly restrict to sheaves; that is to say, there are sheaves which are sent by \(f^{\circledast}\) to a presheaf which does not satisfy the sheaf condition, as witnessed by the following counterexample:
 
 \begin{exmp}
-Let $Y$ be the two-point space with the discrete topology, and let $X$ be the one-point space, with the unique map $f: Y \to X$. 
-We can easily put a sheaf on $X$, for example by defining $\mathcal{F}(\emptyset) = *$ and $\mathcal{F}(X) = \{42, 43, 44\}$. 
+Let $Y$ be the two-point space with the discrete topology, and let $X$ be the one-point space, with the unique map $f: Y \to X$.
+We can easily put a sheaf on $X$, for example by defining $\mathcal{F}(\emptyset) = *$ and $\mathcal{F}(X) = \{42, 43, 44\}$.
 The pullback in presheaves at any point $\{*\} \subset Y$ is $f^{\circledast}(\{*\}) = \colim_{f^{-1}(W) \supseteq *}\mathcal{F}(W) = \mathcal{F}(X) = \{42, 43, 44\}$. But the pullback in presheaves at $Y$ itself is also $\mathcal{F}(X) = \{42, 43, 44\}$. Check that the sheaf condition doesn't hold for the cover of $Y$ given by two opens, one containing precisely each point: the gluing condition on $\{42,43,44\} \times \{42, 43, 44\}$ is void because the points do not intersect.
 \end{exmp}
 
@@ -180,7 +180,7 @@ These two right adjoint are equal by definition, so we find the required natural
 
 The following corollary roughly says that pushforward and pullback are `functorial in the map' (respectively co- and contravariantly).\footnote{This statement can probably be made precise in terms of \(2\)-categories.}
 
-\begin{cor}
+\begin{cor}\label{cor:pushforward-pullback-functorial-in-map}
 For any space \(X\), we have \((\id_X)_*=\id_{\catSheaf(X)}\cong(\id_X)^*\), and for any maps \(f\colon Z\to Y\) and \(g\colon Y\to X\) we have \((gf)_*=g_*f_*\colon\catSheaf(Z)\to\catSheaf(X)\) and \((gf)^*\cong f^*g^*\colon\catSheaf(X)\to\catSheaf(Z)\).
 \end{cor}
 Note that the identities for the pushforward hold on-the-nose, whereas we only prove the identities for the pullback up to natural isomorphism.
@@ -199,7 +199,7 @@ Unravelling definitions, we have \[
 \]
 An element of the stalk at $x$ is represented by a \indexdefnemph{germ} $[s]_U$ for $U \ni x$ and $s \in \mathcal{F}(U)$, where \([s]_U = [t]_V\) if and only if there exists an open neighbourhood \(W\subseteq U\cap V\) of \(x\) such that \(s|_W=t|_W\).
 \end{defn}
-Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over $x$. 
+Note that the stalk $\mathcal{F}_x$ is the fibre of $\etalespace(X) \to X$ over $x$.
 
 \begin{rmk}
 \Cref{cor:pullback-sheafification} tells us that we can compute the stalks of the sheafification of a presheaf by computing the stalks of the presheaf itself.
@@ -221,7 +221,7 @@ The stalk of the orientation sheaf \(\mathcal O_M\) at \(x\in M\) is the \(R\)-m
 \end{exmp}
 
 \begin{rmk}
-One can show (as a generalisation of an exercise in Homework 3) that the étalé space of the pullback can be obtained as a \indexterm{fibre product}. More precisely, given $f\colon Y \to X$, the diagram 
+One can show (as a generalisation of an exercise in Homework 3) that the étalé space of the pullback can be obtained as a \indexterm{fibre product}. More precisely, given $f\colon Y \to X$, the diagram
 \[\begin{tikzcd}
 	{\etalespace(f^*\mathcal{F})} & {\etalespace(\mathcal{F})} \\
 	Y & X
@@ -231,30 +231,33 @@ One can show (as a generalisation of an exercise in Homework 3) that the étalé
 	\arrow[from=1-1, to=1-2]
 	\arrow[pullback, from=1-1, to=2-2]
 \end{tikzcd}\]
-is a pullback square. 
-This is used in \cite[\S~\RN{2}.9]{MacLaneMoerdijkSheavesGeometryLogic} to define $f^*$. 
+is a pullback square.
+This is used in \cite[\S~\RN{2}.9]{MacLaneMoerdijkSheavesGeometryLogic} to define $f^*$.
 \end{rmk}
 
 
 Given a map $\alpha\colon \mathcal{F} \to \mathcal{G}$ between sheaves on a space $X$ and a point $x \in X$, there is an induced map on stalks $\alpha_x\colon \mathcal{F}_x \to \mathcal{G}_x$, because $\mathcal{G}_x$ is a cocone over
 \[\setpred{\mathcal{F}(U)}{U \in \open(X),x \in U}\text{,}\]
-of which $\mathcal{F}_x$ is a colimit. 
+of which $\mathcal{F}_x$ is a colimit.
 
 \begin{lem}\label{lem:stalkwise-check-isomorphism}
-    Let $\alpha\colon \mathcal{F} \to \mathcal{G}$ be a map in $\catSheaf(X)$. 
-    Then $\alpha$ is an isomorphism of sheaves if and only if $\alpha_x\colon \mathcal{F}_x \to \mathcal{G}_x$ is a bijection for all $x \in X$. 
+    Let $\alpha\colon \mathcal{F} \to \mathcal{G}$ be a map in $\catSheaf(X)$.
+    Then $\alpha$ is an isomorphism of sheaves if and only if $\alpha_x\colon \mathcal{F}_x \to \mathcal{G}_x$ is a bijection for all $x \in X$.
 \end{lem}
 \begin{proof}
-    The map $\etalespace(\alpha)\colon \etalespace(\mathcal{F}) \to \etalespace(\mathcal{G})$ is a local homeomorphism over $X$, because the maps $\etalespace(\mathcal{F}) \to X$ and $\etalespace(\mathcal{G}) \to X$ are local homeomorphisms. In particular, $\etalespace(\alpha)$ is an open map. So it is invertible if and only if it is a bijection. Check that this is equivalent to requiring that the map on the fibres over $x$ is a bijection for all $x \in X$. Since the stalks $\mathcal{F}_x$ and $\mathcal{G}_x$ are exactly these fibres, we are done. 
+    The map $\etalespace(\alpha)\colon \etalespace(\mathcal{F}) \to \etalespace(\mathcal{G})$ is a local homeomorphism over $X$, because the maps $\etalespace(\mathcal{F}) \to X$ and $\etalespace(\mathcal{G}) \to X$ are local homeomorphisms. In particular, $\etalespace(\alpha)$ is an open map. So it is invertible if and only if it is a bijection. Check that this is equivalent to requiring that the map on the fibres over $x$ is a bijection for all $x \in X$. Since the stalks $\mathcal{F}_x$ and $\mathcal{G}_x$ are exactly these fibres, we are done.
 \end{proof}
 
+The next lemma shows that the pullback of a constant sheaf along any map is again constant.
+
 \begin{lem}
-	Let $f: Y \to X$ be a continuous map of topological spaces, and let $S$ be a set. Then $f^*\underline{S}_X \cong \underline{S}_Y$.
+	Let $f: Y \to X$ be a continuous map and let $S$ be a set. Then $f^*\underline{S}_X \cong \underline{S}_Y$.
 \end{lem}
 \begin{proof}
-  It suffices to show the lemma holds for the special case of the maps $p_W: W \to *$ from a space to a point. The general case will then follow. Indeed, then \[f^*\underline{S}_X \cong f^* \circ p_X^* \underline{S}_* \cong (f \circ p_X)^* \underline{S}_* = p_Y^* \underline{S}_* \cong \underline{S}_Y.\]
-  For the special case, the presheaf pullback on a nonempty open becomes constant: \[p_W^\circledast \underline{S}_*(U) = \colim_{V \supset p_W(U)}\underline{S}_*(V) \cong \underline{S}_*(*) = S.\] On the empty set, we have $p_W^\circledast(\emptyset) = *$. 
-  The sheafification $\p_W^*\underline{S}_*$ is then $\underline{S}_W$. Verify that sheafification is unaffected by the value of a presheaf on the empty set.
+  It suffices to show the lemma holds for the special case of the maps $p_W: W \to *$ from a space to a point. The general case will then follow. Indeed, then \[f^*\underline{S}_X \cong f^* p_X^* \underline{S}_* \cong (f \circ p_X)^* \underline{S}_* = p_Y^* \underline{S}_* \cong \underline{S}_Y\]
+  by \cref{cor:pushforward-pullback-functorial-in-map}.
+  For the special case, the presheaf pullback on a nonempty open becomes constant: \[p_W^\circledast \underline{S}_*(U) = \colim_{V \supseteq p_W(U)}\underline{S}_*(V) \cong \underline{S}_*(*) = S\text{.}\] On the empty set, we have $p_W^\circledast(\emptyset) = *$.
+  Its sheafification $p_W^*\underline{S}_*$ is then $\underline{S}_W$. (Verify that sheafification is unaffected by the value of a presheaf on the empty set.)
   \end{proof}
 
 \begin{defn}
@@ -262,12 +265,12 @@ of which $\mathcal{F}_x$ is a colimit.
 \end{defn}
 
 \begin{exmp}
-    Let $\{0\} \to \bb R$ be the inclusion of zero into the real numbers. Let $S = \{a,b\}$. Then the skyscraper sheaf is 
+    Let $\{0\} \to \bb R$ be the inclusion of zero into the real numbers. Let $S = \{a,b\}$. Then the skyscraper sheaf is
     \[
         i_{*,S}(U) = S(U \cap 0) =     \begin{cases}
         \{a,b\} & \text{if } 0 \in U\\
         * & \text{if } x \notin U.
     \end{cases}
     \]
-    In Homework 2, we saw that the étalé space of this sheaf is the line with two origins. 
+    In Homework 2, we saw that the étalé space of this sheaf is the line with two origins.
 \end{exmp}
