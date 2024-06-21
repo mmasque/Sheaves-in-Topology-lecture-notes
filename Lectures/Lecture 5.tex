@@ -248,6 +248,15 @@ of which $\mathcal{F}_x$ is a colimit.
     The map $\etalespace(\alpha)\colon \etalespace(\mathcal{F}) \to \etalespace(\mathcal{G})$ is a local homeomorphism over $X$, because the maps $\etalespace(\mathcal{F}) \to X$ and $\etalespace(\mathcal{G}) \to X$ are local homeomorphisms. In particular, $\etalespace(\alpha)$ is an open map. So it is invertible if and only if it is a bijection. Check that this is equivalent to requiring that the map on the fibres over $x$ is a bijection for all $x \in X$. Since the stalks $\mathcal{F}_x$ and $\mathcal{G}_x$ are exactly these fibres, we are done. 
 \end{proof}
 
+\begin{lem}
+	Let $f: Y \to X$ be a continuous map of topological spaces, and let $S$ be a set. Then $f^*\underline{S}_X \cong \underline{S}_Y$.
+\end{lem}
+\begin{proof}
+  It suffices to show the lemma holds for the special case of the maps $p_W: W \to *$ from a space to a point. The general case will then follow. Indeed, then \[f^*\underline{S}_X \cong f^* \circ p_X^* \underline{S}_* \cong (f \circ p_X)^* \underline{S}_* = p_Y^* \underline{S}_* \cong \underline{S}_Y.\]
+  For the special case, the presheaf pullback on a nonempty open becomes constant: \[p_W^\circledast \underline{S}_*(U) = \colim_{V \supset p_W(U)}\underline{S}_*(V) \cong \underline{S}_*(*) = S.\] On the empty set, we have $p_W^\circledast(\emptyset) = *$. 
+  The sheafification $\p_W^*\underline{S}_*$ is then $\underline{S}_W$. Verify that sheafification is unaffected by the value of a presheaf on the empty set.
+  \end{proof}
+
 \begin{defn}
     Let $\{x\} \to X$ be the inclusion of a point $x \in X$ and let \(S\) be a set. The \indexemph{skyscraper sheaf} at $x$ with value $S$ is $i_{x,*}\underline{S}$, the pushforward of the constant sheaf. We denote it $i_{*, S}$.
 \end{defn}
