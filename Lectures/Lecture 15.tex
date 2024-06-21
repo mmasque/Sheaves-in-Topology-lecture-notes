@@ -1,20 +1,20 @@
 \chapter{Proper maps, proper pushforward, the proper base change theorem}
 
-We begin with some general theory of proper maps. 
+We begin with some general theory of proper maps.
 
 \section{Proper maps}
 
 \begin{defn}
-	A continuous map $f: Y \to X$ between topological spaces is \emph{universally closed} if for any map $X' \to X$ the base change $X' \pullback{X} Y \to Y$ is a closed map.
+	A continuous map $f\colon Y \to X$ between topological spaces is \emph{universally closed} if for any map $X' \to X$ the base change $X' \pullback{X} Y \to Y$ is a closed map.
 \end{defn}
 
 \remyquote{The proof I'll give for this lemma is taken from Bourbaki. You'll hate it.}
 \begin{lem}
-	Let $X \in \catTopologicalSpace$. The map $X \to *$ is universally closed if and only if $X$ is compact. 
+	Let $X \in \catTopologicalSpace$. The map $X \to *$ is universally closed if and only if $X$ is compact.
 \end{lem}
 \begin{proof}
-	If $X$ is compact, we need to show that the projection map $\pi: X\times Y \to Y$ is closed for any $Y \in \catTopologicalSpace$. Let $Z \subset X \times Y$ closed and let $y \in Y \setminus \pi(Z)$. We will construct an open set around $y$ that does not intersect $\pi(Z)$. 
-	Notice that $X \cong X \times \{y\} \subset Z^{c}$, so we can cover $X \times \{y\}$ by finitely many opens contained in $Z^c$. Their intersection is still an open open $U$, and the projection map is open so $\pi(U)$ is open containing $y$ and not intersecting $\pi(Z)$. 
+	If $X$ is compact, we need to show that the projection map $\pi\colon X\times Y \to Y$ is closed for any $Y \in \catTopologicalSpace$. Let $Z \subset X \times Y$ closed and let $y \in Y \setminus \pi(Z)$. We will construct an open set around $y$ that does not intersect $\pi(Z)$.
+	Notice that $X \cong X \times \{y\} \subset Z^{c}$, so we can cover $X \times \{y\}$ by finitely many opens contained in $Z^c$. Their intersection is still an open open $U$, and the projection map is open so $\pi(U)$ is open containing $y$ and not intersecting $\pi(Z)$.
 	Conversely, assume $X \to *$ is universally closed.
 	To prove compactness we will use prove that any collection of closed subsets of $X$ with the finite intersection property has nonempty intersection. So let $Z_i \subset X$ ($i \in I$) be a such a collection. We use the notation $Z_J = \bigcap_{j \in J}Z_j$ for $J \subset I$.
 	Define a new space \[
@@ -24,20 +24,20 @@ We begin with some general theory of proper maps.
 \end{proof}
 
 \begin{prop}
-	Let $f: Y \to X$ be a continuous map. The following are equivalent: 
+	Let $f\colon Y \to X$ be a continuous map. The following are equivalent:
 	\begin{enumerate}
     	\item $f$ is universally closed,
-		\item the product $f \times \id_W: Y \times W \to X \times W$ is closed for every space \(W\),
+		\item the product $f \times \id_W\colon Y \times W \to X \times W$ is closed for every space \(W\),
 		\item $f$ is closed and the fibre $f^{-1}(x)$ is compact for all $x \in X$,
-		\item $f$ is closed and the fibre $f^{-1}(Z)$ is compact for all $Z \subset X$ closed. 
+		\item $f$ is closed and the fibre $f^{-1}(Z)$ is compact for all $Z \subset X$ closed.
     \end{enumerate}
 \end{prop}
 \todo{Add the proof}
 
 \begin{defn}
-	A map $f: Y \to X$ of topological spaces is called \emph{separated} if the diagonal map $
-    	\Delta_{Y/X}: Y \to Y\pullback{X} Y
-    $ is closed. The map $f$ is called \emph{proper} if it is universally closed and separated. 
+	A map $f\colon Y \to X$ of topological spaces is called \emph{separated} if the diagonal map $
+    	\Delta_{Y/X}\colon Y \to Y\pullback{X} Y
+    $ is closed. The map $f$ is called \emph{proper} if it is universally closed and separated.
 \end{defn}
 \begin{rmk}
 	Some authors do not include the separated condition, which is automatic if $X$ and $Y$ are both locally compact Hausdorff spaces.
@@ -46,17 +46,17 @@ We begin with some general theory of proper maps.
 \section{Proper pushforward}
 
 \begin{defn}
-	Let $f\colon Y \to X$ be a map of topological spaces. The \emph{proper pushforward} (sometimes called the \emph{pushforward with proper support}) is the functor $f_{!}: \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ defined, given a sheaf $\sh{F} \in \catAbelianSheaf(Y)$, by \[
+	Let $f\colon Y \to X$ be a map of topological spaces. The \emph{proper pushforward} (sometimes called the \emph{pushforward with proper support}) is the functor $f_{!}\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ defined, given a sheaf $\sh{F} \in \catAbelianSheaf(Y)$, by \[
 		(f_{!}\sh{F})(U) = \setpred{s \in \sh{F}(f^{-1}(U))}{\restr{f}{\supp(s)}\colon \supp(s) \to U \text{ is proper}}\text{.}
     \]
 \end{defn}
 \begin{rmk}
-	In Homework~8 you are asked to show this assignment gives a sheaf on $X$. 
+	In Homework~8 you are asked to show this assignment gives a sheaf on $X$.
 \end{rmk}
 \begin{exmp}
 	In Additional exercise~15.3 you are asked to show that for the inclusion of an open subset $j\colon U \hookrightarrow X$ the proper pushforward becomes the extension-by-zero functor.
 \end{exmp}
-We have a functor $f_!$ between abelian categories. One checks it is left exact. 
+We have a functor $f_!$ between abelian categories. One checks it is left exact.
 \begin{defn}
 	The $i$th \emph{higher pushforward with proper support} is the \(i\)th right derived functor $\rightderived^if_!\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X)$ of the \emph{proper pushforward}.
 \end{defn}
@@ -66,7 +66,7 @@ We have a functor $f_!$ between abelian categories. One checks it is left exact.
 \end{exmp}
 
 \begin{exc}
-	If $X$ is Hausdorff then $\cohomology^i_c(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f\colon X \to *$. 
+	If $X$ is Hausdorff then $\cohomology^i_c(X, \sh{F}) = \rightderived^i f_!\sh{F}$ for any sheaf $\sh{F} \in \catAbelianSheaf(X)$ and $f\colon X \to *$.
 \end{exc}
 
 \section{The proper base change theorem}
@@ -77,7 +77,7 @@ We are now ready to state one of the main results of the course. We do so in two
 \begin{thm}\label{thm:proper-base-change-theorem-1}
 	Let $f\colon Y \to X$ be a proper map of topological spaces and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff. For $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
     	(\rightderived^i f_* \sh{F})_x \to \cohomology^i(f^{-1}(x), \sh{F})
-    \] is an isomorphism for all $x \in X$ and for all $i \geq 0$. 
+    \] is an isomorphism for all $x \in X$ and for all $i \geq 0$.
 \end{thm}
 
 \begin{rmk}
@@ -85,7 +85,7 @@ We are now ready to state one of the main results of the course. We do so in two
 \end{rmk}
 
 \begin{thm}\label{thm:proper-base-changed-theorem-2}
-	Let $\colon: Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
+	Let $f\colon Y \to X$ be a continuous map of locally compact Hausdorff spaces. For any $\sh{F} \in \catAbelianSheaf(Y)$ the natural map \[
     	(\rightderived^i f_! \sh{F})_x \to \cohomology^i_c(f^{-1}(x), \sh{F})
     \] is an isomorphism for all $x \in X$ and all $i \geq 0$.
 \end{thm}
@@ -93,25 +93,25 @@ We are now ready to state one of the main results of the course. We do so in two
 We will first prove \cref{thm:proper-base-change-theorem-1}. We will need the following lemma.
 
 \begin{lem}\label{lem:proper-base-change-1}
-	Let $i: Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}
-    	\item $X$ is paracompact Hausdorff or 
+	Let $i\colon Z \hookrightarrow X$ be a closed subset. Assume that either \begin{enumerate}
+    	\item $X$ is paracompact Hausdorff or
 		\item $X$ is locally compact Hausdorff and that $Z$ is compact.
     \end{enumerate}
 	Then there is an isomorphism \[
     	\colim_{Z \subset U \text{ open}}\cohomology^i(U, \sh{F}) \xrightarrow{\sim} \cohomology^i(Z, \sh{F})
-    \] for all sheaves and all $i \geq 0$. 
+    \] for all sheaves and all $i \geq 0$.
 \end{lem}
 \begin{proof}
 	We proved in \cref{prop:restriction-map-isomorphism-paracompact} that the statement holds for $i = 0$.
-	Note that the pullback $i^*: \catAbelianSheaf(X) \to \catAbelianSheaf(Z)$ preserves soft sheaves if $X$ is paracompact Hausdorff (respectively c-soft sheaves if $X$ is locally compact Hausdorff, irrespective of whether $Z$ is compact): if $W \subset Z$ is closed, then any $s \in \sh{F}(W)$ extends to $\sh{F}(X)$ hence also to $\sh{F}(Z)$ \todo{where have we used the assumptions on $X$?} (note that $W$ is compact if $Z$ is). 
-	Now given an injective resolution $0 \to \sh{F} \to \cochaincomplex{I}$, it is (c)-soft, and $i^*\cochaincomplex{I}$ is a (c)-soft resolution of $i^*\sh{F}$. Unravelling the definitions, we obtain the desired result: 
+	Note that the pullback $i^*\colon \catAbelianSheaf(X) \to \catAbelianSheaf(Z)$ preserves soft sheaves if $X$ is paracompact Hausdorff (respectively c-soft sheaves if $X$ is locally compact Hausdorff, irrespective of whether $Z$ is compact): if $W \subset Z$ is closed, then any $s \in \sh{F}(W)$ extends to $\sh{F}(X)$ hence also to $\sh{F}(Z)$ \todo{where have we used the assumptions on $X$?} (note that $W$ is compact if $Z$ is).
+	Now given an injective resolution $0 \to \sh{F} \to \cochaincomplex{I}$, it is (c)-soft, and $i^*\cochaincomplex{I}$ is a (c)-soft resolution of $i^*\sh{F}$. Unravelling the definitions, we obtain the desired result:
 	\begin{align*}
     	\cohomology^i(Z, \sh{F}|_Z) &= \cohomology^i(\Gamma(Z, i^* \cochaincomplex{I})) \\ &\cong \cohomology^i(\filteredcolim_{Z \subset U} \Gamma(U, i^*\cochaincomplex{I}))\\ & \cong \filteredcolim_{Z\subset U} \cohomology^i(\Gamma(U, i^*\cochaincomplex{I}))\\ &= \filteredcolim_{Z \subset U} \cohomology^i(U, \sh{F}).
 	\end{align*}
 \end{proof}
 
-We are now ready to prove the first version of the Proper Base Change Theorem. 
-\begin{proof}{name={of \cref{thm:proper-base-change-theorem-1}}}
+We are now ready to prove the first version of the Proper Base Change Theorem.
+\begin{proof}[name={of \cref{thm:proper-base-change-theorem-1}}]
 	Recall that $\rightderived^i f_* \sh{F}$ is the sheafification of the assignment $U \mapsto H^i(f^{-1}(U), \sh{F})$, so that \[
     	(\rightderived^i f_* \sh{F})_x = \colim_{x \in U \text{ open}} \cohomology^i(f^{-1}(U), \sh{F}).
     \] By \cref{lem:proper-base-change-1} we know that \[
@@ -136,7 +136,7 @@ We are now ready to prove the first version of the Proper Base Change Theorem.
     \] given by $s \mapsto s|_{f^{-1}(x)}$ which we claim is injective.
 	If $s \in (f_!\sh{F})(U)$ maps to zero under this map, then \[
     	\sup(s) \cap f^{-1}(x) = \emptyset.
-    \] Since the map $\sup(s) \to U$ is proper, the set $V = U \setminus f(\sup(s))$ is an open neighborhood of $x$ with the property that $\sup(s) \cap f^{-1}(V) = \emptyset$. 
+    \] Since the map $\sup(s) \to U$ is proper, the set $V = U \setminus f(\sup(s))$ is an open neighborhood of $x$ with the property that $\sup(s) \cap f^{-1}(V) = \emptyset$.
 	Thus $s$ maps to zero in $(f_!\sh{F})(V)$, proving injectivity of $\phi$. If $\sh{F}$ is c-soft, then the composition \[
     	\cohomology^0_c(Y, \sh{F}) \hookrightarrow (f_! \sh{F})(X) \to (f_!\sh{F})_x \xrightarrow{\phi} \cohomology^0_c(f^{-1}(x), \sh{F})
     \] is surjective by \cref{lem:proper-base-change-2} so the map $\phi$ is an isomorphism.
@@ -148,10 +148,10 @@ We are now ready to prove the first version of the Proper Base Change Theorem.
     \] and we are done.\todo{expand details, verify}
 \end{proof}
 
-The next corollary explains the use of \emph{base change} in the namings of \cref{thm:proper-base-change-theorem-1} and \cref{thm:proper-base-changed-theorem-2}. 
+The next corollary explains the use of \emph{base change} in the namings of \cref{thm:proper-base-change-theorem-1} and \cref{thm:proper-base-changed-theorem-2}.
 
 \begin{cor}\label{cor:proper-base-change}
-Let the diagram 
+Let the diagram
 \[\begin{tikzcd}
 	{Y'} \ar[rd, pullback] & {X'} \\
 	Y & X
@@ -160,7 +160,7 @@ Let the diagram
 	\arrow["g", from=1-2, to=2-2]
 	\arrow["f"', from=2-1, to=2-2]
 \end{tikzcd}\]
-be a pullback square in $\catTopologicalSpace$. 
+be a pullback square in $\catTopologicalSpace$.
 \begin{enumerate}
 	\item If $f$ is a proper map and $X$ and $X'$ are either both paracompact Hausdorff or both locally compact Hausdorff, then there are canonical isomorphisms \[
     	g^* \rightderived^i f_* \xrightarrow{\cong} (\rightderived^i f'_*)g'^{*}\colon \catAbelianSheaf(Y) \to \catAbelianSheaf(X).
