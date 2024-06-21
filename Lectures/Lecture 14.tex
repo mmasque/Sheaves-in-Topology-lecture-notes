@@ -180,6 +180,17 @@ Likewise, since $(-)^\sharp \circ i_X = \id$ and $(-)^\sharp$ is exact, we get
 \[(\underline{H}^i(\sh F))^\sharp = \rightderived^i((-)^\sharp \circ i_X)(\sh F) = \rightderived^i \id(\sh F) = 0\]
 if $i>0$ since $\id$ is exact.
 
+The following lemma expresses that the higher pushforward is the relative version of higher cohomology.
+
+\begin{lem}\label{exc:cohomology-higher-pushforward-to-point}
+Let \(\sh F\) be an abelian sheaf on \(X\) and let \(f\colon X\to *\) denote the unique map.
+Then \(\cohomology^i(X,\sh F) = \rightderived^i f_*\sh F\).
+\end{lem}
+\begin{proof}
+Unravelling the definitions shows the equality holds for \(i=0\).
+It then follows for higher \(i\).
+\end{proof}
+
 \section*{Exercise}
 
 \begin{exe}[The link between soft sheaves and partitions of unity] Let $\O_X$ be a sheaf of rings on a Hausdorff space $X$.
@@ -187,7 +198,6 @@ if $i>0$ since $\id$ is exact.
     \item[(a)] If $X$ is paracompact, show that $\O_X$ is soft if and only if for every closed subset $Z\subseteq X$ and every open neighbourhood $U\supseteq Z$, there exists a section $f\in \O_X(X)$ such that $\restr{f}{Z} = 1$ and $\supp(f)\subseteq U$. 
     \item[(b)] If $X$ is locally compact, show that $\O_X$ is c-soft if and only if for every compact subset $Z\subseteq X$ and every open neighbourhood $U\supseteq Z$, there exists a section $f\in H^0_c(X, \O_X)$ such that $\restr{f}{Z} = 1$ and $\supp(f) \subseteq U$. 
 \end{enumerate}
-
 \end{exe}
 
 \end{document}

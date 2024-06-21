@@ -140,6 +140,18 @@ Then there is an isomorphism
 
 \section{Higher pushforwards}
 
+The following two lemmas express that the (proper) pushforward is the relative version of (compactly supported) cohomology.
+
+\begin{lem}[name={\cref{exc:cohomology-higher-pushforward-to-point}}]
+Let \(\sh F\) be an abelian sheaf on \(X\) and let \(f\colon X\to *\) denote the unique map.
+Then \(\cohomology^i(X,\sh F) = \rightderived^i f_*\sh F\).
+\end{lem}
+
+\begin{lem}[name={\cref{exc:compactly-supported-cohomology-higher-proper-pushforward-to-point}}]
+Let \(\sh F\) be an abelian sheaf on a Hausdorff space \(X\) and let \(f\colon X\to *\) denote the unique map.
+Then \(\cohomology^i_c(X,\sh F) = \rightderived^i f_!\sh F\).
+\end{lem}
+
 \begin{thm}[name={\cref{thm:proper-base-change-theorem-1}}]
 Let $f\colon Y \to X$ be a proper map and assume that $X$ and $Y$ are either both paracompact Hausdorff or both locally compact Hausdorff.
 For an abelian sheaf \(\sh F\) on \(Y\), the natural map \[
