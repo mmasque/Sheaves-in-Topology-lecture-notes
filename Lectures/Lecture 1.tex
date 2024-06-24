@@ -8,9 +8,9 @@
 
 \begin{defn}
     Let $X$ be a topological space. Write \indexterm{$\open(X)$} for the partially ordered set of opens of $X$.  A \indexdefnemph{presheaf} of sets on $X$ is a functor
-    \[
+    $
         F: \open(X)\opp \to \catSet. 
-    \]  
+    $
 \end{defn}
 By changing the codomain we can obtain, for example, presheaves of abelian groups. In this course, we will focus almost entirely on presheaves of sets and of abelian groups.
 Let $U \subset V $ be open sets of $X$. The inclusion under $F$ gives a \indexdefnemph{restriction} map $F(V) \to F(U)$. The naming comes from the following example: 
@@ -21,14 +21,13 @@ Let $U \subset V $ be open sets of $X$. The inclusion under $F$ gives a \indexde
 We generalise the notation of function restriction. For $F(V) \to F(U)$, we denote the map pointwise by $s \mapsto s|_U$.
 
 \begin{defn}\label{defn:sheaf}
-    Let $X$ be a topological space and $\mathcal{F}$ a presheaf \[\mathcal{F}: \open(X)\opp \to \catSet. \] We call $\mathcal{F}$ a \indexdefnemph{sheaf} if it satisfies the \emph{sheaf condition}\index{sheaf!sheaf condition}:
+    Let $X$ be a topological space and $\mathcal{F}: \open(X)\opp \to \catSet$ a presheaf on $X$.  We call $\mathcal{F}$ a \indexdefnemph{sheaf} if it satisfies the \emph{sheaf condition}\index{sheaf!sheaf condition}, i.e., if
     for every open $U \subset X$ and every open cover $(U_i)_{i \in I}$ of $U$ with $\bigcup_i U_i = U$, the map 
         \[
             \mathcal{F}(U) \to \prod_{i\in I}\mathcal{F}(U_i)\text{,} \quad s \mapsto (s|_{U_i})_{i \in I}
           \]
-    has the following two properties:
     \begin{enumerate}
-        \item\label{defn:sheaf:injective} it is injective, and
+        \item\label{defn:sheaf:injective} is injective, and
         \item\label{defn:sheaf:gluing} its image satisfies a \indexdefnemph{gluing condition}: it is given by $\setpred{(s_i)_{i\in I}}{s_i |_{U_i \cap U_j} = s_j | _ {U_i \cap U_j} \forall i,j \in I}$.
     \end{enumerate}
 \end{defn}
