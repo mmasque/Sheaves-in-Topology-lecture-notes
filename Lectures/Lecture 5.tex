@@ -274,3 +274,38 @@ The next lemma shows that the pullback of a constant sheaf along any map is agai
     \]
     In Homework 2, we saw that the étalé space of this sheaf is the line with two origins.
 \end{exmp}
+
+% \begin{cor}
+% Let \(i_x\colon\{x\}\hookrightarrow X\) be the inclusion of a point in a space.
+% Then the functors
+% \[ \catPresheaf(X) \xrightarrow{i_x^*} \catSheaf(*) \]
+% and
+% \[ \catPresheaf(X) \xrightarrow{(-)^\sharp} \catSheaf(X) \xrightarrow{i_x^*} \catSheaf(*) \]
+% are naturally isomorphic.
+% \end{cor}
+% \begin{proof}
+%   % and write \(\iota\colon\catSheaf(X)\hookrightarrow\catPresheaf(X)\) for the full subcategory inclusion
+% By definition, the former functor is the composite
+% \begin{equation*}
+%   \begin{tikzcd}
+%     \catPresheaf(X) \ar[r, "i_x^\circledast"{name=leftadj1}, shift left=2] &
+%     \catPresheaf(*) \ar[l, "(i_x)_*"{name=rightadj1}, shift left=2] \ar[r, "(-)^\sharp"{name=leftadj2}, shift left=2] &
+%     \catSheaf(*) \ar[l, ""{name=rightadj2}, shift left=2, inclusion]
+%     \ar[from=leftadj1, to=rightadj1, phantom, "\leftadj" rotate=-90]
+%     \ar[from=leftadj2, to=rightadj2, phantom, "\leftadj" rotate=-90]
+%   \end{tikzcd}
+% \end{equation*}
+% of the presheaf pullback along \(i_x\) and sheafification, which have right adjoints given by respectively the pushforward along \(i_x\) and the full subcategory inclusion by \cref{prop:pullback-Kan-extension} and \cref{cor:sheafification-left-adjoint-to-inclusion}.
+% The latter functor has a right adjoint
+% \begin{equation*}
+%   \begin{tikzcd}
+%     \catPresheaf(X) \ar[r, "(-)^\sharp"{name=leftadj1}, shift left=2] &
+%     \catSheaf(X) \ar[l, ""{name=rightadj1}, shift left=2, inclusion] \ar[r, "i_x^*"{name=leftadj2}, shift left=2] &
+%     \catSheaf(*) \ar[l, "(i_x)_*"{name=rightadj2}, shift left=2]
+%     \ar[from=leftadj1, to=rightadj1, phantom, "\leftadj" rotate=-90]
+%     \ar[from=leftadj2, to=rightadj2, phantom, "\leftadj" rotate=-90]
+%   \end{tikzcd}
+% \end{equation*}
+% given by pushforward along \(i_x\) followed by the full subcategory inclusion by \cref{cor:sheafification-left-adjoint-to-inclusion} and \cref{lem:pushforward-pullback-adjunction-sheaves}.
+% These two right adjoint are equal by definition, so we find the required natural isomorphism.
+% \end{proof}

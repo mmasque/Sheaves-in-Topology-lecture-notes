@@ -649,7 +649,8 @@
 
 %% Fonts for chapter and section heads
 \@ifmemoirloaded{%
-  \RenewDocumentCommand\printchaptername{}{\LaptureCaption\LARGE\textls[120]{\textsc{lecture}}}
+  \addto\captionsenglish{\RenewDocumentCommand\chaptername{}{lecture}}
+  \RenewDocumentCommand\printchaptername{}{\LaptureCaption\LARGE\textls[120]{\textsc{\MakeLowercase{\@chapapp}}}}
   \RenewDocumentCommand\chapternamenum{}{\enskip\space}
   \RenewDocumentCommand\printchapternum{}{\LaptureCaption\LARGE\textsc{\thechapter}}
   \RenewDocumentCommand\midchapskip{}{12pt}
