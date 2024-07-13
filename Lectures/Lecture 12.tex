@@ -1,30 +1,85 @@
 \chapter{Derived functors, sheaf cohomology}
+\label{lecture:12}
 This week's lecturer was Dr. Soumya Sankar. 
 
 \section{Derived functors}
 
 Let $\cochaincomplex{C}$ be a cochain complex. 
-	The kernels $Z^i:= \ker(d^i: C^i \to C^{i+1})$ are called cocycles, and the images $B^i := \im(d^{i-1}: C^{i-1} \to C^i)$ are called coboundaries. Check that the universal property of the kernel gives a map $B^i \to Z^i$. 
+	The kernels $Z^i:= \ker(d^i: C^i \to C^{i+1})$ are called the \emph{cocycles} of the complex, and the images $B^i := \im(d^{i-1}: C^{i-1} \to C^i)$ are its \emph{coboundaries}. 
+	Check that the universal property of the kernel gives a natural map $B^i \to Z^i$.
 \begin{defn}
-	The cokernel $\coker(B^i \to Z^i)$ is the $i$th cohomology of $\cochaincomplex{C}$. It is denoted by $\cohomology^i(\cochaincomplex{C})$. One checks that in abelian groups $\cohomology^i(\cochaincomplex{C})$ is the quotient $Z^i/B^i$. \todo{this is not so clear...}
-	Given a morphism $\cochaincomplex{C} \to \cochaincomplex{D}$, taking the $i$th cohomology functorially induces a map $\cohomology^i{\cochaincomplex{C}} \to \cohomology^i{\cochaincomplex{D}}$.
+	The cokernel $\coker(B^i \to Z^i)$ is the \emph{$i$th cohomology} of $\cochaincomplex{C}$. It is denoted by $\cohomology^i(\cochaincomplex{C})$. One checks that in abelian groups $\cohomology^i(\cochaincomplex{C})$ is the quotient $Z^i/B^i$. \todo{this is not so clear...}
 \end{defn}
+
+Given a morphism $\cochaincomplex{C} \to \cochaincomplex{D}$, taking the $i$th cohomology functorially induces a map $\cohomology^i(\cochaincomplex{C}) \to \cohomology^i(\cochaincomplex{D})$.
+
 If $\cochaincomplex{C}$ is exact, $\cohomology^i(\cochaincomplex{C}) = 0$ for all $i$. 
 
 \begin{exc}
 	Let $\cochaincomplex{C} = 0 \to X \to I^0 \to I^1 \to ... $ be an injective resolution. Then $\cohomology^0(\cochaincomplex{C}) = X$ and $\cohomology^i(\cochaincomplex{C}) = 0$ for $i > 0$. 
 \end{exc}
 
-\begin{lem}
+\begin{prop}\label{prop:magic-map-of-cohomology}
+	Let $\cochaincomplex{C} \in \catChainComplex(\cat A)$ be a cochain complex for $\cat A$ an abelian category. For all $i$ there is a natural map \[
+    	\phi: \coker d^{i-1} \to \ker d^{i+1}.
+    \] Moreover, the map recovers cohomology in degrees $i$ and $i+1$: there are isomorphisms $\cohomology^i(\cochaincomplex{C}) \cong \ker \phi$ and $\cohomology^{i+1}(\cochaincomplex{C}) \cong \coker \phi$. 
+\end{prop}
+\begin{proof}
+	
+Notice that $d^i$ factors via $\ker d^{i+1}$ and via $\coker d^{i-1}$ via the universal properties of the kernel and cokernel respectively. Since $C^i \to \coker d^{i-1}$ is an epimorphism and $d^{i+1} \circ d^i = 0$, the composition $\coker d^{i-1} \to C^{i+1} \to C^{i+2}$ is also zero, so the map $\coker d^{i-1} \to C^{i+1}$ factors via $\ker d^{i+1}$. It may be helpful to stare at the following diagram: 
+\[\begin{tikzcd}
+	{C^i} & {C^{i+1}} & {C^{i+2}} \\
+	{\coker d^{i-1}_C} & {\ker d^{i+1}.}
+	\arrow["{d^i_C}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{d^{i+1}_C}", from=1-2, to=1-3]
+	\arrow[from=2-1, to=1-2]
+	\arrow[dashed, from=2-1, to=2-2]
+	\arrow[from=2-2, to=1-2]
+\end{tikzcd}\]We now obtain a unique map $\ker d^i \to \ker \phi$: the map $\ker d^i \to C^i \to \coker d^{i-1} \to \ker d^{i+1} \to C^{i+1}$ is zero, and thus the map $\ker d^i \to C^i \to \coker d^{i-1} \to \ker d^{i+1}$ is also zero ($\ker d^{i+1} \to C^{i+1}$ is a monomorphism).
+
+$\cohomology^i(\cochaincomplex{C}) \to \coker d^{i-1}$ 
+\end{proof}
+
+\begin{lem}[name=Long exact sequence of cohomology]
 	Let $0 \to \cochaincomplex{A} \to \cochaincomplex{B} \to \cochaincomplex{C} \to 0$ be a short exact sequence of chain complexes. Then there is a canonical long exact sequence 
 	\[
     	\cdots \to \cohomology^{i-1}(\cochaincomplex{A}) \to \cohomology^{i-1}(\cochaincomplex{B}) \to \cohomology^{i-1}(\cochaincomplex{C}) \to \cohomology^{i}(\cochaincomplex{A}) \to \cohomology^{i}(\cochaincomplex{B}) \to \cohomology^{i}(\cochaincomplex{C}) \to \cdots 
     \]
 \end{lem}
 \begin{proof}
-	The proof from the lecture used abelian groups. \todo{rewrite in general abelian categories}. 
+	From the diagram 	\[\begin{tikzcd}
+	0 & {A^{i+1}} & {B^{i+1}} & {C^{i+1}} & 0 \\
+	0 & {A^{i+2}} & {B^{i+2}} & {C^{i+2}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\] and the snake lemma we get an exact sequence $0 \to \ker d^{i+1}_A \to \ker d^{i+1}_B \to \ker d^{i+1}_C$. 
+By shifting indices and again using the snake lemma we obtain the exact sequence \[\coker(d^{i-1}_A) \to \coker(d^{i-1}_B) \to \coker(d^{i-1}_C) \to 0.\]
+We can now apply the snake lemma to the diagram
+\[\begin{tikzcd}
+	& {\coker d^{i-1}_A} & {\coker d^{i-1}_B} & {\coker d^{i-1}_C} & 0 \\
+	0 & {\ker d^{i+1}_A} & {\ker d^{i+1}_B} & {\ker d^{i+1}_C}.
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+\end{tikzcd}\]
+By \cref{prop:magic-map-of-cohomology} we thus obtain the long exact sequence of cohomology.
 \end{proof}
-
 \begin{defn}
 Let \(F\colon\cat A\to\cat B\) be a left exact functor between abelian categories and suppose \(\cat A\) has enough injectives.
 Define the \emph{\(i\)th right derived functor} \(\rightderived^iF\colon\cat A\to\cat B\) as follows: for an object \(X\) of \(\cat A\), choose an injective resolution
